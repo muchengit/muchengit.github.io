@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Prompt 工程没有你想的那么复杂 | Prompt Engineering Is Simpler Than You Think</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div></div><nav><div class="nav-in"><a href="../"><i class="dot"></i> muchengit.github.io</a><button class="lang-btn" id="langBtn">EN / 中</button></div></nav><article>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <img src="prompt-hero.jpg" alt="Prompt Engineering" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag">AI 技巧 <span class="en-only">|</span> <span class="en-only">Tips</span></div>
+    <h1 class="reveal">
+      <span class="zh-only">Prompt 工程没有你想的那么复杂</span>
+      <span class="en-only">Prompt Engineering Is Simpler Than You Think</span>
+    </h1>
+    <p class="hero-sub reveal">
+      <span class="zh-only">2026.04.18 — 三个核心原则，彻底搞懂怎么和 AI 说话</span>
+      <span class="en-only">2026.04.18 — Three core principles to master communicating with AI</span>
+    </p>
+  </div>
+</header>
+
+<!-- ==================== 1. 开头：破除迷思 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">别被「Prompt 工程」这个词吓到</span>
+    <span class="en-only">Don't Let the Term "Prompt Engineering" Intimidate You</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">打开社交媒体，你会看到铺天盖地的「Prompt 工程教程」——有人列出 50 个万能模板，有人推销自己的提示词课程，还有人告诉你必须掌握某种「框架」才能用好 AI。整个领域被包装得像一门高深的玄学。</span>
+    <span class="en-only">Open social media and you'll see "prompt engineering tutorials" everywhere — people listing 50 universal templates, selling prompt courses, and telling you that you must master some kind of "framework" to use AI effectively. The entire field has been packaged like some esoteric art.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">但事实是：<strong>Prompt 工程的核心就 3 个原则。</strong>不需要背模板，不需要学框架，不需要什么「提示词工程师」认证。只要你是一个能正常沟通的人，你就已经具备了写出好提示词的基础能力。</span>
+    <span class="en-only">But here's the truth: <strong>there are only 3 core principles to prompt engineering.</strong> No need to memorize templates, no need to learn frameworks, no need for any "prompt engineer" certification. As long as you can communicate like a normal human being, you already have the foundational skill to write good prompts.</span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"Prompt 工程不是一门新技术，它就是你'如何把自己的想法说清楚'这件事在 AI 时代的升级版。"</span>
+    <span class="en-only">"Prompt engineering isn't a new technology — it's just the AI-era upgrade of 'how to clearly express your ideas.'"</span>
+  </blockquote>
+
+  <p>
+    <span class="zh-only">接下来的内容，我会先用一张「误区清单」帮你清除掉那些误导性的认知，然后逐个讲解 3 个核心原则。每个原则都有具体的对比示例，看完你就能直接上手用。</span>
+    <span class="en-only">In the following sections, I'll start with a "myth checklist" to clear away the misconceptions, then walk you through each of the 3 core principles. Every principle comes with concrete before-and-after examples, so you can start applying them immediately.</span>
+  </p>
+</section>
+
+<!-- ==================== 2. 误区清单 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">四大常见误区</span>
+    <span class="en-only">Four Common Misconceptions</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">在学 Prompt 工程之前，我们先把这些坑避开。</span>
+    <span class="en-only">Before learning prompt engineering, let's avoid these pitfalls first.</span>
+  </p>
+
+  <div class="callout warn">
+    <strong>
+      <span class="zh-only">误区一：「提示词越详细越好」</span>
+      <span class="en-only">Myth 1: "The More Detailed the Prompt, the Better"</span>
+    </strong>
+    <p>
+      <span class="zh-only">很多人以为写提示词就像写作文，字数越多 AI 理解得越深。错。关键是<strong>精准</strong>，不是啰嗦。一篇 500 字的提示词里如果只有 50 字是有用信息，AI 反而会被那 450 字的噪音干扰。好的提示词是「说重点」，不是「说很多」。</span>
+      <span class="en-only">Many people think writing prompts is like writing essays — the more words, the better the AI understands. Wrong. The key is <strong>precision</strong>, not verbosity. If a 500-word prompt only contains 50 words of useful information, the AI will actually be distracted by those 450 words of noise. A good prompt "hits the point" rather than "says a lot."</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <strong>
+      <span class="zh-only">误区二：「必须用英文才能得到好结果」</span>
+      <span class="en-only">Myth 2: "You Must Use English for Good Results"</span>
+    </strong>
+    <p>
+      <span class="zh-only">2026 年了，主流大模型对中文的理解能力已经非常强。除非你用的某个小众模型确实只支持英文，否则用中文写提示词完全没有问题。事实上，对于大多数中国用户来说，<strong>用中文反而能表达得更精准、更自然</strong>，因为那是你的母语。唯一需要注意的是：如果你需要 AI 输出的内容本身是英文的（比如写英文邮件），那提示词里当然要用英文或者明确要求输出英文。</span>
+      <span class="en-only">It's 2026, and mainstream large language models are already very strong at understanding Chinese. Unless you're using some niche model that only supports English, writing prompts in Chinese is perfectly fine. In fact, for most Chinese users, <strong>writing in Chinese actually allows for more precise and natural expression</strong> since it's your native language. The only exception: if you need the AI's output itself to be in English (like writing an English email), then of course use English in the prompt or explicitly request English output.</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <strong>
+      <span class="zh-only">误区三：「必须用特殊格式或角色设定」</span>
+      <span class="en-only">Myth 3: "You Must Use Special Formats or Role-Playing Setups"</span>
+    </strong>
+    <p>
+      <span class="zh-only">「你是一个资深的 XXX 专家，请以 XXX 的风格……」——这种角色设定在某些场景下确实有用，但它<strong>不是必需品</strong>。很多教程把这种技巧当作万能药，搞得好像不写「你是一个 XX 年经验的资深工程师」，AI 就不给你好好干活一样。实际上，大多数情况下，你只需要把需求说清楚，比任何花哨的角色设定都管用。角色设定是一个可选的增强手段，不是基础前提。</span>
+      <span class="en-only">"You are a senior XXX expert, please respond in the style of XXX..." — this kind of role-playing setup can be helpful in certain scenarios, but it's <strong>not a requirement</strong>. Many tutorials present this trick as a cure-all, making it seem like if you don't write "You are a senior engineer with XX years of experience," the AI won't do a good job. In reality, most of the time, simply stating your requirements clearly is more effective than any fancy role setup. Role-playing is an optional enhancement, not a prerequisite.</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <strong>
+      <span class="zh-only">误区四：「需要专门的'提示词工程师'才能做好」</span>
+      <span class="en-only">Myth 4: "You Need a Dedicated 'Prompt Engineer' to Do It Well"</span>
+    </strong>
+    <p>
+      <span class="zh-only">这个误区最危险。它暗示写提示词是一种「专业技能」，普通人是做不好的。但 Prompt 工程的本质就是<strong>清晰表达需求</strong>——这跟你在工作中给同事布置任务、给老板汇报方案、给客户写需求文档，是同一种能力。唯一不同的是，你的沟通对象从人变成了 AI。而 AI 其实比人更好伺候——它不会因为你的语气不好而生气，也不会因为你的需求改了三遍而翻白眼。</span>
+      <span class="en-only">This is the most dangerous misconception. It implies that writing prompts is a "professional skill" that ordinary people can't master. But the essence of prompt engineering is simply <strong>clearly expressing your needs</strong> — the same skill you use when assigning tasks to colleagues, presenting proposals to your boss, or writing requirement docs for clients. The only difference is your communication partner changed from a human to AI. And AI is actually easier to work with — it won't get offended by your tone, and it won't roll its eyes when you change your requirements for the third time.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ==================== 3. 原则一：给足上下文 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">原则一：给足上下文</span>
+    <span class="en-only">Principle 1: Provide Enough Context</span>
+  </h2>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">什么是「上下文」？</span>
+        <span class="en-only">What Is "Context"?</span>
+      </h3>
+      <p>
+        <span class="zh-only">上下文就是让 AI 理解「你在什么场景下、要解决什么问题」的背景信息。它通常包含三个部分：</span>
+        <span class="en-only">Context is the background information that helps the AI understand "what scenario you're in and what problem you're trying to solve." It typically has three parts:</span>
+      </p>
+      <ul>
+        <li>
+          <span class="zh-only"><strong>背景信息</strong>：你是谁？你在做什么？你的读者/用户是谁？</span>
+          <span class="en-only"><strong>Background info</strong>: Who are you? What are you doing? Who is your reader/user?</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>约束条件</strong>：有什么限制？不能做什么？必须遵守什么规则？</span>
+          <span class="en-only"><strong>Constraints</strong>: What are the limitations? What can't be done? What rules must be followed?</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>期望输出格式</strong>：你希望 AI 给你什么样的结果？</span>
+          <span class="en-only"><strong>Expected output format</strong>: What kind of result do you want from the AI?</span>
+        </li>
+      </ul>
+
+      <div class="callout tip">
+        <span class="zh-only">一个简单的自检方法：把你的提示词拿给一个完全不了解你情况的同事看，如果他能看懂你要什么，那上下文就够足了。如果他一脸懵，说明你还缺关键信息。</span>
+        <span class="en-only">A simple self-test: show your prompt to a colleague who knows nothing about your situation. If they understand what you want, the context is sufficient. If they look confused, you're missing key information.</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>
+    <span class="zh-only">对比：缺上下文 vs 给足上下文</span>
+    <span class="en-only">Comparison: Missing Context vs. Sufficient Context</span>
+  </h3>
+
+  <div class="compare">
+    <div class="col bad">
+      <h3>
+        <span class="zh-only">缺上下文</span>
+        <span class="en-only">Missing Context</span>
+      </h3>
+      <pre data-lang="prompt"><span class="zh-only">帮我写一封邮件</span><span class="en-only">Help me write an email</span></pre>
+      <p>
+        <span class="zh-only">AI 可能会给你一封通用的、套话连篇的邮件模板——因为根本不知道你要写给谁、为什么写、想要什么效果。</span>
+        <span class="en-only">The AI might give you a generic, cliché-filled email template — because it has no idea who you're writing to, why, or what outcome you want.</span>
+      </p>
+    </div>
+    <div class="col good">
+      <h3>
+        <span class="zh-only">给足上下文</span>
+        <span class="en-only">Sufficient Context</span>
+      </h3>
+      <pre data-lang="prompt"><span class="zh-only">我是一家 10 人创业公司的 CEO，要给一位推迟了交付日期的外包开发者写一封邮件。
+
+情况：他负责开发我们的官网，原定上周五交付，但至今没有完成，也没有提前告知。
+
+要求：
+- 语气：专业但不要过于严厉，毕竟我们后续可能还要长期合作
+- 需要他给出一个新的交付时间表
+- 字数控制在 200 字以内
+- 用中文写</span><span class="en-only">I'm the CEO of a 10-person startup. I need to write an email to an outsourced developer who delayed delivery.
+
+Situation: He's building our company website. The original deadline was last Friday, but it's still not done, and he didn't notify us in advance.
+
+Requirements:
+- Tone: Professional but not too harsh, since we may work together long-term
+- Ask him for a revised delivery timeline
+- Keep it under 200 words
+- Write in English</span></pre>
+      <p>
+        <span class="zh-only">AI 现在知道了你是谁、对方是谁、发生了什么、想要什么语气和格式。输出的邮件会精准得多。</span>
+        <span class="en-only">Now the AI knows who you are, who the recipient is, what happened, and what tone and format you want. The resulting email will be much more on-target.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <span class="zh-only">注意看上面的例子——第二个提示词虽然更长，但每一句话都有信息量，没有废话。这就是「精准」和「啰嗦」的区别。</span>
+    <span class="en-only">Notice the example above — the second prompt is longer, but every sentence carries information. No filler. That's the difference between "precise" and "verbose."</span>
+  </div>
+</section>
+
+<!-- ==================== 4. 原则二：说清楚要什么 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">原则二：说清楚要什么</span>
+    <span class="en-only">Principle 2: Be Clear About What You Want</span>
+  </h2>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">三个维度：格式、长度、语气</span>
+        <span class="en-only">Three Dimensions: Format, Length, Tone</span>
+      </h3>
+      <p>
+        <span class="zh-only">「说清楚要什么」听起来简单，但很多人在这里翻车。最常见的表现就是：你心里想要的和你说出来的不一样。你需要在三个维度上做出明确的选择：</span>
+        <span class="en-only">"Being clear about what you want" sounds simple, but many people stumble here. The most common manifestation: what you want in your head is different from what comes out of your mouth. You need to make explicit choices on three dimensions:</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>格式：</strong>你要表格还是列表？代码还是 JSON？段落还是要点？Markdown 还是纯文本？很多人抱怨 AI 给的答案「不好用」，其实只是没说清楚要什么格式。比如你想要一个数据对比，但你没说要表格，AI 就给你写了两段话。</span>
+        <span class="en-only"><strong>Format:</strong> Do you want a table or a list? Code or JSON? Paragraphs or bullet points? Markdown or plain text? Many people complain that the AI's answers "aren't useful," but they simply didn't specify the format. For example, you want a data comparison, but you didn't say "table," so the AI wrote two paragraphs of prose.</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>长度：</strong>200 字以内还是 2000 字深度分析？3 个要点还是 10 个要点？一句话总结还是详细步骤？长度决定了 AI 分配多少「精力」给这个回答。你不说长度，AI 只能猜——有时候猜对了，更多时候不是你想要的。</span>
+        <span class="en-only"><strong>Length:</strong> Under 200 words or a 2000-word deep analysis? 3 key points or 10? A one-sentence summary or detailed step-by-step? Length determines how much "effort" the AI allocates to the response. If you don't specify, the AI can only guess — sometimes it guesses right, but more often it's not what you wanted.</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>语气：</strong>专业严谨还是轻松幽默？正式还是口语化？学术风格还是大白话？语气不对，内容再好也读不下去。如果你要发在工作群里，就不该用学术论文的语气；如果你要写技术文档，就不该用段子手的风格。</span>
+        <span class="en-only"><strong>Tone:</strong> Professional and rigorous or lighthearted and humorous? Formal or conversational? Academic or plain language? Wrong tone, and even great content becomes unreadable. If you're posting in a work group chat, you shouldn't use an academic paper's tone; if you're writing technical documentation, you shouldn't use a comedian's style.</span>
+      </p>
+
+      <div class="callout tip">
+        <span class="zh-only">养成习惯：每次写提示词之前，先问自己三个问题——「我要什么格式？多长？什么语气？」如果你自己都答不上来，那说明你还没想清楚要什么。先想清楚，再让 AI 做。</span>
+        <span class="en-only">Make it a habit: before writing each prompt, ask yourself three questions — "What format do I want? How long? What tone?" If you can't answer these yourself, it means you haven't thought clearly about what you want. Figure it out first, then ask the AI.</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>
+    <span class="zh-only">对比：模糊要求 vs 明确要求</span>
+    <span class="en-only">Comparison: Vague Request vs. Clear Request</span>
+  </h3>
+
+  <div class="compare">
+    <div class="col bad">
+      <h3>
+        <span class="zh-only">模糊要求</span>
+        <span class="en-only">Vague Request</span>
+      </h3>
+      <pre data-lang="prompt"><span class="zh-only">帮我分析一下 Python 和 JavaScript 哪个好</span><span class="en-only">Help me analyze whether Python or JavaScript is better</span></pre>
+      <p>
+        <span class="zh-only">AI 可能给你写一篇 1500 字的对比长文，从历史沿革讲到性能基准测试。但你其实只是想快速知道：做数据分析该学哪个？</span>
+        <span class="en-only">The AI might write a 1500-word comparison essay covering everything from historical context to performance benchmarks. But you actually just wanted to quickly know: which one should I learn for data analysis?</span>
+      </p>
+    </div>
+    <div class="col good">
+      <h3>
+        <span class="zh-only">明确要求</span>
+        <span class="en-only">Clear Request</span>
+      </h3>
+      <pre data-lang="prompt"><span class="zh-only">我是一个文科生，没有任何编程基础，想学一门编程语言来做数据分析。
+请帮我比较 Python 和 JavaScript，用表格对比，包含以下列：
+- 学习难度（1-5 分）
+- 数据分析生态（库和工具的丰富程度）
+- 找工作难度
+- 推荐指数
+
+最后给一个明确的推荐结论，语气轻松友好，200 字以内。</span><span class="en-only">I'm a liberal arts student with no programming background, and I want to learn a programming language for data analysis.
+Please compare Python and JavaScript in a table with these columns:
+- Learning difficulty (1-5 scale)
+- Data analysis ecosystem (richness of libraries and tools)
+- Job market difficulty
+- Recommendation score
+
+End with a clear recommendation. Use a friendly, casual tone. Keep it under 200 words.</span></pre>
+      <p>
+        <span class="zh-only">格式（表格）、长度（200 字以内）、语气（轻松友好）、背景（文科生、零基础、做数据分析）——全都交代清楚了。AI 给你的答案会又快又准。</span>
+        <span class="en-only">Format (table), length (under 200 words), tone (friendly and casual), background (liberal arts student, zero experience, data analysis) — everything is clearly specified. The AI's answer will be fast and accurate.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5. 原则三：迭代 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">原则三：迭代而不是一次完美</span>
+    <span class="en-only">Principle 3: Iterate Instead of Perfection on the First Try</span>
+  </h2>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">没有人第一次就写对</span>
+        <span class="en-only">Nobody Gets It Right on the First Try</span>
+      </h3>
+      <p>
+        <span class="zh-only">这是最重要也最常被忽略的一个原则。很多人以为好提示词是「一次性写出来」的，于是对着一个空白的输入框发呆半天，试图构思出一个「完美提示词」。</span>
+        <span class="en-only">This is the most important and most commonly overlooked principle. Many people think a good prompt is "written in one shot," so they stare at a blank input box for ages trying to craft a "perfect prompt."</span>
+      </p>
+
+      <div class="highlight">
+        <p>
+          <span class="zh-only"><strong>正确的做法是：先快速写一个初版提示词，看 AI 的输出，然后告诉 AI 哪里不对、哪里要改。</strong>这就像你给设计师提需求——你不会期望第一版就是最终版，你会看初稿、给反馈、再改，如此反复直到满意。和 AI 对话完全一样。</span>
+          <span class="en-only"><strong>The right approach is: quickly write a first-draft prompt, look at the AI's output, then tell the AI what's wrong and what to change.</strong> It's just like giving requirements to a designer — you don't expect the first draft to be the final version. You look at the draft, give feedback, revise, and repeat until you're satisfied. Talking to AI is exactly the same.</span>
+        </p>
+      </div>
+
+      <p>
+        <span class="zh-only">下面是一个真实的 3 轮迭代示例，演示如何从一版「还凑合」的结果，通过两轮反馈，得到一个「非常好」的结果。</span>
+        <span class="en-only">Below is a real 3-round iteration example, showing how to go from a "decent" first result to an "excellent" one through two rounds of feedback.</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>场景：</strong>我想让 AI 帮我写一个产品发布推文。</span>
+        <span class="en-only"><strong>Scenario:</strong> I want the AI to help me write a product launch tweet.</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>第一轮：</strong></span>
+        <span class="en-only"><strong>Round 1:</strong></span>
+      </p>
+
+      <pre data-lang="prompt"><span class="zh-only">帮我写一条推文，宣传我的新产品——一个 Markdown 笔记应用。</span><span class="en-only">Help me write a tweet to promote my new product — a Markdown note-taking app.</span></pre>
+
+      <p>
+        <span class="zh-only"><em>AI 输出：</em>「Excited to announce my new Markdown note-taking app! It's fast, clean, and powerful. Check it out! #markdown #notes #productivity」</span>
+        <span class="en-only"><em>AI output:</em> "Excited to announce my new Markdown note-taking app! It's fast, clean, and powerful. Check it out! #markdown #notes #productivity"</span>
+      </p>
+
+      <p>
+        <span class="zh-only">评价：太通用了，像 100 个产品都在用的模板。缺少具体信息。于是进行第二轮——</span>
+        <span class="en-only">Assessment: Too generic — looks like a template 100 products could use. Missing specific info. So I move to round 2 —</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>第二轮：</strong></span>
+        <span class="en-only"><strong>Round 2:</strong></span>
+      </p>
+
+      <pre data-lang="prompt"><span class="zh-only">太通用了。重新写，加上这些信息：
+- 我们的应用叫 InkDown
+- 核心卖点是：支持双向链接、本地存储、零延迟
+- 目标用户是经常写技术博客的开发者
+- 不要用感叹号，语气要克制、专业
+- 包含一个具体的使用场景</span><span class="en-only">Too generic. Rewrite with these details:
+- Our app is called InkDown
+- Core selling points: bidirectional links, local storage, zero latency
+- Target users: developers who write tech blogs frequently
+- No exclamation marks — tone should be restrained and professional
+- Include a specific use case</span></pre>
+
+      <p>
+        <span class="zh-only"><em>AI 输出：</em>（明显好多了，有了具体产品名、明确卖点、目标用户和使用场景。）</span>
+        <span class="en-only"><em>AI output:</em> (Significantly better now — includes the specific product name, clear selling points, target users, and a use case.)</span>
+      </p>
+
+      <p>
+        <span class="zh-only">评价：内容好了，但长度有点长，作为推文需要更精简。最后一轮——</span>
+        <span class="en-only">Assessment: Content is good, but it's a bit long for a tweet. Final round —</span>
+      </p>
+
+      <p>
+        <span class="zh-only"><strong>第三轮：</strong></span>
+        <span class="en-only"><strong>Round 3:</strong></span>
+      </p>
+
+      <pre data-lang="prompt"><span class="zh-only">内容不错，但作为推文太长了。压缩到 200 字以内，保留核心卖点和使用场景，删掉其他多余内容。</span><span class="en-only">Content is good but too long for a tweet. Compress to under 200 characters, keeping the core selling points and use case. Remove everything else.</span></pre>
+
+      <p>
+        <span class="zh-only"><em>AI 输出：</em>（精简后，完美适配推文的长度和格式。）</span>
+        <span class="en-only"><em>AI output:</em> (After compression, it's a perfect fit for a tweet's length and format.)</span>
+      </p>
+
+      <div class="callout tip">
+        <span class="zh-only">注意看迭代的过程：第一轮我没花超过 10 秒，第二轮我补充了具体信息，第三轮我只调整了长度。整个过程不到 2 分钟。这就是迭代的威力——你不需要一开始就想到所有细节，你只需要<strong>先开始，然后逐步优化</strong>。</span>
+        <span class="en-only">Notice the iteration process: I spent less than 10 seconds on round 1, added specifics in round 2, and only adjusted length in round 3. The whole process took under 2 minutes. That's the power of iteration — you don't need to think of every detail upfront. You just need to <strong>start, then progressively refine.</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6. 进阶技巧 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">三个进阶技巧</span>
+    <span class="en-only">Three Advanced Techniques</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">掌握了三个核心原则之后，下面这三个技巧可以让你更进一步。</span>
+    <span class="en-only">After mastering the three core principles, these three techniques will take you even further.</span>
+  </p>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">技巧 1：让 AI 反问你来补全需求</span>
+      <span class="en-only">Technique 1: Let the AI Ask You Questions to Complete the Requirements</span>
+    </strong>
+    <p>
+      <span class="zh-only">当你不确定自己有没有把需求说清楚的时候，可以在提示词末尾加一句：「在你开始回答之前，先问我 3 个问题来确保你完全理解了我的需求。」这是一个非常强大的技巧——AI 会站在「执行者」的角度，找出你描述中的模糊点和遗漏点。它问你的问题，往往是你自己没想到但确实需要明确的。回答完这些问题之后，AI 再给出最终答案，质量会高非常多。</span>
+      <span class="en-only">When you're not sure if you've stated your requirements clearly, add this to the end of your prompt: "Before you answer, ask me 3 questions to make sure you fully understand my needs." This is an incredibly powerful technique — the AI will identify ambiguities and gaps in your description from the perspective of an "executor." The questions it asks are often things you hadn't thought of but really do need to clarify. After you answer those questions, the AI's final response will be significantly higher quality.</span>
+    </p>
+
+    <pre data-lang="prompt"><span class="zh-only">帮我写一份产品需求文档（PRD），关于一个 AI 驱动的英语口语练习 App。
+
+在你开始写之前，先问我 5 个问题来确保你完全理解了我的需求。</span><span class="en-only">Help me write a Product Requirements Document (PRD) for an AI-powered English speaking practice app.
+
+Before you start writing, ask me 5 questions to make sure you fully understand my needs.</span></pre>
+  </div>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">技巧 2：给 AI 示例（Few-Shot Prompting）</span>
+      <span class="en-only">Technique 2: Give the AI Examples (Few-Shot Prompting)</span>
+    </strong>
+    <p>
+      <span class="zh-only">有时候，无论你怎么描述，都不如直接给 AI 看一个例子来得有效。这叫 Few-Shot Prompting（少样本提示），是业界公认最有效的提示词技巧之一。原理很简单：你给 AI 看 1-3 个「输入 - 输出」的示例，AI 就能理解你想要的模式和风格。比如你想让 AI 按特定格式写产品描述，与其花 200 字描述格式规则，不如直接给它看两篇你满意的范例。</span>
+      <span class="en-only">Sometimes, no matter how well you describe something, nothing beats showing the AI a concrete example. This is called Few-Shot Prompting, and it's one of the most widely recognized effective prompt techniques in the industry. The principle is simple: you show the AI 1-3 "input - output" examples, and it can understand the pattern and style you want. For example, if you want the AI to write product descriptions in a specific format, instead of spending 200 words describing format rules, just show it two examples you're happy with.</span>
+    </p>
+
+    <pre data-lang="prompt"><span class="zh-only">请按照下面的示例风格，帮我写一个新产品「InkDown」的介绍文案。
+
+【示例 1】
+产品：Notion
+文案：Notion 是一个把笔记、文档、任务管理合为一体的工具。不需要 5 个 App，一个就够了。
+
+【示例 2】
+产品：Figma
+文案：Figma 让设计师告别「文件传来传去」的时代。打开浏览器就能协作，真正的实时同步。
+
+现在请写 InkDown（一个支持双向链接的本地 Markdown 笔记应用）的介绍文案。</span><span class="en-only">Please write a product intro for my new product "InkDown" in the style of the examples below.
+
+[Example 1]
+Product: Notion
+Copy: Notion is a tool that combines notes, documents, and task management into one. No need for 5 apps — one is enough.
+
+[Example 2]
+Product: Figma
+Copy: Figma lets designers say goodbye to the era of "sending files back and forth." Open your browser and collaborate — true real-time sync.
+
+Now write the intro for InkDown (a local Markdown note-taking app with bidirectional link support).</span></pre>
+  </div>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">技巧 3：拆分复杂任务</span>
+      <span class="en-only">Technique 3: Break Down Complex Tasks</span>
+    </strong>
+    <p>
+      <span class="zh-only">如果你的任务很复杂，不要试图在一个提示词里完成所有事。把大任务拆成 3-5 个小步骤，每一步给 AI 一个明确的子任务。这样做的好处有三个：第一，每个步骤的提示词更短、更精准，AI 不容易跑偏；第二，如果某一步的结果不满意，你只需要重新做那一步，不用从头来；第三，你可以逐步审查每一步的输出，确保方向正确。</span>
+      <span class="en-only">If your task is complex, don't try to accomplish everything in a single prompt. Break the big task into 3-5 small steps, and give the AI a clear sub-task at each step. This has three benefits: first, each step's prompt is shorter and more precise, so the AI is less likely to go off-track; second, if one step's result isn't satisfactory, you only need to redo that step — no need to start over; third, you can review each step's output incrementally to ensure you're heading in the right direction.</span>
+    </p>
+
+    <pre data-lang="prompt"><span class="zh-only">第一步：先帮我列出这篇文章的 5 个核心论点，不用写正文，只列要点。
+
+（等 AI 列出后，你再继续——）
+
+第二步：基于第 1、3、5 个论点，帮我各写一段 150 字的论述。
+
+（审查后——）
+
+第三步：帮我写一个开头和结尾，把上面的三段论述串联起来，总字数 1000 字左右。</span><span class="en-only">Step 1: First, list 5 core arguments for this article. Don't write the full text — just bullet points.
+
+(After the AI lists them, continue —)
+
+Step 2: Based on arguments 1, 3, and 5, write a 150-word paragraph for each.
+
+(After reviewing —)
+
+Step 3: Write an introduction and conclusion that tie the three paragraphs together, around 1000 words total.</span></pre>
+  </div>
+</section>
+
+<!-- ==================== 7. 公式 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">一个万能公式</span>
+    <span class="en-only">A Universal Formula</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">如果你需要一条好记的口诀，可以记这个：</span>
+    <span class="en-only">If you need a memorable rule of thumb, remember this one:</span>
+  </p>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>好的提示词 = 背景 + 任务 + 约束 + 输出格式 + 语气</strong></span>
+      <span class="en-only"><strong>A good prompt = Context + Task + Constraints + Output Format + Tone</strong></span>
+    </p>
+    <p>
+      <span class="zh-only">好的提示词 = 背景（你是谁、在什么场景下）+ 任务（你希望 AI 做什么）+ 约束（不能做什么、有什么限制）+ 输出格式（表格、列表、代码、JSON 等）+ 语气（专业、轻松、幽默等）</span>
+      <span class="en-only">A good prompt = Context (who you are, what situation) + Task (what you want the AI to do) + Constraints (what not to do, what limitations exist) + Output Format (table, list, code, JSON, etc.) + Tone (professional, casual, humorous, etc.)</span>
+    </p>
+  </div>
+
+  <p>
+    <span class="zh-only">这个公式不是为了让你机械地填空，而是帮你建立一个检查清单——写完提示词后，快速扫一遍这五个要素有没有遗漏。如果有，补上；如果没有，说明你的提示词已经很完善了。</span>
+    <span class="en-only">This formula isn't meant for you to mechanically fill in blanks — it's a checklist to help you review. After writing a prompt, quickly scan these five elements. If any are missing, add them. If they're all present, your prompt is already quite solid.</span>
+  </p>
+
+  <div class="callout tip">
+    <span class="zh-only">实际上，回头看前面的三个原则，你会发现它们就是这五个要素的展开：原则一「给足上下文」对应的是「背景 + 约束」，原则二「说清楚要什么」对应的是「任务 + 输出格式 + 语气」，原则三「迭代」则是确保这五个要素在对话中逐步完善的方法论。</span>
+    <span class="en-only">In fact, if you look back at the three principles, you'll find they're just an expansion of these five elements: Principle 1 "provide context" corresponds to "Context + Constraints," Principle 2 "be clear about what you want" corresponds to "Task + Output Format + Tone," and Principle 3 "iterate" is the methodology for ensuring these five elements are progressively refined through conversation.</span>
+  </div>
+</section>
+
+<!-- ==================== 8. 结尾 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">最重要的不是记住公式，是养成习惯</span>
+    <span class="en-only">The Most Important Thing Isn't Memorizing the Formula — It's Building the Habit</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">读到这里，你可能觉得「这不就是常识吗？」——对，它就是常识。但常识之所以有价值，恰恰是因为大多数人不会在关键时刻用上它。</span>
+    <span class="en-only">You might be thinking, "Isn't this just common sense?" — Yes, it is. But common sense is valuable precisely because most people don't apply it at critical moments.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">每次你打开 ChatGPT、Claude 或者任何 AI 工具，在输入框里打字之前，花 5 秒钟问自己：「我有没有说清楚我要什么？」这个习惯，比背 100 个提示词模板都管用。</span>
+    <span class="en-only">Every time you open ChatGPT, Claude, or any AI tool, before you start typing, spend 5 seconds asking yourself: "Have I clearly stated what I want?" This habit is more effective than memorizing 100 prompt templates.</span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"与其追求完美的提示词，不如追求清晰的思维。想清楚了再说，比说完再改，效率高十倍。"</span>
+    <span class="en-only">"Rather than pursuing perfect prompts, pursue clear thinking. Thinking before speaking is ten times more efficient than speaking then revising."</span>
+  </blockquote>
+
+  <p>
+    <span class="zh-only">Prompt 工程没有你想的那么复杂。它不需要天赋，不需要培训，不需要花哨的技巧。它需要的只是你停下来，想清楚你要什么，然后说出来。</span>
+    <span class="en-only">Prompt engineering isn't as complex as you think. It doesn't require talent, training, or fancy techniques. It just requires you to pause, think clearly about what you want, and then say it.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>这不仅是写好提示词的秘诀，也是做好任何事情的基础。</strong></span>
+    <span class="en-only"><strong>This isn't just the secret to writing good prompts — it's the foundation for doing anything well.</strong></span>
+  </p>
+</section>
+
+</article>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="foot-link"><a href="../"><span class="zh-only">&larr; 回到主页</span><span class="en-only">&larr; Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

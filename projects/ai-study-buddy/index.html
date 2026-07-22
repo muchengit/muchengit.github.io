@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="zh" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Study Buddy | AI 课程助手</title>
+<meta name="description" content="AI-powered study assistant that generates summaries, flashcards, and quizzes from your course notes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  background: #0A0E1A;
+  color: #E2E8F0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #00E5FF; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0A0E1A; }
+::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+/* ========== VARIABLES ========== */
+:root {
+  --bg-primary: #0A0E1A;
+  --bg-secondary: #0F172A;
+  --bg-tertiary: #1E293B;
+  --bg-card: #111827;
+  --border: #1E293B;
+  --border-hover: #334155;
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --cyan: #00E5FF;
+  --cyan-dim: rgba(0, 229, 255, 0.15);
+  --violet: #A855F7;
+  --violet-dim: rgba(168, 85, 247, 0.15);
+  --amber: #F59E0B;
+  --amber-dim: rgba(245, 158, 11, 0.15);
+  --red: #EF4444;
+  --green: #22C55E;
+  --font-display: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes cardFlipIn {
+  from { transform: rotateY(90deg); opacity: 0; }
+  to { transform: rotateY(0); opacity: 1; }
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink {
+  0%, 100% { border-color: var(--cyan); }
+  50% { border-color: transparent; }
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+.nav-brand .logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-link {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+.nav-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  text-decoration: none;
+}
+.lang-toggle {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+.lang-toggle:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-dim);
+}
+
+/* ========== MAIN LAYOUT ========== */
+.main-container {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 32px;
+}
+@media (max-width: 960px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+    gap: 24px;
+  }
+}
+
+/* ========== PANELS ========== */
+.panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.panel-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.panel-header h2 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.panel-header .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.panel-body {
+  padding: 24px;
+}
+
+/* ========== INPUT SECTION ========== */
+.input-section { display: flex; flex-direction: column; gap: 24px; }
+
+/* API Key */
+.api-key-group { display: flex; flex-direction: column; gap: 10px; }
+.api-key-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.api-key-row { display: flex; gap: 8px; }
+.api-key-row select,
+.api-key-row input {
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+.api-key-row select {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  min-width: 130px;
+  cursor: pointer;
+  outline: none;
+  appearance: auto;
+}
+.api-key-row select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--cyan-dim);
+}
+.api-key-row input {
+  flex: 1;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.api-key-row input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--cyan-dim);
+}
+.api-key-row input::placeholder { color: var(--text-muted); }
+
+/* Notes textarea */
+.notes-group { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.notes-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notes-textarea {
+  width: 100%;
+  min-height: 280px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.notes-textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--cyan-dim);
+}
+.notes-textarea::placeholder { color: var(--text-muted); }
+
+/* Generate button */
+.btn-generate {
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 0.3px;
+}
+.btn-generate:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(0, 229, 255, 0.3);
+}
+.btn-generate:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  animation: none;
+}
+.btn-generate .spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+.btn-generate.loading .spinner { display: block; }
+.btn-generate.loading .btn-text { display: none; }
+.btn-generate.loading .btn-loading-text { display: inline; }
+.btn-loading-text { display: none; }
+
+/* ========== RESULTS SECTION ========== */
+.result-section { display: flex; flex-direction: column; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  gap: 4px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+.tab:hover { color: var(--text-secondary); }
+.tab.active {
+  color: var(--cyan);
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--cyan);
+  border-radius: 2px 2px 0 0;
+}
+.tab .tab-icon {
+  margin-right: 6px;
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 24px;
+  display: none;
+  animation: fadeInUp 0.3s ease;
+}
+.tab-content.active { display: block; }
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+  min-height: 400px;
+}
+.empty-state .empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+.empty-state h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.empty-state p {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 320px;
+}
+
+/* Loading skeleton */
+.loading-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 0;
+}
+.skeleton-line {
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--bg-tertiary) 25%, #1E293B 50%, var(--bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+.skeleton-line:nth-child(1) { width: 60%; }
+.skeleton-line:nth-child(2) { width: 90%; }
+.skeleton-line:nth-child(3) { width: 75%; }
+.skeleton-line:nth-child(4) { width: 85%; }
+.skeleton-line:nth-child(5) { width: 50%; }
+.skeleton-block {
+  height: 80px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--bg-tertiary) 25%, #1E293B 50%, var(--bg-tertiary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ========== SUMMARY ========== */
+.summary-topics { display: flex; flex-direction: column; gap: 20px; }
+.topic-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease both;
+  transition: border-color 0.2s;
+}
+.topic-block:hover { border-color: var(--border-hover); }
+.topic-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.topic-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.topic-header h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.topic-body {
+  padding: 16px 20px;
+}
+.topic-body p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.topic-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+.topic-body ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.topic-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+/* Typewriter effect for summary */
+.typewriter-text {
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease;
+}
+
+/* ========== FLASHCARDS ========== */
+.flashcards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .flashcards-grid { grid-template-columns: 1fr; }
+}
+.flashcard {
+  perspective: 800px;
+  height: 220px;
+  cursor: pointer;
+  animation: cardFlipIn 0.5s ease both;
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+}
+.flashcard-front {
+  background: var(--bg-card);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.flashcard-front .card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--violet);
+  margin-bottom: 16px;
+}
+.flashcard-front .card-question {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.flashcard-front .card-hint {
+  position: absolute;
+  bottom: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.flashcard-back {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(0, 229, 255, 0.08));
+  border-color: var(--violet);
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+.flashcard-back .card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.flashcard-back .card-answer {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  flex: 1;
+}
+.flashcard-back .card-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+.card-counter {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* ========== QUIZZES ========== */
+.quiz-list { display: flex; flex-direction: column; gap: 20px; }
+.quiz-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease both;
+  transition: border-color 0.2s;
+}
+.quiz-item:hover { border-color: var(--border-hover); }
+.quiz-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.quiz-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--amber-dim);
+  color: var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.quiz-header h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.quiz-type-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.quiz-type-badge.multiple-choice {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+}
+.quiz-type-badge.short-answer {
+  background: var(--violet-dim);
+  color: var(--violet);
+}
+.quiz-body { padding: 0 20px 20px 20px; }
+
+/* Multiple choice */
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.option-btn {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.option-btn:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: var(--text-primary);
+  background: var(--cyan-dim);
+}
+.option-btn .option-letter {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.option-btn:hover:not(:disabled) .option-letter {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.option-btn.correct {
+  border-color: var(--green);
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--green);
+}
+.option-btn.correct .option-letter {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+}
+.option-btn.wrong {
+  border-color: var(--red);
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--red);
+}
+.option-btn.wrong .option-letter {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+.option-btn:disabled { cursor: default; opacity: 0.7; }
+.quiz-feedback {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  animation: fadeInUp 0.3s ease;
+}
+.quiz-feedback.correct {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+.quiz-feedback.wrong {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Short answer */
+.short-answer-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+.show-answer-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+.show-answer-btn:hover {
+  border-color: var(--violet);
+  color: var(--violet);
+  background: var(--violet-dim);
+}
+.reference-answer {
+  margin-top: 12px;
+  padding: 16px;
+  background: var(--violet-dim);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  display: none;
+  animation: fadeInUp 0.3s ease;
+}
+.reference-answer.visible { display: block; }
+
+/* ========== SCORE DISPLAY ========== */
+.score-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: none;
+}
+.score-bar.visible { display: flex; }
+.score-item {
+  text-align: center;
+}
+.score-item .score-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+}
+.score-item .score-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.score-item.correct .score-value { color: var(--green); }
+.score-item.wrong .score-value { color: var(--red); }
+.score-item.total .score-value { color: var(--cyan); }
+.score-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+}
+
+/* ========== ERROR ========== */
+.error-message {
+  padding: 16px 20px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--red);
+  font-size: 14px;
+  display: none;
+  animation: fadeInUp 0.3s ease;
+}
+.error-message.visible { display: flex; align-items: flex-start; gap: 10px; }
+
+/* ========== FOOTER ========== */
+.footer {
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.footer a { color: var(--cyan); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .navbar { padding: 0 16px; }
+  .nav-brand { font-size: 15px; }
+  .nav-brand .logo { width: 30px; height: 30px; font-size: 16px; }
+  .panel-header { padding: 16px; }
+  .panel-header h2 { font-size: 16px; }
+  .panel-body { padding: 16px; }
+  .tabs { padding: 0 16px; }
+  .tab { padding: 12px 14px; font-size: 13px; }
+  .tab-content { padding: 16px; }
+  .notes-textarea { min-height: 200px; }
+  .btn-generate { font-size: 14px; padding: 12px 16px; }
+  .flashcards-grid { grid-template-columns: 1fr; }
+  .empty-state { padding: 40px 16px; min-height: 300px; }
+  .empty-state .empty-icon { font-size: 48px; }
+  .score-bar { gap: 16px; padding: 12px; }
+  .score-item .score-value { font-size: 22px; }
+}
+
+/* ========== LANGUAGE TOGGLE ========== */
+.en-only { display: none; }
+[data-lang="en"] .en-only { display: initial; }
+[data-lang="en"] .en-only.flex { display: flex; }
+[data-lang="en"] .en-only.grid { display: grid; }
+[data-lang="en"] .en-only.inline { display: inline; }
+[data-lang="en"] .en-only.inline-block { display: inline-block; }
+.zh-only { display: initial; }
+.zh-only.flex { display: flex; }
+.zh-only.grid { display: grid; }
+.zh-only.inline { display: inline; }
+.zh-only.inline-block { display: inline-block; }
+[data-lang="en"] .zh-only { display: none; }
+
+/* ========== TOAST ========== */
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  animation: fadeInUp 0.3s ease;
+  box-shadow: var(--shadow);
+  max-width: 360px;
+}
+.toast.success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: var(--green);
+}
+.toast.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--red);
+}
+.toast.info {
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--cyan);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="logo">&#x1F9E0;</div>
+    <span>
+      <span class="zh-only">AI 课程助手</span>
+      <span class="en-only">AI Study Buddy</span>
+    </span>
+  </div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">
+      <span class="zh-only">返回主页</span>
+      <span class="en-only">Home</span>
+    </a>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN / 中</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-container">
+  <!-- LEFT: INPUT -->
+  <div class="input-panel panel">
+    <div class="panel-header">
+      <div class="icon" style="background:var(--cyan-dim); color:var(--cyan);">&#x270D;</div>
+      <h2>
+        <span class="zh-only">输入学习内容</span>
+        <span class="en-only">Input</span>
+      </h2>
+    </div>
+    <div class="panel-body input-section">
+      <!-- API Key -->
+      <div class="api-key-group">
+        <label>
+          <span class="zh-only">&#x1F511; API Key（选填，已保存则自动填入）</span>
+          <span class="en-only">&#x1F511; API Key (optional, auto-filled if saved)</span>
+        </label>
+        <div class="api-key-row">
+          <select id="providerSelect" onchange="onProviderChange()">
+            <option value="openai">OpenAI</option>
+            <option value="anthropic">Anthropic</option>
+          </select>
+          <input type="password" id="apiKeyInput" placeholder="sk-... / sk-ant-..." autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="notes-group">
+        <label>
+          <span class="zh-only">&#x1F4D3; 课程笔记 / 学习内容</span>
+          <span class="en-only">&#x1F4D3; Course Notes / Study Content</span>
+        </label>
+        <textarea class="notes-textarea" id="notesInput" placeholder=""></textarea>
+      </div>
+
+      <!-- Generate -->
+      <button class="btn-generate" id="generateBtn" onclick="handleGenerate()">
+        <span class="btn-text">
+          <span class="zh-only">&#x2728; AI 智能分析</span>
+          <span class="en-only">&#x2728; AI Analyze</span>
+        </span>
+        <span class="btn-loading-text">
+          <span class="zh-only">&#x23F3; AI 分析中...</span>
+          <span class="en-only">&#x23F3; Analyzing...</span>
+        </span>
+        <span class="spinner"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT: RESULTS -->
+  <div class="result-section panel">
+    <div class="tabs">
+      <button class="tab active" data-tab="summary" onclick="switchTab('summary')">
+        <span class="tab-icon">&#x1F4CB;</span>
+        <span class="zh-only">笔记摘要</span>
+        <span class="en-only">Summary</span>
+      </button>
+      <button class="tab" data-tab="flashcards" onclick="switchTab('flashcards')">
+        <span class="tab-icon">&#x1F5C4;</span>
+        <span class="zh-only">复习卡片</span>
+        <span class="en-only">Flashcards</span>
+      </button>
+      <button class="tab" data-tab="quiz" onclick="switchTab('quiz')">
+        <span class="tab-icon">&#x2753;</span>
+        <span class="zh-only">练习题</span>
+        <span class="en-only">Quiz</span>
+      </button>
+    </div>
+
+    <!-- Summary Tab -->
+    <div class="tab-content active" id="tab-summary">
+      <div class="empty-state" id="summaryEmpty">
+        <div class="empty-icon">&#x1F4CB;</div>
+        <h3>
+          <span class="zh-only">等待输入内容</span>
+          <span class="en-only">Waiting for Input</span>
+        </h3>
+        <p>
+          <span class="zh-only">在左侧粘贴课程笔记，点击"AI 智能分析"生成结构化摘要</span>
+          <span class="en-only">Paste your course notes and click "AI Analyze" to generate a structured summary</span>
+        </p>
+      </div>
+      <div class="loading-skeleton" id="summaryLoading" style="display:none;">
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-block"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="error-message" id="summaryError"></div>
+      <div class="summary-topics" id="summaryContent"></div>
+    </div>
+
+    <!-- Flashcards Tab -->
+    <div class="tab-content" id="tab-flashcards">
+      <div class="empty-state" id="flashcardsEmpty">
+        <div class="empty-icon">&#x1F5C4;</div>
+        <h3>
+          <span class="zh-only">暂无复习卡片</span>
+          <span class="en-only">No Flashcards Yet</span>
+        </h3>
+        <p>
+          <span class="zh-only">AI 将根据你的笔记自动生成问答复习卡片</span>
+          <span class="en-only">AI will auto-generate Q&A flashcards based on your notes</span>
+        </p>
+      </div>
+      <div class="loading-skeleton" id="flashcardsLoading" style="display:none;">
+        <div class="skeleton-block"></div>
+        <div class="skeleton-block"></div>
+        <div class="skeleton-block"></div>
+      </div>
+      <div class="error-message" id="flashcardsError"></div>
+      <div class="card-counter" id="cardCounter" style="display:none;"></div>
+      <div class="flashcards-grid" id="flashcardsContent"></div>
+    </div>
+
+    <!-- Quiz Tab -->
+    <div class="tab-content" id="tab-quiz">
+      <div class="empty-state" id="quizEmpty">
+        <div class="empty-icon">&#x2753;</div>
+        <h3>
+          <span class="zh-only">暂无练习题</span>
+          <span class="en-only">No Quizzes Yet</span>
+        </h3>
+        <p>
+          <span class="zh-only">AI 将根据内容自动生成选择题和简答题</span>
+          <span class="en-only">AI will auto-generate multiple choice and short answer questions</span>
+        </p>
+      </div>
+      <div class="loading-skeleton" id="quizLoading" style="display:none;">
+        <div class="skeleton-block"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-block"></div>
+      </div>
+      <div class="error-message" id="quizError"></div>
+      <div class="score-bar" id="scoreBar">
+        <div class="score-item correct">
+          <div class="score-value" id="scoreCorrect">0</div>
+          <div class="score-label">
+            <span class="zh-only">正确</span>
+            <span class="en-only">Correct</span>
+          </div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="score-item wrong">
+          <div class="score-value" id="scoreWrong">0</div>
+          <div class="score-label">
+            <span class="zh-only">错误</span>
+            <span class="en-only">Wrong</span>
+          </div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="score-item total">
+          <div class="score-value" id="scoreTotal">0</div>
+          <div class="score-label">
+            <span class="zh-only">总计</span>
+            <span class="en-only">Total</span>
+          </div>
+        </div>
+      </div>
+      <div class="quiz-list" id="quizContent"></div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>
+    <span class="zh-only">AI 课程助手 &mdash; 使用你自己的 API Key，数据不经过第三方</span>
+    <span class="en-only">AI Study Buddy &mdash; Uses your own API key. No third-party data transit.</span>
+  </p>
+</footer>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ========== STATE ==========
+let currentLang = localStorage.getItem('asb-lang') || 'zh';
+let isGenerating = false;
+let quizScore = { correct: 0, wrong: 0, total: 0 };
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+  applyLang(currentLang);
+  loadApiKey();
+  setPlaceholders();
+});
+
+// ========== LANGUAGE ==========
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  localStorage.setItem('asb-lang', currentLang);
+  applyLang(currentLang);
+  setPlaceholders();
+}
+
+function applyLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+}
+
+function setPlaceholders() {
+  const notes = document.getElementById('notesInput');
+  const apiKey = document.getElementById('apiKeyInput');
+  if (currentLang === 'zh') {
+    notes.placeholder = '在此粘贴你的课程笔记、讲义内容或学习材料...\n\n支持任意学科，AI 会自动识别主题并生成结构化内容。';
+    apiKey.placeholder = 'sk-... / sk-ant-...';
+  } else {
+    notes.placeholder = 'Paste your course notes, lecture content, or study materials here...\n\nSupports any subject. AI will auto-detect topics and generate structured content.';
+    apiKey.placeholder = 'sk-... / sk-ant-...';
+  }
+}
+
+// ========== API KEY MANAGEMENT ==========
+function onProviderChange() {
+  loadApiKey();
+}
+
+function loadApiKey() {
+  const provider = document.getElementById('providerSelect').value;
+  const input = document.getElementById('apiKeyInput');
+  const key = localStorage.getItem(`asb-apikey-${provider}`);
+  if (key) {
+    input.value = key;
+  }
+}
+
+function saveApiKey() {
+  const provider = document.getElementById('providerSelect').value;
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) {
+    localStorage.setItem(`asb-apikey-${provider}`, key);
+  }
+}
+
+function getApiKey() {
+  const provider = document.getElementById('providerSelect').value;
+  const input = document.getElementById('apiKeyInput').value.trim();
+  const saved = localStorage.getItem(`asb-apikey-${provider}`);
+  return input || saved || '';
+}
+
+// ========== TABS ==========
+function switchTab(tabName) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+  document.getElementById(`tab-${tabName}`).classList.add('active');
+}
+
+// ========== TOAST ==========
+function showToast(msg, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = msg;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; }, 2500);
+  setTimeout(() => { toast.remove(); }, 3000);
+}
+
+// ========== MAIN GENERATE HANDLER ==========
+async function handleGenerate() {
+  if (isGenerating) return;
+
+  const notes = document.getElementById('notesInput').value.trim();
+  const apiKey = getApiKey();
+  const provider = document.getElementById('providerSelect').value;
+
+  if (!notes) {
+    showToast(currentLang === 'zh' ? '请输入课程笔记内容' : 'Please enter course notes', 'error');
+    return;
+  }
+  if (!apiKey) {
+    showToast(currentLang === 'zh' ? '请输入 API Key' : 'Please enter API Key', 'error');
+    return;
+  }
+
+  saveApiKey();
+  isGenerating = true;
+
+  const btn = document.getElementById('generateBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  // Reset
+  resetResults();
+  showLoading('summary', true);
+  showLoading('flashcards', true);
+  showLoading('quiz', true);
+
+  const langHint = currentLang === 'zh'
+    ? '请用中文回答，并返回严格的 JSON 格式。'
+    : 'Answer in English and return strict JSON format.';
+
+  const prompt = `你是一个专业的学习助手。根据以下课程笔记内容，生成三个部分的 JSON 数据：
+
+1) summary（结构化笔记摘要）：
+   - 按主题分类
+   - 每个主题包含：title（标题）、points（要点数组，每个要点是字符串）或 content（摘要段落）
+
+2) flashcards（复习卡片）：
+   - question（问题）和 answer（答案）
+   - 生成 5-8 张卡片
+
+3) quiz（练习题）：
+   - 包含选择题和简答题
+   - 选择题格式：{ type: "multiple_choice", question: "...", options: ["A.","B.","C.","D."], correct: 0 }（correct 为正确选项索引，从 0 开始）
+   - 简答题格式：{ type: "short_answer", question: "...", reference_answer: "..." }
+   - 生成 4-6 题
+
+重要：${langHint}
+返回的 JSON 结构必须是：
+{
+  "summary": { "topics": [{ "title": "...", "content": "...", "points": ["..."] }] },
+  "flashcards": [{ "question": "...", "answer": "..." }],
+  "quiz": [{ "type": "multiple_choice", "question": "...", "options": [...], "correct": 0 }, { "type": "short_answer", "question": "...", "reference_answer": "..." }]
+}
+
+只返回 JSON，不要加 markdown 代码块或其他文字。
+
+以下是课程笔记内容：
+---
+${notes}`;
+
+  try {
+    let resultText;
+    if (provider === 'openai') {
+      resultText = await callOpenAI(apiKey, prompt);
+    } else {
+      resultText = await callAnthropic(apiKey, prompt);
+    }
+
+    // Parse JSON - try to extract from possible markdown code blocks
+    let jsonStr = resultText.trim();
+    const jsonMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (jsonMatch) {
+      jsonStr = jsonMatch[1].trim();
+    }
+    // Also try to find raw JSON object
+    if (!jsonStr.startsWith('{')) {
+      const braceMatch = jsonStr.match(/\{[\s\S]*\}/);
+      if (braceMatch) jsonStr = braceMatch[0];
+    }
+
+    const data = JSON.parse(jsonStr);
+    renderSummary(data.summary);
+    renderFlashcards(data.flashcards);
+    renderQuiz(data.quiz);
+    showToast(currentLang === 'zh' ? '分析完成!' : 'Analysis complete!', 'success');
+  } catch (err) {
+    console.error('Generation error:', err);
+    const errMsg = currentLang === 'zh'
+      ? `分析失败: ${err.message}`
+      : `Analysis failed: ${err.message}`;
+    showError('summary', errMsg);
+    showError('flashcards', errMsg);
+    showError('quiz', errMsg);
+    showToast(errMsg, 'error');
+  } finally {
+    isGenerating = false;
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    hideLoading('summary');
+    hideLoading('flashcards');
+    hideLoading('quiz');
+  }
+}
+
+// ========== API CALLS ==========
+async function callOpenAI(apiKey, prompt) {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are a professional study assistant. Always respond with valid JSON only.' },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.4,
+      max_tokens: 4000
+    })
+  });
+
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.error?.message || `OpenAI API error: ${res.status}`);
+  }
+
+  const data = await res.json();
+  return data.choices[0].message.content;
+}
+
+async function callAnthropic(apiKey, prompt) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 4000,
+      messages: [
+        { role: 'user', content: prompt }
+      ]
+    })
+  });
+
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.error?.message || `Anthropic API error: ${res.status}`);
+  }
+
+  const data = await res.json();
+  return data.content[0].text;
+}
+
+// ========== RENDERING ==========
+function resetResults() {
+  document.getElementById('summaryContent').innerHTML = '';
+  document.getElementById('flashcardsContent').innerHTML = '';
+  document.getElementById('quizContent').innerHTML = '';
+  document.getElementById('cardCounter').style.display = 'none';
+  document.getElementById('scoreBar').classList.remove('visible');
+  document.getElementById('summaryEmpty').style.display = 'none';
+  document.getElementById('flashcardsEmpty').style.display = 'none';
+  document.getElementById('quizEmpty').style.display = 'none';
+  hideError('summary');
+  hideError('flashcards');
+  hideError('quiz');
+  quizScore = { correct: 0, wrong: 0, total: 0 };
+}
+
+function showLoading(tab, show) {
+  const el = document.getElementById(`${tab}Loading`);
+  el.style.display = show ? 'flex' : 'none';
+}
+
+function hideLoading(tab) { showLoading(tab, false); }
+
+function showError(tab, msg) {
+  const el = document.getElementById(`${tab}Error`);
+  el.innerHTML = `<span>&#x26A0;</span><span>${escapeHtml(msg)}</span>`;
+  el.classList.add('visible');
+}
+
+function hideError(tab) {
+  const el = document.getElementById(`${tab}Error`);
+  el.classList.remove('visible');
+}
+
+// -- Summary --
+function renderSummary(summary) {
+  const container = document.getElementById('summaryContent');
+  if (!summary || !summary.topics || summary.topics.length === 0) {
+    container.innerHTML = `<p style="color:var(--text-muted);">${currentLang === 'zh' ? '未生成摘要内容' : 'No summary generated'}</p>`;
+    return;
+  }
+
+  summary.topics.forEach((topic, i) => {
+    const block = document.createElement('div');
+    block.className = 'topic-block';
+    block.style.animationDelay = `${i * 0.1}s`;
+
+    let bodyHtml = '';
+    if (topic.content) {
+      bodyHtml += `<p>${escapeHtml(topic.content)}</p>`;
+    }
+    if (topic.points && topic.points.length > 0) {
+      bodyHtml += '<ul>' + topic.points.map(p => `<li>${escapeHtml(p)}</li>`).join('') + '</ul>';
+    }
+    if (!bodyHtml) {
+      bodyHtml = `<p>${currentLang === 'zh' ? '无详细内容' : 'No details'}</p>`;
+    }
+
+    block.innerHTML = `
+      <div class="topic-header">
+        <div class="topic-number">${i + 1}</div>
+        <h3>${escapeHtml(topic.title)}</h3>
+      </div>
+      <div class="topic-body">${bodyHtml}</div>
+    `;
+    container.appendChild(block);
+  });
+}
+
+// -- Flashcards --
+function renderFlashcards(flashcards) {
+  const container = document.getElementById('flashcardsContent');
+  const counter = document.getElementById('cardCounter');
+
+  if (!flashcards || flashcards.length === 0) {
+    container.innerHTML = `<p style="color:var(--text-muted);">${currentLang === 'zh' ? '未生成卡片' : 'No flashcards generated'}</p>`;
+    return;
+  }
+
+  counter.style.display = 'block';
+  counter.innerHTML = currentLang === 'zh'
+    ? `共 ${flashcards.length} 张卡片 (点击翻转)`
+    : `${flashcards.length} cards (click to flip)`;
+
+  flashcards.forEach((card, i) => {
+    const el = document.createElement('div');
+    el.className = 'flashcard';
+    el.style.animationDelay = `${i * 0.08}s`;
+    el.onclick = () => el.classList.toggle('flipped');
+
+    el.innerHTML = `
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="card-label">${currentLang === 'zh' ? '问题' : 'QUESTION'}</div>
+          <div class="card-question">${escapeHtml(card.question)}</div>
+          <div class="card-hint">${currentLang === 'zh' ? '点击查看答案' : 'Click to reveal'}</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="card-label">${currentLang === 'zh' ? '答案' : 'ANSWER'}</div>
+          <div class="card-answer">${escapeHtml(card.answer)}</div>
+          <div class="card-hint">${currentLang === 'zh' ? '点击返回问题' : 'Click to flip back'}</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+// -- Quiz --
+function renderQuiz(quiz) {
+  const container = document.getElementById('quizContent');
+  const scoreBar = document.getElementById('scoreBar');
+
+  if (!quiz || quiz.length === 0) {
+    container.innerHTML = `<p style="color:var(--text-muted);">${currentLang === 'zh' ? '未生成练习题' : 'No quizzes generated'}</p>`;
+    return;
+  }
+
+  // Count multiple choice questions for scoring
+  const mcCount = quiz.filter(q => q.type === 'multiple_choice').length;
+  if (mcCount > 0) {
+    quizScore.total = mcCount;
+    scoreBar.classList.add('visible');
+    updateScoreDisplay();
+  }
+
+  quiz.forEach((item, qi) => {
+    const el = document.createElement('div');
+    el.className = 'quiz-item';
+    el.style.animationDelay = `${qi * 0.1}s`;
+
+    const isMC = item.type === 'multiple_choice';
+    const typeLabel = isMC
+      ? (currentLang === 'zh' ? '选择题' : 'Multiple Choice')
+      : (currentLang === 'zh' ? '简答题' : 'Short Answer');
+    const typeClass = isMC ? 'multiple-choice' : 'short-answer';
+
+    let bodyHtml = '';
+    if (isMC) {
+      const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+      bodyHtml = `<div class="options-list">
+        ${(item.options || []).map((opt, oi) => `
+          <button class="option-btn" data-q="${qi}" data-o="${oi}" onclick="handleMCAnswer(${qi}, ${oi})">
+            <span class="option-letter">${letters[oi] || (oi+1)}</span>
+            <span>${escapeHtml(opt)}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="feedback-${qi}" style="display:none;"></div>`;
+    } else {
+      bodyHtml = `
+        <div class="short-answer-hint">
+          ${currentLang === 'zh' ? '思考你的答案，然后点击下方查看参考答案。' : 'Think about your answer, then click below to see the reference.'}
+        </div>
+        <button class="show-answer-btn" onclick="toggleShortAnswer(${qi})">
+          ${currentLang === 'zh' ? '查看参考答案' : 'Show Reference Answer'}
+        </button>
+        <div class="reference-answer" id="sa-${qi}">${escapeHtml(item.reference_answer || '')}</div>`;
+    }
+
+    el.innerHTML = `
+      <div class="quiz-header">
+        <div class="quiz-number">${qi + 1}</div>
+        <div>
+          <span class="quiz-type-badge ${typeClass}">${typeLabel}</span>
+          <h4>${escapeHtml(item.question)}</h4>
+        </div>
+      </div>
+      <div class="quiz-body">${bodyHtml}</div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+function handleMCAnswer(qi, oi) {
+  // Find all buttons for this question
+  const buttons = document.querySelectorAll(`.option-btn[data-q="${qi}"]`);
+  const firstBtn = buttons[0];
+  // We need the correct answer - stored in the quiz data
+  // Re-parse from the rendered HTML isn't ideal, so let's store quiz data
+  // Actually let's read the original data
+  if (!window._quizData) return;
+  const item = window._quizData[qi];
+  if (!item) return;
+
+  const correctIdx = item.correct;
+  buttons.forEach(btn => {
+    btn.disabled = true;
+    const thisO = parseInt(btn.getAttribute('data-o'));
+    if (thisO === correctIdx) {
+      btn.classList.add('correct');
+    } else if (thisO === oi && oi !== correctIdx) {
+      btn.classList.add('wrong');
+    }
+  });
+
+  // Show feedback
+  const feedback = document.getElementById(`feedback-${qi}`);
+  const isCorrect = oi === correctIdx;
+  if (isCorrect) {
+    quizScore.correct++;
+    feedback.className = 'quiz-feedback correct';
+    feedback.innerHTML = currentLang === 'zh'
+      ? '&#x2705; 正确!'
+      : '&#x2705; Correct!';
+  } else {
+    quizScore.wrong++;
+    feedback.className = 'quiz-feedback wrong';
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    feedback.innerHTML = currentLang === 'zh'
+      ? `&#x274C; 不正确。正确答案是 ${letters[correctIdx] || correctIdx}。`
+      : `&#x274C; Incorrect. The correct answer is ${letters[correctIdx] || correctIdx}.`;
+  }
+  feedback.style.display = 'block';
+  updateScoreDisplay();
+}
+
+function toggleShortAnswer(qi) {
+  const el = document.getElementById(`sa-${qi}`);
+  el.classList.toggle('visible');
+}
+
+function updateScoreDisplay() {
+  document.getElementById('scoreCorrect').textContent = quizScore.correct;
+  document.getElementById('scoreWrong').textContent = quizScore.wrong;
+  document.getElementById('scoreTotal').textContent = quizScore.total;
+}
+
+// Override renderQuiz to store data
+const _origRenderQuiz = renderQuiz;
+renderQuiz = function(quiz) {
+  window._quizData = quiz;
+  _origRenderQuiz(quiz);
+};
+
+// ========== UTILITIES ==========
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

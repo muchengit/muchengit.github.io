@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="zh" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clipboard AI - 一键剪贴板 AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== CSS Reset & Variables ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #0A0E1A;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1E293B;
+  --bg-card: #151C2C;
+  --bg-input: #0F1629;
+  --border-color: #1E293B;
+  --border-hover: #334155;
+  --cyan: #00E5FF;
+  --violet: #A855F7;
+  --amber: #F59E0B;
+  --cyan-dim: rgba(0,229,255,0.15);
+  --violet-dim: rgba(168,85,247,0.15);
+  --amber-dim: rgba(245,158,11,0.15);
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-glow-cyan: 0 0 20px rgba(0,229,255,0.2);
+  --shadow-glow-violet: 0 0 20px rgba(168,85,247,0.2);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-display: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ========== Background Grid ========== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(0,229,255,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(168,85,247,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========== Layout ========== */
+.app-wrapper { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ========== Navbar ========== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(10,14,26,0.85);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.navbar-logo {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: var(--shadow-glow-cyan);
+}
+.navbar-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.navbar-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: -2px;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-home {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+.nav-home:hover { border-color: var(--cyan); color: var(--cyan); }
+.lang-switcher {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.lang-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  transition: var(--transition);
+}
+.lang-btn.active { background: var(--cyan-dim); color: var(--cyan); }
+.lang-btn:hover:not(.active) { color: var(--text-secondary); }
+
+/* ========== Main Content ========== */
+.main-content {
+  flex: 1;
+  display: flex;
+  gap: 0;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+}
+.content-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ========== API Key Section ========== */
+.api-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+.api-section:hover { border-color: var(--border-hover); }
+.api-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.api-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.api-title svg { color: var(--amber); }
+.api-provider {
+  display: flex;
+  gap: 8px;
+}
+.provider-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.provider-btn.active { border-color: var(--violet); background: var(--violet-dim); color: var(--violet); }
+.provider-btn:hover:not(.active) { border-color: var(--border-hover); }
+.api-input-row {
+  display: flex;
+  gap: 12px;
+}
+.api-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition);
+}
+.api-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,229,255,0.1); }
+.api-input::placeholder { color: var(--text-muted); }
+.api-save-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--violet), #7C3AED);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.api-save-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-glow-violet); }
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.api-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.api-status-dot.connected { background: #22C55E; box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+
+/* ========== Input Section ========== */
+.input-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+.input-section:hover { border-color: var(--border-hover); }
+.section-label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label svg { color: var(--cyan); }
+.input-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  resize: vertical;
+  outline: none;
+  transition: var(--transition);
+}
+.input-textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,229,255,0.1); }
+.input-textarea::placeholder { color: var(--text-muted); }
+.input-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.char-count { font-family: var(--font-mono); }
+
+/* ========== Mode Tabs ========== */
+.mode-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+.mode-section:hover { border-color: var(--border-hover); }
+.mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.mode-tab {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.mode-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: var(--transition);
+}
+.mode-tab:hover:not(.active) { border-color: var(--border-hover); color: var(--text-primary); }
+.mode-tab.active {
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  box-shadow: 0 0 12px rgba(0,229,255,0.1);
+}
+.mode-tab .tab-icon { font-size: 18px; }
+
+/* Mode-specific options */
+.mode-options {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+.mode-options-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.mode-options select {
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+.mode-options select:focus { border-color: var(--cyan); }
+
+/* ========== Process Button ========== */
+.process-row { display: flex; gap: 12px; }
+.process-btn {
+  flex: 1;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  background: linear-gradient(135deg, var(--cyan), #00B8D4);
+  color: #0A0E1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.process-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow-cyan); }
+.process-btn:active { transform: translateY(0); }
+.process-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.clear-btn {
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.clear-btn:hover { border-color: #EF4444; color: #EF4444; background: rgba(239,68,68,0.1); }
+
+/* ========== Loading Animation ========== */
+.loading-overlay {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+.loading-overlay.visible { display: flex; }
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ========== Result Section ========== */
+.result-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.result-section:hover { border-color: var(--border-hover); }
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+.result-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.result-title svg { color: var(--cyan); }
+.result-actions { display: flex; gap: 8px; }
+.copy-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.copy-btn:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+.copy-btn.copied { border-color: #22C55E; color: #22C55E; background: rgba(34,197,94,0.1); }
+.result-body {
+  padding: 20px;
+  min-height: 120px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.result-body pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.result-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.result-placeholder .placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+.result-placeholder-text { text-align: center; }
+
+/* ========== History Sidebar ========== */
+.history-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  margin-left: 24px;
+  transition: var(--transition);
+}
+.history-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+.history-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.history-title svg { color: var(--amber); }
+.history-actions { display: flex; gap: 8px; }
+.history-clear-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.history-clear-btn:hover { border-color: #EF4444; color: #EF4444; }
+.history-list {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  padding: 8px;
+}
+.history-item {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+.history-item:hover { background: var(--bg-input); border-color: var(--border-color); }
+.history-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.history-mode {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.history-mode.mode-summary { background: var(--cyan-dim); color: var(--cyan); }
+.history-mode.mode-todo { background: var(--violet-dim); color: var(--violet); }
+.history-mode.mode-classify { background: var(--amber-dim); color: var(--amber); }
+.history-mode.mode-translate { background: rgba(34,197,94,0.15); color: #22C55E; }
+.history-mode.mode-rewrite { background: rgba(236,72,153,0.15); color: #EC4899; }
+.history-time { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+.history-preview {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history-result-preview {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+.history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+.history-empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.3; }
+
+/* ========== History Toggle (Mobile) ========== */
+.history-toggle {
+  display: none;
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+.history-toggle:hover { border-color: var(--amber); color: var(--amber); }
+
+/* ========== Footer ========== */
+.footer {
+  border-top: 1px solid var(--border-color);
+  padding: 20px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  background: rgba(10,14,26,0.85);
+  backdrop-filter: blur(20px);
+}
+.footer a { color: var(--cyan); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ========== Toast ========== */
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  padding: 12px 20px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-primary);
+  box-shadow: var(--shadow);
+  animation: slideIn 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toast.success { border-color: #22C55E; }
+.toast.success::before { content: '✓'; color: #22C55E; font-weight: 700; }
+.toast.error { border-color: #EF4444; }
+.toast.error::before { content: '✕'; color: #EF4444; font-weight: 700; }
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ========== Fade-in Animation ========== */
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+  .main-content { flex-direction: column; padding: 16px; }
+  .history-sidebar { width: 100%; margin-left: 0; margin-top: 24px; }
+  .history-panel { position: static; }
+  .history-toggle { display: block; }
+  .history-sidebar.collapsed .history-list,
+  .history-sidebar.collapsed .history-header { display: none; }
+}
+@media (max-width: 640px) {
+  .navbar { padding: 12px 16px; }
+  .navbar-subtitle { display: none; }
+  .mode-tabs { gap: 6px; }
+  .mode-tab { padding: 8px 14px; font-size: 13px; }
+  .mode-tab .tab-icon { display: none; }
+  .process-row { flex-direction: column; }
+  .api-input-row { flex-direction: column; }
+  .nav-home span { display: none; }
+  .content-area { gap: 16px; }
+}
+
+/* ========== zh-only / en-only ========== */
+[data-lang="zh"] .en-only { display: none !important; }
+[data-lang="en"] .zh-only { display: none !important; }
+</style>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- ========== Navbar ========== -->
+  <nav class="navbar">
+    <a href="/" class="navbar-brand">
+      <div class="navbar-logo">AI</div>
+      <div>
+        <div class="navbar-title">Clipboard AI</div>
+        <div class="navbar-subtitle">
+          <span class="zh-only">一键剪贴板 AI 助手</span>
+          <span class="en-only">One-Click Clipboard AI Assistant</span>
+        </div>
+      </div>
+    </a>
+    <div class="navbar-right">
+      <a href="/" class="nav-home">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span class="zh-only">返回主页</span>
+        <span class="en-only">Home</span>
+      </a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-set-lang="zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" data-set-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== Main ========== -->
+  <div class="main-content">
+    <div class="content-area">
+
+      <!-- API Key -->
+      <div class="api-section fade-in">
+        <div class="api-header">
+          <div class="api-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            <span class="zh-only">API 密钥配置</span>
+            <span class="en-only">API Key Configuration</span>
+          </div>
+          <div class="api-provider">
+            <button class="provider-btn active" onclick="setProvider('openai')">OpenAI</button>
+            <button class="provider-btn" onclick="setProvider('anthropic')">Anthropic</button>
+          </div>
+        </div>
+        <div class="api-input-row">
+          <input type="password" class="api-input" id="apiKeyInput" placeholder="sk-... / sk-ant-..." autocomplete="off">
+          <button class="api-save-btn" onclick="saveApiKey()">
+            <span class="zh-only">保存密钥</span>
+            <span class="en-only">Save Key</span>
+          </button>
+        </div>
+        <div class="api-status">
+          <span class="api-status-dot" id="apiStatusDot"></span>
+          <span id="apiStatusText">
+            <span class="zh-only">未配置 API 密钥</span>
+            <span class="en-only">No API key configured</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="input-section fade-in">
+        <div class="section-label">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span class="zh-only">输入文本</span>
+          <span class="en-only">Input Text</span>
+        </div>
+        <textarea class="input-textarea" id="inputText" placeholder=""></textarea>
+        <div class="input-footer">
+          <span class="char-count"><span id="charCount">0</span> <span class="zh-only">字符</span><span class="en-only">chars</span></span>
+          <button class="copy-btn" onclick="pasteFromClipboard()" style="font-size:12px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+            <span class="zh-only">从剪贴板粘贴</span>
+            <span class="en-only">Paste</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode Selection & Process -->
+      <div class="mode-section fade-in">
+        <div class="mode-tabs" id="modeTabs">
+          <button class="mode-tab active" data-mode="summary" onclick="setMode('summary')">
+            <span class="tab-icon">📝</span>
+            <span class="zh-only">AI 摘要</span>
+            <span class="en-only">Summarize</span>
+          </button>
+          <button class="mode-tab" data-mode="todo" onclick="setMode('todo')">
+            <span class="tab-icon">✅</span>
+            <span class="zh-only">提取待办</span>
+            <span class="en-only">Extract Todos</span>
+          </button>
+          <button class="mode-tab" data-mode="classify" onclick="setMode('classify')">
+            <span class="tab-icon">📂</span>
+            <span class="zh-only">分类归档</span>
+            <span class="en-only">Classify</span>
+          </button>
+          <button class="mode-tab" data-mode="translate" onclick="setMode('translate')">
+            <span class="tab-icon">🌐</span>
+            <span class="zh-only">翻译</span>
+            <span class="en-only">Translate</span>
+          </button>
+          <button class="mode-tab" data-mode="rewrite" onclick="setMode('rewrite')">
+            <span class="tab-icon">✨</span>
+            <span class="zh-only">改写润色</span>
+            <span class="en-only">Rewrite</span>
+          </button>
+        </div>
+
+        <!-- Translation options -->
+        <div class="mode-options" id="translateOptions" style="display:none">
+          <span class="mode-options-label">
+            <span class="zh-only">目标语言：</span>
+            <span class="en-only">Target Language:</span>
+          </span>
+          <select id="targetLang">
+            <option value="zh">中文 (Chinese)</option>
+            <option value="en">English</option>
+            <option value="ja">日本語 (Japanese)</option>
+          </select>
+        </div>
+
+        <!-- Rewrite options -->
+        <div class="mode-options" id="rewriteOptions" style="display:none">
+          <span class="mode-options-label">
+            <span class="zh-only">改写风格：</span>
+            <span class="en-only">Rewrite Style:</span>
+          </span>
+          <select id="rewriteStyle">
+            <option value="professional">
+              <span class="zh-only">专业正式</span>
+              <span class="en-only">Professional</span>
+            </option>
+            <option value="casual">
+              <span class="zh-only">轻松口语</span>
+              <span class="en-only">Casual</span>
+            </option>
+            <option value="concise">
+              <span class="zh-only">简洁精炼</span>
+              <span class="en-only">Concise</span>
+            </option>
+            <option value="academic">
+              <span class="zh-only">学术风格</span>
+              <span class="en-only">Academic</span>
+            </option>
+          </select>
+        </div>
+
+        <div class="process-row">
+          <button class="process-btn" id="processBtn" onclick="processText()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span id="processBtnText">
+              <span class="zh-only">开始处理</span>
+              <span class="en-only">Process</span>
+            </span>
+          </button>
+          <button class="clear-btn" onclick="clearAll()">
+            <span class="zh-only">清空</span>
+            <span class="en-only">Clear</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+          <span class="zh-only">AI 正在思考中...</span>
+          <span class="en-only">AI is thinking...</span>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="result-section fade-in" id="resultSection" style="display:none">
+        <div class="result-header">
+          <div class="result-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            <span class="zh-only">处理结果</span>
+            <span class="en-only">Result</span>
+          </div>
+          <div class="result-actions">
+            <button class="copy-btn" id="copyBtn" onclick="copyResult()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span class="zh-only">复制结果</span>
+              <span class="en-only">Copy</span>
+            </button>
+          </div>
+        </div>
+        <div class="result-body">
+          <pre id="resultText"></pre>
+        </div>
+      </div>
+
+      <!-- Result Placeholder -->
+      <div class="result-section fade-in" id="resultPlaceholder">
+        <div class="result-placeholder">
+          <div class="result-placeholder-text">
+            <div class="placeholder-icon">⚡</div>
+            <div>
+              <span class="zh-only">粘贴文本，选择处理模式，点击「开始处理」</span>
+              <span class="en-only">Paste text, select a mode, and click "Process"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- History Sidebar -->
+    <div class="history-sidebar" id="historySidebar">
+      <div class="history-toggle" onclick="toggleHistory()">
+        <span class="zh-only">展开历史记录</span>
+        <span class="en-only">Show History</span>
+      </div>
+      <div class="history-panel">
+        <div class="history-header">
+          <div class="history-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="zh-only">历史记录</span>
+            <span class="en-only">History</span>
+          </div>
+          <div class="history-actions">
+            <button class="history-clear-btn" onclick="clearHistory()">
+              <span class="zh-only">清空</span>
+              <span class="en-only">Clear</span>
+            </button>
+          </div>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty" id="historyEmpty">
+            <div class="history-empty-icon">📭</div>
+            <div>
+              <span class="zh-only">暂无处理记录</span>
+              <span class="en-only">No history yet</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="zh-only">Clipboard AI &mdash; 纯前端 AI 文本处理工具 &mdash; 数据仅存储在本地浏览器中</span>
+    <span class="en-only">Clipboard AI &mdash; Client-side AI text processing tool &mdash; Data stored locally only</span>
+  </footer>
+
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ========== State ==========
+let currentProvider = localStorage.getItem('clipai_provider') || 'openai';
+let currentMode = 'summary';
+let isProcessing = false;
+let currentResult = '';
+let lang = localStorage.getItem('clipai_lang') || 'zh';
+
+// ========== Init ==========
+(function init() {
+  // Set lang
+  setLang(lang, true);
+  // Set provider UI
+  document.querySelectorAll('.provider-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(currentProvider));
+  });
+  // Load saved API key
+  const savedKey = localStorage.getItem('clipai_apikey_' + currentProvider);
+  if (savedKey) {
+    document.getElementById('apiKeyInput').value = savedKey;
+    updateApiStatus(true);
+  }
+  // Textarea placeholder
+  updatePlaceholder();
+  updateTextareaPlaceholder();
+  // Render history
+  renderHistory();
+  // Char counter
+  const inputText = document.getElementById('inputText');
+  inputText.addEventListener('input', () => {
+    document.getElementById('charCount').textContent = inputText.value.length;
+  });
+})();
+
+function updatePlaceholder() {
+  const placeholders = {
+    zh: {
+      input: '在此粘贴或输入需要处理的文本内容...\n\n支持任何类型的文本：文章、邮件、会议纪要、代码注释、笔记等。',
+      apiKey: 'sk-... / sk-ant-...'
+    },
+    en: {
+      input: 'Paste or type the text you want to process here...\n\nSupports any type of text: articles, emails, meeting notes, code comments, notes, etc.',
+      apiKey: 'sk-... / sk-ant-...'
+    }
+  };
+  document.getElementById('apiKeyInput').placeholder = placeholders[lang].apiKey;
+}
+
+function updateTextareaPlaceholder() {
+  const inputText = document.getElementById('inputText');
+  const placeholders = {
+    zh: '在此粘贴或输入需要处理的文本内容...\n\n支持任何类型的文本：文章、邮件、会议纪要、代码注释、笔记等。',
+    en: 'Paste or type the text you want to process here...\n\nSupports any type of text: articles, emails, meeting notes, code comments, notes, etc.'
+  };
+  inputText.placeholder = placeholders[lang];
+}
+
+// ========== Language ==========
+function setLang(l, silent) {
+  lang = l;
+  localStorage.setItem('clipai_lang', l);
+  document.documentElement.setAttribute('data-lang', l);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-set-lang') === l);
+  });
+  updateTextareaPlaceholder();
+  updatePlaceholder();
+  renderHistory();
+}
+
+// ========== Provider ==========
+function setProvider(provider) {
+  currentProvider = provider;
+  localStorage.setItem('clipai_provider', provider);
+  document.querySelectorAll('.provider-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(provider));
+  });
+  const savedKey = localStorage.getItem('clipai_apikey_' + provider);
+  document.getElementById('apiKeyInput').value = savedKey || '';
+  updateApiStatus(!!savedKey);
+}
+
+// ========== API Key ==========
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) {
+    showToast(lang === 'zh' ? '请输入 API 密钥' : 'Please enter an API key', 'error');
+    return;
+  }
+  localStorage.setItem('clipai_apikey_' + currentProvider, key);
+  updateApiStatus(true);
+  showToast(lang === 'zh' ? 'API 密钥已保存' : 'API key saved', 'success');
+}
+
+function updateApiStatus(connected) {
+  const dot = document.getElementById('apiStatusDot');
+  const text = document.getElementById('apiStatusText');
+  dot.classList.toggle('connected', connected);
+  if (connected) {
+    text.innerHTML = currentProvider === 'openai'
+      ? (lang === 'zh' ? '<span class="zh-only">OpenAI 已配置</span><span class="en-only">OpenAI configured</span>' : 'OpenAI configured')
+      : (lang === 'zh' ? '<span class="zh-only">Anthropic 已配置</span><span class="en-only">Anthropic configured</span>' : 'Anthropic configured');
+  } else {
+    text.innerHTML = '<span class="zh-only">未配置 API 密钥</span><span class="en-only">No API key configured</span>';
+  }
+}
+
+// ========== Mode ==========
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.getAttribute('data-mode') === mode);
+  });
+  document.getElementById('translateOptions').style.display = mode === 'translate' ? 'flex' : 'none';
+  document.getElementById('rewriteOptions').style.display = mode === 'rewrite' ? 'flex' : 'none';
+}
+
+// ========== Paste ==========
+async function pasteFromClipboard() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('inputText').value = text;
+    document.getElementById('charCount').textContent = text.length;
+    showToast(lang === 'zh' ? '已从剪贴板粘贴' : 'Pasted from clipboard', 'success');
+  } catch (e) {
+    showToast(lang === 'zh' ? '无法访问剪贴板，请手动粘贴' : 'Cannot access clipboard, please paste manually', 'error');
+  }
+}
+
+// ========== Clear ==========
+function clearAll() {
+  document.getElementById('inputText').value = '';
+  document.getElementById('charCount').textContent = '0';
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('resultPlaceholder').style.display = '';
+  currentResult = '';
+  const copyBtn = document.getElementById('copyBtn');
+  copyBtn.classList.remove('copied');
+  copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="zh-only">复制结果</span><span class="en-only">Copy</span>';
+}
+
+// ========== Build Prompt ==========
+function buildPrompt(text, mode) {
+  const langMap = { zh: '中文', en: 'English', ja: '日本語' };
+  const isZh = lang === 'zh';
+  switch (mode) {
+    case 'summary':
+      return isZh
+        ? `请对以下文本生成简洁的摘要。要求：\n1. 用 3-5 个要点概括核心内容\n2. 每个要点一行\n3. 保持客观准确\n4. 使用中文输出\n\n文本：\n${text}`
+        : `Please generate a concise summary of the following text. Requirements:\n1. Use 3-5 bullet points for core content\n2. One point per line\n3. Be objective and accurate\n\nText:\n${text}`;
+    case 'todo':
+      return isZh
+        ? `请从以下文本中提取所有待办事项和行动项（action items）。要求：\n1. 列出每一项待办\n2. 标注优先级（高/中/低）\n3. 如有截止日期请标注\n4. 用中文输出\n\n文本：\n${text}`
+        : `Please extract all action items and todos from the following text. Requirements:\n1. List each action item\n2. Mark priority (High/Medium/Low)\n3. Include deadlines if mentioned\n\nText:\n${text}`;
+    case 'classify':
+      return isZh
+        ? `请分析以下文本，自动分类并给出归档建议。要求：\n1. 判断内容类型（如：技术文档、商务邮件、学习笔记、项目文档、个人笔记等）\n2. 提取关键词/标签\n3. 给出推荐的归档文件夹名称\n4. 简要说明分类理由\n5. 用中文输出\n\n文本：\n${text}`
+        : `Please analyze and classify the following text. Requirements:\n1. Determine content type (e.g., technical doc, business email, study notes, project doc, personal notes)\n2. Extract keywords/tags\n3. Suggest an archive folder name\n4. Briefly explain the classification reason\n\nText:\n${text}`;
+    case 'translate': {
+      const target = document.getElementById('targetLang').value;
+      const targetName = langMap[target] || target;
+      return isZh
+        ? `请将以下文本翻译为${targetName}。要求：\n1. 准确传达原文含义\n2. 符合目标语言的表达习惯\n3. 专业术语保持准确\n\n文本：\n${text}`
+        : `Please translate the following text into ${targetName}. Requirements:\n1. Accurately convey the original meaning\n2. Follow target language conventions\n3. Keep technical terms accurate\n\nText:\n${text}`;
+    }
+    case 'rewrite': {
+      const style = document.getElementById('rewriteStyle').value;
+      const styleNames = {
+        professional: { zh: '专业正式', en: 'professional' },
+        casual: { zh: '轻松口语', en: 'casual' },
+        concise: { zh: '简洁精炼', en: 'concise' },
+        academic: { zh: '学术风格', en: 'academic' }
+      };
+      const styleName = styleNames[style][lang];
+      return isZh
+        ? `请以「${styleName}」风格改写以下文本。要求：\n1. 保持原文核心含义不变\n2. 改善表达和流畅度\n3. 调整语气和措辞以匹配目标风格\n4. 用中文输出\n\n文本：\n${text}`
+        : `Please rewrite the following text in a "${styleName}" style. Requirements:\n1. Preserve the core meaning\n2. Improve expression and fluency\n3. Adjust tone and wording to match the target style\n\nText:\n${text}`;
+    }
+    default:
+      return text;
+  }
+}
+
+// ========== API Call ==========
+async function callAI(prompt) {
+  const apiKey = localStorage.getItem('clipai_apikey_' + currentProvider);
+  if (!apiKey) {
+    throw new Error(lang === 'zh' ? '请先配置 API 密钥' : 'Please configure an API key first');
+  }
+
+  if (currentProvider === 'openai') {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: lang === 'zh' ? '你是一个高效的文本处理助手。请直接输出结果，不要有多余的寒暄。' : 'You are an efficient text processing assistant. Output results directly, no extra pleasantries.' },
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: 2048,
+        temperature: 0.7
+      })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `OpenAI API error: ${res.status}`);
+    }
+    const data = await res.json();
+    return data.choices[0].message.content.trim();
+  } else {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-3-haiku-20240307',
+        max_tokens: 2048,
+        system: lang === 'zh' ? '你是一个高效的文本处理助手。请直接输出结果，不要有多余的寒暄。' : 'You are an efficient text processing assistant. Output results directly, no extra pleasantries.',
+        messages: [
+          { role: 'user', content: prompt }
+        ]
+      })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Anthropic API error: ${res.status}`);
+    }
+    const data = await res.json();
+    return data.content[0].text.trim();
+  }
+}
+
+// ========== Process ==========
+async function processText() {
+  const text = document.getElementById('inputText').value.trim();
+  if (!text) {
+    showToast(lang === 'zh' ? '请先输入或粘贴文本' : 'Please enter or paste text first', 'error');
+    return;
+  }
+  const apiKey = localStorage.getItem('clipai_apikey_' + currentProvider);
+  if (!apiKey) {
+    showToast(lang === 'zh' ? '请先配置 API 密钥' : 'Please configure an API key first', 'error');
+    return;
+  }
+  if (isProcessing) return;
+
+  isProcessing = true;
+  const btn = document.getElementById('processBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="loading-spinner" style="width:20px;height:20px;border-width:2px"></div><span class="zh-only">处理中...</span><span class="en-only">Processing...</span>';
+  document.getElementById('loadingOverlay').classList.add('visible');
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('resultPlaceholder').style.display = 'none';
+
+  try {
+    const prompt = buildPrompt(text, currentMode);
+    const result = await callAI(prompt);
+    currentResult = result;
+    document.getElementById('resultText').textContent = result;
+    document.getElementById('resultSection').style.display = '';
+    document.getElementById('resultPlaceholder').style.display = 'none';
+
+    // Save to history
+    saveHistory(text, currentMode, result);
+    renderHistory();
+
+    showToast(lang === 'zh' ? '处理完成' : 'Done', 'success');
+  } catch (err) {
+    showToast(err.message || (lang === 'zh' ? '处理失败' : 'Processing failed'), 'error');
+    document.getElementById('resultPlaceholder').style.display = '';
+  } finally {
+    isProcessing = false;
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span class="zh-only">开始处理</span><span class="en-only">Process</span>';
+    document.getElementById('loadingOverlay').classList.remove('visible');
+  }
+}
+
+// ========== Copy Result ==========
+async function copyResult() {
+  if (!currentResult) return;
+  try {
+    await navigator.clipboard.writeText(currentResult);
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="zh-only">已复制</span><span class="en-only">Copied!</span>';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="zh-only">复制结果</span><span class="en-only">Copy</span>';
+    }, 2000);
+  } catch (e) {
+    // Fallback
+    const textarea = document.createElement('textarea');
+    textarea.value = currentResult;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToast(lang === 'zh' ? '已复制' : 'Copied!', 'success');
+  }
+}
+
+// ========== History ==========
+function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem('clipai_history') || '[]');
+  } catch { return []; }
+}
+
+function saveHistory(input, mode, result) {
+  const history = getHistory();
+  history.unshift({
+    id: Date.now(),
+    input,
+    mode,
+    result,
+    provider: currentProvider,
+    time: new Date().toISOString()
+  });
+  // Keep only 10
+  if (history.length > 10) history.length = 10;
+  localStorage.setItem('clipai_history', JSON.stringify(history));
+}
+
+function renderHistory() {
+  const history = getHistory();
+  const list = document.getElementById('historyList');
+  const empty = document.getElementById('historyEmpty');
+
+  if (history.length === 0) {
+    list.innerHTML = '';
+    list.appendChild(empty);
+    empty.style.display = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+  const modeLabels = {
+    summary: { zh: '摘要', en: 'Summary' },
+    todo: { zh: '待办', en: 'Todo' },
+    classify: { zh: '分类', en: 'Classify' },
+    translate: { zh: '翻译', en: 'Translate' },
+    rewrite: { zh: '改写', en: 'Rewrite' }
+  };
+  const modeClasses = {
+    summary: 'mode-summary',
+    todo: 'mode-todo',
+    classify: 'mode-classify',
+    translate: 'mode-translate',
+    rewrite: 'mode-rewrite'
+  };
+
+  list.innerHTML = history.map(item => {
+    const modeName = modeLabels[item.mode]?.[lang] || item.mode;
+    const modeClass = modeClasses[item.mode] || 'mode-summary';
+    const date = new Date(item.time);
+    const timeStr = date.toLocaleTimeString(lang === 'zh' ? 'zh-CN' : 'en-US', { hour: '2-digit', minute: '2-digit' });
+    const dateStr = date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short', day: 'numeric' });
+    return `
+      <div class="history-item" onclick="loadHistory(${item.id})">
+        <div class="history-item-header">
+          <span class="history-mode ${modeClass}">${modeName}</span>
+          <span class="history-time">${dateStr} ${timeStr}</span>
+        </div>
+        <div class="history-preview">${escapeHtml(item.input.substring(0, 60))}</div>
+        <div class="history-result-preview">${escapeHtml(item.result.substring(0, 50))}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function loadHistory(id) {
+  const history = getHistory();
+  const item = history.find(h => h.id === id);
+  if (!item) return;
+  document.getElementById('inputText').value = item.input;
+  document.getElementById('charCount').textContent = item.input.length;
+  setMode(item.mode);
+  currentResult = item.result;
+  document.getElementById('resultText').textContent = item.result;
+  document.getElementById('resultSection').style.display = '';
+  document.getElementById('resultPlaceholder').style.display = 'none';
+  // Scroll to result
+  document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function clearHistory() {
+  localStorage.removeItem('clipai_history');
+  renderHistory();
+  showToast(lang === 'zh' ? '历史记录已清空' : 'History cleared', 'success');
+}
+
+function toggleHistory() {
+  document.getElementById('historySidebar').classList.toggle('collapsed');
+}
+
+// ========== Toast ==========
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = 'opacity 0.3s';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
+
+// ========== Utilities ==========
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

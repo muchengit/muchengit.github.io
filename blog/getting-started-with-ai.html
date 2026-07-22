@@ -1,0 +1,767 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>写给想用 AI 做东西但不知道从何开始的人 | For Those Who Want to Build with AI But Don't Know Where to Start</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div></div><nav><div class="nav-in"><a href="../"><i class="dot"></i> muchengit.github.io</a><button class="lang-btn" id="langBtn">EN / 中</button></div></nav><article>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <img src="start-hero.jpg" alt="Getting Started with AI" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">入门</span><span class="en-only">Getting Started</span></div>
+    <h1 class="reveal">
+      <span class="zh-only">写给想用 AI 做东西但不知道从何开始的人</span>
+      <span class="en-only">For Those Who Want to Build with AI But Don't Know Where to Start</span>
+    </h1>
+    <p class="hero-sub reveal">
+      <span class="zh-only">2026.02.09 — 一份给非技术人的 AI 工具地图和行动指南，从想法到上线的完整路径</span>
+      <span class="en-only">2026.02.09 — A complete AI tool map and action guide for non-technical builders, from idea to launch</span>
+    </p>
+  </div>
+</header>
+
+<!-- ==================== 1. 开头：共情读者 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">你有一个想法，但觉得门槛太高</span>
+    <span class="en-only">You Have an Idea, But the Barrier Feels Too High</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">你可能早就听说过 AI 能帮你做网站、做 App、做各种神奇的东西。你甚至脑子里已经有一个模糊的想法——也许是帮家里老人做的健康管理页面，也许是工作中反复整理报表让你想写个小工具自动搞定，也许纯粹是想做一个属于自己的小产品试试水。</span>
+    <span class="en-only">You've probably heard that AI can help you build websites, apps, and all sorts of amazing things. You might even have a vague idea forming in your mind — maybe a health management page for your elderly parents, a small tool to automate those tedious spreadsheet reports at work, or perhaps you just want to build something of your own to see what happens.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">但每次你打开搜索引擎搜"怎么用 AI 做产品"，迎面而来的全是专业术语：API、框架、部署、域名解析……你可能连 HTML 和 JavaScript 的区别都搞不清楚，更别说去搞什么"全栈开发"了。</span>
+    <span class="en-only">But every time you search "how to build a product with AI," you're hit with a wall of jargon: APIs, frameworks, deployment, DNS resolution... You might not even know the difference between HTML and JavaScript, let alone tackle "full-stack development."</span>
+  </p>
+
+  <p>
+    <span class="zh-only">这篇文章就是写给你的。<strong>你不需要任何编程基础。</strong>我会帮你梳理清楚：从零开始，到底需要哪些工具、按什么顺序、做什么事，才能把脑海中的想法变成一个真实上线的产品。这不是一篇教你写代码的教程——这是一份行动地图。</span>
+    <span class="en-only">This article is written for you. <strong>You don't need any programming background.</strong> I'll help you map out everything clearly: starting from zero, what tools you need, in what order, and what exactly to do to turn the idea in your head into a real, live product. This isn't a coding tutorial — it's an action map.</span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"最好的时机是十年前，其次是现在。你已经有了想法，现在只需要一张地图。"</span>
+    <span class="en-only">"The best time was ten years ago. The second best time is now. You already have an idea — now you just need a map."</span>
+  </blockquote>
+</section>
+
+<!-- ==================== 2. 先回答三个问题 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">开始之前，先回答三个问题</span>
+    <span class="en-only">Before You Start, Answer These Three Questions</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">很多人上来就开始研究工具，结果研究了一圈发现自己不知道到底要做什么。磨刀不误砍柴工，先花五分钟想清楚下面三个问题，后面会顺畅很多。</span>
+    <span class="en-only">Many people jump straight into researching tools, only to find after a while that they're not sure what they actually want to build. Sharpening the axe before chopping wood: take five minutes to think through these three questions, and everything after will go much more smoothly.</span>
+  </p>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">问题一：你想解决什么问题？</span>
+      <span class="en-only">Question 1: What Problem Do You Want to Solve?</span>
+    </strong>
+    <p>
+      <span class="zh-only">注意，不是"我想做个 App"——这种回答太抽象了，它不能指导你做任何具体的事情。正确的思考方式是：<strong>谁 + 遇到了什么困难 + 你想帮他怎么解决</strong>。</span>
+      <span class="en-only">Note: "I want to build an app" is too abstract — it can't guide you to do anything specific. The right way to think about it is: <strong>who + what difficulty they face + how you want to help them solve it.</strong></span>
+    </p>
+    <p>
+      <span class="zh-only">比如，不要说"我想做个菜谱 App"，要说"我妈妈每次想找上次做的红烧肉的配方都要翻半天手机相册，我想帮她做一个可以分类保存家庭菜谱的网页"。</span>
+      <span class="en-only">For example, instead of saying "I want to build a recipe app," say "My mom spends ages scrolling through her phone photos every time she wants to find that braised pork recipe she made last time. I want to help her by building a webpage where she can save and categorize family recipes."</span>
+    </p>
+    <p>
+      <span class="zh-only">越具体越好。具体的问题才能导向具体的解决方案，模糊的想法只会让你在工具选择上迷失。</span>
+      <span class="en-only">The more specific, the better. Specific problems lead to specific solutions. Vague ideas will only leave you lost in tool choices.</span>
+    </p>
+  </div>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">问题二：你的用户是谁？</span>
+      <span class="en-only">Question 2: Who Is Your User?</span>
+    </strong>
+    <p>
+      <span class="zh-only">用户画像越清晰，你做的产品就越有方向。不要想"所有人"——"所有人"等于"没有人"。你的用户可能只是你自己、你的家人、你的同事，或者是某个细分领域里的一小群人。</span>
+      <span class="en-only">The clearer your user persona, the more focused your product will be. Don't think "everyone" — "everyone" means "no one." Your users might just be yourself, your family, your colleagues, or a small niche group in a specific domain.</span>
+    </p>
+    <p>
+      <span class="zh-only">举个例子：如果你是给 60 岁的妈妈做的菜谱工具，那界面要尽量大、操作要尽量简单、最好不需要注册登录。如果你是给程序员同事做的代码片段管理器，那功能可以更复杂，但效率必须高。用户是谁，直接决定了你用什么工具、做什么样的界面。</span>
+      <span class="en-only">For example: if you're building a recipe tool for your 60-year-old mom, the interface should be large, interactions simple, and ideally no registration required. If you're building a code snippet manager for your programmer colleagues, features can be more complex, but efficiency must be high. Who your users are directly determines which tools you use and what kind of interface you build.</span>
+    </p>
+  </div>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">问题三：你能投入多少时间？</span>
+      <span class="en-only">Question 3: How Much Time Can You Invest?</span>
+    </strong>
+    <p>
+      <span class="zh-only">这个问题很现实但很重要。你打算每天花 30 分钟慢慢磨，还是这个周末集中两天全职投入？不同的时间预算，适合不同的工具和策略。</span>
+      <span class="en-only">This is a practical but crucial question. Are you planning to spend 30 minutes a day chipping away slowly, or dedicate a full weekend (both days) to intensive work? Different time budgets suit different tools and strategies.</span>
+    </p>
+    <p>
+      <span class="zh-only">如果你只有碎片时间，建议用对话式 AI 工具（ChatGPT / Claude / 豆包）配合 AI 建站工具（v0.dev），因为这类工具上手快、反馈即时，每次打开都能看到进展。如果你有大块时间，可以考虑用 Cursor 或 Windsurf 这种 AI 编程工具，学习曲线稍陡但能做出更复杂的东西。</span>
+      <span class="en-only">If you only have fragmented time, I recommend conversational AI tools (ChatGPT / Claude / Doubao) combined with AI website builders (v0.dev), because these tools have quick onboarding and instant feedback — every time you open them, you can see progress. If you have large blocks of time, consider AI coding tools like Cursor or Windsurf; the learning curve is slightly steeper but they can handle more complex projects.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ==================== 3. 工具地图 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">AI 时代的工具地图：六个层级</span>
+    <span class="en-only">The AI Era Tool Map: Six Levels</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">很多人觉得"AI 工具"就是 ChatGPT。其实 AI 工具已经发展成一个完整的生态系统，从想需求到做产品再到上线推广，每个环节都有对应的工具。下面我用六个层级帮你梳理清楚。</span>
+    <span class="en-only">Many people think "AI tools" just means ChatGPT. In reality, AI tools have evolved into a complete ecosystem — from ideation to product building to launch and promotion, every step has corresponding tools. Below, I'll break it down into six levels for you.</span>
+  </p>
+
+  <div class="steps">
+
+    <!-- Level 1 -->
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">对话式 AI：ChatGPT / Claude / 豆包</span>
+        <span class="en-only">Conversational AI: ChatGPT / Claude / Doubao</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>用途：</strong>想清楚需求、写文案、做策划、头脑风暴。这是你接触 AI 的第一站。</span>
+        <span class="en-only"><strong>Use case:</strong> Clarifying requirements, writing copy, planning, brainstorming. This is your first stop for AI.</span>
+      </p>
+      <p>
+        <span class="zh-only">在动手做任何产品之前，你应该先和 AI 对话，把你的想法聊清楚。很多时候你以为自己知道想要什么，其实并没有。比如你说"我想做一个效率工具"，AI 会追问你："什么样的效率？是时间管理？任务追踪？还是自动化处理？"这个对话过程本身就是极有价值的。</span>
+        <span class="en-only">Before building anything, you should first talk to an AI and clarify your idea. Often, you think you know what you want, but you actually don't. For instance, you say "I want to build a productivity tool," and the AI follows up: "What kind of productivity? Time management? Task tracking? Or automation processing?" This conversation process itself is incredibly valuable.</span>
+      </p>
+      <p>
+        <span class="zh-only">中文用户推荐豆包（字节跳动的 AI 助手），对中文理解更好。英文场景推荐 Claude（Anthropic 出品，长文本理解能力强）或 ChatGPT（OpenAI 出品，生态最丰富）。</span>
+        <span class="en-only">Chinese users should try Doubao (ByteDance's AI assistant) for better Chinese understanding. For English-language tasks, I recommend Claude (by Anthropic, strong at long-text comprehension) or ChatGPT (by OpenAI, the richest ecosystem).</span>
+      </p>
+    </div>
+
+    <!-- Level 2 -->
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">AI 建站工具：v0.dev / Bolt.new / Lovable</span>
+        <span class="en-only">AI Website Builders: v0.dev / Bolt.new / Lovable</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>用途：</strong>用自然语言描述需求，直接生成可运行的网页。零代码基础首选。</span>
+        <span class="en-only"><strong>Use case:</strong> Describe your needs in natural language and get a runnable webpage directly. Best choice for zero coding background.</span>
+      </p>
+      <p>
+        <span class="zh-only">这是目前最适合非技术人的 AI 产品工具。你不需要安装任何软件，不需要打开终端，不需要懂 Git。打开浏览器，用中文或英文描述你想要的东西，它就会实时生成一个可以预览、可以交互的网页。</span>
+        <span class="en-only">These are currently the most suitable AI product tools for non-technical people. You don't need to install any software, open a terminal, or understand Git. Open your browser, describe what you want in Chinese or English, and it generates a previewable, interactive webpage in real time.</span>
+      </p>
+      <p>
+        <span class="zh-only"><strong>v0.dev</strong>（Vercel 出品）：最适合做单个网页和落地页，生成质量高，界面美观。生成的项目可以直接部署到 Vercel。<br>
+        <strong>Bolt.new</strong>（StackBlitz 出品）：支持更复杂的应用，可以生成带后端逻辑的全栈项目，在浏览器里就能运行。<br>
+        <strong>Lovable</strong>：对自然语言理解能力最强，你可以像聊天一样逐步完善你的产品。</span>
+        <span class="en-only"><strong>v0.dev</strong> (by Vercel): Best for single-page websites and landing pages. High generation quality, beautiful interfaces. Generated projects can be deployed directly to Vercel.<br>
+        <strong>Bolt.new</strong> (by StackBlitz): Supports more complex applications, can generate full-stack projects with backend logic that run directly in the browser.<br>
+        <strong>Lovable</strong>: Strongest natural language understanding — you can iteratively refine your product through conversation.</span>
+      </p>
+    </div>
+
+    <!-- Level 3 -->
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">AI 编程工具：Cursor / Windsurf</span>
+        <span class="en-only">AI Coding Tools: Cursor / Windsurf</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>用途：</strong>需要稍微理解代码，但能做更复杂、更定制化的产品。</span>
+        <span class="en-only"><strong>Use case:</strong> Requires a bit of code understanding, but can build more complex and customizable products.</span>
+      </p>
+      <p>
+        <span class="zh-only">当你发现 AI 建站工具已经不够用了——比如你需要用户登录、需要数据库、需要复杂的交互逻辑——这时候就该上 Cursor 或 Windsurf 了。它们是带有 AI 能力的代码编辑器，你用自然语言描述需求，AI 直接帮你写代码、改代码、管理项目。</span>
+        <span class="en-only">When you find that AI website builders are no longer enough — for example, you need user authentication, a database, or complex interaction logic — that's when it's time to level up to Cursor or Windsurf. They're code editors with AI capabilities: describe your requirements in natural language, and the AI directly writes code, modifies code, and manages your project.</span>
+      </p>
+      <p>
+        <span class="zh-only">你不需要会写代码，但最好能看懂基本的代码结构（哪个文件是页面、哪个是样式、哪个是逻辑），这样和 AI 的沟通效率会更高。建议从 AI 建站工具入手，熟悉了基本概念后再过渡到这一层。</span>
+        <span class="en-only">You don't need to write code, but it helps to understand basic code structure (which file is the page, which is the stylesheet, which is the logic) — this makes communication with the AI much more efficient. I recommend starting with AI website builders and transitioning to this level once you're familiar with the basic concepts.</span>
+      </p>
+    </div>
+
+    <!-- Level 4 -->
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">部署工具：Vercel / GitHub Pages / Netlify</span>
+        <span class="en-only">Deployment Tools: Vercel / GitHub Pages / Netlify</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>用途：</strong>一键把你的产品放到互联网上，让任何人都能访问。</span>
+        <span class="en-only"><strong>Use case:</strong> One-click publish your product to the internet so anyone can access it.</span>
+      </p>
+      <p>
+        <span class="zh-only">产品做出来了，当然要让别人看到。"部署"听起来很技术，但其实已经变得极其简单了。你只需要有一个 GitHub 账号（免费注册），然后把项目关联上去。</span>
+        <span class="en-only">Once your product is built, naturally you want others to see it. "Deployment" sounds technical, but it has become incredibly simple. You just need a GitHub account (free to register), then connect your project.</span>
+      </p>
+      <p>
+        <span class="zh-only"><strong>Vercel</strong>：最推荐，尤其适合 v0.dev 和 Next.js 项目。连上 GitHub 后，每次你更新代码，它会自动重新部署。<br>
+        <strong>GitHub Pages</strong>：适合纯静态网站（没有后端逻辑的页面），完全免费。<br>
+        <strong>Netlify</strong>：功能全面，适合各种类型的项目，操作也很直观。</span>
+        <span class="en-only"><strong>Vercel</strong>: Most recommended, especially for v0.dev and Next.js projects. Once connected to GitHub, it automatically redeploys every time you update code.<br>
+        <strong>GitHub Pages</strong>: Best for pure static websites (pages without backend logic), completely free.<br>
+        <strong>Netlify</strong>: Full-featured, suitable for various project types, and very intuitive to use.</span>
+      </p>
+    </div>
+
+    <!-- Level 5 -->
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h3>
+        <span class="zh-only">域名和品牌：Namecheap / Figma</span>
+        <span class="en-only">Domain and Branding: Namecheap / Figma</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>用途：</strong>给你的产品一个专业的外壳——好记的网址和好看的界面。</span>
+        <span class="en-only"><strong>Use case:</strong> Give your product a professional shell — a memorable URL and a beautiful interface.</span>
+      </p>
+      <p>
+        <span class="zh-only">这一步不是必须的，但它能让你的产品从"个人玩具"升级为"看起来正经的产品"。域名（网址）推荐在 <strong>Namecheap</strong> 购买，一个 .com 域名大概每年 $8-12，.ai 域名稍贵。买完后在 Vercel 或 Netlify 的设置里绑定即可。</span>
+        <span class="en-only">This step isn't mandatory, but it elevates your product from "personal toy" to "looks like a real product." For domains (URLs), I recommend buying from <strong>Namecheap</strong> — a .com domain costs about $8-12/year; .ai domains are slightly more expensive. After purchasing, simply bind it in Vercel or Netlify's settings.</span>
+      </p>
+      <p>
+        <span class="zh-only">如果你的产品需要更精致的界面设计，可以用 <strong>Figma</strong> 先画个原型（AI 也可以帮你生成 Figma 设计稿）。不过对于第一个项目，直接用 AI 工具生成的界面通常就够用了——先把东西做出来，再慢慢美化。</span>
+        <span class="en-only">If your product needs a more polished interface design, use <strong>Figma</strong> to create a mockup first (AI can also help you generate Figma designs). But for your first project, the interface generated by AI tools is usually sufficient — build it first, polish it later.</span>
+      </p>
+    </div>
+
+    <!-- Level 6 -->
+    <div class="step reveal">
+      <div class="step-num">6</div>
+      <h3>
+        <span class="zh-only">分享和获客：小红书 / X / Product Hunt</span>
+        <span class="en-only">Sharing and Growth: Xiaohongshu / X / Product Hunt</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>用途：</strong>让别人知道你做了什么，找到你的第一批用户。</span>
+        <span class="en-only"><strong>Use case:</strong> Let people know what you built and find your first users.</span>
+      </p>
+      <p>
+        <span class="zh-only">产品上线后最怕的就是没人知道。分享和获客本身就是产品成功的关键环节。如果你面向中文用户，<strong>小红书</strong>是最好的起步平台——发一篇"我用 AI 做了一个 XX 工具"的帖子，配上截图和链接，往往能获得不错的初始流量。<strong>V2EX</strong>和<strong>即刻</strong>也是中文技术社区的好选择。</span>
+        <span class="en-only">The biggest fear after launching is that nobody knows about it. Sharing and user acquisition are themselves critical to a product's success. If you're targeting Chinese users, <strong>Xiaohongshu</strong> is the best starting platform — posting a "I built an XX tool with AI" article with screenshots and links often generates good initial traffic. <strong>V2EX</strong> and <strong>Jike</strong> are also good choices in the Chinese tech community.</span>
+      </p>
+      <p>
+        <span class="zh-only">面向国际用户：<strong>X（Twitter）</strong>适合建设个人品牌，<strong>Product Hunt</strong>适合正式发布产品（可以带来大量初始流量）。<strong>Reddit</strong> 的相关子版块也是精准获客的好地方——前提是你真诚地分享，而不是硬广。</span>
+        <span class="en-only">For international users: <strong>X (Twitter)</strong> is great for building a personal brand, <strong>Product Hunt</strong> is ideal for formal product launches (it can drive significant initial traffic). Relevant <strong>Reddit</strong> subreddits are also great for targeted user acquisition — provided you share authentically rather than spamming.</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== 4. 推荐的入门路径 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">三条入门路径，总有一条适合你</span>
+    <span class="en-only">Three Starter Paths — One Is Right for You</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">根据你的技术背景和时间投入，我推荐三条不同的路径。选一条最适合你的，然后直接开始。</span>
+    <span class="en-only">Based on your technical background and time investment, I recommend three different paths. Pick the one that fits you best and start right away.</span>
+  </p>
+
+  <div class="highlight">
+    <h3>
+      <span class="zh-only">路径 A：完全零基础</span>
+      <span class="en-only">Path A: Absolute Beginner</span>
+    </h3>
+    <p>
+      <span class="zh-only"><strong>适合：</strong>不会写代码、不想学代码、只想尽快做出一个能用的东西。</span>
+      <span class="en-only"><strong>For:</strong> Those who can't code, don't want to learn to code, and just want to build something usable as fast as possible.</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>路径：</strong>v0.dev 生成界面 → 一键部署到 Vercel → 小红书分享</span>
+      <span class="en-only"><strong>Path:</strong> Generate interface with v0.dev → One-click deploy to Vercel → Share on Xiaohongshu</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>预估时间：</strong>一个周末（如果需求简单，甚至一天就够）</span>
+      <span class="en-only"><strong>Estimated time:</strong> One weekend (or even just one day if requirements are simple)</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>优点：</strong>全程在浏览器里完成，不需要安装任何软件。上手极快，反馈即时。生成的页面质量已经很不错了。</span>
+      <span class="en-only"><strong>Pros:</strong> Everything happens in the browser — no software installation needed. Extremely fast onboarding, instant feedback. The generated page quality is already quite good.</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>局限：</strong>适合单页面、相对简单的产品。如果你需要用户系统、数据库、复杂的业务逻辑，这条路径可能不够用。</span>
+      <span class="en-only"><strong>Limitations:</strong> Suitable for single-page, relatively simple products. If you need user systems, databases, or complex business logic, this path may not be enough.</span>
+    </p>
+  </div>
+
+  <div class="highlight">
+    <h3>
+      <span class="zh-only">路径 B：有一点基础</span>
+      <span class="en-only">Path B: Some Basic Knowledge</span>
+    </h3>
+    <p>
+      <span class="zh-only"><strong>适合：</strong>看过一些 HTML/CSS 教程、能看懂一点代码、愿意花时间学习。</span>
+      <span class="en-only"><strong>For:</strong> Those who've read some HTML/CSS tutorials, can read basic code, and are willing to invest time learning.</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>路径：</strong>Cursor 写代码 → GitHub 管理项目 → 独立域名上线</span>
+      <span class="en-only"><strong>Path:</strong> Write code with Cursor → Manage project on GitHub → Launch with custom domain</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>预估时间：</strong>1-2 周（取决于项目复杂度）</span>
+      <span class="en-only"><strong>Estimated time:</strong> 1-2 weeks (depending on project complexity)</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>优点：</strong>能做出更复杂的产品，灵活性更高。Cursor 的 AI 能力很强，即使你只会一点点代码，也能做出超出你能力的产品。</span>
+      <span class="en-only"><strong>Pros:</strong> Can build more complex products with higher flexibility. Cursor's AI is powerful enough that even with minimal coding knowledge, you can build products beyond your normal ability.</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>建议：</strong>如果选这条路，建议先跟着这篇教程安装 Cursor，走一遍完整流程。有了第一次成功经验后，之后做任何项目都会得心应手。</span>
+      <span class="en-only"><strong>Tip:</strong> If you choose this path, I recommend first following the Cursor tutorial to install it and walk through a complete workflow. Once you have that first successful experience, every future project will feel natural.</span>
+    </p>
+  </div>
+
+  <div class="highlight">
+    <h3>
+      <span class="zh-only">路径 C：想认真做产品</span>
+      <span class="en-only">Path C: Serious About Building Products</span>
+    </h3>
+    <p>
+      <span class="zh-only"><strong>适合：</strong>想把 AI 做的东西变成真正的产品、愿意投入时间学习完整技能链。</span>
+      <span class="en-only"><strong>For:</strong> Those who want to turn their AI-built project into a real product and are willing to invest time learning the complete skill chain.</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>路径：</strong>完整工具链 —— 对话式 AI 想需求 → v0.dev 做原型 → Cursor 做正式版 → Vercel 部署 → 独立域名 → 社区推广</span>
+      <span class="en-only"><strong>Path:</strong> Full tool chain — Conversational AI for ideation → v0.dev for prototyping → Cursor for production build → Vercel for deployment → Custom domain → Community promotion</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>预估时间：</strong>2-4 周做出第一个正式版本</span>
+      <span class="en-only"><strong>Estimated time:</strong> 2-4 weeks for the first official version</span>
+    </p>
+    <p>
+      <span class="zh-only"><strong>建议：</strong>用 v0.dev 快速验证想法，确认方向对了之后再用 Cursor 做正式版。这样既不浪费时间在错误方向上，又能保证最终产品的质量。</span>
+      <span class="en-only"><strong>Tip:</strong> Use v0.dev to quickly validate your idea, and once you confirm the direction is right, switch to Cursor for the production build. This avoids wasting time on the wrong direction while ensuring final product quality.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ==================== 5. 第一个项目建议 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">第一个项目做什么？三个适合新手的方向</span>
+    <span class="en-only">What to Build First? Three Beginner-Friendly Directions</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">如果你还没有明确的想法，下面三个方向特别适合作为第一个项目。它们的共同特点是：需求明确、技术复杂度低、你自己就是用户（这意味着你有天然的测试反馈）。</span>
+    <span class="en-only">If you don't have a clear idea yet, these three directions are especially suitable for a first project. They share common traits: clear requirements, low technical complexity, and you are your own user (meaning you have natural testing feedback).</span>
+  </p>
+
+  <div class="compare">
+    <div class="col good">
+      <h3>
+        <span class="zh-only">个人工具类</span>
+        <span class="en-only">Personal Utility Tools</span>
+      </h3>
+      <p>
+        <span class="zh-only">比如：习惯打卡器、每日计划表、饮水提醒</span>
+        <span class="en-only">Examples: habit tracker, daily planner, water intake reminder</span>
+      </p>
+      <ul>
+        <li>
+          <span class="zh-only"><strong>为什么适合：</strong>你自己就是用户，需求你最清楚</span>
+          <span class="en-only"><strong>Why it's suitable:</strong> You are your own user — you know the requirements best</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>技术复杂度：</strong>低，用 localStorage 存数据即可</span>
+          <span class="en-only"><strong>Technical complexity:</strong> Low — localStorage is sufficient for data storage</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>推荐工具：</strong>v0.dev 或 Cursor</span>
+          <span class="en-only"><strong>Recommended tools:</strong> v0.dev or Cursor</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>典型提示词：</strong>"我想做一个每天打卡的习惯追踪器，可以添加习惯名称、每天点一下打卡、显示连续打卡天数"</span>
+          <span class="en-only"><strong>Sample prompt:</strong> "I want to build a daily habit tracker where I can add habit names, tap to check in daily, and see streak counts"</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col good">
+      <h3>
+        <span class="zh-only">内容生成类</span>
+        <span class="en-only">Content Generation Tools</span>
+      </h3>
+      <p>
+        <span class="zh-only">比如：文案助手、社交媒体帖子生成器、周报自动生成</span>
+        <span class="en-only">Examples: copywriting assistant, social media post generator, weekly report auto-generator</span>
+      </p>
+      <ul>
+        <li>
+          <span class="zh-only"><strong>为什么适合：</strong>利用 AI 的文字能力，技术实现简单</span>
+          <span class="en-only"><strong>Why it's suitable:</strong> Leverages AI's text capabilities; technically simple to implement</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>技术复杂度：</strong>中低，需要调用 AI API（但 Cursor 能帮你搞定）</span>
+          <span class="en-only"><strong>Technical complexity:</strong> Low-medium — requires calling an AI API (but Cursor can handle this for you)</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>推荐工具：</strong>Cursor（需要 API 集成）</span>
+          <span class="en-only"><strong>Recommended tools:</strong> Cursor (requires API integration)</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>典型提示词：</strong>"做一个文案助手页面，输入产品名称和卖点，自动生成适合小红书风格的种草文案"</span>
+          <span class="en-only"><strong>Sample prompt:</strong> "Build a copywriting assistant page where you input a product name and selling points, and it auto-generates Xiaohongshu-style promotional copy"</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col good">
+      <h3>
+        <span class="zh-only">信息整理类</span>
+        <span class="en-only">Information Organization Tools</span>
+      </h3>
+      <p>
+        <span class="zh-only">比如：读书笔记整理器、收藏夹管理、播客笔记</span>
+        <span class="en-only">Examples: book note organizer, bookmark manager, podcast notes</span>
+      </p>
+      <ul>
+        <li>
+          <span class="zh-only"><strong>为什么适合：</strong>解决真实痛点，使用频率高</span>
+          <span class="en-only"><strong>Why it's suitable:</strong> Solves a real pain point with high usage frequency</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>技术复杂度：</strong>低，核心就是增删改查</span>
+          <span class="en-only"><strong>Technical complexity:</strong> Low — core functionality is just CRUD (create, read, update, delete)</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>推荐工具：</strong>v0.dev 或 Cursor</span>
+          <span class="en-only"><strong>Recommended tools:</strong> v0.dev or Cursor</span>
+        </li>
+        <li>
+          <span class="zh-only"><strong>典型提示词：</strong>"做一个读书笔记整理器，可以添加书名、作者、摘抄和读后感，支持搜索和按分类筛选"</span>
+          <span class="en-only"><strong>Sample prompt:</strong> "Build a book note organizer where I can add book title, author, excerpts, and reviews, with search and category filtering"</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6. 24 小时挑战 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">24 小时挑战：从想法到上线</span>
+    <span class="en-only">The 24-Hour Challenge: From Idea to Launch</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">如果你已经有了想法（或者从上面三个方向选了一个），下面是一个紧凑但可行的 24 小时计划。你可以一口气做完，也可以分两三天完成。关键是一气呵成，不要中途停下来"研究"。</span>
+    <span class="en-only">If you already have an idea (or picked one from the three directions above), here's a tight but achievable 24-hour plan. You can do it in one sitting or spread it over two to three days. The key is momentum — don't stop to "research" in the middle.</span>
+  </p>
+
+  <div class="steps">
+
+    <!-- Phase 1 -->
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">0-2 小时：想清楚你要做什么</span>
+        <span class="en-only">0-2 Hours: Clarify What You Want to Build</span>
+      </h3>
+      <p>
+        <span class="zh-only">打开 ChatGPT、Claude 或豆包，把你的想法告诉它，让它帮你聊清楚。这一步的目标不是写代码，而是写一份<strong>产品描述</strong>——包括产品名称、核心功能、目标用户、界面风格。</span>
+        <span class="en-only">Open ChatGPT, Claude, or Doubao, tell it your idea, and let it help you think it through. The goal of this step isn't to write code — it's to produce a <strong>product description</strong> including product name, core features, target users, and interface style.</span>
+      </p>
+
+      <pre data-lang="prompt"><span class="zh-only">我想做一个习惯打卡网页应用。帮我想清楚：
+1. 核心功能是什么？（除了打卡还能有什么）
+2. 界面应该长什么样？
+3. 适合什么名字？
+4. 有什么类似的产品可以参考？
+
+请帮我写一份完整的产品描述。</span><span class="en-only">I want to build a habit-tracking web app. Help me think through:
+1. What are the core features? (Beyond just check-ins, what else?)
+2. What should the interface look like?
+3. What would be a good name?
+4. Are there similar products I can reference?
+
+Please write a complete product description for me.</span></pre>
+
+      <p>
+        <span class="zh-only">拿到产品描述后，不要追求完美。"够用就行"是这 24 小时的核心原则。</span>
+        <span class="en-only">Once you have the product description, don't aim for perfection. "Good enough" is the core principle for these 24 hours.</span>
+      </p>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">2-8 小时：生成第一版界面</span>
+        <span class="en-only">2-8 Hours: Generate the First Version of the Interface</span>
+      </h3>
+      <p>
+        <span class="zh-only">打开 <strong>v0.dev</strong>（如果你选的是零基础路径）或 <strong>Cursor</strong>（如果你选了稍微进阶的路径），把你的产品描述粘贴进去。</span>
+        <span class="en-only">Open <strong>v0.dev</strong> (if you chose the beginner path) or <strong>Cursor</strong> (if you chose the slightly more advanced path), and paste in your product description.</span>
+      </p>
+
+      <pre data-lang="prompt"><span class="zh-only">根据以下产品描述，帮我生成一个习惯打卡网页应用的第一版：
+
+产品名称：DayStreak
+核心功能：
+- 添加自定义习惯（名称、图标、频率）
+- 每日点击打卡
+- 显示连续打卡天数
+- 用 localStorage 保存数据
+界面风格：简洁温暖，以绿色为主色调
+请生成完整的可运行项目。</span><span class="en-only">Based on the following product description, generate the first version of a habit-tracking web app:
+
+Product name: DayStreak
+Core features:
+- Add custom habits (name, icon, frequency)
+- Daily tap to check in
+- Show streak counts
+- Use localStorage to save data
+Interface style: Clean and warm, green as the primary color
+Please generate a complete, runnable project.</span></pre>
+
+      <p>
+        <span class="zh-only">AI 生成第一版后，花时间逐个看每个功能，把不满意的地方记下来。然后一轮一轮地让它修改。每次只提一个修改需求，这样 AI 的执行效果最好。</span>
+        <span class="en-only">After AI generates the first version, take time to check each feature one by one and note what you're not satisfied with. Then iterate round by round with modifications. Submit one change request at a time for the best AI execution quality.</span>
+      </p>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">8-20 小时：用 AI 迭代改进，加功能</span>
+        <span class="en-only">8-20 Hours: Iterate with AI, Add Features</span>
+      </h3>
+      <p>
+        <span class="zh-only">这是最长也是最有价值的阶段。你的产品从"能看"变成"能用"，靠的就是这个阶段的反复迭代。</span>
+        <span class="en-only">This is the longest and most valuable phase. What turns your product from "viewable" to "usable" is the iterative refinement during this stage.</span>
+      </p>
+      <p>
+        <span class="zh-only">建议的迭代节奏：</span>
+        <span class="en-only">Recommended iteration rhythm:</span>
+      </p>
+      <p>
+        <span class="zh-only">先修界面问题——颜色不对、按钮太小、布局不好看。再补功能——加个搜索、加个筛选、加个数据统计。最后打磨细节——加载动画、空状态提示、错误处理。</span>
+        <span class="en-only">First fix interface issues — wrong colors, buttons too small, poor layout. Then add features — add search, add filters, add data statistics. Finally polish details — loading animations, empty state messages, error handling.</span>
+      </p>
+
+      <pre data-lang="prompt"><span class="zh-only">现在帮我把这个习惯打卡应用做以下改进：
+1. 加一个数据统计页面，显示每个习惯本周和本月的打卡率
+2. 如果用户某天忘记打卡，允许补打卡（显示为灰色而不是绿色）
+3. 加一个简单的设置页面，可以选择主题色</span><span class="en-only">Now help me improve this habit tracker with the following changes:
+1. Add a statistics page showing weekly and monthly check-in rates for each habit
+2. Allow make-up check-ins for missed days (displayed in gray instead of green)
+3. Add a simple settings page with theme color selection</span></pre>
+
+      <div class="callout tip">
+        <span class="zh-only">迭代过程中如果遇到 bug，不要自己研究。直接把错误信息或截图给 AI，让它帮你修。这是 AI 编程最大的优势——你永远有一个免费的"技术支持"在线。</span>
+        <span class="en-only">If you encounter bugs during iteration, don't research them yourself. Just give the error message or a screenshot to the AI and let it fix it for you. This is the biggest advantage of AI-assisted building — you always have free "tech support" online.</span>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">20-24 小时：部署上线，发给朋友测试</span>
+        <span class="en-only">20-24 Hours: Deploy and Send to Friends for Testing</span>
+      </h3>
+      <p>
+        <span class="zh-only">产品做完了（至少第一版做完了），是时候让世界看到它了。如果你用的是 v0.dev，直接点"Deploy to Vercel"按钮就行。如果你用的是 Cursor，把项目推到 GitHub，然后在 Vercel 上导入。</span>
+        <span class="en-only">Your product is done (at least the first version is) — time to show the world. If you used v0.dev, just click the "Deploy to Vercel" button. If you used Cursor, push the project to GitHub, then import it on Vercel.</span>
+      </p>
+      <p>
+        <span class="zh-only">部署成功后，把链接发给<strong>至少 3 个朋友</strong>，请他们试用并给你反馈。朋友的真实反馈比你自己测试一百遍都有用。问他们三个问题：</span>
+        <span class="en-only">After successful deployment, send the link to <strong>at least 3 friends</strong> and ask them to try it and give you feedback. Real feedback from friends is more valuable than testing it yourself a hundred times. Ask them three questions:</span>
+      </p>
+      <p>
+        <span class="zh-only">1. 你第一次打开时，知道怎么用吗？<br>
+2. 有没有哪个地方让你觉得困惑或不好用？<br>
+3. 你觉得还缺什么功能？</span>
+        <span class="en-only">1. When you first opened it, did you know how to use it?<br>
+2. Was there any part that confused you or felt hard to use?<br>
+3. What features do you think are missing?</span>
+      </p>
+      <p>
+        <span class="zh-only">收到反馈后，挑最重要的 2-3 个问题修复，然后你的产品就已经是一个"正式版 1.0"了。</span>
+        <span class="en-only">After receiving feedback, pick the 2-3 most important issues to fix, and your product is now officially "Version 1.0."</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== 7. 心态建设 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">心态比工具更重要</span>
+    <span class="en-only">Mindset Matters More Than Tools</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">在你开始之前，我想分享三句话。这些不是什么鸡汤——它们是我在帮助很多非技术朋友上手 AI 产品后总结出来的真实经验。</span>
+    <span class="en-only">Before you begin, I want to share three thoughts. These aren't platitudes — they are real lessons I've learned from helping many non-technical friends start building with AI.</span>
+  </p>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">完成比完美重要</span>
+      <span class="en-only">Done Is Better Than Perfect</span>
+    </strong>
+    <p>
+      <span class="zh-only">你的第一个产品不会是完美的。它可能有 bug，界面可能不够好看，功能可能不够完善。没关系。全世界最成功的产品的第一个版本也都是粗糙的。Facebook 的第一个版本只是一个 Harvard 校内的简陋交友页面。Airbnb 的第一个版本就是几个气垫床的照片。完美主义是行动的天敌——<strong>先做一个 60 分的产品，再迭代到 80 分，比你一直在脑子里规划一个 100 分的产品要有效一万倍。</strong></span>
+      <span class="en-only">Your first product won't be perfect. It might have bugs, the interface might not be beautiful enough, features might not be complete. That's okay. The first version of every successful product in the world was rough. Facebook's first version was just a barebones Harvard-only social page. Airbnb's first version was literally photos of air mattresses. Perfectionism is the enemy of action — <strong>building a 60-point product and iterating to 80 is ten thousand times more effective than endlessly planning a 100-point product in your head.</strong></span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">第一个产品不会是最后一个</span>
+      <span class="en-only">Your First Product Won't Be Your Last</span>
+    </strong>
+    <p>
+      <span class="zh-only">把第一个项目当成"练手"。你从中学到的经验——怎么和 AI 沟通、怎么部署、怎么修 bug——这些才是真正的收获。你做的第一个产品可能没人用，但它给你打开了一扇门。有了这扇门，你的第二个产品会好十倍，第三个产品会好百倍。我见过太多人因为第一个项目不够好就放弃了，其实第一个项目存在的意义就是让你"学会做项目"，而不是"做一个完美的项目"。</span>
+      <span class="en-only">Treat your first project as "practice." The real takeaways are the skills you learn — how to communicate with AI, how to deploy, how to fix bugs. Your first product might not have any users, but it opens a door for you. With that door open, your second product will be ten times better, and your third will be a hundred times better. I've seen too many people give up because their first project wasn't good enough. In reality, the purpose of the first project is to "learn how to build," not to "build something perfect."</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">享受过程，不要焦虑</span>
+      <span class="en-only">Enjoy the Process, Don't Stress</span>
+    </strong>
+    <p>
+      <span class="zh-only">社交媒体上到处都是"我用 AI 3 天做了一个月入万刀的 SaaS"的故事——请理性看待。这些故事要么夸大了，要么省略了背后大量的积累。你的节奏是自己的，不需要和任何人比较。享受用 AI 把想法变成现实的过程本身，这就已经是一件很酷的事了。5 年前，能自己做产品的人凤毛麟角；今天，你只需要会说话就能做。这本身就是一个奇迹。</span>
+      <span class="en-only">Social media is full of "I built a $10K/month SaaS with AI in 3 days" stories — please view these rationally. These stories are either exaggerated or omit a massive amount of accumulated experience behind the scenes. Your pace is your own — you don't need to compare with anyone. Enjoy the process of turning ideas into reality with AI. That alone is already a remarkable thing. Five years ago, people who could build their own products were rare as hen's teeth; today, you only need to know how to speak to build. That itself is a miracle.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ==================== 8. 资源推荐 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">推荐资源</span>
+    <span class="en-only">Recommended Resources</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">下面是我精选的一些学习资源、社区和灵感来源。不需要全看，挑你觉得有用的就好。</span>
+    <span class="en-only">Below is a curated selection of learning resources, communities, and sources of inspiration. You don't need to go through all of them — just pick what's useful to you.</span>
+  </p>
+
+  <h3>
+    <span class="zh-only">学习资源</span>
+    <span class="en-only">Learning Resources</span>
+  </h3>
+  <ul>
+    <li>
+      <span class="zh-only"><strong>YouTube</strong>：搜索 "AI build a website from scratch"，有大量零基础跟做教程。推荐频道：Fireship（短小精悍）、Traversy Media（手把手教学）</span>
+      <span class="en-only"><strong>YouTube:</strong> Search "AI build a website from scratch" for plenty of beginner-friendly follow-along tutorials. Recommended channels: Fireship (short and punchy), Traversy Media (step-by-step teaching)</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>中文博客</strong>：阮一峰的网络日志（技术入门经典）、少数派（AI 工具评测和应用案例）、不可置信（独立开发实战分享）</span>
+      <span class="en-only"><strong>Chinese blogs:</strong> Ruan Yifeng's Weblog (classic tech intro), Sspai (AI tool reviews and use cases), Kexin's Blog (indie dev practical sharing)</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>官方文档</strong>：v0.dev、Cursor、Vercel 都有很友好的官方文档和教程，遇到问题先查文档</span>
+      <span class="en-only"><strong>Official docs:</strong> v0.dev, Cursor, and Vercel all have friendly official documentation and tutorials — check the docs first when you run into issues</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>B 站</strong>：搜索"AI 做网站"，有大量中文视频教程，适合跟做学习</span>
+      <span class="en-only"><strong>Bilibili:</strong> Search "AI 做网站" for many Chinese video tutorials, great for follow-along learning</span>
+    </li>
+  </ul>
+
+  <h3>
+    <span class="zh-only">社区</span>
+    <span class="en-only">Communities</span>
+  </h3>
+  <ul>
+    <li>
+      <span class="zh-only"><strong>Reddit</strong>：r/SideProject（独立项目分享）、r/ChatGPT（AI 使用技巧）、r/webdev（网页开发）</span>
+      <span class="en-only"><strong>Reddit:</strong> r/SideProject (indie project sharing), r/ChatGPT (AI usage tips), r/webdev (web development)</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>V2EX</strong>：中文技术社区，可以分享你的作品获取反馈，也可以提问求助</span>
+      <span class="en-only"><strong>V2EX:</strong> Chinese tech community where you can share your work for feedback or ask for help</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>即刻</strong>：中文创意社区，氛围友好，适合分享 AI 产品和获取早期用户</span>
+      <span class="en-only"><strong>Jike:</strong> Chinese creative community with a friendly atmosphere, suitable for sharing AI products and finding early users</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>独立开发者社区</strong>：Indie Hackers（英文）、出海日报（中文），了解别人是怎么做产品的</span>
+      <span class="en-only"><strong>Indie dev communities:</strong> Indie Hackers (English), 出海日报 (Chinese) — learn how others build products</span>
+    </li>
+  </ul>
+
+  <h3>
+    <span class="zh-only">灵感来源</span>
+    <span class="en-only">Inspiration Sources</span>
+  </h3>
+  <ul>
+    <li>
+      <span class="zh-only"><strong>Product Hunt</strong>：每天有大量新产品发布，看看别人做了什么，激发你自己的灵感</span>
+      <span class="en-only"><strong>Product Hunt:</strong> New products launch daily — see what others have built and get inspired for your own ideas</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>Indie Hackers</strong>：独立开发者分享收入、经验教训，非常真实的创业社区</span>
+      <span class="en-only"><strong>Indie Hackers:</strong> Indie developers share revenue and lessons learned — a very authentic startup community</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>小红书</strong>：搜索"AI 做 XX"，看看普通人用 AI 做了哪些有趣的东西</span>
+      <span class="en-only"><strong>Xiaohongshu:</strong> Search "AI 做 XX" to see what interesting things ordinary people have built with AI</span>
+    </li>
+    <li>
+      <span class="zh-only"><strong>Twitter/X</strong>：关注 #BuildInPublic 标签，看独立开发者们的实时分享</span>
+      <span class="en-only"><strong>Twitter/X:</strong> Follow the #BuildInPublic hashtag for real-time sharing from indie developers</span>
+    </li>
+  </ul>
+</section>
+
+<!-- ==================== 9. 结尾 ==================== -->
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">唯一缺的，是开始</span>
+    <span class="en-only">The Only Thing Missing Is Starting</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">回过头看，2026 年的今天，一个不会写代码的普通人，用 AI 工具做产品的门槛已经低到了前所未有的程度。你有对话式 AI 帮你想需求，有 AI 建站工具帮你生成界面，有 AI 编程工具帮你做复杂项目，有一键部署工具帮你上线，有社交媒体帮你获客。</span>
+    <span class="en-only">Looking back, today in 2026, the barrier for a non-coder to build products with AI tools has dropped to an unprecedented low. You have conversational AI to help you think through requirements, AI website builders to generate interfaces, AI coding tools for complex projects, one-click deployment tools to go live, and social media to find users.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>你现在拥有的工具，比 5 年前的专业团队还强大。</strong>那时候做一个网站，需要设计师出图、前端工程师写页面、后端工程师搭服务器、运维工程师配置部署——一个团队、几个月、几十万。现在，你一个人，一个周末，免费工具，就能做出差不多的东西。</span>
+    <span class="en-only"><strong>The tools you have right now are more powerful than a professional team from five years ago.</strong> Back then, building a website required a designer for mockups, a frontend engineer for pages, a backend engineer for servers, a DevOps engineer for deployment — a whole team, months of work, hundreds of thousands of RMB. Now, you alone, one weekend, free tools, can build something similar.</span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"五年后你会感谢今天开始的自己。不要等到准备好才开始——因为你永远不会觉得自己准备好了。开始了，你就已经比 90% 的人走得更远了。"</span>
+    <span class="en-only">"Five years from now, you'll thank yourself for starting today. Don't wait until you feel ready — because you never will. By starting, you've already gone further than 90% of people."</span>
+  </blockquote>
+
+  <p>
+    <span class="zh-only">打开浏览器，去 v0.dev 或者 cursor.com，然后告诉 AI 你想做什么。<strong>就这么简单。</strong></span>
+    <span class="en-only">Open your browser, go to v0.dev or cursor.com, and tell the AI what you want to build. <strong>It's that simple.</strong></span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>去吧。你的第一个产品，正在等你。</strong></span>
+    <span class="en-only"><strong>Go. Your first product is waiting for you.</strong></span>
+  </p>
+</section>
+
+</article>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>
