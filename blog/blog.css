@@ -15,7 +15,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.75;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.75;min-height:100vh;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block;border-radius:12px}
 
@@ -93,7 +93,7 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
 /* Code blocks */
 .prose pre{
   background:#0D1117;border:1px solid var(--border-2);border-radius:12px;
-  padding:20px 24px;margin:20px 0 28px;overflow-x:auto;
+  padding:20px 24px;margin:20px 0 28px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
   font-family:var(--font-m);font-size:13.5px;line-height:1.7;
   color:#C9D1D9;
   box-shadow:0 8px 24px -8px rgba(0,0,0,.4);
@@ -150,7 +150,7 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
 
 /* Comparison */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
-.compare .col{padding:20px;border-radius:14px;border:1px solid var(--border)}
+.compare .col{padding:20px;border-radius:14px;border:1px solid var(--border);overflow:hidden}
 .compare .col.bad{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.15)}
 .compare .col.good{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.15)}
 .compare .col h4{font-family:var(--font-m);font-size:12px;letter-spacing:.06em;margin-bottom:12px;text-transform:uppercase}
@@ -181,6 +181,13 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
 
 /* Divider */
 .prose hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border-2),transparent);margin:40px 0}
+
+/* Table */
+.prose table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.prose th,.prose td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.prose th{color:var(--text);font-weight:600;font-size:13px;background:var(--surface)}
+.prose td{color:var(--text-2)}
+.prose tr:hover td{background:var(--surface)}
 
 /* Footer */
 .foot-link{
@@ -213,15 +220,25 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
   .prose h3{font-size:17px}
   .prose pre{font-size:12px;padding:16px}
   .compare{grid-template-columns:1fr}
+  .compare .col{padding:16px}
+  .compare .col h4{font-size:11px}
+  .compare .col p{font-size:13px}
   .step{flex-direction:column;gap:12px}
   .step::before{width:32px;height:32px;font-size:13px}
+  .prose table{font-size:12.5px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .prose th,.prose td{padding:8px 10px}
 }
 @media(max-width:500px){
   .art-header{padding:100px 0 24px}
   .art-header .hero-img{border-radius:12px;margin-bottom:24px}
   .prose h2{font-size:18px;padding-left:12px}
-  .callout{padding:16px;gap:10px}
-  .step{padding:16px}
-  .highlight{padding:18px 20px}
+  .callout{padding:14px 16px;gap:10px;font-size:13px}
+  .callout .icon{font-size:16px}
+  .step{padding:14px;gap:12px}
+  .step h4{font-size:14.5px}
+  .step p{font-size:13px}
+  .highlight{padding:16px 18px}
+  .prose pre{font-size:11.5px;padding:14px;line-height:1.6}
+  .compare .col{padding:14px;border-radius:12px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
