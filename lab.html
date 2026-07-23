@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="title">木尘 · 技能栈 & GitHub 趋势</title>
+<meta name="description" content="木尘的技能栈和 GitHub 热门项目追踪。AI 编程实践者的工具库和开源项目观察。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E1A;
+    --bg-2:#0F1524;
+    --surface:rgba(255,255,255,.04);
+    --surface-2:rgba(255,255,255,.07);
+    --border:rgba(255,255,255,.08);
+    --border-2:rgba(255,255,255,.14);
+    --text:#E6E9F2;
+    --text-2:#9BA3B8;
+    --text-3:#5F6980;
+    --cyan:#00E5FF;
+    --cyan-soft:rgba(0,229,255,.15);
+    --violet:#A855F7;
+    --violet-soft:rgba(168,85,247,.15);
+    --amber:#F59E0B;
+    --amber-soft:rgba(245,158,11,.15);
+    --pink:#F472B6;
+    --maxw:1366px;
+    --font-h:"Space Grotesk","Noto Sans SC",system-ui,sans-serif;
+    --font-b:"Inter","Noto Sans SC",system-ui,sans-serif;
+    --font-m:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-b);
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+
+  /* Background */
+  .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .bg-wrap .grid-bg{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
+  }
+  .bg-wrap .orb{
+    position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;
+    animation:float 18s ease-in-out infinite;
+  }
+  .bg-wrap .orb.c1{width:420px;height:420px;background:radial-gradient(circle,var(--cyan),transparent 70%);top:-120px;left:-80px;animation-delay:0s}
+  .bg-wrap .orb.c2{width:380px;height:380px;background:radial-gradient(circle,var(--violet),transparent 70%);top:30%;right:-100px;animation-delay:-6s}
+  .bg-wrap .orb.c3{width:340px;height:340px;background:radial-gradient(circle,var(--amber),transparent 70%);bottom:-100px;left:30%;animation-delay:-12s;opacity:.35}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(40px,-30px) scale(1.1)}
+    66%{transform:translate(-30px,40px) scale(.95)}
+  }
+  .noise{
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  }
+
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+  /* ===== Nav ===== */
+  nav{
+    position:fixed;top:16px;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .nav-in{
+    max-width:var(--maxw);width:calc(100% - 64px);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px 10px 18px;
+    background:rgba(10,14,26,.6);
+    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    border:1px solid var(--border);
+    border-radius:999px;
+    box-shadow:0 8px 32px -10px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .logo{font-family:var(--font-m);font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px}
+  .logo .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 12px var(--cyan),0 0 24px rgba(0,229,255,.5);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{50%{box-shadow:0 0 16px var(--cyan),0 0 40px rgba(0,229,255,.7);opacity:.8}}
+  .nav-links{display:flex;gap:6px;align-items:center;font-size:13.5px;font-weight:500}
+  .nav-links a{
+    padding:7px 14px;border-radius:999px;
+    color:var(--text-2);transition:all .25s ease;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--text);background:var(--surface-2)}
+  .nav-right{display:flex;align-items:center;gap:8px}
+  .lang-btn{
+    font-family:var(--font-m);font-size:11px;
+    padding:6px 12px;border-radius:999px;
+    background:var(--surface);border:1px solid var(--border);
+    color:var(--text-2);cursor:pointer;transition:all .25s;
+    letter-spacing:.04em;
+  }
+  .lang-btn:hover{color:var(--cyan);border-color:var(--cyan-soft);background:var(--cyan-soft)}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;font-size:20px;color:var(--text)}
+
+  /* ===== Page Header ===== */
+  .page-header{padding:140px 0 60px;position:relative;text-align:center}
+  .page-header .sec-no{
+    font-family:var(--font-m);font-size:13px;color:var(--cyan);letter-spacing:.06em;margin-bottom:14px;display:block;
+  }
+  .page-header h1{
+    font-family:var(--font-h);font-weight:700;
+    font-size:clamp(32px,5vw,52px);
+    letter-spacing:-.02em;margin-bottom:14px;
+  }
+  .page-header h1 .grad{
+    background:linear-gradient(135deg,var(--cyan) 0%,var(--violet) 50%,var(--pink) 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    background-size:200% 200%;
+    animation:gradShift 8s ease infinite;
+  }
+  @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .page-header p{
+    color:var(--text-2);font-size:16px;max-width:520px;margin:0 auto;
+  }
+
+  /* ===== Section ===== */
+  section{padding:60px 0;position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:40px;flex-wrap:wrap}
+  .sec-no{font-family:var(--font-m);font-size:13px;color:var(--cyan);letter-spacing:.06em}
+  .sec-title{
+    font-family:var(--font-h);font-weight:700;
+    font-size:clamp(24px,3.5vw,36px);
+    letter-spacing:-.02em;
+  }
+  .sec-sub{color:var(--text-3);font-size:13px;margin-left:auto;font-family:var(--font-m);letter-spacing:.05em}
+
+  /* ===== Skills (lab-grid) ===== */
+  .lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .lab-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:24px;
+    transition:all .35s cubic-bezier(.2,.7,.2,1);
+    position:relative;overflow:hidden;
+    backdrop-filter:blur(8px);
+  }
+  .lab-card:hover{
+    transform:translateY(-5px) scale(1.02);
+    border-color:var(--border-2);
+    background:var(--surface-2);
+    box-shadow:0 20px 40px -15px rgba(0,0,0,.4);
+  }
+  .lab-card .emoji{
+    font-size:28px;margin-bottom:14px;
+    filter:drop-shadow(0 0 10px rgba(0,229,255,.3));
+    transition:transform .3s;
+  }
+  .lab-card:hover .emoji{transform:scale(1.15) rotate(8deg)}
+  .lab-card h4{font-family:var(--font-h);font-weight:600;font-size:16px;margin-bottom:8px}
+  .lab-card p{font-size:13.5px;color:var(--text-2);line-height:1.65}
+
+  /* ===== GitHub Trending ===== */
+  .gh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .gh-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px 24px;
+    transition:all .3s;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    text-decoration:none;
+    color:inherit;
+  }
+  .gh-card:hover{
+    border-color:var(--border-2);
+    transform:translateY(-2px);
+    background:var(--surface-2);
+  }
+  .gh-card .gh-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .gh-card .gh-name{
+    font-family:var(--font-m);
+    font-size:14px;
+    font-weight:500;
+    color:var(--cyan);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .gh-card .gh-stars{
+    font-family:var(--font-m);
+    font-size:12px;
+    color:var(--amber);
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .gh-card .gh-desc{
+    font-size:13px;
+    color:var(--text-2);
+    line-height:1.65;
+    flex:1;
+  }
+  .gh-card .gh-meta{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:11.5px;
+    color:var(--text-3);
+  }
+  .gh-card .gh-lang{
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .gh-card .gh-lang::before{content:'';width:8px;height:8px;border-radius:50%}
+  .gh-card .gh-lang.python::before{background:#3572A5}
+  .gh-card .gh-lang.typescript::before{background:#3178C6}
+  .gh-card .gh-lang.c::before{background:#555}
+  .gh-card .gh-lang.csharp::before{background:#68217A}
+  .gh-card .gh-lang.rust::before{background:#DEA584}
+  .gh-card .gh-lang.javascript::before{background:#F1E05A}
+  .gh-card .gh-lang.zig::before{background:#EC915C}
+  .gh-card .gh-lang.go::before{background:#00ADD8}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--border);padding:40px 0 50px;margin-top:60px;position:relative}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .foot p{font-family:var(--font-m);font-size:12px;color:var(--text-3);letter-spacing:.03em}
+  .foot .back{
+    font-family:var(--font-m);font-size:12px;color:var(--text-2);
+    display:inline-flex;align-items:center;gap:6px;
+    transition:color .2s;letter-spacing:.03em;
+  }
+  .foot .back:hover{color:var(--cyan)}
+
+  /* ===== Reveal ===== */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== Lang toggle ===== */
+  [data-lang="en"] .zh-only{display:none!important}
+  [data-lang="zh"] .en-only{display:none!important}
+
+  /* ===== Responsive ===== */
+  @media(max-width:900px){
+    .lab-grid{grid-template-columns:repeat(2,1fr)}
+    .gh-grid{grid-template-columns:1fr 1fr}
+    .sec-sub{margin-left:0;width:100%}
+    .page-header{padding:120px 0 50px}
+    .page-header h1{font-size:clamp(26px,7vw,38px)}
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .nav-links.open{
+      display:flex;flex-direction:column;gap:4px;
+      position:absolute;top:64px;left:16px;right:16px;
+      background:rgba(10,14,26,.95);
+      backdrop-filter:blur(20px);
+      padding:16px;border-radius:16px;
+      border:1px solid var(--border);
+    }
+    .wrap{padding:0 22px}
+    .nav-in{width:calc(100% - 44px);padding:8px 10px 8px 14px}
+    section{padding:50px 0}
+    .sec-head{margin-bottom:32px}
+  }
+  @media(max-width:500px){
+    .lab-grid{grid-template-columns:1fr}
+    .gh-grid{grid-template-columns:1fr}
+    .page-header h1{font-size:clamp(24px,8vw,32px)}
+    .page-header p{font-size:14px}
+    footer{padding:32px 0 40px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body data-lang="zh">
+
+<!-- BG -->
+<div class="bg-wrap">
+  <div class="grid-bg"></div>
+  <div class="orb c1"></div>
+  <div class="orb c2"></div>
+  <div class="orb c3"></div>
+</div>
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html#top" class="logo"><i class="dot"></i>muchengit.github.io</a>
+    <div class="nav-links" id="navlinks">
+      <a href="index.html#works" data-i18n="nav_works">作品</a>
+      <a href="index.html#writing" data-i18n="nav_writing">文字</a>
+      <a href="index.html#lab" data-i18n="nav_lab">实验室</a>
+      <a href="index.html#about" data-i18n="nav_about">关于</a>
+      <a href="index.html#connect" data-i18n="nav_connect">联系</a>
+    </div>
+    <div class="nav-right">
+      <button class="lang-btn" id="langBtn">EN / 中</button>
+      <button class="menu-btn" id="menubtn" aria-label="菜单">≡</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="wrap">
+    <span class="sec-no reveal">03 — LAB</span>
+    <h1 class="reveal">
+      <span class="zh-only">我的<span class="grad">技能栈 & 工具库</span></span>
+      <span class="en-only">My <span class="grad">Skills & Toolkit</span></span>
+    </h1>
+    <p class="reveal">
+      <span class="zh-only">我日常用来构建 AI 产品的工具和正在关注的开源项目。</span>
+      <span class="en-only">The tools I use daily to build AI products and the open-source projects I'm watching.</span>
+    </p>
+  </div>
+</header>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">SKILLS</span>
+      <h2 class="sec-title">
+        <span class="zh-only">技能栈</span>
+        <span class="en-only">Skills</span>
+      </h2>
+      <span class="sec-sub">
+        <span class="zh-only">// 构建 AI 产品的工具箱</span>
+        <span class="en-only">// the AI builder toolkit</span>
+      </span>
+    </div>
+    <div class="lab-grid">
+      <div class="lab-card reveal">
+        <div class="emoji">⚡</div>
+        <h4>Cursor / Windsurf</h4>
+        <p><span class="zh-only">AI 编程编辑器，Tab 补全、Composer、Agent 模式，让写代码像对话一样自然。</span><span class="en-only">AI-powered code editor with Tab completion, Composer, and Agent mode.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🤖</div>
+        <h4>Claude / GPT-4o</h4>
+        <p><span class="zh-only">大模型对话，长文本理解、结构化输出、Artifacts，复杂任务的得力助手。</span><span class="en-only">Advanced LLMs for long-context understanding, structured output, and Artifacts.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🎨</div>
+        <h4>v0.dev / Midjourney</h4>
+        <p><span class="zh-only">AI 设计工具，用自然语言生成 UI 和图像，从想法到视觉稿只需几秒。</span><span class="en-only">AI design tools — generate UI and images from natural language descriptions.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🧠</div>
+        <h4>LangGraph / CrewAI</h4>
+        <p><span class="zh-only">Agent 框架，多智能体协作和工作流编排，把单点 AI 能力串联成系统。</span><span class="en-only">Agent frameworks for multi-agent collaboration and workflow orchestration.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">📊</div>
+        <h4>DeepSeek / Llama</h4>
+        <p><span class="zh-only">开源大模型，支持本地部署、低成本高性能，数据隐私可控。</span><span class="en-only">Open-source LLMs for local deployment with low cost and high performance.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🚀</div>
+        <h4>Vercel / Cloudflare</h4>
+        <p><span class="zh-only">部署平台，边缘计算、自动 HTTPS、全球 CDN，让应用触达世界。</span><span class="en-only">Deployment platforms with edge computing, auto HTTPS, and global CDN.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🌐</div>
+        <h4>Next.js / React</h4>
+        <p><span class="zh-only">前端框架，SSR、ISR、组件化开发，现代 Web 应用的标准选择。</span><span class="en-only">Frontend frameworks with SSR, ISR, and component-based development.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">📱</div>
+        <h4>Electron / Tauri</h4>
+        <p><span class="zh-only">桌面应用框架，跨平台、原生性能，用 Web 技术构建桌面软件。</span><span class="en-only">Cross-platform desktop app frameworks with native-like performance.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🔧</div>
+        <h4>Docker / Kubernetes</h4>
+        <p><span class="zh-only">容器化部署，微服务架构、DevOps 自动化，让环境管理不再头疼。</span><span class="en-only">Containerization and orchestration for microservices and DevOps automation.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🗄️</div>
+        <h4>PostgreSQL / Redis</h4>
+        <p><span class="zh-only">数据库组合，关系型数据持久化 + 高性能缓存，支撑各类应用架构。</span><span class="en-only">Relational database + in-memory cache powering diverse application architectures.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">📡</div>
+        <h4>GitHub Actions / CI</h4>
+        <p><span class="zh-only">自动化部署，持续集成持续交付，每次提交自动测试、构建、发布。</span><span class="en-only">CI/CD automation — test, build, and deploy on every commit.</span></p>
+      </div>
+      <div class="lab-card reveal">
+        <div class="emoji">🔍</div>
+        <h4>Figma / Excalidraw</h4>
+        <p><span class="zh-only">设计和原型，协作设计和手绘风格，从线框到高保真一站式完成。</span><span class="en-only">Design and prototyping tools for collaborative design and hand-drawn wireframes.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB TRENDING -->
+<section id="github">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-no">GITHUB</span>
+      <h2 class="sec-title">
+        <span class="zh-only">热门项目</span>
+        <span class="en-only">Trending</span>
+      </h2>
+      <span class="sec-sub">
+        <span class="zh-only">// 2026 年 7 月值得关注</span>
+        <span class="en-only">// worth watching in July 2026</span>
+      </span>
+    </div>
+    <div class="gh-grid">
+      <a href="https://github.com/usestrix/strix" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">usestrix/strix</span><span class="gh-stars">⭐ 42K</span></div>
+        <p class="gh-desc"><span class="zh-only">AI 安全渗透测试工具，像真正的安全研究员一样动态发现并验证应用漏洞。支持 HTTP 代理、浏览器利用、Python 沙箱和 CI/CD 集成。</span><span class="en-only">AI pentest tool that dynamically discovers and verifies app vulnerabilities like a real security researcher. Supports HTTP proxies, browser exploitation, Python sandbox, and CI/CD integration.</span></p>
+        <div class="gh-meta"><span class="gh-lang python">Python</span></div>
+      </a>
+      <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">DeusData/codebase-memory-mcp</span><span class="gh-stars">⭐ 32K</span></div>
+        <p class="gh-desc"><span class="zh-only">通过 tree-sitter 为 AI 编程 Agent 构建代码库的持久化知识图谱。将结构化查询的 token 消耗降低最高 99%，单二进制零依赖。</span><span class="en-only">Builds persistent codebase knowledge graphs for AI coding agents via tree-sitter. Reduces structured query token consumption by up to 99%, single binary with zero dependencies.</span></p>
+        <div class="gh-meta"><span class="gh-lang c">C</span></div>
+      </a>
+      <a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">MadsLorentzen/ai-job-search</span><span class="gh-stars">⭐ 23K</span></div>
+        <p class="gh-desc"><span class="zh-only">基于 Claude Code 的本地求职 Agent。自动评估岗位匹配度、定制简历、生成求职信、准备面试，将求职流程变为自动化流水线。</span><span class="en-only">Local job search agent powered by Claude Code. Auto-evaluates role fit, tailors resumes, generates cover letters, and prepares interviews — turning job hunting into an automated pipeline.</span></p>
+        <div class="gh-meta"><span class="gh-lang typescript">TypeScript</span></div>
+      </a>
+      <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">HKUDS/Vibe-Trading</span><span class="gh-stars">⭐ 24K</span></div>
+        <p class="gh-desc"><span class="zh-only">香港大学数据科学实验室出品，自然语言驱动的量化交易框架。内置 452 个预置 Alpha 因子及严格的防前视偏差机制。</span><span class="en-only">From HKU Data Science Lab — an NLP-driven quantitative trading framework with 452 built-in Alpha factors and strict look-ahead bias prevention.</span></p>
+        <div class="gh-meta"><span class="gh-lang python">Python</span></div>
+      </a>
+      <a href="https://github.com/stablyai/orca" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">stablyai/orca</span><span class="gh-stars">⭐ 19K</span></div>
+        <p class="gh-desc"><span class="zh-only">多 Agent 并行开发环境（ADE），支持多 Agent 调度、桌面和移动端。解决多个编程 Agent 同时工作时如何协调状态和任务分配。</span><span class="en-only">Multi-Agent Development Environment (ADE) supporting multi-agent scheduling for desktop and mobile. Solves state coordination and task allocation when multiple coding agents work simultaneously.</span></p>
+        <div class="gh-meta"><span class="gh-lang typescript">TypeScript</span></div>
+      </a>
+      <a href="https://github.com/iOfficeAI/OfficeCLI" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">iOfficeAI/OfficeCLI</span><span class="gh-stars">⭐ 18K</span></div>
+        <p class="gh-desc"><span class="zh-only">面向 AI Agent 的开源 Office 套件。让 AI Agent 无需安装 Office 即可原生读取、编辑和自动化 Word、Excel、PPT 文件。</span><span class="en-only">Open-source Office suite for AI agents. Enables native reading, editing, and automation of Word, Excel, and PPT files without installing Office.</span></p>
+        <div class="gh-meta"><span class="gh-lang csharp">C#</span></div>
+      </a>
+      <a href="https://github.com/diegosouzapw/OmniRoute" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">diegosouzapw/OmniRoute</span><span class="gh-stars">⭐ 18K</span></div>
+        <p class="gh-desc"><span class="zh-only">LLM 模型网关，一个端点路由 231+ 模型供应商。支持 token 压缩、智能 fallback、多模态 API、MCP/A2A 协议。</span><span class="en-only">LLM model gateway routing 231+ providers through a single endpoint. Supports token compression, intelligent fallback, multimodal APIs, and MCP/A2A protocols.</span></p>
+        <div class="gh-meta"><span class="gh-lang typescript">TypeScript</span></div>
+      </a>
+      <a href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">xai-org/grok-build</span><span class="gh-stars">⭐ 9.3K</span></div>
+        <p class="gh-desc"><span class="zh-only">xAI 开源编程 Agent CLI，与 Grok 编程栈使用相同的 Agent 循环。完整暴露上下文处理、工具执行、插件、Skills 和 MCP 集成。</span><span class="en-only">xAI open-source coding agent CLI using the same agent loop as the Grok coding stack. Fully exposes context handling, tool execution, plugins, Skills, and MCP integration.</span></p>
+        <div class="gh-meta"><span class="gh-lang c">C/C++</span></div>
+      </a>
+      <a href="https://github.com/oven-sh/bun" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">oven-sh/bun</span><span class="gh-stars">⭐ 75K</span></div>
+        <p class="gh-desc"><span class="zh-only">极速 JavaScript 运行时和打包工具，比 Node.js 快 3 倍。内置 bundler、transpiler、package manager，一个工具替代多个。</span><span class="en-only">Blazing-fast JavaScript runtime and bundler, up to 3x faster than Node.js. Built-in bundler, transpiler, and package manager — one tool replaces many.</span></p>
+        <div class="gh-meta"><span class="gh-lang zig">Zig</span></div>
+      </a>
+      <a href="https://github.com/rustdesk/rustdesk" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">rustdesk/rustdesk</span><span class="gh-stars">⭐ 78K</span></div>
+        <p class="gh-desc"><span class="zh-only">开源远程桌面软件，TeamViewer 的免费替代品。支持自建服务器、端到端加密、跨平台，适合个人和企业使用。</span><span class="en-only">Open-source remote desktop software, a free alternative to TeamViewer. Supports self-hosted servers, end-to-end encryption, and cross-platform use for individuals and enterprises.</span></p>
+        <div class="gh-meta"><span class="gh-lang rust">Rust</span></div>
+      </a>
+      <a href="https://github.com/ggerganov/llama.cpp" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">ggerganov/llama.cpp</span><span class="gh-stars">⭐ 72K</span></div>
+        <p class="gh-desc"><span class="zh-only">在纯 C/C++ 中实现 LLaMA 推理，支持多种量化格式。可在消费级硬件上运行大模型，是本地部署 AI 的核心基础设施。</span><span class="en-only">LLaMA inference in pure C/C++ with support for multiple quantization formats. Run large models on consumer hardware — the core infrastructure for local AI deployment.</span></p>
+        <div class="gh-meta"><span class="gh-lang c">C/C++</span></div>
+      </a>
+      <a href="https://github.com/charliermarsh/ruff" target="_blank" rel="noopener" class="gh-card reveal">
+        <div class="gh-top"><span class="gh-name">charliermarsh/ruff</span><span class="gh-stars">⭐ 36K</span></div>
+        <p class="gh-desc"><span class="zh-only">极速 Python linter 和 formatter，用 Rust 编写。比 flake8 + black 快 10-100 倍，兼容现有工具链。</span><span class="en-only">An extremely fast Python linter and formatter, written in Rust. 10-100x faster than flake8 + black, compatible with existing toolchains.</span></p>
+        <div class="gh-meta"><span class="gh-lang rust">Rust</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot">
+    <p>© 2026 Mu Chen · <span class="zh-only">用 AI 和好奇心驱动</span><span class="en-only">Powered by AI & curiosity</span></p>
+    <a href="index.html" class="back">
+      <span class="zh-only">← 回到主页</span>
+      <span class="en-only">← Back to home</span>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // nav scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.style.transform=scrollY>20?'translateY(-4px)':'translateY(0)');
+  // mobile menu
+  const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');
+  btn?.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+  // reveal
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%8*50)+'ms';io.observe(el);});
+  // language toggle
+  const langBtn=document.getElementById('langBtn');
+  const body=document.body;
+  function setLang(lang){
+    body.setAttribute('data-lang',lang);
+    langBtn.textContent=lang==='zh'?'EN / 中':'中 / EN';
+    try{localStorage.setItem('site-lang',lang)}catch(e){}
+    document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+    const t=document.querySelector('[data-i18n="title"]');
+    if(t) document.title=t.textContent || document.title;
+  }
+  try{const saved=localStorage.getItem('site-lang');if(saved) setLang(saved)}catch(e){}
+  langBtn?.addEventListener('click',()=>{
+    const cur=body.getAttribute('data-lang')||'zh';
+    setLang(cur==='zh'?'en':'zh');
+  });
+</script>
+</body>
+</html>
