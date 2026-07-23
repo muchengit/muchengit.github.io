@@ -209,7 +209,7 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
 
 /* Reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
-.reveal.in{opacity:1;transform:none}
+.reveal.in,.reveal.visible{opacity:1;transform:none}
 
 /* Responsive */
 @media(max-width:900px){
