@@ -23,33 +23,39 @@ img{max-width:100%;display:block;border-radius:12px}
 .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .bg-wrap .grid-bg{
   position:absolute;inset:0;
-  background-image:linear-gradient(rgba(0,229,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.04) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
   background-size:60px 60px;
-  mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 70%);
+  mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
 }
-.bg-wrap .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4;animation:bfloat 20s ease-in-out infinite}
-.bg-wrap .orb.c1{width:350px;height:350px;background:radial-gradient(circle,var(--cyan),transparent 70%);top:-100px;left:-60px}
-.bg-wrap .orb.c2{width:300px;height:300px;background:radial-gradient(circle,var(--violet),transparent 70%);top:40%;right:-80px;animation-delay:-7s}
-@keyframes bfloat{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
+.bg-wrap .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;animation:bfloat 18s ease-in-out infinite}
+.bg-wrap .orb.c1{width:420px;height:420px;background:radial-gradient(circle,var(--cyan),transparent 70%);top:-120px;left:-80px;animation-delay:0s}
+.bg-wrap .orb.c2{width:380px;height:380px;background:radial-gradient(circle,var(--violet),transparent 70%);top:30%;right:-100px;animation-delay:-6s}
+.bg-wrap .orb.c3{width:340px;height:340px;background:radial-gradient(circle,var(--amber),transparent 70%);bottom:-100px;left:30%;animation-delay:-12s;opacity:.35}
+@keyframes bfloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(.95)}}
+.noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+}
 
 /* Nav */
 nav{position:fixed;top:16px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:center}
 .nav-in{
-  max-width:var(--maxw);width:calc(100% - 48px);
+  max-width:1180px;width:calc(100% - 64px);
   display:flex;align-items:center;justify-content:space-between;
-  padding:9px 14px 9px 18px;
+  padding:10px 14px 10px 18px;
   background:rgba(10,14,26,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
   border:1px solid var(--border);border-radius:999px;
   box-shadow:0 8px 32px -10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);
 }
-.nav-in a{font-family:var(--font-m);font-size:13px;color:var(--text-2);display:flex;align-items:center;gap:8px;transition:color .2s}
-.nav-in a:hover{color:var(--cyan)}
-.nav-in a .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 16px var(--cyan);opacity:.7}}
+.nav-in a.logo{font-family:var(--font-m);font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px;transition:color .2s}
+.nav-in a.logo:hover{color:var(--cyan)}
+.nav-in a.logo .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan),0 0 24px rgba(0,229,255,.5);animation:pulse 2.4s ease-in-out infinite}
+.nav-right{display:flex;align-items:center;gap:8px}
+@keyframes pulse{50%{box-shadow:0 0 16px var(--cyan),0 0 40px rgba(0,229,255,.7);opacity:.8}}
 .lang-btn{
   font-family:var(--font-m);font-size:11px;
-  padding:5px 12px;border-radius:999px;
+  padding:6px 12px;border-radius:999px;
   background:var(--surface);border:1px solid var(--border);
   color:var(--text-2);cursor:pointer;transition:all .25s;letter-spacing:.04em;
 }
