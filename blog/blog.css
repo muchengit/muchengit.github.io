@@ -138,6 +138,7 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
   transition:border-color .3s;
 }
 .step:hover{border-color:var(--border-2)}
+.step-num{display:none}
 .step::before{
   content:counter(step);flex-shrink:0;
   width:36px;height:36px;border-radius:10px;
