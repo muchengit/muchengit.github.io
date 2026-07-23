@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code | The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div><nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">工具评测 <span class="en-only">|</span> <span class="en-only">Tools</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</span>
+    <span class="en-only">The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</span>
+  </h1>
+  <p class="meta reveal">2025.02.15 — <span class="zh-only">四大 AI 编程工具 2025 年最新版本全方位对比，帮你找到最适合的那个</span><span class="en-only">A comprehensive 2025 comparison of four major AI coding tools to help you find the right one</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">2025 年，AI 编程工具进入了"战国时代"</span>
+    <span class="en-only">2025: The Warring States Era of AI Coding Tools</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">如果你在 2025 年还不用 AI 辅助编程，那你可能正在以三倍的速度"浪费"自己的时间。AI 编程工具在 2024 年经历了爆发式增长，到了 2025 年，市场已经形成了"四大天王"的格局：<strong>Cursor</strong>、<strong>GitHub Copilot</strong>、<strong>Windsurf</strong> 和 <strong>Claude Code</strong>。这四款工具各有特色、各有拥趸，选错工具不仅浪费钱，更可能让你对 AI 编程产生错误印象。</span>
+    <span class="en-only">If you're still not using AI-assisted coding in 2025, you might be "wasting" your time at triple speed. AI coding tools experienced explosive growth in 2024, and by 2025, the market has consolidated into the "Big Four": <strong>Cursor</strong>, <strong>GitHub Copilot</strong>, <strong>Windsurf</strong>, and <strong>Claude Code</strong>. Each has its own strengths and fanbase. Choosing the wrong tool doesn't just waste money — it might give you the wrong impression of AI coding entirely.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">这篇文章不是简单的功能列表——我会从实际使用体验出发，从代码补全质量、项目理解能力、多文件编辑、Agent 模式、价格和适合人群等多个维度，给出一个尽量客观的对比。作为日常重度使用这些工具的人，我的目标是帮你少走弯路，直接选到最适合自己的工具。</span>
+    <span class="en-only">This article isn't a simple feature list — I'll provide an objective comparison from the perspective of actual daily usage, covering code completion quality, project understanding, multi-file editing, Agent mode, pricing, and target users. As someone who heavily uses these tools daily, my goal is to help you avoid detours and directly find the best tool for you.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">四款工具快速概览</span>
+    <span class="en-only">Quick Overview of the Four Tools</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">在深入对比之前，先快速认识一下这四位"选手"。</span>
+    <span class="en-only">Before diving into the comparison, let's quickly meet the four "contestants."</span>
+  </p>
+
+  <div class="compare">
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">定位</span><span class="en-only">Positioning</span></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">基于 VS Code 深度改造的独立 AI 编辑器。目前最流行的 AI 编程工具，社区最活跃。主打 Composer 多文件编辑和 Agent 模式。</span><span class="en-only">Independent AI editor deeply rebuilt on VS Code. Currently the most popular AI coding tool with the most active community. Focuses on Composer multi-file editing and Agent mode.</span></p></div>
+      <div class="compare-item"><strong>GitHub Copilot</strong><p><span class="zh-only">微软/GitHub 出品，可嵌入 VS Code、JetBrains、Neovim 等多种编辑器。生态最广，集成最深度。2025 年升级为 Copilot Workspace。</span><span class="en-only">By Microsoft/GitHub, embeddable in VS Code, JetBrains, Neovim, etc. Widest ecosystem, deepest integration. Upgraded to Copilot Workspace in 2025.</span></p></div>
+      <div class="compare-item"><strong>Windsurf</strong><p><span class="zh-only">Codeium 团队推出的 AI IDE。主打"流式"交互和 Cascade 多步规划。上手快，界面友好。</span><span class="en-only">AI IDE by the Codeium team. Focuses on "streaming" interaction and Cascade multi-step planning. Fast onboarding, friendly interface.</span></p></div>
+      <div class="compare-item"><strong>Claude Code</strong><p><span class="zh-only">Anthropic 推出的命令行 AI 编程工具。无 GUI，在终端中运行。适合高级开发者和自动化场景。模型能力极强。</span><span class="en-only">CLI-based AI coding tool by Anthropic. No GUI, runs in terminal. For advanced developers and automation scenarios. Extremely strong model capabilities.</span></p></div>
+    </div>
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">定价</span><span class="en-only">Pricing</span></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">免费版有额度限制。Pro $20/月，Business $40/月。Pro 可用 GPT-4o、Claude 3.5 Sonnet、DeepSeek-R1 等模型。</span><span class="en-only">Free tier has usage limits. Pro $20/month, Business $40/month. Pro offers GPT-4o, Claude 3.5 Sonnet, DeepSeek-R1 models.</span></p></div>
+      <div class="compare-item"><strong>GitHub Copilot</strong><p><span class="zh-only">Individual $10/月，Business $19/月，Enterprise $39/月。与 GitHub 生态深度绑定。</span><span class="en-only">Individual $10/month, Business $19/month, Enterprise $39/month. Deeply tied to GitHub ecosystem.</span></p></div>
+      <div class="compare-item"><strong>Windsurf</strong><p><p><span class="zh-only">免费版功能较全。Pro $15/月。性价比最高。</span><span class="en-only">Free tier has substantial features. Pro $15/month. Best value for money.</span></p></div>
+      <div class="compare-item"><strong>Claude Code</strong><p><span class="zh-only">通过 Anthropic API 计费。Claude Pro 订阅 $20/月可用。纯 CLI，无需额外订阅工具。</span><span class="en-only">Billed via Anthropic API. Available with Claude Pro subscription at $20/month. Pure CLI, no additional tool subscription needed.</span></p></div>
+    </div>
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">代码补全</span><span class="en-only">Code Completion</span></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">Tab 补全速度快、质量高，尤其擅长预测多行代码。支持多种模型切换。</span><span class="en-only">Fast Tab completion with high quality, especially strong at predicting multi-line code. Supports switching between multiple models.</span></p></div>
+      <div class="compare-item"><strong>GitHub Copilot</strong><p><span class="zh-only">业界先驱，补全速度快，上下文理解优秀。但在复杂逻辑上偶尔不如 Cursor。</span><span class="en-only">Industry pioneer, fast completion, excellent context understanding. But occasionally weaker than Cursor on complex logic.</span></p></div>
+      <div class="compare-item"><strong>Windsurf</strong><p><span class="zh-only">补全质量不错，但响应速度有时偏慢。和 Codeium 引擎配合良好。</span><span class="en-only">Good completion quality, but response speed sometimes lags. Works well with Codeium engine.</span></p></div>
+      <div class="compare-item"><strong>Claude Code</strong><p><span class="zh-only">不提供实时补全（CLI 模式），侧重于命令式生成和编辑。</span><span class="en-only">No real-time completion (CLI mode), focuses on command-based generation and editing.</span></p></div>
+    </div>
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">项目理解</span><span class="en-only">Project Understanding</span></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">通过 @codebase 可索引整个项目。理解跨文件关系能力强。2025 年改进了上下文管理。</span><span class="en-only">Indexes entire project via @codebase. Strong at understanding cross-file relationships. Improved context management in 2025.</span></p></div>
+      <div class="compare-item"><strong>GitHub Copilot</strong><p><span class="zh-only">借助 GitHub 仓库信息理解项目。2025 年 Workspace 加入 PR 级别上下文。</span><span class="en-only">Leverages GitHub repo info for project understanding. 2025 Workspace adds PR-level context.</span></p></div>
+      <div class="compare-item"><strong>Windsurf</strong><p><span class="zh-only">Cascade 系统自动分析项目结构。理解力不错但大型项目偶有遗漏。</span><span class="en-only">Cascade system auto-analyzes project structure. Good understanding but occasionally misses in large projects.</span></p></div>
+      <div class="compare-item"><strong>Claude Code</strong><p><span class="zh-only">可读取整个工作目录文件，项目理解能力极强。适合一次性深度分析。</span><span class="en-only">Can read entire working directory, extremely strong project understanding. Best for one-time deep analysis.</span></p></div>
+    </div>
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">Agent 模式</span><span class="en-only">Agent Mode</span></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">Agent 模式成熟，可自主执行多步操作、读写文件、运行终端命令。2025 年支持更多工具调用。</span><span class="en-only">Mature Agent mode, can autonomously execute multi-step operations, read/write files, run terminal commands. More tool calls in 2025.</span></p></div>
+      <div class="compare-item"><strong>GitHub Copilot</strong><p><span class="zh-only">2025 年引入 Copilot Agent，可处理 GitHub Issues 和 PR。但自主编辑能力尚在完善中。</span><span class="en-only">Introduced Copilot Agent in 2025 for handling GitHub Issues and PRs. Autonomous editing still maturing.</span></p></div>
+      <div class="compare-item"><strong>Windsurf</strong><p><span class="zh-only">Cascade 规划器类似 Agent，可拆解复杂任务为多步执行。体验流畅但稳定性有待提升。</span><span class="en-only">Cascade planner is Agent-like, breaks complex tasks into multi-step execution. Smooth experience but stability needs improvement.</span></p></div>
+      <div class="compare-item"><strong>Claude Code</strong><p><span class="zh-only">天生就是 Agent——在终端中自主读写文件、执行命令、搜索代码。自主性最强。</span><span class="en-only">Born as an Agent — autonomously reads/writes files, executes commands, searches code in terminal. Highest autonomy.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">各工具优势与不足</span>
+    <span class="en-only">Strengths and Weaknesses</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">没有完美的工具，只有最适合你的工具。让我从实际体验角度，逐一分析每款工具的亮点和槽点。</span>
+    <span class="en-only">No tool is perfect — only the one that fits you best. Let me analyze the highlights and pain points of each tool from a practical experience perspective.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">Cursor：全能冠军，但有代价</span>
+        <span class="en-only">Cursor: All-Around Champion, With a Price</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>优势：</strong>功能最全面——Tab 补全 + Composer 多文件编辑 + Agent 模式 + 多模型切换，形成完整的工作流。社区生态最丰富，教程、提示词模板、最佳实践遍地都是。对于新手和资深开发者都很友好。</span>
+        <span class="en-only"><strong>Strengths:</strong> Most comprehensive — Tab completion + Composer multi-file editing + Agent mode + multi-model switching form a complete workflow. Richest community ecosystem with tutorials, prompt templates, and best practices everywhere. Friendly for both beginners and senior developers.</span>
+      </p>
+      <p>
+        <span class="zh-only"><strong>不足：</strong>基于 VS Code 的 fork，偶尔和某些 VS Code 插件存在兼容问题。重度使用时内存占用较大。Agent 模式有时会"自作主张"修改不该改的文件。</span>
+        <span class="en-only"><strong>Weaknesses:</strong> VS Code fork occasionally has compatibility issues with certain plugins. High memory usage under heavy workloads. Agent mode sometimes "takes liberties" modifying files it shouldn't.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">GitHub Copilot：生态王者，适合"正统派"</span>
+        <span class="en-only">GitHub Copilot: Ecosystem King for the "Establishment"</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>优势：</strong>和 GitHub 深度集成——PR、Issue、CI/CD 全打通。几乎支持所有主流编辑器。2025 年的 Copilot Workspace 让你直接在 GitHub 上用自然语言创建和修改代码。对于重度 GitHub 用户来说体验无缝。</span>
+        <span class="en-only"><strong>Strengths:</strong> Deep GitHub integration — PRs, Issues, CI/CD all connected. Supports nearly all mainstream editors. 2025's Copilot Workspace lets you create and modify code directly on GitHub with natural language. Seamless for heavy GitHub users.</span>
+      </p>
+      <p>
+        <span class="zh-only"><strong>不足：</strong>多文件编辑能力不如 Cursor 的 Composer。Agent 模式起步较晚，自主性还不够。在非 GitHub 工作流中优势打折。</span>
+        <span class="en-only"><strong>Weaknesses:</strong> Multi-file editing weaker than Cursor's Composer. Agent mode launched later, autonomy still limited. Advantages diminish in non-GitHub workflows.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">Windsurf：黑马选手，性价比之王</span>
+        <span class="en-only">Windsurf: The Dark Horse, King of Value</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>优势：</strong>Cascade 规划器是非常有创意的设计——它不是简单地执行你的指令，而是先"思考"一个执行计划，然后逐步执行。界面简洁直观，上手非常快。Pro 定价仅 $15/月，是四大工具中最便宜的。免费版的功能就已经很实用。</span>
+        <span class="en-only"><strong>Strengths:</strong> Cascade planner is a creative design — instead of simply executing your instructions, it first "thinks" through an execution plan, then proceeds step by step. Clean, intuitive interface, very fast onboarding. Pro pricing at only $15/month makes it the cheapest of the four. Free tier is already quite practical.</span>
+      </p>
+      <p>
+        <span class="zh-only"><strong>不足：</strong>社区和生态还在建设中，教程和资源远不如 Cursor 丰富。偶尔出现生成中断或格式混乱的问题。大型复杂项目的稳定性还需要提升。</span>
+        <span class="en-only"><strong>Weaknesses:</strong> Community and ecosystem still building, tutorials and resources far less abundant than Cursor. Occasional generation interruptions or formatting chaos. Stability on large complex projects needs improvement.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">Claude Code：极客利器，高手之选</span>
+        <span class="en-only">Claude Code: Geek's Weapon, Choice of Experts</span>
+      </h3>
+      <p>
+        <span class="zh-only"><strong>优势：</strong>Claude 3.5 Sonnet / Claude 4 的代码能力在 2025 年公认最强。命令行界面意味着你可以把 AI 编程能力嵌入任何工作流——脚本、管道、自动化。没有 GUI 开销，速度极快。适合做代码审查、重构、批量修改等高级任务。</span>
+        <span class="en-only"><strong>Strengths:</strong> Claude 3.5 Sonnet / Claude 4 coding abilities are widely acknowledged as the strongest in 2025. CLI interface means you can embed AI coding into any workflow — scripts, pipelines, automation. No GUI overhead, extremely fast. Best for code review, refactoring, batch modifications, and other advanced tasks.</span>
+      </p>
+      <p>
+        <span class="zh-only"><strong>不足：</strong>纯命令行，没有图形界面，对不熟悉终端的新手非常不友好。没有实时代码补全功能。每次交互都是"对话式"的，不如 IDE 内嵌工具那样流畅。</span>
+        <span class="en-only"><strong>Weaknesses:</strong> Pure CLI, no GUI, very unfriendly for beginners unfamiliar with terminals. No real-time code completion. Every interaction is "conversational," not as fluid as IDE-embedded tools.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">不同场景的推荐</span>
+    <span class="en-only">Recommendations by Scenario</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">说了这么多，你可能还是想知道"我到底该选哪个"。答案取决于你是谁、你做什么、你的预算是多少。</span>
+    <span class="en-only">After all this, you probably still want to know "which one should I choose?" The answer depends on who you are, what you do, and your budget.</span>
+  </p>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">场景 1：不会写代码，想用 AI 做产品</span>
+      <span class="en-only">Scenario 1: Can't Code, Want to Build Products with AI</span>
+    </strong>
+    <p>
+      <span class="zh-only">选 Cursor。它的 Composer 功能和多模型支持让你可以用自然语言描述需求，AI 帮你实现。社区教程最多，遇到问题容易找到解决方案。</span>
+      <span class="en-only">Choose Cursor. Its Composer and multi-model support let you describe requirements in natural language while AI implements them. Most community tutorials, easy to find solutions when problems arise.</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">场景 2：专业开发者，在团队协作</span>
+      <span class="en-only">Scenario 2: Professional Developer in Team Collaboration</span>
+    </strong>
+    <p>
+      <span class="zh-only">选 GitHub Copilot 或 Cursor。如果团队重度使用 GitHub，Copilot 的集成体验最好。如果团队更注重 AI 辅助的灵活性，Cursor 更合适。两者可以并存——Copilot 做补全，Cursor 做复杂编辑。</span>
+      <span class="en-only">Choose GitHub Copilot or Cursor. If the team heavily uses GitHub, Copilot's integrated experience is best. If the team values AI-assisted flexibility, Cursor is more suitable. Both can coexist — Copilot for completion, Cursor for complex editing.</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">场景 3：预算有限的学生或独立开发者</span>
+      <span class="en-only">Scenario 3: Budget-Constrained Student or Indie Developer</span>
+    </strong>
+    <p>
+      <span class="zh-only">选 Windsurf。免费版已经足够日常使用，Pro $15/月性价比最高。界面友好，上手极快。</span>
+      <span class="en-only">Choose Windsurf. Free tier is sufficient for daily use, Pro at $15/month is best value. Friendly interface, extremely fast onboarding.</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">场景 4：高级开发者，追求极致效率</span>
+      <span class="en-only">Scenario 4: Advanced Developer Seeking Peak Efficiency</span>
+    </strong>
+    <p>
+      <span class="zh-only">Claude Code + Cursor 组合。Claude Code 做深度分析和重构（在终端中），Cursor 做日常编辑和补全。Claude 4 的代码理解能力在 2025 年几乎无人能敌。</span>
+      <span class="en-only">Claude Code + Cursor combo. Use Claude Code for deep analysis and refactoring (in terminal), Cursor for daily editing and completion. Claude 4's code understanding is nearly unmatched in 2025.</span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">写在最后</span>
+    <span class="en-only">Final Thoughts</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">AI 编程工具的进化速度令人惊叹。2024 年初，大家还在惊叹"AI 能帮我补全一行代码"；2025 年初，AI 已经能帮你完成整个功能模块的设计和实现。这四款工具各有定位，没有绝对的"最好"，只有"最适合"。我的建议是：不要纠结于选"最好的"工具，而是选一个"先开始用"的工具。在你实际使用的过程中，你会自然地发现哪个工具最顺手，哪个功能最能提升你的效率。<strong>工具永远在进化，但你的学习不会亏本——在不同工具之间积累的使用经验，都是可迁移的。</strong></span>
+    <span class="en-only">The evolution speed of AI coding tools is staggering. At the start of 2024, people were amazed that "AI can complete a line of code for me"; by early 2025, AI can already help you design and implement entire feature modules. These four tools each have their positioning — there's no absolute "best," only "most suitable." My advice: don't agonize over picking the "best" tool — just pick one and start using it. Through actual usage, you'll naturally discover which tool feels most comfortable and which features boost your productivity most. <strong>Tools keep evolving, but your learning never goes to waste — experience accumulated across different tools is transferable.</strong></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">← <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

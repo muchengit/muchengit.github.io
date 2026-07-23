@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南 | Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div><nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">Agent <span class="en-only">|</span> <span class="en-only">智能体</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</span>
+    <span class="en-only">Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</span>
+  </h1>
+  <p class="meta reveal">2025.09.22 — <span class="zh-only">三大多智能体框架深度对比，附完整项目示例代码</span><span class="en-only">Deep comparison of three multi-agent frameworks, with complete project example code</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">什么是多智能体协作？</span>
+    <span class="en-only">What Is Multi-Agent Collaboration?</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">单个 AI Agent 能做很多事情，但它有一个根本限制：<strong>它只能扮演一个角色</strong>。如果你需要一篇文章先由研究员搜集资料，再由写作者撰写初稿，再由编辑审核修改——单 Agent 做不到这种多角色的流水线协作。多智能体协作（Multi-Agent）就是让多个 AI Agent 各自扮演不同角色，按照一定的流程协作完成复杂任务。</span>
+    <span class="en-only">A single AI Agent can do many things, but it has a fundamental limitation: <strong>it can only play one role.</strong> If you need an article first researched, then drafted by a writer, then reviewed and revised by an editor — a single Agent can't handle this multi-role pipeline. Multi-Agent collaboration means having multiple AI Agents each play different roles, collaborating through defined workflows to complete complex tasks.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">多智能体不是"同时用多个 AI 聊天"，而是<strong>让不同的 Agent 有明确的分工、明确的输入输出、明确的协作流程</strong>。就像一个公司里，产品经理、设计师、工程师各司其职，通过流程协作完成一个项目。2025 年，三个主流框架——AutoGen、CrewAI、LangGraph——让这种协作变得可编程、可复用。</span>
+    <span class="en-only">Multi-Agent isn't "using multiple AIs to chat at the same time" — it's <strong>giving different Agents clear roles, clear inputs/outputs, and clear collaboration workflows.</strong> Like a company where product managers, designers, and engineers each have their responsibilities, collaborating through processes to complete a project. In 2025, three mainstream frameworks — AutoGen, CrewAI, and LangGraph — make this collaboration programmable and reusable.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">三大框架对比</span>
+    <span class="en-only">Framework Comparison</span>
+  </h2>
+
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">AutoGen（微软）</span><span class="en-only">AutoGen (Microsoft)</span></h4>
+      <p>
+        <span class="zh-only"><strong>架构：</strong>基于对话的协作模式，Agent 之间通过消息传递通信。支持人类参与对话。学习曲线：中等。适合研究型任务和需要人类介入的场景。<strong>优点：</strong>灵活度高，支持复杂对话模式，有微软背书。<strong>缺点：</strong>文档偏学术，社区活跃度一般，生产级部署需要较多额外工作。适合需要灵活控制对话流程的开发者。</span>
+        <span class="en-only"><strong>Architecture:</strong> Conversation-based collaboration, Agents communicate via message passing. Supports human participation. Learning curve: medium. Suited for research tasks and human-in-the-loop scenarios. <strong>Pros:</strong> High flexibility, supports complex conversation patterns, Microsoft-backed. <strong>Cons:</strong> Academic-leaning docs, moderate community activity, production deployment needs extra work. Best for developers needing flexible conversation flow control.</span>
+      </p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">CrewAI</span><span class="en-only">CrewAI</span></h4>
+      <p>
+        <span class="zh-only"><strong>架构：</strong>基于"团队"概念，定义 Agent 角色和任务，框架自动编排执行流程。学习曲线：最低。适合快速搭建多 Agent 流水线。<strong>优点：</strong>概念直观（团队/角色/任务），上手最快，社区活跃，文档好。<strong>缺点：</strong>灵活度较低，复杂流程控制不如另外两个框架，深度定制较难。适合想快速落地多 Agent 项目的开发者。</span>
+        <span class="en-only"><strong>Architecture:</strong> Team-based concept — define Agent roles and tasks, framework auto-orchestrates execution. Learning curve: lowest. Suited for rapid multi-Agent pipeline setup. <strong>Pros:</strong> Intuitive concepts (team/role/task), fastest to get started, active community, good docs. <strong>Cons:</strong> Lower flexibility, less control over complex flows, hard to deeply customize. Best for developers wanting to quickly ship multi-Agent projects.</span>
+      </p>
+    </div>
+  </div>
+
+  <p>
+    <span class="zh-only"><strong>LangGraph（LangChain）</strong>——单独说是因为它的定位不同。LangGraph 不是"多 Agent 框架"，而是<strong>基于图的状态机框架</strong>。你可以用它构建任意复杂的 Agent 工作流，包括多 Agent 协作。学习曲线：最高，但灵活度也最高。适合需要精细控制每一步流程、需要状态持久化、需要人机协作循环的复杂场景。如果你需要构建生产级的 Agent 系统，LangGraph 是最可靠的选择。</span>
+    <span class="en-only"><strong>LangGraph (LangChain)</strong> — discussed separately because its positioning differs. LangGraph isn't a "multi-Agent framework" but a <strong>graph-based state machine framework.</strong> You can build arbitrarily complex Agent workflows with it, including multi-Agent collaboration. Learning curve: highest, but so is flexibility. Best for complex scenarios needing fine-grained flow control, state persistence, and human-AI collaboration loops. If you're building production-grade Agent systems, LangGraph is the most reliable choice.</span>
+  </p>
+
+  <table>
+    <tr><th><span class="zh-only">维度</span><span class="en-only">Dimension</span></th><th>AutoGen</th><th>CrewAI</th><th>LangGraph</th></tr>
+    <tr><td><span class="zh-only">学习曲线</span><span class="en-only">Learning Curve</span></td><td><span class="zh-only">中等</span><span class="en-only">Medium</span></td><td><span class="zh-only">低</span><span class="en-only">Low</span></td><td><span class="zh-only">高</span><span class="en-only">High</span></td></tr>
+    <tr><td><span class="zh-only">灵活度</span><span class="en-only">Flexibility</span></td><td><span class="zh-only">高</span><span class="en-only">High</span></td><td><span class="zh-only">中</span><span class="en-only">Medium</span></td><td><span class="zh-only">最高</span><span class="en-only">Highest</span></td></tr>
+    <tr><td><span class="zh-only">社区活跃度</span><span class="en-only">Community</span></td><td><span class="zh-only">中等</span><span class="en-only">Medium</span></td><td><span class="zh-only">高</span><span class="en-only">High</span></td><td><span class="zh-only">高</span><span class="en-only">High</span></td></tr>
+    <tr><td><span class="zh-only">生产就绪</span><span class="en-only">Production Ready</span></td><td><span class="zh-only">需要额外工作</span><span class="en-only">Needs extra work</span></td><td><span class="zh-only">基本可用</span><span class="en-only">Mostly ready</span></td><td><span class="zh-only">最成熟</span><span class="en-only">Most mature</span></td></tr>
+    <tr><td><span class="zh-only">适合场景</span><span class="en-only">Best For</span></td><td><span class="zh-only">研究/原型</span><span class="en-only">Research/Prototype</span></td><td><span class="zh-only">快速落地</span><span class="en-only">Quick Shipping</span></td><td><span class="zh-only">生产系统</span><span class="en-only">Production Systems</span></td></tr>
+  </table>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">实战：用 CrewAI 做一个内容创作流水线</span>
+    <span class="en-only">Hands-On: Build a Content Pipeline with CrewAI</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">选 CrewAI 做示例，因为它的代码最简洁直观。我们要做一个"技术博客写作流水线"：研究员搜集资料、写作者写初稿、编辑审核修改。以下是完整代码：</span>
+    <span class="en-only">Choosing CrewAI for the example because its code is the most concise and intuitive. We'll build a "tech blog writing pipeline": a researcher gathers info, a writer drafts, an editor reviews. Here's the complete code:</span>
+  </p>
+
+  <pre data-lang="python">from crewai import Agent, Task, Crew, Process
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
+
+# 定义三个 Agent
+researcher = Agent(
+    role="技术研究员",
+    goal="搜集关于指定主题的最新技术资料",
+    backstory="你是一名资深技术研究员，擅长快速搜集和分析技术信息",
+    llm=llm,
+    verbose=True
+)
+
+writer = Agent(
+    role="技术写作者",
+    goal="基于研究员提供的资料，撰写高质量的技术博客文章",
+    backstory="你是一名经验丰富的技术博主，文章风格简洁清晰、有深度",
+    llm=llm,
+    verbose=True
+)
+
+editor = Agent(
+    role="技术编辑",
+    goal="审核并优化文章质量，确保准确性和可读性",
+    backstory="你是一名严谨的技术编辑，注重事实准确和表达清晰",
+    llm=llm,
+    verbose=True
+)
+
+# 定义三个任务
+research_task = Task(
+    description="搜集关于 '{topic}' 的最新技术资料，整理成要点清单",
+    expected_output="一份包含 5-8 个关键要点的资料清单",
+    agent=researcher
+)
+
+writing_task = Task(
+    description="基于研究员提供的资料清单，撰写一篇 1500 字的技术博客",
+    expected_output="一篇结构完整、有深度的技术博客文章",
+    agent=writer
+)
+
+editing_task = Task(
+    description="审核文章的技术准确性、逻辑结构和表达质量，给出修改建议并输出最终版本",
+    expected_output="经过审核和优化后的最终版文章",
+    agent=editor
+)
+
+# 组装 Crew 并执行
+crew = Crew(
+    agents=[researcher, writer, editor],
+    tasks=[research_task, writing_task, editing_task],
+    process=Process.sequential,  # 顺序执行
+    verbose=True
+)
+
+result = crew.kickoff(inputs={"topic": "2025 年多智能体框架对比"})
+print(result)</pre>
+
+  <p>
+    <span class="zh-only">这段代码定义了三个 Agent（研究员、写作者、编辑）和三个 Task（搜集资料、写文章、审校），然后按顺序执行。CrewAI 会自动把前一个 Task 的输出作为后一个 Task 的输入。<strong>整个多 Agent 协作系统，核心代码不超过 50 行。</strong></span>
+    <span class="en-only">This code defines three Agents (researcher, writer, editor) and three Tasks (gather info, write article, review), then executes them sequentially. CrewAI automatically passes the previous Task's output as the next Task's input. <strong>The entire multi-Agent collaboration system, core code under 50 lines.</strong></span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">从零搭建的 5 个步骤</span>
+    <span class="en-only">5 Steps to Build from Scratch</span>
+  </h2>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">明确任务和分工</span>
+        <span class="en-only">Define Tasks and Roles</span>
+      </h3>
+      <p>
+        <span class="zh-only">多 Agent 不是越多越好。先想清楚你要完成什么任务，这个任务需要几个角色。大多数场景 2-4 个 Agent 就够了。每个 Agent 只负责一件事，职责越清晰越好。</span>
+        <span class="en-only">More Agents isn't better. First think through what task you need to complete and how many roles it requires. Most scenarios need only 2-4 Agents. Each Agent handles one thing — the clearer the responsibility, the better.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">选择框架</span>
+        <span class="en-only">Choose a Framework</span>
+      </h3>
+      <p>
+        <span class="zh-only">快速原型用 CrewAI，研究探索用 AutoGen，生产系统用 LangGraph。不要为了"用最新框架"而选框架——选最适合你当前阶段的。</span>
+        <span class="en-only">Quick prototypes: CrewAI. Research/exploration: AutoGen. Production systems: LangGraph. Don't choose a framework just to "use the latest" — pick what fits your current stage.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">定义 Agent 和 Task</span>
+        <span class="en-only">Define Agents and Tasks</span>
+      </h3>
+      <p>
+        <span class="zh-only">给每个 Agent 写清楚 role、goal、backstory。这三个字段决定了 Agent 的行为模式。Task 的 description 要具体，expected_output 要明确——模糊的描述会导致模糊的输出。</span>
+        <span class="en-only">Write clear role, goal, and backstory for each Agent. These three fields determine the Agent's behavior pattern. Task descriptions must be specific, expected outputs must be clear — vague descriptions lead to vague outputs.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">测试和调试</span>
+        <span class="en-only">Test and Debug</span>
+      </h3>
+      <p>
+        <span class="zh-only">多 Agent 系统的调试比单 Agent 难得多，因为问题可能出在任何一个 Agent 或者它们之间的交互上。建议先用简单的输入测试每个 Agent 单独工作是否正常，再测试协作流程。开启 verbose 模式，观察每一步的输出。</span>
+        <span class="en-only">Debugging multi-Agent systems is much harder than single Agent, because issues can be in any Agent or their interactions.建议先用简单的输入测试每个Agent单独工作是否正常，然后再测试协作流程。打开详细的模式，并观察每一步的输出。</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h3>
+        <span class="zh-only">优化和部署</span>
+        <span class="en-only">Optimize and Deploy</span>
+      </h3>
+      <p>
+        <span class="zh-only">优化方向包括：调整 prompt 让 Agent 输出更稳定、添加缓存减少重复 API 调用、添加错误处理和重试机制、加入人类审核节点。部署可以用 FastAPI 包装成 API 服务，或者用 Streamlit 做一个简单的 Web 界面。</span>
+        <span class="en-only">Optimization directions include: adjusting prompts for more stable Agent output, adding caching to reduce duplicate API calls, adding error handling and retry mechanisms, inserting human review nodes. For deployment, wrap in a FastAPI service or build a simple web UI with Streamlit.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>选型建议：</strong>如果你刚开始接触多 Agent，从 CrewAI 开始——它上手最快、文档最好、社区最活跃。当你发现 CrewAI 无法满足你的流程控制需求时，再迁移到 LangGraph。AutoGen 适合有学术研究需求或者需要复杂对话模式的场景。不要纠结于"哪个框架最好"，没有最好的框架，只有最适合你当前需求的框架。</span>
+      <span class="en-only"><strong>Selection advice:</strong> If you're new to multi-Agent, start with CrewAI — fastest onboarding, best docs, most active community. When you find CrewAI can't meet your flow control needs, migrate to LangGraph. AutoGen suits academic research or complex conversation pattern scenarios. Don't agonize over "which framework is best" — there's no best framework, only the one that best fits your current needs.</span>
+    </p>
+  </div>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">← <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

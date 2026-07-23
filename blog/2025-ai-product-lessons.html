@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AI 产品从 0 到 1：8 个产品的血泪教训 | Building AI Products from Scratch: Lessons from 8 Products</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div><nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">产品 <span class="en-only">|</span> <span class="en-only">Product</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">AI 产品从 0 到 1：8 个产品的血泪教训</span>
+    <span class="en-only">Building AI Products from Scratch: Lessons from 8 Products</span>
+  </h1>
+  <p class="meta reveal">2025.10.30 — <span class="zh-only">一个人用 AI 做了 8 个产品的完整复盘，每个产品的想法来源、技术方案、结果和教训</span><span class="en-only">A complete retrospective of 8 AI products built solo — idea origins, tech approaches, results, and lessons</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">8 个产品，8 个故事</span>
+    <span class="en-only">8 Products, 8 Stories</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">过去 14 个月，我用 AI 辅助做了 8 个产品。有赚到钱的，有完全失败的，有不赚不亏但学到很多的。这篇文章不做美化，把每个产品的想法来源、技术方案、上线结果、收入数据和经验教训全部公开。希望能帮到正在做或者打算做 AI 产品的你。</span>
+    <span class="en-only">Over the past 14 months, I built 8 products with AI assistance. Some made money, some failed completely, some broke even but taught me a lot. This article doesn't sugarcoat — I'm publicly sharing every product's idea origin, tech approach, launch results, revenue data, and lessons learned. Hoping to help those building or planning to build AI products.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">8 个产品复盘</span>
+    <span class="en-only">8 Product Retrospectives</span>
+  </h2>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h4>
+        <span class="zh-only">AI 简历优化器（月入 ¥6,000+）</span>
+        <span class="en-only">AI Resume Optimizer ($850+/mo)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>在 V2EX 和招聘论坛看到大量"简历被拒"的求助帖，意识到简历优化是一个刚需市场。<strong>技术方案：</strong>Next.js + Supabase + OpenAI API，用 Cursor 开发，2 周完成 MVP。<strong>上线结果：</strong>发布在 Product Hunt 当天获得第 3 名，首月 200+ 付费用户。<strong>收入：</strong>累计约 ¥42,000，月均 ¥6,000+。<strong>教训：</strong>需求验证是最重要的一步。我在开发前先在论坛帮 20 个人免费优化简历，确认了需求的真实性和付费意愿。</span>
+        <span class="en-only"><strong>Idea:</strong> Saw tons of "resume rejected" help posts on V2EX and job forums, realized resume optimization is a刚需 market. <strong>Tech:</strong> Next.js + Supabase + OpenAI API, built with Cursor, 2-week MVP. <strong>Result:</strong> #3 on Product Hunt launch day, 200+ paying users first month. <strong>Revenue:</strong> ~$6,000 total, ~$850+/mo average. <strong>Lesson:</strong> Demand validation is the most important step. I first free-optimized 20 resumes on forums, confirming real demand and willingness to pay.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h4>
+        <span class="zh-only">Notion 模板商城（累计 ¥18,500）</span>
+        <span class="en-only">Notion Template Shop ($2,643 total)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>自己用 Notion 管理项目和知识库，做了几套模板分享给朋友后收到"能不能卖"的反馈。<strong>技术方案：</strong>纯静态站（Gumroad + Notion 模板），不需要写后端代码，1 周完成。<strong>上线结果：</strong>通过小红书和 Twitter 分享获得流量，现在每月稳定出 30-50 单。<strong>收入：</strong>累计 ¥18,500，被动收入。<strong>教训：</strong>数字产品的边际成本为零，是最适合个人开发者的商业模式。不需要服务器、不需要客服、不需要持续开发。</span>
+        <span class="en-only"><strong>Idea:</strong> Used Notion for project and knowledge management, shared templates with friends who asked "can you sell these?" <strong>Tech:</strong> Pure static (Gumroad + Notion templates), no backend needed, 1 week. <strong>Result:</strong> Traffic from Xiaohongshu and Twitter, now 30-50 sales/month steady. <strong>Revenue:</strong> $2,643 total, passive income. <strong>Lesson:</strong> Digital products have zero marginal cost — the best business model for solo devs. No servers, no customer support, no ongoing development.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h4>
+        <span class="zh-only">AI 写作助手 Chrome 插件（¥5,200）</span>
+        <span class="en-only">AI Writing Assistant Extension ($743)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>自己写英文邮件时经常需要查表达方式，想要一个随时可用的 AI 写作辅助工具。<strong>技术方案：</strong>Chrome Extension + OpenAI API，用 Cursor 开发，1 周完成。<strong>上线结果：</strong>Chrome 商店上架，通过博客 SEO 获得自然流量。<strong>收入：</strong>累计 ¥5,200，付费率约 3%。<strong>教训：</strong>Chrome 插件的分发依赖 SEO 和口碑，需要持续写内容来获取流量。技术门槛低意味着竞品多，需要在体验上做到明显更好。</span>
+        <span class="en-only"><strong>Idea:</strong> Frequently needed to look up expressions when writing English emails, wanted an always-available AI writing tool. <strong>Tech:</strong> Chrome Extension + OpenAI API, built with Cursor, 1 week. <strong>Result:</strong> Listed on Chrome Web Store, organic traffic via blog SEO. <strong>Revenue:</strong> $743 total, ~3% conversion. <strong>Lesson:</strong> Extension distribution relies on SEO and word-of-mouth, needs continuous content for traffic. Low tech barrier means many competitors — need significantly better UX.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h4>
+        <span class="zh-only">小红书 AI 配图工具（¥3,800）</span>
+        <span class="en-only">Xiaohongshu AI Image Tool ($543)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>看到小红书博主每天要花大量时间做配图，AI 生成的配图可以大幅提升效率。<strong>技术方案：</strong>Next.js + Stable Diffusion API，3 天完成最简版本。<strong>上线结果：</strong>通过小红书引流，用户量不大但留存不错。<strong>收入：</strong>累计 ¥3,800。<strong>教训：</strong>面向国内市场的变现天花板比较低，用户付费意愿不如海外市场。如果重新做，会优先考虑面向海外市场。</span>
+        <span class="en-only"><strong>Idea:</strong> Saw Xiaohongshu creators spending lots of time on images, AI-generated images could massively boost efficiency. <strong>Tech:</strong> Next.js + Stable Diffusion API, 3 days for minimal version. <strong>Result:</strong> Traffic via Xiaohongshu, small user base but good retention. <strong>Revenue:</strong> $543 total. <strong>Lesson:</strong> Domestic market monetization ceiling is relatively low, user willingness to pay is lower than overseas. If rebuilding, I'd prioritize the overseas market.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h4>
+        <span class="zh-only">AI 周报生成器（¥1,200）</span>
+        <span class="en-only">AI Weekly Report Gen ($171)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>自己每周要写周报，觉得 AI 可以自动生成。<strong>技术方案：</strong>Web App + OpenAI API，1 周开发。<strong>上线结果：</strong>用户反馈"不如直接用 ChatGPT"，留存率极低。<strong>收入：</strong>累计 ¥1,200。<strong>教训：</strong>如果一个产品只是对 ChatGPT 的简单封装，用户会直接用 ChatGPT。产品必须有 ChatGPT 做不到的附加价值——比如特定格式的输出、团队协作功能、历史记录管理等。</span>
+        <span class="en-only"><strong>Idea:</strong> Had to write weekly reports myself, thought AI could auto-generate them. <strong>Tech:</strong> Web App + OpenAI API, 1 week dev. <strong>Result:</strong> Users said "might as well use ChatGPT directly," extremely low retention. <strong>Revenue:</strong> $171 total. <strong>Lesson:</strong> If a product is just a thin wrapper around ChatGPT, users will use ChatGPT directly. The product must offer added value ChatGPT can't — like specific format output, team collaboration, history management, etc.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">6</div>
+      <h4>
+        <span class="zh-only">AI 社交媒体管理工具（亏损 ¥700）</span>
+        <span class="en-only">AI Social Media Manager (Lost $100)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>觉得中小企业需要便宜好用的社交媒体管理工具，AI 可以自动化大部分工作。<strong>技术方案：</strong>Next.js + 多个平台 API 集成，3 周开发。<strong>上线结果：</strong>功能太多做不精，API 集成频繁出问题，用户反馈"不如 Buffer"。<strong>收入：</strong>¥1,800（投入 ¥2,500，净亏 ¥700）。<strong>教训：</strong>不要试图和大厂正面竞争。Buffer、Hootsuite 有几百人的团队在维护，你一个人做不过。要做就做他们不做的小功能。</span>
+        <span class="en-only"><strong>Idea:</strong> Thought SMBs need affordable social media management, AI could automate most work. <strong>Tech:</strong> Next.js + multiple platform API integrations, 3 weeks dev. <strong>Result:</strong> Too many features, none polished; API integrations kept breaking; users said "might as well use Buffer." <strong>Revenue:</strong> $257 ($357 invested, net loss $100). <strong>Lesson:</strong> Don't compete head-on with big companies. Buffer and Hootsuite have hundreds of engineers. You can't beat them alone. If you build in this space, do the small features they don't.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">7</div>
+      <h4>
+        <span class="zh-only">AI 学习 App（亏损 ¥6,000）</span>
+        <span class="en-only">AI Learning App (Lost $857)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>觉得 AI 可以做个性化的学习助手，根据用户水平调整内容难度。<strong>技术方案：</strong>React Native + OpenAI API，4 周开发（最长的项目）。<strong>上线结果：</strong>App Store 上架后几乎没人下载——因为没做任何推广，应用商店的搜索排名根本排不上去。<strong>收入：</strong>¥2,000（投入 ¥8,000，净亏 ¥6,000）。<strong>教训：</strong>移动 App 的分发是最难的环节。没有推广预算，在应用商店里你的 App 就像大海里的一滴水。独立开发者做移动 App 一定要有配套的推广计划，否则不要做。</span>
+        <span class="en-only"><strong>Idea:</strong> Thought AI could make personalized learning assistants that adjust content difficulty based on user level. <strong>Tech:</strong> React Native + OpenAI API, 4 weeks dev (longest project). <strong>Result:</strong> Almost no downloads after App Store launch — zero promotion, couldn't rank in search. <strong>Revenue:</strong> $286 ($1,143 invested, net loss $857). <strong>Lesson:</strong> Mobile app distribution is the hardest part. Without promotion budget, your app is a drop in the ocean. Indie devs building mobile apps must have a promotion plan, otherwise don't build.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">8</div>
+      <h4>
+        <span class="zh-only">AI 编程助手 VS Code 插件（零收入）</span>
+        <span class="en-only">AI Coding Assistant VS Code Extension ($0)</span>
+      </h4>
+      <p>
+        <span class="zh-only"><strong>想法来源：</strong>看到 Cursor 成功后，觉得可以做一个更轻量的 AI 编程助手。<strong>技术方案：</strong>VS Code Extension API + OpenAI API，2 周开发。<strong>上线结果：</strong>VS Code 插件市场上架，两周内只有 5 次安装。用户评价"不如直接用 Cursor/GitHub Copilot"。<strong>收入：</strong>¥0。<strong>教训：</strong>在已经有强竞品（Cursor、Copilot）的市场里，除非你的产品有明显差异化优势，否则不要做。这个项目最大的错误是没在开发前分析竞品格局。</span>
+        <span class="en-only"><strong>Idea:</strong> After seeing Cursor's success, thought I could build a lighter AI coding assistant. <strong>Tech:</strong> VS Code Extension API + OpenAI API, 2 weeks dev. <strong>Result:</strong> Listed on VS Code Marketplace, only 5 installs in two weeks. Users said "might as well use Cursor/GitHub Copilot." <strong>Revenue:</strong> $0. <strong>Lesson:</strong> In markets with strong incumbents (Cursor, Copilot), don't build unless you have clear differentiation. This project's biggest mistake was not analyzing the competitive landscape before development.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">常见坑</span>
+    <span class="en-only">Common Traps</span>
+  </h2>
+
+  <div class="callout warn">
+    <span class="icon">⚠</span>
+    <p>
+      <span class="zh-only"><strong>坑 1：先做产品再找用户。</strong>8 个产品中，赚钱的 2 个都是先找到用户需求再做的。失败的 2 个都是"我觉得有需求"就直接做了。需求验证只需要 1-2 天，但 90% 的新手跳过了这一步。</span>
+      <span class="en-only"><strong>Trap 1: Build first, find users later.</strong> Of 8 products, the 2 profitable ones both found user demand before building. The 2 failures were "I think there's demand" then built directly. Demand validation takes 1-2 days, but 90% of beginners skip it.</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <span class="icon">⚠</span>
+    <p>
+      <span class="zh-only"><strong>坑 2：做一个"更好的 XXX"。</strong>AI 编程助手和社交媒体管理工具的失败都是因为试图和成熟竞品正面竞争。在别人已经做得很好的领域，你需要 10 倍的优势才能赢——一个人做不到 10 倍优势。</span>
+      <span class="en-only"><strong>Trap 2: Build a "better XXX."</strong> Both the AI coding assistant and social media manager failed because they tried to compete head-on with mature competitors. In fields where others already excel, you need a 10x advantage to win — one person can't achieve 10x.</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <span class="icon">⚠</span>
+    <p>
+      <span class="zh-only"><strong>坑 3：功能太多。</strong>社交管理工具试图做 5 个功能，结果每个都半成品。Notion 模板商城只做一件事（卖模板），反而赚了最多的钱。少即是多。</span>
+      <span class="en-only"><strong>Trap 3: Too many features.</strong> The social media tool tried to do 5 things, resulting in all being half-baked. The Notion template shop did one thing (sell templates) and made the most money. Less is more.</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <span class="icon">⚠</span>
+    <p>
+      <span class="zh-only"><strong>坑 4：不做推广。</strong>AI 学习 App 和 AI 编程助手都是"做了就完了"，没有任何推广动作。产品不会自己传播，至少要在 1-2 个渠道上持续做内容来获取流量。</span>
+      <span class="en-only"><strong>Trap 4: No promotion.</strong> The AI Learning App and AI Coding Assistant were both "built and forgotten," with zero promotional effort. Products don't spread themselves — you need to consistently create content on at least 1-2 channels for traffic.</span>
+    </p>
+  </div>
+
+  <div class="callout warn">
+    <span class="icon">⚠</span>
+    <p>
+      <span class="zh-only"><strong>坑 5：沉没成本谬误。</strong>社交管理工具开发到第 2 周时我已经发现方向不对，但觉得"已经花了一周了，放弃太可惜"——结果又花了两周，亏得更多。及时止损是最难但也最重要的能力。</span>
+      <span class="en-only"><strong>Trap 5: Sunk cost fallacy.</strong> By week 2 of the social media tool, I already knew the direction was wrong, but thought "I've spent a week, can't abandon it now" — result: spent two more weeks and lost more. Cutting losses in time is the hardest but most important ability.</span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>核心教训：</strong>做 AI 产品和做任何产品一样，成功的关键不在技术，而在产品思维。技术只是执行层——AI 让执行变快了，但它不能帮你选对方向、找到用户、做好分发。这 8 个产品最大的共性是：<strong>赚钱的产品都解决了一个真实的小问题，失败的产品都是我在自嗨</strong>。记住这句话，能帮你少走很多弯路。</span>
+      <span class="en-only"><strong>Core lesson:</strong> Building AI products is like building any product — success depends on product thinking, not technology. Technology is just the execution layer — AI makes execution faster, but it can't help you choose the right direction, find users, or do distribution well. The biggest commonality across these 8 products: <strong>profitable ones all solved a real small problem, failed ones were all me building for myself.</strong> Remember this, and you'll avoid many detours.</span>
+    </p>
+  </div>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">← <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

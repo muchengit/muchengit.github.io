@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程 | The Deep Claude Guide: Why It Beats ChatGPT for Writing & Coding</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head>
+<body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">AI 技巧 <span class="en-only">|</span> <span class="en-only">Tips</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程</span>
+    <span class="en-only">The Deep Claude Guide: Why It Beats ChatGPT for Writing & Coding</span>
+  </h1>
+  <p class="meta reveal">2024.04.03 — <span class="zh-only">Claude 的独特优势与 5 个实用技巧，让 AI 输出质量翻倍</span><span class="en-only">Claude unique advantages and 5 practical tips to double your AI output quality</span></p>
+</header>
+<section class="prose reveal">
+  <h2><span class="zh-only">为什么 Claude 值得专门写一篇指南</span><span class="en-only">Why Claude Deserves Its Own Guide</span></h2>
+  <p><span class="zh-only">在大多数人的印象中，ChatGPT 就是 AI 助手的代名词。但如果你认真对比过 Claude 和 ChatGPT，你会发现它们在许多方面有显著差异。Claude 在<strong>长文本理解</strong>、<strong>结构化输出</strong>和<strong>编程能力</strong>方面有着独特的优势，特别是在处理复杂写作和深度编程任务时，Claude 的表现往往更加出色。这篇文章不是要踩一捧一，而是想帮助你了解 Claude 的独特之处，以及如何充分利用这些特点来提升工作效率。</span><span class="en-only">In most people's minds, ChatGPT is synonymous with AI assistants. But if you have seriously compared Claude and ChatGPT, you will find significant differences. Claude has unique advantages in <strong>long text understanding</strong>, <strong>structured output</strong>, and <strong>coding ability</strong>. Especially for complex writing and deep programming tasks, Claude often performs better. This article aims to help you understand Claude's uniqueness and how to leverage it.</span></p>
+  <p><span class="zh-only">Claude 由 Anthropic 公司开发，和 OpenAI 一样是 AI 领域的顶级团队。Claude 3.5 Sonnet 是目前性价比最高的版本，Claude Pro 订阅价格和 ChatGPT Plus 一样是 20 美元/月。</span><span class="en-only">Claude is developed by Anthropic, a top-tier AI team alongside OpenAI. Claude 3.5 Sonnet is the best value version, and Claude Pro is the same $20/month as ChatGPT Plus.</span></p>
+</section>
+<section class="prose reveal">
+  <h2><span class="zh-only">Claude 的三大独特优势</span><span class="en-only">Three Unique Advantages of Claude</span></h2>
+  <p><span class="zh-only"><strong>第一，超长上下文理解。</strong>Claude 支持 200K Token 的上下文窗口，你可以直接丢给它一整本书、一份 100 页的报告、或者一个大型代码库，它能准确理解和引用其中的内容。ChatGPT 虽然也支持长上下文，但在长文本中的理解和引用准确度上，Claude 通常表现更好。</span><span class="en-only"><strong>First, ultra-long context understanding.</strong> Claude supports a 200K token context window. You can feed it an entire book, a 100-page report, or a large codebase, and it accurately understands and references the content. Claude generally performs better at long-text understanding and citation accuracy.</span></p>
+  <p><span class="zh-only"><strong>第二，结构化输出能力。</strong>Claude 非常擅长按照你要求的格式输出内容。无论你要求 JSON、Markdown 表格、特定的文档结构还是代码框架，Claude 的遵循度都很高。做数据分析、文档整理、API 开发时特别有用。</span><span class="en-only"><strong>Second, structured output ability.</strong> Claude excels at outputting content in your required format. Whether you want JSON, Markdown tables, specific document structures, or code frameworks, Claude follows instructions well. Especially useful for data analysis, document organization, and API development.</span></p>
+  <p><span class="zh-only"><strong>第三，编程深度。</strong>在复杂编程任务中，Claude 展现出了更强的代码理解能力。它不仅能写出代码，还能理解代码背后的架构设计、提出改进建议、发现潜在 Bug。配合 Artifacts 功能，Claude 可以直接生成可运行的前端原型。</span><span class="en-only"><strong>Third, coding depth.</strong> In complex programming tasks, Claude shows stronger code understanding. It not only writes code but understands the architecture, suggests improvements, and finds potential bugs. With the Artifacts feature, Claude can directly generate runnable frontend prototypes.</span></p>
+</section>
+<section class="prose reveal">
+  <h2><span class="zh-only">5 个实用技巧</span><span class="en-only">5 Practical Tips</span></h2>
+
+  <h3><span class="zh-only">技巧 1：用 Artifacts 做快速原型</span><span class="en-only">Tip 1: Use Artifacts for Rapid Prototyping</span></h3>
+<pre data-lang="prompt">请帮我做一个任务管理工具的前端原型。要求：
+- 左侧是任务列表，支持添加、删除、标记完成
+- 右侧是日历视图，显示每天的任务
+- 整体风格简洁现代，使用浅色主题
+- 用 React + Tailwind CSS 实现
+- 所有交互都要真实可用，不要占位符</pre>
+  <p><span class="zh-only">Artifacts 是 Claude 独有的功能。当你让 Claude 生成代码时，它会自动在右侧面板中渲染出一个可交互的预览。你可以直接看到效果、点击按钮、测试交互。对于快速验证产品想法来说，这个功能极其好用。</span><span class="en-only">Artifacts is a Claude-exclusive feature. When you ask Claude to generate code, it automatically renders an interactive preview in the right panel. You can see the result, click buttons, and test interactions. For quickly validating product ideas, this is incredibly useful.</span></p>
+
+  <h3><span class="zh-only">技巧 2：长文档分析</span><span class="en-only">Tip 2: Long Document Analysis</span></h3>
+<pre data-lang="prompt">请分析这份产品需求文档。我需要你：
+1. 提取所有功能需求，按优先级排序
+2. 找出需求中的矛盾或不清晰之处
+3. 评估开发工作量（按人天估算）
+4. 给出建议的开发顺序
+5. 输出为 Markdown 表格格式</pre>
+  <p><span class="zh-only">Claude 的长上下文窗口让你可以上传整个文档而不是分片。关键是<strong>在 Prompt 中明确指定输出格式</strong>。上面这个 Prompt 要求输出 Markdown 表格，Claude 会严格按要求组织信息。</span><span class="en-only">Claude's long context window lets you upload entire documents. The key is <strong>explicitly specifying output format in your prompt</strong>. Claude will strictly follow your formatting requirements.</span></p>
+
+  <h3><span class="zh-only">技巧 3：结构化 Prompt 框架</span><span class="en-only">Tip 3: Structured Prompt Framework</span></h3>
+<pre data-lang="prompt">## 角色
+你是一个有 10 年经验的高级产品经理。
+
+## 背景
+我正在做一个面向独立开发者的项目管理系统。
+
+## 任务
+请帮我设计这个产品的定价策略。
+
+## 要求
+- 分析 3-5 个竞品的定价模式
+- 给出 3 个定价方案
+- 每个方案列出具体的功能差异
+- 用表格形式对比展示
+- 最后给出推荐方案和理由</pre>
+  <p><span class="zh-only">结构化 Prompt 是提升 Claude 输出质量最有效的方法。用 Markdown 标题明确划分角色、背景、任务和要求四个部分。这种方式比连续文字描述效果好得多，Claude 可以更准确地理解每个部分的意图。</span><span class="en-only">Structured prompts are the most effective way to improve Claude output quality. Use Markdown headings to clearly separate role, background, task, and requirements. Claude can more accurately understand each section's intent.</span></p>
+
+  <h3><span class="zh-only">技巧 4：代码审查</span><span class="en-only">Tip 4: Code Review</span></h3>
+<pre data-lang="prompt">请审查以下代码，从以下角度给出反馈：
+1. 潜在的 Bug 或逻辑错误
+2. 性能问题
+3. 安全隐患
+4. 代码可读性和维护性
+5. 改进建议（附具体代码）
+请用严重程度（高/中/低）标注每个问题。</pre>
+  <p><span class="zh-only">把代码直接贴给 Claude，配合上面的审查 Prompt。Claude 在代码审查方面能力非常强，能发现很多容易忽略的问题，特别是安全隐患。注意要求它给出具体改进代码，而不仅是文字建议。</span><span class="en-only">Paste your code directly to Claude with the review prompt above. Claude is very strong at code review — it finds many easily overlooked issues, especially security ones. Ask for specific improved code, not just text suggestions.</span></p>
+
+  <h3><span class="zh-only">技巧 5：项目规划</span><span class="en-only">Tip 5: Project Planning</span></h3>
+<pre data-lang="prompt">我要做一个 AI 驱动的笔记应用。请帮我拆解成里程碑计划。
+
+条件：
+- 一个人开发，每周 10 小时
+- 前端 React，后端 Python FastAPI
+- 需要 AI 摘要和搜索功能
+
+请输出：
+- 分阶段里程碑（每阶段 2-3 周）
+- 每个里程碑的任务清单
+- 技术重点和风险点
+- 建议的技术选型</pre>
+  <p><span class="zh-only">Claude 非常适合做项目规划，能同时考虑技术可行性和实际约束。关键是<strong>明确约束条件</strong>（时间、技术栈、团队规模），这样给出的计划才切实可行。</span><span class="en-only">Claude is excellent for project planning, considering both technical feasibility and practical constraints. The key is <strong>clearly stating your constraints</strong> so the plan is realistic.</span></p>
+</section>
+<section class="prose reveal">
+  <h2><span class="zh-only">Claude vs ChatGPT：什么时候用哪个</span><span class="en-only">Claude vs ChatGPT: When to Use Which</span></h2>
+  <p><span class="zh-only">我的建议是：<strong>两个都用</strong>。日常通用对话和简单问答用 ChatGPT（4o 响应更快）；长文档分析、结构化写作、代码审查用 Claude；需要插件和联网搜索用 ChatGPT；需要 Artifacts 做原型用 Claude。不要把选择变成信仰之争，把它们当成不同场景下的不同工具就好。</span><span class="en-only">My recommendation: <strong>use both</strong>. Daily general conversation and simple Q&A use ChatGPT (4o is faster); long document analysis, structured writing, code review use Claude; plugins and web search use ChatGPT; Artifacts prototyping use Claude. Do not make it a matter of faith — treat them as different tools for different scenarios.</span></p>
+  <p><span class="zh-only">最后想说的是，<strong>Claude 最大的优势可能不是某个具体功能，而是它的对话风格</strong>。Claude 的回复通常更加细致、有结构感，给人一种「认真思考过」的感觉。这种风格在写作和编程场景中特别有价值——你得到的不是泛泛而谈的回答，而是真正经过深入分析的、可以直接使用的内容。</span><span class="en-only">Finally, <strong>Claude's biggest advantage might not be any specific feature, but its conversation style</strong>. Claude's responses are typically more detailed and structured, giving a feeling of "thoughtful consideration." This style is especially valuable in writing and coding — you get not vague answers, but deeply analyzed, directly usable content.</span></p>
+</section>
+</article>
+
+<div class="foot-link"><a href="../">&larr; <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

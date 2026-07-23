@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Cursor 入门到精通：2024 最强 AI 编程工具实战 | The Complete Cursor Guide: Mastering AI Coding in 2024</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div><nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">AI 编程 <span class="en-only">|</span> <span class="en-only">AI Coding</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">Cursor 入门到精通：2024 最强 AI 编程工具实战</span>
+    <span class="en-only">The Complete Cursor Guide: Mastering AI Coding in 2024</span>
+  </h1>
+  <p class="meta reveal">2024.10.20 — <span class="zh-only">从零基础到高效开发，一篇讲透 Cursor 的核心功能和使用技巧</span><span class="en-only">From zero to productive development — a complete guide to Cursor's core features and techniques</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">Cursor 到底是什么？</span>
+    <span class="en-only">What Exactly Is Cursor?</span>
+  </h2>
+
+  <p>
+    <span class="zh-only"><strong>Cursor</strong> 是一款基于 VS Code 的 AI 代码编辑器。它由 Anysphere 团队开发，于 2023 年推出，在 2024 年迅速成为全球开发者社区最受追捧的 AI 编程工具。你可以把它理解为一个"装了 AI 大脑的 VS Code"——界面熟悉，但能力远超普通编辑器。</span>
+    <span class="en-only"><strong>Cursor</strong> is an AI-powered code editor built on VS Code. Developed by the Anysphere team, it launched in 2023 and rapidly became the most sought-after AI coding tool in the global developer community throughout 2024. Think of it as "VS Code with an AI brain" — familiar interface, but capabilities far beyond a regular editor.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">Cursor 的核心理念是：<strong>让 AI 成为你编程过程中的"副驾驶"，而不是替代品。</strong>它不会替你做所有的决策，但会在你写代码的每一个环节提供智能辅助——从补全一行代码，到创建整个功能模块，再到调试和修复 Bug。</span>
+    <span class="en-only">Cursor's core philosophy is: <strong>make AI your "copilot" in the programming process, not a replacement.</strong> It won't make all decisions for you, but it provides intelligent assistance at every stage of coding — from completing a single line, to creating entire feature modules, to debugging and fixing bugs.</span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"Cursor 不是在教 AI 写代码，而是在教人类如何更好地和 AI 一起写代码。"</span>
+    <span class="en-only">"Cursor isn't teaching AI to write code — it's teaching humans how to write code better with AI."</span>
+  </blockquote>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">五大核心功能详解</span>
+    <span class="en-only">Five Core Features Explained</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">Cursor 的强大来自于它精心设计的五个核心功能。理解这五个功能，你就掌握了 Cursor 80% 的能力。</span>
+    <span class="en-only">Cursor's power comes from five carefully designed core features. Understanding these five gives you mastery over 80% of Cursor's capabilities.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">Tab 补全：AI 预测你的下一步</span>
+        <span class="en-only">Tab Completion: AI Predicts Your Next Move</span>
+      </h3>
+      <p>
+        <span class="zh-only">Tab 补全是 Cursor 最"无感"但最强大的功能。当你在编辑器里写代码时，Cursor 会根据上下文实时预测你接下来要写什么，以灰色虚线文字显示。你只需要按 Tab 键就能接受建议。这不是简单的自动补全——Cursor 会理解你的代码逻辑、注释意图、甚至项目结构，给出"懂你"的补全建议。</span>
+        <span class="en-only">Tab completion is Cursor's most "invisible" yet powerful feature. As you write code in the editor, Cursor predicts what you'll type next based on context, shown as gray ghost text. Just press Tab to accept. This isn't simple autocomplete — Cursor understands your code logic, comment intent, and even project structure to give suggestions that "get you."</span>
+      </p>
+      <p>
+        <span class="zh-only">一个小技巧：如果你想让 Cursor 补全一大段代码，先写一段注释描述你想要什么，然后按 Tab。比如：</span>
+        <span class="en-only">A pro tip: if you want Cursor to complete a large block of code, write a comment describing what you want first, then press Tab. For example:</span>
+      </p>
+      <pre data-lang="prompt"><span class="zh-only">// 创建一个函数，接收用户数组，返回按注册时间降序排列的前 10 个活跃用户
+// 每个用户包含 name, email, lastActive, registeredAt 字段</span><span class="en-only">// Create a function that takes a user array and returns the top 10 active users sorted by registration date descending
+// Each user has name, email, lastActive, registeredAt fields</span></pre>
+      <p>
+        <span class="zh-only">写完这段注释后，Ctrl+I 触发 Tab 补全，Cursor 通常会直接生成完整的函数代码。</span>
+        <span class="en-only">After writing this comment, press Ctrl+I to trigger Tab completion, and Cursor will usually generate the complete function code directly.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">Cmd+K 内联编辑：选中即修改</span>
+        <span class="en-only">Cmd+K Inline Edit: Select and Modify</span>
+      </h3>
+      <p>
+        <span class="zh-only">这是 Cursor 日常使用中频率最高的功能。选中你想修改的代码，按下 Cmd+K（Windows 上是 Ctrl+K），然后在弹出的输入框里描述你想要的修改。Cursor 会生成一个修改预览（diff 视图），你可以选择接受或拒绝。</span>
+        <span class="en-only">This is Cursor's most frequently used feature in daily work. Select the code you want to modify, press Cmd+K (or Ctrl+K on Windows), and describe your desired change in the popup input. Cursor generates a diff preview, and you can accept or reject.</span>
+      </p>
+      <pre data-lang="prompt"><span class="zh-only">选中一段 CSS 代码后输入：
+把这个卡片的圆角改成 16px，加一个淡蓝色的边框，hover 的时候有微微上浮的效果</span><span class="en-only">After selecting CSS code, type:
+Change this card's border-radius to 16px, add a light blue border, and add a subtle lift effect on hover</span></pre>
+      <p>
+        <span class="zh-only">内联编辑的优势在于它只关注你选中的代码片段，修改精确且不影响其他部分。非常适合做局部调整、样式修改、Bug 修复等。</span>
+        <span class="en-only">Inline editing's advantage is that it focuses only on your selected code snippet — precise modifications that don't affect other parts. Perfect for local adjustments, style changes, bug fixes, and more.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">Chat：对话式编程助手</span>
+        <span class="en-only">Chat: Conversational Programming Assistant</span>
+      </h3>
+      <p>
+        <span class="zh-only">Chat 面板是 Cursor 的"对话窗口"。你可以用自然语言向它提问、让它解释代码、让它帮你设计方案。Chat 的独特之处在于它可以引用你项目中的代码——使用 <code>@file</code> 引用特定文件，使用 <code>@folder</code> 引用整个目录，使用 <code>@codebase</code> 让它理解整个项目。</span>
+        <span class="en-only">The Chat panel is Cursor's "conversation window." You can ask questions in natural language, have it explain code, or have it help you design solutions. Chat's unique feature is its ability to reference code in your project — use <code>@file</code> to reference specific files, <code>@folder</code> for entire directories, and <code>@codebase</code> to let it understand your whole project.</span>
+      </p>
+      <pre data-lang="prompt">@codebase
+<span class="zh-only">这个项目的用户认证是用什么方案实现的？
+帮我在现有认证的基础上，加一个"记住我"功能，有效期 7 天</span><span class="en-only">What authentication scheme does this project use?
+Help me add a "remember me" feature on top of the existing auth, valid for 7 days</span></pre>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">Composer：多文件协作编辑器</span>
+        <span class="en-only">Composer: Multi-File Collaborative Editor</span>
+      </h3>
+      <p>
+        <span class="zh-only">Composer（快捷键 Ctrl+I 或 Cmd+I）是 Cursor 的"大招"。当你需要做涉及多个文件的修改时——比如添加一个新功能、重构一个模块——直接在 Composer 里描述需求，它会自动跨文件协调修改。Composer 会分析哪些文件需要修改、哪些文件需要新建、哪些依赖关系需要处理，然后一次性给出完整的修改方案。</span>
+        <span class="en-only">Composer (shortcut Ctrl+I or Cmd+I) is Cursor's "ultimate move." When you need changes across multiple files — like adding a new feature or refactoring a module — describe your needs in Composer, and it coordinates modifications across files automatically. Composer analyzes which files need modification, which need to be created, and which dependencies need handling, then presents a complete modification plan at once.</span>
+      </p>
+      <pre data-lang="prompt"><span class="zh-only">帮我在这个项目中加一个用户收藏功能：
+1. 数据库新增 favorites 表
+2. 用户可以收藏文章
+3. 在文章详情页加一个收藏按钮
+4. 在用户个人页显示收藏列表</span><span class="en-only">Add a user favorites feature to this project:
+1. Create a new favorites table in the database
+2. Users can favorite articles
+3. Add a favorite button on the article detail page
+4. Show favorites list on the user profile page</span></pre>
+      <p>
+        <span class="zh-only">Composer 会同时修改数据库迁移文件、后端 API、前端页面组件等多个文件，确保所有修改协调一致。</span>
+        <span class="en-only">Composer simultaneously modifies database migration files, backend APIs, frontend page components, and more — ensuring all changes are coordinated and consistent.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h3>
+        <span class="zh-only">Agent 模式：AI 自主执行</span>
+        <span class="en-only">Agent Mode: AI Autonomous Execution</span>
+      </h3>
+      <p>
+        <span class="zh-only">Agent 模式是 2024 年 Cursor 最令人兴奋的新功能。在 Agent 模式下，Cursor 不只是生成代码建议——它会自主地执行任务：创建文件、修改代码、运行命令、查看结果、发现问题并自我修正。你只需要描述最终目标，Cursor 会自己规划步骤并执行。</span>
+        <span class="en-only">Agent mode is Cursor's most exciting new feature of 2024. In Agent mode, Cursor doesn't just generate code suggestions — it autonomously executes tasks: creating files, modifying code, running commands, checking results, discovering issues, and self-correcting. You just describe the end goal, and Cursor plans the steps and executes them.</span>
+      </p>
+      <pre data-lang="prompt"><span class="zh-only">帮我把这个项目的登录功能从 session 方案迁移到 JWT 方案。
+需要修改后端认证中间件、前端 Token 存储和刷新逻辑、以及所有需要认证的 API 接口。</span><span class="en-only">Migrate this project's login from session-based auth to JWT.
+Need to modify backend auth middleware, frontend token storage and refresh logic, and all authenticated API endpoints.</span></pre>
+      <p>
+        <span class="zh-only">Agent 会自己分析项目结构、找到需要修改的文件、逐一修改并验证。你可以在过程中随时查看进度，如果方向不对，可以随时叫停。</span>
+        <span class="en-only">The Agent analyzes the project structure itself, finds files that need modification, modifies them one by one, and verifies. You can check progress at any time, and if the direction is wrong, you can stop it anytime.</span>
+      </p>
+
+      <div class="callout warn">
+        <span class="zh-only">Agent 模式虽然强大，但目前还不够完美。对于复杂的全局性重构，建议你分步骤引导，而不是让 Agent 一次性完成。先让它做最核心的改动，验证通过后再做下一步。</span>
+        <span class="en-only">Agent mode is powerful but not yet perfect. For complex global refactoring, I recommend guiding it step by step rather than letting the Agent do everything at once. Have it do the core changes first, verify, then proceed to the next step.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">新手 5 分钟上手流程</span>
+    <span class="en-only">5-Minute Quick Start for Beginners</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">如果你是第一次用 Cursor，跟着下面这个流程走，5 分钟就能上手。</span>
+    <span class="en-only">If this is your first time using Cursor, follow this workflow and you'll be up and running in 5 minutes.</span>
+  </p>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">Step 1：安装和登录</span>
+      <span class="en-only">Step 1: Install and Sign In</span>
+    </strong>
+    <p>
+      <span class="zh-only">访问 cursor.com 下载安装。打开后用 GitHub 账号登录。新用户通常有免费试用额度，包含 GPT-4o 和 Claude 等模型。安装完成后，Cursor 会自动导入你的 VS Code 设置和扩展——如果你之前在用 VS Code，几乎所有配置都会无缝迁移。</span>
+      <span class="en-only">Visit cursor.com to download and install. Open it and sign in with your GitHub account. New users typically get free trial credits including GPT-4o and Claude models. After installation, Cursor automatically imports your VS Code settings and extensions — if you were using VS Code before, nearly all configurations migrate seamlessly.</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">Step 2：打开一个项目</span>
+      <span class="en-only">Step 2: Open a Project</span>
+    </strong>
+    <p>
+      <span class="zh-only">File > Open Folder，选择你的项目目录。如果是从零开始，可以先创建一个空文件夹。Cursor 会自动索引你的代码库（你可能需要等几秒到几十秒，取决于项目大小）。</span>
+      <span class="en-only">File > Open Folder, select your project directory. If starting from scratch, create an empty folder first. Cursor will automatically index your codebase (you may need to wait a few seconds to tens of seconds, depending on project size).</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">Step 3：试试 Tab 补全</span>
+      <span class="en-only">Step 3: Try Tab Completion</span>
+    </strong>
+    <p>
+      <span class="zh-only">在任意代码文件里写几行代码，停下来看看是否有灰色的补全建议。按 Tab 接受。如果你用 JavaScript，试试写一个 <code>function</code> 关键字，然后描述你想要什么功能，Tab 补全会自动生成函数体。</span>
+      <span class="en-only">Write a few lines of code in any file, stop and see if there's a gray completion suggestion. Press Tab to accept. If you're using JavaScript, try writing a <code>function</code> keyword, then describe the functionality you want, and Tab completion will auto-generate the function body.</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">Step 4：试试 Chat</span>
+      <span class="en-only">Step 4: Try Chat</span>
+    </strong>
+    <p>
+      <span class="zh-only">点击左侧边栏的 Chat 图标（或按 Ctrl+L），输入一个简单的问题，比如 <code>@codebase 这个项目是做什么的？</code>。看看 Cursor 如何回答。然后试着让它帮你做一个小修改。</span>
+      <span class="en-only">Click the Chat icon in the left sidebar (or press Ctrl+L), enter a simple question like <code>@codebase What does this project do?</code>. See how Cursor responds. Then try having it make a small modification.</span>
+    </p>
+  </div>
+
+  <div class="callout tip">
+    <strong>
+      <span class="zh-only">Step 5：试试 Composer</span>
+      <span class="en-only">Step 5: Try Composer</span>
+    </strong>
+    <p>
+      <span class="zh-only">按下 Ctrl+I（Cmd+I）打开 Composer，描述一个小功能，比如"帮我创建一个 404 页面"。接受建议后，检查 Cursor 创建或修改的文件。这就是 Cursor 最强大的地方——它可以跨多个文件协调修改。</span>
+      <span class="en-only">Press Ctrl+I (Cmd+I) to open Composer, describe a small feature like "create a 404 page for me." After accepting, check the files Cursor created or modified. This is Cursor's most powerful feature — it coordinates changes across multiple files.</span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">模型选择：GPT-4o 还是 Claude？</span>
+    <span class="en-only">Model Selection: GPT-4o or Claude?</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">Cursor 支持多个 AI 模型，最常用的是 OpenAI 的 GPT-4o 和 Anthropic 的 Claude。很多新手会纠结选哪个，这里给出我的建议：</span>
+    <span class="en-only">Cursor supports multiple AI models, with OpenAI's GPT-4o and Anthropic's Claude being the most common. Many beginners纠结 over which to choose — here's my advice:</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>日常编程、写功能、改 Bug</strong>——选 Claude 3.5 Sonnet。Claude 在代码生成方面通常比 GPT-4o 更精准，特别是处理复杂逻辑时表现更好。<strong>理解项目、解释代码、设计方案</strong>——选 GPT-4o。GPT-4o 在理解和推理方面更强大，适合需要"深度思考"的任务。</span>
+    <span class="en-only"><strong>Daily coding, building features, fixing bugs</strong> — choose Claude 3.5 Sonnet. Claude is usually more precise at code generation than GPT-4o, especially better at handling complex logic. <strong>Understanding projects, explaining code, designing solutions</strong> — choose GPT-4o. GPT-4o is stronger at understanding and reasoning, suitable for tasks requiring "deep thinking."</span>
+  </p>
+
+  <div class="callout info">
+    <strong>
+      <span class="zh-only">快速切换</span>
+      <span class="en-only">Quick Switching</span>
+    </strong>
+    <p>
+      <span class="zh-only">你可以在 Cursor 底部状态栏快速切换模型。不需要每次都纠结选哪个——先用默认模型试，如果结果不满意，换一个模型重新生成。很多开发者会在不同任务间切换不同模型。</span>
+      <span class="en-only">You can quickly switch models in Cursor's bottom status bar. No need to agonize over which to choose each time — try the default model first, and if the result isn't satisfactory, switch to another model and regenerate. Many developers switch between models for different tasks.</span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">让效率翻倍的 3 个习惯</span>
+    <span class="en-only">3 Habits to Double Your Productivity</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">用 Cursor 几个月后，我养成了三个让我效率大幅提升的习惯。这些习惯看似简单，但效果非常显著。</span>
+    <span class="en-only">After using Cursor for several months, I developed three habits that dramatically boosted my productivity. They seem simple but the effects are remarkable.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>习惯一：写注释驱动编程。</strong>不要直接开始写代码，先写中文注释描述你要做什么。每一行注释就是一个"小任务"，然后让 Cursor 的 Tab 补全来填充代码。这样你的代码会有清晰的逻辑结构，也更容易维护。</span>
+    <span class="en-only"><strong>Habit 1: Comment-driven development.</strong> Don't start writing code directly — write Chinese comments first describing what you want to do. Each comment is a "mini task," then let Cursor's Tab completion fill in the code. This way your code has clear logical structure and is easier to maintain.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>习惯二：小步提交，频繁验证。</strong>每次让 Cursor 做修改后，先运行看看效果，确认没问题再继续下一个修改。不要让 Cursor 一次性做太多事情——万一方向错了，回退的成本会很高。</span>
+    <span class="en-only"><strong>Habit 2: Small steps, frequent verification.</strong> After each Cursor modification, run and check the result before continuing to the next change. Don't let Cursor do too much at once — if the direction is wrong, the cost of rolling back is high.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>习惯三：善用 Ctrl+Z 撤销。</strong>Cursor 的每次修改都可以用 Ctrl+Z 撤销。如果 AI 的建议不是你想要的，直接撤销重来。不要怕"浪费"AI 的额度——试验和探索本身就是学习的一部分。</span>
+    <span class="en-only"><strong>Habit 3: Make good use of Ctrl+Z undo.</strong> Every Cursor modification can be undone with Ctrl+Z. If the AI's suggestion isn't what you want, just undo and try again. Don't worry about "wasting" AI credits — experimentation and exploration are part of the learning process.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">写在最后</span>
+    <span class="en-only">Final Thoughts</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">Cursor 不是一个"会写代码的聊天机器人"。它是一个重新定义了编程工作流的工具。Tab 补全让你的手指不用敲那么多键盘，Chat 让你随时有一个 AI 技术顾问，Composer 让复杂的多文件修改变得简单，Agent 让你只需描述目标就能得到结果。</span>
+    <span class="en-only">Cursor isn't a "chatbot that writes code." It's a tool that redefines the programming workflow. Tab completion saves your fingers from typing so much, Chat gives you an AI technical advisor on demand, Composer makes complex multi-file edits simple, and Agent lets you describe goals and get results.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">2024 年，Cursor 已经证明了 AI 编程不是噱头，而是真正能提升十倍效率的生产力工具。无论你是资深开发者还是零基础的新手，Cursor 都值得你花时间学习和使用。</span>
+    <span class="en-only">In 2024, Cursor has proven that AI coding isn't a gimmick — it's a productivity tool that can genuinely improve efficiency tenfold. Whether you're a senior developer or a complete beginner, Cursor is worth your time to learn and use.</span>
+  </p>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>最重要的建议：不要等到"完全学会"才开始用。安装 Cursor，打开你的项目，直接开始。最好的学习方式就是在真实项目中使用。每一行代码、每一次修改，都是一次学习。</strong></span>
+      <span class="en-only"><strong>Most important advice: don't wait until you've "fully learned" to start using it. Install Cursor, open your project, and just begin. The best way to learn is by using it in a real project. Every line of code, every modification, is a learning experience.</strong></span>
+    </p>
+  </div>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">← <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

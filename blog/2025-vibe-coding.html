@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>一个人 + AI = 产品：Vibe Coding 实战手册 | One Person + AI = Product: The Vibe Coding Playbook</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div><nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">AI 编程 <span class="en-only">|</span> <span class="en-only">AI Coding</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">一个人 + AI = 产品：Vibe Coding 实战手册</span>
+    <span class="en-only">One Person + AI = Product: The Vibe Coding Playbook</span>
+  </h1>
+  <p class="meta reveal">2025.04.12 — <span class="zh-only">用自然语言描述想法，让 AI 帮你实现——从概念到上线的完整方法论</span><span class="en-only">Describe ideas in natural language, let AI build them — a complete methodology from concept to launch</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">什么是 Vibe Coding？</span>
+    <span class="en-only">What Is Vibe Coding?</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">"Vibe Coding"这个词在 2025 年初由 Andrej Karpathy（OpenAI 联合创始人之一）提出，迅速在开发者社区爆火。它的核心理念非常简单：<strong>你不需要会写代码，你只需要能用自然语言清晰地描述你想要什么，然后让 AI 编程工具帮你实现。</strong></span>
+    <span class="en-only">The term "Vibe Coding" was coined in early 2025 by Andrej Karpathy (one of OpenAI's co-founders) and quickly went viral in the developer community. Its core idea is beautifully simple: <strong>you don't need to know how to code — you just need to clearly describe what you want in natural language, then let AI coding tools build it for you.</strong></span>
+  </p>
+
+  <p>
+    <span class="zh-only">为什么叫"Vibe"？因为这种方法不追求传统软件工程中那种精确、严谨、从底层设计到顶层实现的过程。相反，它更像是在和 AI"聊"出一个产品——你描述你的"感觉"（vibe），AI 捕捉你的意图并生成代码。你看看效果，不满意就继续"聊"，直到产品符合你的预期。</span>
+    <span class="en-only">Why "Vibe"? Because this method doesn't pursue the precise, rigorous, bottom-up-to-top-down approach of traditional software engineering. Instead, it's more like "chatting" a product into existence with AI — you describe your "vibe," AI captures your intent and generates code. You check the result, if unsatisfied you keep "chatting" until the product meets your expectations.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">Vibe Coding 不是让你成为程序员——而是让你成为<strong>产品经理 + AI 团队的领导</strong>。你的核心竞争力不是写代码的能力，而是：对用户需求的理解、对产品设计的审美、以及清晰表达想法的能力。</span>
+    <span class="en-only">Vibe Coding doesn't turn you into a programmer — it turns you into a <strong>product manager + leader of an AI team.</strong> Your core competency isn't writing code, but rather: understanding user needs, having good product design taste, and the ability to clearly express ideas.</span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"Vibe Coding 不是'不会编程的人做产品'，而是'表达能力强的人做产品'。"</span>
+    <span class="en-only">"Vibe Coding isn't 'people who can't code building products' — it's 'people who can express themselves clearly building products.'"</span>
+  </blockquote>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">Vibe Coding 的核心心法</span>
+    <span class="en-only">Core Principles of Vibe Coding</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">Vibe Coding 看起来简单——不就是"和 AI 聊天"吗？但要真正做出好产品，你需要掌握几条核心心法。这些心法是很多人踩过坑之后总结出来的，遵循它们能让你少走大量弯路。</span>
+    <span class="en-only">Vibe Coding looks simple — isn't it just "chatting with AI"? But to truly build good products, you need to master several core principles. These are lessons learned from many people's mistakes — following them will save you enormous detours.</span>
+  </p>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>心法一：描述要具体。</strong>不要说"做一个好看的网站"，要说"做一个深色主题的个人作品集网站，顶部有导航栏，中间有 hero section 展示我的名字和一句话介绍，下方是三个项目卡片的网格布局，每个卡片有标题、描述和预览图。配色用深蓝底 + 青色点缀"。AI 不是读心术师，你描述得越具体，它给出的结果越接近你的预期。</span>
+      <span class="en-only"><strong>Principle 1: Be specific.</strong> Don't say "make a nice website" — say "build a dark-themed personal portfolio with a top navigation bar, a hero section displaying my name and one-liner intro, followed by a grid of three project cards below, each with title, description, and preview image. Color scheme: deep blue base with cyan accents." AI isn't a mind reader — the more specific your description, the closer the result matches your expectations.</span>
+    </p>
+  </div>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>心法二：迭代要快。</strong>不要试图一次让 AI 做出完美的产品。先做最小可行版本，看看效果，然后一步步加功能和优化。Vibe Coding 的精髓是"快速验证"——与其花一小时描述一个完美的需求，不如花五分钟做出初版、再花十分钟迭代三次。</span>
+      <span class="en-only"><strong>Principle 2: Iterate fast.</strong> Don't try to have AI build a perfect product in one go. Build the minimum viable version first, check the result, then add features and optimize step by step. The essence of Vibe Coding is "rapid validation" — rather than spending an hour describing a perfect requirement, spend five minutes building v1, then ten minutes iterating three times.</span>
+    </p>
+  </div>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>心法三：不追求完美。</strong>Vibe Coding 做出来的代码不优雅？没关系。架构不清晰？也行。能用、好看、能上线，就是成功。完美主义是 Vibe Coding 最大的敌人。你可以之后找专业开发者重构，但先把产品做出来、验证市场需求才是最重要的。</span>
+      <span class="en-only"><strong>Principle 3: Don't pursue perfection.</strong> The code Vibe Coding produces isn't elegant? That's fine. Architecture isn't clean? It works. If it functions, looks good, and can go live, that's success. Perfectionism is Vibe Coding's biggest enemy. You can hire professional developers to refactor later — but getting the product out and validating market demand is what matters most.</span>
+    </p>
+  </div>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>心法四：学会"说人话"。</strong>你的表达能力决定了 AI 的输出质量。练习把复杂的想法拆解成简单、有序的描述。好的提示词 = 清晰的结构 + 具体的细节 + 明确的约束。如果你发现自己描述不清楚，可能是因为你自己还没想清楚——先想清楚再和 AI 聊。</span>
+      <span class="en-only"><strong>Principle 4: Learn to "speak plainly."</strong> Your communication ability determines AI's output quality. Practice breaking complex ideas into simple, ordered descriptions. A good prompt = clear structure + specific details + explicit constraints. If you find yourself unable to describe clearly, it might be because you haven't thought it through — think first, then chat with AI.</span>
+    </p>
+  </div>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>心法五：善用参考。</strong>与其从零描述，不如给 AI 一个参考。截一张你喜欢的网站截图、发一个竞品的链接、描述一个你用过的类似产品。视觉参考比文字描述有效十倍。</span>
+      <span class="en-only"><strong>Principle 5: Use references.</strong> Rather than describing from scratch, give AI a reference. Screenshot a website you like, share a competitor's link, describe a similar product you've used. Visual references are ten times more effective than text descriptions.</span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">实战案例：从想法到上线</span>
+    <span class="en-only">Hands-On Case: From Idea to Launch</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">光说理论太抽象，让我们用一个完整的实战案例来演示 Vibe Coding 的全过程。假设你想做一个"每日 AI 新闻聚合器"——每天自动收集 AI 领域的重要新闻，整理成一份简洁的邮件发送给你。</span>
+    <span class="en-only">Theory alone is too abstract. Let's use a complete hands-on case to demonstrate the full Vibe Coding process. Say you want to build a "Daily AI News Aggregator" — automatically collecting important AI news daily and sending you a concise email digest.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">第一步：明确想法（5 分钟）</span>
+        <span class="en-only">Step 1: Clarify the Idea (5 min)</span>
+      </h3>
+      <p>
+        <span class="zh-only">不要急着打开工具。先拿出一张纸（或者打开一个文本编辑器），用最简单的语言写下你要做什么。核心问题：这个产品解决什么问题？给谁用？核心功能是什么？</span>
+        <span class="en-only">Don't rush to open a tool. First grab a piece of paper (or open a text editor) and write what you want to build in the simplest language. Core questions: What problem does this product solve? Who is it for? What are the core features?</span>
+      </p>
+      <p>
+        <span class="zh-only">对于我们的新闻聚合器：解决"每天 AI 信息太多，来不及筛选"的问题。给自己用。核心功能：自动抓取 AI 新闻 → AI 筛选重要内容 → 生成简洁摘要 → 发送邮件。</span>
+        <span class="en-only">For our news aggregator: solves "too much AI info daily, not enough time to filter." For personal use. Core features: auto-fetch AI news → AI filters important content → generates concise summaries → sends email.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">第二步：选对工具（2 分钟）</span>
+        <span class="en-only">Step 2: Pick the Right Tool (2 min)</span>
+      </h3>
+      <p>
+        <span class="zh-only">这个项目需要后端逻辑（抓取、筛选、定时发送），所以不适合只用 v0.dev。我推荐用 Cursor——它的 Agent 模式可以帮你完成从项目搭建到功能实现的全过程。或者用 Bolt.new，它可以直接在浏览器中完成全栈开发。</span>
+        <span class="en-only">This project needs backend logic (fetching, filtering, scheduled sending), so v0.dev alone isn't suitable. I recommend Cursor — its Agent mode can help you complete everything from project setup to feature implementation. Or Bolt.new, which can handle full-stack development directly in the browser.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">第三步：搭建基础结构（10 分钟）</span>
+        <span class="en-only">Step 3: Build the Foundation (10 min)</span>
+      </h3>
+      <p>
+        <span class="zh-only">打开 Cursor，新建项目，然后给 AI 你的第一条指令。注意看下面的提示词示例——它不是随意写的，而是遵循了"具体、有序、有约束"的原则。</span>
+        <span class="en-only">Open Cursor, create a new project, then give AI your first instruction. Notice the prompt example below — it's not written casually, but follows the "specific, ordered, with constraints" principle.</span>
+      </p>
+      <pre data-lang="prompt">创建一个 AI 新闻聚合器的后端项目。技术栈：Python + FastAPI + SQLite。
+
+核心功能：
+1. 用 RSS 抓取以下 AI 新闻源的信息（Hacker News AI tag、TechCrunch AI section、The Verge AI tag）
+2. 用 OpenAI API 对抓取到的新闻做筛选，只保留重要程度 7/10 以上的新闻
+3. 对筛选后的新闻生成 2-3 句的中文摘要
+4. 用 SMTP 发送邮件到指定邮箱
+5. 添加定时任务，每天早上 8 点自动执行
+
+项目结构要求：
+- 主文件 main.py，包含 FastAPI 路由和定时任务配置
+- 数据库文件用 SQLite，存储已发送的新闻避免重复
+- 配置文件 config.py，存放 API key 和邮箱配置
+- requirements.txt 列出所有依赖</pre>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">第四步：逐步迭代（30-60 分钟）</span>
+        <span class="en-only">Step 4: Iterate Step by Step (30-60 min)</span>
+      </h3>
+      <p>
+        <span class="zh-only">AI 生成基础代码后，不要急着一次性做完所有功能。按以下顺序逐步添加和测试：先让 RSS 抓取跑通，确认能拿到数据；再加入 AI 筛选功能，测试筛选质量；然后生成摘要；最后配置邮件发送和定时任务。每一步完成后先运行测试，确认没问题再进入下一步。</span>
+        <span class="en-only">After AI generates the basic code, don't try to complete all features at once. Add and test in this order: first get RSS fetching working, confirm it can retrieve data; then add AI filtering, test filter quality; then generate summaries; finally configure email sending and scheduled tasks. Run tests after each step, confirm no issues before proceeding.</span>
+      </p>
+      <pre data-lang="prompt">现在先帮我实现第一步：RSS 抓取功能。
+只用 Hacker News 的 AI 相关 RSS 源。
+抓取后打印标题和链接，我确认数据格式正确后再继续下一步。
+不要实现其他功能，专注做好这一步。</pre>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h3>
+        <span class="zh-only">第五步：部署上线（10 分钟）</span>
+        <span class="en-only">Step 5: Deploy (10 min)</span>
+      </h3>
+      <p>
+        <span class="zh-only">功能都做完了，最后一步是部署。对于一个 Python 后端项目，最简单的部署方式是用 Render 或者 Railway——它们都支持一键部署 Python 应用，免费额度足够个人使用。把代码推到 GitHub，然后在 Render 上新建一个 Web Service，连接仓库，设置环境变量（API key、邮箱配置），点部署。十分钟后你的新闻聚合器就在线运行了。</span>
+        <span class="en-only">All features done, final step is deployment. For a Python backend project, the simplest deployment is via Render or Railway — both support one-click Python app deployment with free tiers sufficient for personal use. Push code to GitHub, create a new Web Service on Render, connect the repo, set environment variables (API key, email config), click deploy. Ten minutes later, your news aggregator is live.</span>
+      </p>
+      <pre data-lang="prompt">帮我写一个 Dockerfile 和 docker-compose.yml，
+让这个项目可以用 Docker 部署到任何支持 Docker 的平台。
+同时写一个 .env.example 文件列出所有需要配置的环境变量。</pre>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">常见误区和避坑指南</span>
+    <span class="en-only">Common Pitfalls and How to Avoid Them</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">Vibe Coding 虽然降低了做产品的门槛，但绝不是"什么都不想就能做出好产品"。以下是最常见的几个误区，都是大量实践者踩过的坑。</span>
+    <span class="en-only">While Vibe Coding lowers the barrier to building products, it's definitely not "make great products without thinking." Below are the most common pitfalls, all learned from many practitioners' mistakes.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>误区一：什么都想一次做完。</strong>这是最常见的错误。一次给 AI 一个超长的提示词，试图让它在一次对话中完成整个项目。结果往往是：AI 做出来的东西和你想象中的完全不一样。正确做法：一步步来，每步确认后再继续。</span>
+    <span class="en-only"><strong>Pitfall 1: Trying to do everything at once.</strong> This is the most common mistake. Giving AI one super-long prompt, trying to have it complete the entire project in one conversation. The result is usually: what AI builds is completely different from what you imagined. Correct approach: one step at a time, confirm each before continuing.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>误区二：描述太模糊。</strong>"做一个好看的 App"——AI 不知道你认为什么是"好看"。"做一个像 Notion 的笔记应用"——这个描述就好多了，因为有明确的参考。永远记住：具体 > 抽象，参考 > 描述。</span>
+    <span class="en-only"><strong>Pitfall 2: Too vague.</strong> "Make a nice-looking app" — AI doesn't know what you think "nice" means. "Make a note-taking app like Notion" — this description is much better because there's a clear reference. Always remember: specific > abstract, reference > description.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>误区三：不会 debug。</strong>AI 生成的代码不会 100% 正确。当出现错误时，不要慌——把错误信息直接发给 AI，让它修复。大部分情况下，AI 能自己发现并修复问题。学会"复制错误信息 → 粘贴给 AI → 应用修复"这个循环，你就掌握了 Vibe Coding 最核心的工作模式。</span>
+    <span class="en-only"><strong>Pitfall 3: Can't debug.</strong> AI-generated code won't be 100% correct. When errors appear, don't panic — paste the error message directly to AI and let it fix it. Most of the time, AI can find and fix the problem on its own. Master the "copy error → paste to AI → apply fix" loop, and you've mastered Vibe Coding's most core workflow.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>误区四：过度依赖 AI。</strong>AI 不知道你的用户是谁、不知道市场需要什么、不知道什么设计是好的。这些判断需要你自己做。AI 是执行者，你才是决策者。Vibe Coding 的产品经理角色至关重要——AI 负责实现，你负责方向。</span>
+    <span class="en-only"><strong>Pitfall 4: Over-relying on AI.</strong> AI doesn't know who your users are, what the market needs, or what good design looks like. These judgments are yours to make. AI is the executor, you are the decision-maker. The product manager role in Vibe Coding is crucial — AI handles implementation, you handle direction.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">写在最后</span>
+    <span class="en-only">Final Thoughts</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">Vibe Coding 的本质，是把"编程"这个技能壁垒从做产品的过程中移除。以前，有想法的人需要找程序员合作才能做产品；现在，你只需要有想法、有表达力、有审美——AI 可以帮你完成剩下的所有技术实现。</span>
+    <span class="en-only">The essence of Vibe Coding is removing the skill barrier of "programming" from the product-building process. Before, people with ideas needed to find programmers to collaborate; now, you just need ideas, expressiveness, and taste — AI can handle all the remaining technical implementation.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">但这不意味着人人都能做出成功的产品。技术门槛降低了，<strong>但产品思维、用户洞察和审美判断的门槛没有降低——甚至更高了</strong>。因为当所有人都能做产品的时候，决定胜负的就是谁更能理解用户、谁的设计更打动人。Vibe Coding 给了你一个起跑线，但跑多快、跑多远，取决于你自己。</span>
+    <span class="en-only">But this doesn't mean everyone can build successful products. The technical barrier has lowered, <strong>but the barriers of product thinking, user insight, and aesthetic judgment haven't — they've actually gotten higher.</strong> Because when everyone can build products, what determines success is who better understands users and whose design resonates more. Vibe Coding gives you a starting line, but how fast and far you run depends on you.</span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">← <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

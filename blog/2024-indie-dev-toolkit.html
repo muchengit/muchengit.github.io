@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>独立开发者 AI 工具栈搭建指南（2024 版） | The Indie Developer AI Toolkit Guide (2024 Edition)</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head>
+<body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">工具栈 <span class="en-only">|</span> <span class="en-only">Toolkit</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">独立开发者 AI 工具栈搭建指南（2024 版）</span>
+    <span class="en-only">The Indie Developer AI Toolkit Guide (2024 Edition)</span>
+  </h1>
+  <p class="meta reveal">2024.02.18 — <span class="zh-only">一个独立开发者需要的完整 AI 工具链，覆盖从想法到变现的全流程</span><span class="en-only">A complete AI toolchain for indie developers, covering the full flow from idea to monetization</span></p>
+</header>
+<section class="prose reveal">
+  <h2><span class="zh-only">独立开发者的困境</span><span class="en-only">The Indie Developer's Dilemma</span></h2>
+  <p><span class="zh-only">作为独立开发者，你一个人就是一支团队。你要负责想产品、做设计、写代码、搞部署、做运营、写文档。如果每个环节都从零开始，效率低得可怕。2024 年，AI 工具的成熟让这一切有了根本性的改变——你不再需要每件事都亲力亲为，AI 可以成为你的设计助手、编程搭档、运营管家。但工具多了也会选择困难。这篇文章帮你梳理一套完整的 AI 工具栈，覆盖从想法到变现的全流程。</span><span class="en-only">As an indie developer, you are a one-person team. You handle product ideation, design, coding, deployment, operations, and documentation. If you start from scratch at every step, efficiency is terrifyingly low. In 2024, the maturation of AI tools has fundamentally changed this — you no longer need to do everything yourself. AI can be your design assistant, coding partner, and operations manager. But with so many tools, choosing becomes difficult. This article helps you build a complete AI toolkit covering the full flow from idea to monetization.</span></p>
+</section>
+<section class="prose reveal">
+  <h2><span class="zh-only">五个阶段，五个工具集</span><span class="en-only">Five Stages, Five Tool Sets</span></h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3><span class="zh-only">想法验证阶段</span><span class="en-only">Stage 1: Idea Validation</span></h3>
+      <p><span class="zh-only">这个阶段的核心问题是：我的想法有没有价值？值不值得投入时间做？推荐工具：<strong>ChatGPT / Claude</strong>（深度对话，分析市场、竞品、用户需求），<strong>Perplexity</strong>（快速市场调研，获取最新数据和行业报告），<strong>Kimi / 豆包</strong>（中文语境下的市场分析，免费使用）。用 AI 帮你做竞品分析、用户画像、市场规模估算，这些过去需要几天的工作现在几小时就能完成。</span><span class="en-only">Core question: Is my idea worth pursuing? Recommended tools: <strong>ChatGPT / Claude</strong> (deep conversation for market, competitor, and user analysis), <strong>Perplexity</strong> (quick market research with latest data), <strong>Kimi / Doubao</strong> (Chinese market analysis, free). Use AI for competitor analysis, user personas, and market sizing — what used to take days now takes hours.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3><span class="zh-only">设计阶段</span><span class="en-only">Stage 2: Design</span></h3>
+      <p><span class="zh-only">有了想法之后，需要把抽象的产品概念变成具体的视觉设计。推荐工具：<strong>v0.dev</strong>（快速生成 UI 原型，分钟级出界面），<strong>Midjourney</strong>（产品配图、Logo 灵感、营销素材），<strong>Figma + AI 插件</strong>（精细化设计，AI 辅助排版和配色）。v0.dev 生成初始界面，Midjourney 做视觉素材，Figma 做精细打磨——这个组合效率极高。</span><span class="en-only">Turn abstract product concepts into concrete visual designs. Recommended tools: <strong>v0.dev</strong> (rapid UI prototyping, minutes to interface), <strong>Midjourney</strong> (product images, logo inspiration, marketing assets), <strong>Figma + AI plugins</strong> (refined design with AI-assisted layout and color). v0 for initial UI, Midjourney for visuals, Figma for polish — extremely efficient combo.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3><span class="zh-only">编程阶段</span><span class="en-only">Stage 3: Development</span></h3>
+      <p><span class="zh-only">这是 AI 工具价值最大的环节。推荐工具：<strong>Cursor</strong>（AI 代码编辑器，日常开发的主力工具），<strong>GitHub Copilot</strong>（代码补全，配合 Cursor 使用或单独在 VS Code 中使用），<strong>Bolt.new</strong>（快速出全栈原型，适合验证技术方案）。Cursor 是独立开发者 2024 年最值得投资的工具，没有之一。它的 Composer 功能可以同时修改多个文件，Agent 模式可以自主完成复杂任务。如果你只能选一个 AI 编程工具，选 Cursor。</span><span class="en-only">This is where AI tools provide the most value. Recommended tools: <strong>Cursor</strong> (AI code editor, your main development tool), <strong>GitHub Copilot</strong> (code completion, use with Cursor or standalone in VS Code), <strong>Bolt.new</strong> (quick full-stack prototypes for validating tech approaches). Cursor is the single most worthwhile AI tool investment for indie developers in 2024. Its Composer modifies multiple files simultaneously; Agent mode autonomously completes complex tasks. If you can only pick one AI coding tool, pick Cursor.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3><span class="zh-only">部署阶段</span><span class="en-only">Stage 4: Deployment</span></h3>
+      <p><span class="zh-only">产品做出来了，要让它上线。推荐工具：<strong>Vercel</strong>（前端项目首选，GitHub 推送自动部署，免费额度够用），<strong>Netlify</strong>（同样优秀的前端部署平台，拖拽部署），<strong>Supabase</strong>（开源的 Firebase 替代，提供数据库、认证、存储一站式后端）。这三个工具都提供了非常慷慨的免费层，独立开发者在产品初期几乎不需要花一分钱在基础设施上。</span><span class="en-only">Your product is built — now get it online. Recommended tools: <strong>Vercel</strong> (first choice for frontend, auto-deploy from GitHub, generous free tier), <strong>Netlify</strong> (equally excellent, drag-and-drop deploy), <strong>Supabase</strong> (open-source Firebase alternative with database, auth, and storage). All three offer generous free tiers — indie developers barely need to spend on infrastructure in the early stages.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h3><span class="zh-only">运营阶段</span><span class="en-only">Stage 5: Operations</span></h3>
+      <p><span class="zh-only">产品上线只是开始，让人知道你的产品才是真正的挑战。推荐工具：<strong>AI 写作工具</strong>（ChatGPT / Claude / 豆包，用于写博客、社交媒体内容、产品文案），<strong>AI SEO 工具</strong>（用 ChatGPT 做关键词研究、优化 Landing Page 的 SEO），<strong>AI 翻译工具</strong>（DeepL / Claude，帮助你的产品触达全球用户）。运营的核心是持续产出内容，AI 写作工具可以帮你把产出效率提升 5-10 倍。</span><span class="en-only">Launching is just the beginning — getting people to know your product is the real challenge. Recommended tools: <strong>AI writing tools</strong> (ChatGPT / Claude / Doubao for blogs, social media, product copy), <strong>AI SEO tools</strong> (ChatGPT for keyword research and landing page SEO optimization), <strong>AI translation</strong> (DeepL / Claude to reach global users). The core of operations is consistent content output, and AI writing tools can boost your productivity 5-10x.</span></p>
+    </div>
+  </div>
+</section>
+<section class="prose reveal">
+  <h2><span class="zh-only">工具组合建议</span><span class="en-only">Tool Combination Recommendations</span></h2>
+  <div class="highlight">
+    <p><span class="zh-only"><strong>我的推荐组合（2024 年最佳性价比）：Claude Pro（20 美元/月，用于写作和编程）+ Cursor Pro（20 美元/月，主力开发工具）+ Vercel（免费，部署）+ Midjourney（10 美元/月，设计素材）。月总成本 50 美元，覆盖了独立开发者 90% 的工作需求。如果你预算更紧，可以替换为：豆包（免费，替代 Claude 做中文写作）+ Cursor Free 版 + Vercel + Flux Schnell（免费，替代 Midjourney）。这样月成本为零，虽然体验差一些，但功能上完全可以跑通全流程。</strong></span><span class="en-only"><strong>My recommended combo (best value in 2024): Claude Pro ($20/month for writing and coding) + Cursor Pro ($20/month, main dev tool) + Vercel (free, deployment) + Midjourney ($10/month, design assets). Total: $50/month, covering 90% of indie developer needs. For tighter budgets: Doubao (free, replaces Claude for Chinese writing) + Cursor Free + Vercel + Flux Schnell (free, replaces Midjourney). Total cost: $0. Slightly less polished but fully functional across the entire workflow.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">最重要的建议</span><span class="en-only">The Most Important Advice</span></h2>
+  <p><span class="zh-only">工具只是手段，不是目的。不要陷入「不断尝试新工具」的陷阱。选定一套工具后，花时间真正熟悉它们，比不断切换工具有效率得多。AI 工具的真正价值不在于它们能做什么，而在于你用它们做了什么。一个熟练使用 Claude 和 Cursor 的独立开发者，产出质量可以超过一个 3-5 人的小团队。这不再是理论——2024 年已经有大量真实案例证明了这一点。</span><span class="en-only">Tools are means, not ends. Do not fall into the trap of constantly trying new tools. Once you pick a set, invest time in truly mastering them — it is far more productive than constantly switching. The real value of AI tools is not what they can do, but what you do with them. A solo developer proficient with Claude and Cursor can outproduce a 3-5 person team. This is no longer theory — 2024 has plenty of real cases proving it.</span></p>
+</section>
+</article>
+
+<div class="foot-link"><a href="../">&larr; <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

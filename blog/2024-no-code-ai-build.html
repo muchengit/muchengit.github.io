@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程 | Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head>
+<body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">AI 编程 <span class="en-only">|</span> <span class="en-only">AI Coding</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</span>
+    <span class="en-only">Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</span>
+  </h1>
+  <p class="meta reveal">2024.05.10 — <span class="zh-only">零基础用 AI 做产品的三种工具路径，从想法到上线的完整指南</span><span class="en-only">Three AI tool paths for building products from scratch, a complete guide from idea to launch</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">一个大胆的论断</span>
+    <span class="en-only">A Bold Claim</span>
+  </h2>
+  <p>
+    <span class="zh-only">2024 年，我越来越确信一件事：<strong>不会写代码不再是做产品的障碍。</strong>AI 编程工具已经进化到了一个临界点——只要你能清晰地表达你想要什么，AI 就能帮你把它做出来。当然，这并不意味着编程变得没有价值。专业程序员依然不可或缺，AI 目前能做的更多是 MVP 层面的东西。但对于那些有一个想法但不会实现的人来说，2024 年的 AI 工具是一个巨大的机会。</span>
+    <span class="en-only">In 2024, I have become increasingly convinced of one thing: <strong>not knowing how to code is no longer a barrier to building products.</strong> AI coding tools have evolved to a tipping point — as long as you can clearly express what you want, AI can help you build it. Of course, this does not mean programming has lost its value. Professional developers remain indispensable. But for those who have an idea but cannot implement it, 2024 AI tools represent a massive opportunity.</span>
+  </p>
+  <p>
+    <span class="zh-only">目前最适合零基础做产品的三款 AI 工具是：v0.dev（快速出界面）、Bolt.new（全栈原型）、Cursor（深度定制）。它们各有侧重，最好的方式不是只选一个，而是在不同阶段用不同的工具。</span>
+    <span class="en-only">The three AI tools best suited for zero-code product building are: v0.dev (quick UI), Bolt.new (full-stack prototype), and Cursor (deep customization). Each has its focus — the best approach is using different tools at different stages.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">三款工具对比</span>
+    <span class="en-only">Three-Tool Comparison</span>
+  </h2>
+  <div class="compare">
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">核心定位</span><span class="en-only">Core Positioning</span></div>
+      <div class="compare-item"><strong>v0.dev</strong><p><span class="zh-only">AI 界面生成器。输入文字描述，直接生成 React/HTML 界面代码和实时预览。专注前端 UI。</span><span class="en-only">AI UI generator. Text to React/HTML code with live preview. Focused on frontend UI.</span></p></div>
+      <div class="compare-item"><strong>Bolt.new</strong><p><span class="zh-only">AI 全栈开发环境。浏览器里构建完整 Web 应用，包括前后端和数据库。</span><span class="en-only">AI full-stack dev environment. Build complete web apps in browser including frontend, backend, and database.</span></p></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">AI 代码编辑器。基于 VS Code 深度改造，AI 理解整个项目。适合深度定制。</span><span class="en-only">AI code editor. Deeply modified VS Code, AI understands your entire project. For deep customization.</span></p></div>
+    </div>
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">上手难度</span><span class="en-only">Learning Curve</span></div>
+      <div class="compare-item"><strong>v0.dev</strong><p><span class="zh-only">最低。纯对话式，不需要技术背景。</span><span class="en-only">Lowest. Pure conversational, no technical background needed.</span></p></div>
+      <div class="compare-item"><strong>Bolt.new</strong><p><span class="zh-only">低。浏览器里操作，需要逻辑思维但不需编程知识。</span><span class="en-only">Low. Browser-based, needs logical thinking but no programming knowledge.</span></p></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">中等。在编辑器里操作，最好能看懂基本代码。</span><span class="en-only">Medium. Work in editor, ideally understand basic code.</span></p></div>
+    </div>
+    <div class="compare-row reveal">
+      <div class="compare-label"><span class="zh-only">适合场景</span><span class="en-only">Best For</span></div>
+      <div class="compare-item"><strong>v0.dev</strong><p><span class="zh-only">Landing Page、Dashboard、快速验证 UI 想法。</span><span class="en-only">Landing pages, dashboard UI, quickly validating UI ideas.</span></p></div>
+      <div class="compare-item"><strong>Bolt.new</strong><p><span class="zh-only">完整 Web 应用原型、MVP 验证、需要后端逻辑的项目。</span><span class="en-only">Complete web prototypes, MVP validation, projects with backend logic.</span></p></div>
+      <div class="compare-item"><strong>Cursor</strong><p><span class="zh-only">需要持续迭代的产品、复杂项目、深度自定义场景。</span><span class="en-only">Products needing iteration, complex projects, deep customization.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">推荐的全流程使用方法</span>
+    <span class="en-only">Recommended Full Workflow</span>
+  </h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3><span class="zh-only">第一步：选对工具</span><span class="en-only">Step 1: Choose the Right Tool</span></h3>
+      <p><span class="zh-only">根据产品类型来选。展示型的（活动页面、作品集），直接用 v0.dev。需要交互和逻辑的（记账工具、AI 聊天应用），用 Bolt.new。打算长期做、不断迭代的产品，用 Cursor。</span><span class="en-only">Choose by product type. Display-oriented, use v0.dev. Interaction and logic needed, use Bolt.new. Long-term product with iteration, use Cursor.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3><span class="zh-only">第二步：快速出界面</span><span class="en-only">Step 2: Rapid UI Prototyping</span></h3>
+      <p><span class="zh-only">不管最终用哪个工具，建议先用 v0.dev 出界面原型。描述页面布局、颜色风格、功能区域，v0 几秒内生成可交互预览。满意后导出代码，简单产品直接就能用。</span><span class="en-only">Regardless of final tool, start with v0.dev for UI prototyping. Describe layout, colors, functional areas, and v0 generates interactive preview in seconds. Export when satisfied.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3><span class="zh-only">第三步：迭代和补全</span><span class="en-only">Step 3: Iterate and Complete</span></h3>
+      <p><span class="zh-only">有了界面后，把代码导入 Cursor 或在 Bolt.new 中继续完善。在 Bolt.new 里直接告诉 AI 需要什么功能，它会写完所有相关代码。在 Cursor 中用 Composer 功能跨文件修改。核心原则：<strong>一步一步加功能，每次只提一个明确需求</strong>。不要试图一次让 AI 完成所有事情，分步骤迭代效果好得多。</span><span class="en-only">After getting the interface, import code into Cursor or continue in Bolt.new. In Bolt.new, simply tell AI what features you need. In Cursor, use Composer for cross-file changes. Core principle: <strong>add features one at a time with a clear, specific request</strong>. Do not try to have AI do everything at once.</span></p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3><span class="zh-only">第四步：部署上线</span><span class="en-only">Step 4: Deploy</span></h3>
+      <p><span class="zh-only">Bolt.new 内置部署，一键发布。用 Cursor 的话，推到 GitHub 后用 Vercel 或 Netlify 一键部署。纯前端项目甚至可以直接拖文件夹到 Netlify 页面完成部署。整个过程不需要服务器运维知识。</span><span class="en-only">Bolt.new has built-in deployment, one-click publish. With Cursor, push to GitHub then deploy with Vercel or Netlify. No server operations knowledge needed.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">几个实用建议</span>
+    <span class="en-only">Some Practical Advice</span>
+  </h2>
+  <p>
+    <span class="zh-only">第一，<strong>从小项目开始</strong>。不要一上来就做复杂 SaaS。先做简单工具——计算器、待办清单、个人介绍页。第二，<strong>学会看报错信息</strong>。即使不会写代码，也要看懂报错信息，然后反馈给 AI 修复。第三，<strong>善用模板</strong>。v0 和 Bolt.new 有大量现成模板，从模板开始修改比从零描述效率高得多。</span>
+    <span class="en-only">First, <strong>start with small projects</strong>. Do not try to build a complex SaaS right away. Second, <strong>learn to read error messages</strong>. Understand errors and feed them back to AI for fixes. Third, <strong>leverage templates</strong>. Both v0 and Bolt.new have ready-made templates — modifying them is far more efficient than starting from scratch.</span>
+  </p>
+  <blockquote>
+    <span class="zh-only">不会写代码不是障碍，不敢尝试才是。2024 年最好的时机就是现在。</span>
+    <span class="en-only">Not knowing how to code is not the barrier — being afraid to try is. The best time in 2024 is now.</span>
+  </blockquote>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">&larr; <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>

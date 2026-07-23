@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>DeepSeek-R1 深度解读：开源如何震动全球 AI 圈 | DeepSeek-R1: How Open Source Shocked the Global AI Community</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh"><div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div><nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>muchengit.github.io</a><div class="nav-links" id="navlinks"><a href="../#works">作品</a><a href="../#writing">文字</a><a href="../#lab">实验室</a><a href="../#about">关于</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav><article>
+
+<header class="art-header">
+  <div class="tag">深度解析 <span class="en-only">|</span> <span class="en-only">Deep Dive</span></div>
+  <h1 class="reveal">
+    <span class="zh-only">DeepSeek-R1 深度解读：开源如何震动全球 AI 圈</span>
+    <span class="en-only">DeepSeek-R1: How Open Source Shocked the Global AI Community</span>
+  </h1>
+  <p class="meta reveal">2025.01.28 — <span class="zh-only">一个中国团队用十分之一的成本、纯开源的方式，做出了比肩 GPT-o1 的推理模型</span><span class="en-only">A Chinese team built a reasoning model rivaling GPT-o1 at one-tenth the cost, fully open source</span></p>
+</header>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">2025 年 1 月，AI 圈发生了一场"地震"</span>
+    <span class="en-only">January 2025: An "Earthquake" in the AI Community</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">2025 年 1 月 20 日，DeepSeek——一个此前在圈外并不广为人知的中国 AI 团队——发布了 DeepSeek-R1。这个名字在接下来的几天里刷爆了全球社交媒体、Hacker News、Reddit 和 Twitter。为什么？因为 DeepSeek-R1 在数学、编程和逻辑推理等多项基准测试上的表现，<strong>几乎追平甚至部分超越了 OpenAI 的 GPT-o1</strong>——而 GPT-o1 被公认为是当时最强的推理模型。</span>
+    <span class="en-only">On January 20, 2025, DeepSeek — a Chinese AI team previously little-known outside tech circles — released DeepSeek-R1. Within days, the name exploded across global social media, Hacker News, Reddit, and Twitter. Why? Because DeepSeek-R1's performance on math, coding, and logical reasoning benchmarks <strong>nearly matched or even partially surpassed OpenAI's GPT-o1</strong> — and GPT-o1 was widely regarded as the strongest reasoning model at the time.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">更令人震惊的是，DeepSeek-R1 完全开源。任何人都可以下载模型权重、自行部署、自由商用。这不仅是一个技术突破，更是一个行业范式的转变——它向全世界证明：<strong>最顶尖的 AI 能力不需要被少数几家巨头垄断。</strong></span>
+    <span class="en-only">Even more shocking was that DeepSeek-R1 was fully open source. Anyone could download the model weights, deploy it themselves, and use it commercially for free. This wasn't just a technical breakthrough — it was a paradigm shift for the entire industry. It proved to the world: <strong>the most cutting-edge AI capabilities don't need to be monopolized by a handful of tech giants.</strong></span>
+  </p>
+
+  <blockquote>
+    <span class="zh-only">"DeepSeek-R1 的发布，可能是开源 AI 历史上最重要的里程碑之一。它让我们看到了一个没有围墙的 AI 未来。"</span>
+    <span class="en-only">"The release of DeepSeek-R1 may be one of the most important milestones in open-source AI history. It showed us a future for AI without walls."</span>
+  </blockquote>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">核心技术突破</span>
+    <span class="en-only">Core Technical Breakthroughs</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">DeepSeek-R1 之所以能震动全球 AI 圈，不是因为它做了一件"新"的事，而是因为它用一种极其高效的方式做到了以前只有花巨资才能做到的事。让我们拆解它的核心技术突破。</span>
+    <span class="en-only">DeepSeek-R1 shook the global AI community not because it did something "new," but because it achieved what previously required massive investment in an extremely efficient way. Let's break down its core technical breakthroughs.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h3>
+        <span class="zh-only">纯强化学习路径：不用 SFT 也能做推理</span>
+        <span class="en-only">Pure RL Path: Reasoning Without SFT</span>
+      </h3>
+      <p>
+        <span class="zh-only">传统的大模型训练流程是：先做"监督微调"（SFT），用大量人工标注的高质量数据"教"模型如何回答问题，然后再做强化学习来进一步优化。但 DeepSeek-R1 走了一条完全不同的路——<strong>跳过 SFT，直接用纯强化学习训练推理能力。</strong>团队设计了一套基于规则的奖励系统，让模型在数学题、编程题和逻辑推理题上自我博弈、自我进化。模型通过"试错"学会了如何一步步思考问题，而不是依赖人工标注的标准答案。这条路径的意义在于：它大幅降低了对高质量人工标注数据的依赖，使得训练成本急剧下降。</span>
+        <span class="en-only">Traditional LLM training follows this flow: first do "Supervised Fine-Tuning" (SFT) — using massive amounts of human-annotated, high-quality data to "teach" the model how to answer questions — then apply reinforcement learning to further optimize. But DeepSeek-R1 took a completely different approach — <strong>skip SFT entirely, and directly train reasoning capabilities through pure reinforcement learning.</strong> The team designed a rule-based reward system that let the model self-play and self-evolve on math problems, coding challenges, and logic puzzles. Through trial and error, the model learned to think step by step rather than relying on human-annotated standard answers. The significance: this dramatically reduced dependence on high-quality human annotation data, causing training costs to plummet.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <h3>
+        <span class="zh-only">MoE 架构：大模型，小成本</span>
+        <span class="en-only">MoE Architecture: Large Model, Small Cost</span>
+      </h3>
+      <p>
+        <span class="zh-only">DeepSeek-R1 采用了 MoE（Mixture of Experts，混合专家）架构。简单来说，MoE 把一个超大模型拆分成很多个"专家"子网络，每次推理时只激活其中一小部分。DeepSeek-R1 的总参数量高达 671B（6710 亿），但每次推理只激活约 37B（370 亿）参数。这意味着它在拥有超大模型能力的同时，推理成本只相当于一个小得多的模型。这种架构是 DeepSeek 能够以极低成本训练出顶级模型的关键因素之一。</span>
+        <span class="en-only">DeepSeek-R1 uses a Mixture of Experts (MoE) architecture. Simply put, MoE splits a massive model into many "expert" sub-networks, activating only a small subset during each inference pass. DeepSeek-R1 has a total parameter count of 671B (671 billion), but only activates about 37B (37 billion) parameters per inference. This means it possesses the capabilities of an ultra-large model while incurring inference costs equivalent to a much smaller model. This architecture is one of the key factors enabling DeepSeek to train a top-tier model at extremely low cost.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <h3>
+        <span class="zh-only">训练成本：GPT-o1 的十分之一</span>
+        <span class="en-only">Training Cost: One-Tenth of GPT-o1</span>
+      </h3>
+      <p>
+        <span class="zh-only">这是最让业界震惊的数据。据 DeepSeek 团队披露，DeepSeek-R1 的完整训练成本约为 557 万美元，而业界估计 OpenAI 训练 GPT-o1 级别模型的花费在 5000 万到 1 亿美元之间。换句话说，DeepSeek 用不到十分之一的成本，达到了比肩最顶尖闭源模型的性能。<strong>这对整个 AI 行业的意义是颠覆性的——它打破了"只有巨头才能做基础模型"的共识。</strong></span>
+        <span class="en-only">This was the most shocking number for the industry. According to the DeepSeek team, the complete training cost for DeepSeek-R1 was approximately $5.57 million, while industry estimates put OpenAI's GPT-o1-level model training at between $50 million and $100 million. In other words, DeepSeek achieved performance rivaling the top closed-source model at less than one-tenth the cost. <strong>The implications for the entire AI industry are disruptive — it shatters the consensus that "only tech giants can build foundation models."</strong></span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <h3>
+        <span class="zh-only">思维链透明可见</span>
+        <span class="en-only">Transparent Chain-of-Thought</span>
+      </h3>
+      <p>
+        <span class="zh-only">DeepSeek-R1 在生成最终答案之前，会完整展示它的推理过程——从理解问题、拆解子问题、尝试不同思路到最终得出结论。这种"思考过程"不仅是调试的好帮手，更让用户能直观地看到 AI 是如何"想"的。与传统模型直接给答案不同，DeepSeek-R1 的思维链让 AI 的决策过程变得可解释、可验证。</span>
+        <span class="en-only">Before generating its final answer, DeepSeek-R1 displays its complete reasoning process — from understanding the problem, breaking it into sub-problems, trying different approaches, to reaching a final conclusion. This "thinking process" isn't just helpful for debugging — it lets users intuitively see how AI "thinks." Unlike traditional models that directly give answers, DeepSeek-R1's chain-of-thought makes AI's decision-making process interpretable and verifiable.</span>
+      </p>
+    </div>
+
+    <div class="step reveal">
+      <div class="step-num">5</div>
+      <h3>
+        <span class="zh-only">完全开源，权重可下载</span>
+        <span class="en-only">Fully Open Source with Downloadable Weights</span>
+      </h3>
+      <p>
+        <span class="zh-only">DeepSeek-R1 的模型权重在 Hugging Face 和 DeepSeek 官方平台上完全公开，采用 MIT 许可证，允许商用。这意味着任何公司、研究团队甚至个人开发者，都可以在自己的服务器上部署这个顶级推理模型，不受任何限制。从学术界到初创公司，从国内到海外，所有人都因此受益。</span>
+        <span class="en-only">DeepSeek-R1's model weights are fully public on Hugging Face and DeepSeek's official platform, released under the MIT license with commercial use permitted. This means any company, research team, or individual developer can deploy this top-tier reasoning model on their own servers without restrictions. From academia to startups, from domestic to international — everyone benefits.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">开源的意义：为什么这件事如此重要？</span>
+    <span class="en-only">Why Open Source Matters: Why This Is So Important</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">在 DeepSeek-R1 之前，全球最强的推理模型——OpenAI 的 o1 系列——是完全闭源的。你只能通过 OpenAI 的 API 使用它，按 token 计费，而且价格不便宜。你的数据必须发送到 OpenAI 的服务器，隐私安全完全取决于对方的承诺。</span>
+    <span class="en-only">Before DeepSeek-R1, the world's strongest reasoning model — OpenAI's o1 series — was completely closed source. You could only use it through OpenAI's API, paying per token at a not-inexpensive rate. Your data had to be sent to OpenAI's servers, and privacy depended entirely on their promises.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">DeepSeek-R1 的开源打破了这种垄断格局。它的意义体现在多个层面：</span>
+    <span class="en-only">DeepSeek-R1's open source broke this monopolistic landscape. Its significance manifests on multiple levels:</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>对研究者：</strong>终于有了一个真正顶级的开源推理模型可以用来做实验、做对比、做改进。以前的研究者只能拿开源的通用模型做实验，推理能力方面的研究严重受限。</span>
+    <span class="en-only"><strong>For researchers:</strong> finally there's a truly top-tier open-source reasoning model for experiments, comparisons, and improvements. Previously, researchers could only experiment with open-source general models, severely limiting reasoning capability research.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>对初创公司：</strong>不再需要依赖 OpenAI 的 API，可以用自己的服务器部署 DeepSeek-R1，大幅降低运营成本，同时掌控自己的数据安全。</span>
+    <span class="en-only"><strong>For startups:</strong> no longer dependent on OpenAI's API, they can deploy DeepSeek-R1 on their own servers, dramatically reducing operational costs while maintaining data security control.</span>
+  </p>
+
+  <p>
+    <span class="zh-only"><strong>对整个行业：</strong>DeepSeek-R1 证明了一条新的技术路线是可行的——纯强化学习、MoE 架构、低成本训练。这给了所有人信心：AI 的进步不需要只有砸钱一条路。</span>
+    <span class="en-only"><strong>For the entire industry:</strong> DeepSeek-R1 proved a new technical approach is viable — pure reinforcement learning, MoE architecture, low-cost training. This gave everyone confidence that AI progress doesn't require only spending mountains of money.</span>
+  </p>
+
+  <div class="highlight">
+    <p>
+      <span class="zh-only"><strong>DeepSeek-R1 的开源不是"免费试用"，而是"彻底开放"。你可以下载它、改造它、商用它，没有任何限制。这种开放程度在顶级 AI 模型中前所未有。它重新定义了开源 AI 的标准，也让全世界看到了中国 AI 团队的技术实力和开放胸怀。</strong></span>
+      <span class="en-only"><strong>DeepSeek-R1's open source isn't "free trial" — it's "completely open." You can download it, modify it, commercialize it, with zero restrictions. This level of openness is unprecedented for a top-tier AI model. It redefined the standard for open-source AI and showed the world the technical prowess and openness of a Chinese AI team.</strong></span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">对普通人意味着什么？</span>
+    <span class="en-only">What Does This Mean for Ordinary People?</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">你可能会问："这些技术细节和我有什么关系？"关系大了。</span>
+    <span class="en-only">You might ask: "What do these technical details have to do with me?" A lot, actually.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">首先，<strong>免费获得顶级推理能力。</strong>DeepSeek 提供了免费的在线体验入口，你可以直接去 DeepSeek 的官网和它对话。不需要付费、不需要排队、不需要复杂的配置。这个模型在数学、编程、逻辑推理方面的能力，在 2024 年底是需要花大价钱通过 OpenAI API 才能使用的。现在，它对所有人免费开放。</span>
+    <span class="en-only">First, <strong>free access to top-tier reasoning capabilities.</strong> DeepSeek provides a free online experience portal where you can chat with the model directly at their website. No payment, no queues, no complex configuration needed. This model's capabilities in math, coding, and logical reasoning would have required expensive OpenAI API access at the end of 2024. Now, it's freely available to everyone.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">其次，<strong>更可靠的帮助。</strong>推理模型的独特之处在于它不只是"猜测"答案，而是真正"思考"后给出结论。当你问它一个复杂的数学题，它不是直接扔一个答案给你，而是展示完整的解题过程。当你让它帮你分析一个业务问题，它会先拆解因素、列举可能性，再给出建议。这种"会思考"的 AI，比传统模型的回答可靠得多。</span>
+    <span class="en-only">Second, <strong>more reliable assistance.</strong> The unique thing about reasoning models is they don't just "guess" answers — they actually "think" before concluding. When you ask a complex math problem, it doesn't just throw an answer at you; it shows the complete solving process. When you ask it to analyze a business problem, it first breaks down factors, lists possibilities, then gives recommendations. This "thinking" AI is far more reliable than traditional models' answers.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">第三，<strong>隐私安全。</strong>如果你想用 AI 处理敏感信息（比如公司内部数据分析、个人财务规划），你可以选择 DeepSeek 的开源版本自行部署，数据完全不出你自己的服务器。对于注重隐私的用户和企业来说，这是一个巨大的优势。</span>
+    <span class="en-only">Third, <strong>privacy and security.</strong> If you want to use AI for sensitive tasks (like internal company data analysis, personal financial planning), you can choose to self-deploy the open-source version of DeepSeek, keeping all data on your own servers. For privacy-conscious users and enterprises, this is a massive advantage.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2>
+    <span class="zh-only">写在最后</span>
+    <span class="en-only">Final Thoughts</span>
+  </h2>
+
+  <p>
+    <span class="zh-only">DeepSeek-R1 的故事，本质上是一个"以小博大"的故事。一个不算庞大的中国团队，用创新的技术路线和极致的工程效率，做出了让全球 AI 圈为之震动的东西。它提醒我们：AI 的进步不仅仅取决于谁有最多的钱和最大的算力，更取决于谁有最好的技术洞察和最勇敢的开放精神。</span>
+    <span class="en-only">The DeepSeek-R1 story is, at its core, a "David vs. Goliath" story. A Chinese team of moderate size used innovative technical approaches and extreme engineering efficiency to create something that shook the global AI community. It reminds us: AI progress isn't determined only by who has the most money and computing power — it depends even more on who has the best technical insight and the courage to be open.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">对于每一个正在学习 AI、使用 AI 的人来说，DeepSeek-R1 带来的最大启示也许是：<strong>最好的 AI 时代，是所有人都能用上顶级 AI 的时代。</strong>而这个时代，正在到来。</span>
+    <span class="en-only">For everyone learning about AI and using AI, perhaps the greatest insight from DeepSeek-R1 is: <strong>the best AI era is one where everyone has access to top-tier AI.</strong> And that era is arriving.</span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../">← <span class="zh-only">回到主页</span><span class="en-only">Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const btn=document.getElementById('menubtn'),links=document.getElementById('navlinks');btn&&btn.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+</body></html>
