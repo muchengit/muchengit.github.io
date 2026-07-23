@@ -145,22 +145,26 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
 .steps{counter-reset:step;margin:36px 0}
 .step{
   counter-increment:step;
-  display:flex;gap:20px;margin-bottom:20px;
-  padding:24px;background:var(--surface);
+  margin-bottom:24px;
+  padding:28px 28px 28px 0;background:var(--surface);
   border:1px solid var(--border);border-radius:14px;
   transition:border-color .3s;
+  position:relative;
 }
 .step:hover{border-color:var(--border-2)}
 .step-num{display:none}
 .step::before{
-  content:counter(step);flex-shrink:0;
-  width:38px;height:38px;border-radius:10px;
+  content:counter(step);position:absolute;top:28px;left:-20px;
+  width:40px;height:40px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-m);font-size:14px;font-weight:600;
+  font-family:var(--font-m);font-size:15px;font-weight:600;
   background:linear-gradient(135deg,var(--cyan),var(--violet));color:#0A0E1A;
+  box-shadow:0 4px 16px -4px rgba(0,229,255,.3);
 }
-.step h4{font-family:var(--font-h);font-weight:600;font-size:17px;margin-bottom:8px;color:var(--text)}
-.step p{margin:0;color:var(--text-2);font-size:15px;line-height:1.75}
+.step h3,.step h4{font-family:var(--font-h);font-weight:600;font-size:19px;margin-bottom:10px;color:var(--text);padding-left:52px}
+.step p{margin:0 0 16px;color:var(--text-2);font-size:15px;line-height:1.75;padding-left:52px}
+.step pre{margin-left:52px}
+.step .callout{margin:16px 0 0 52px}
 
 /* Comparison */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
@@ -237,8 +241,12 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
   .compare .col{padding:16px}
   .compare .col h4{font-size:11px}
   .compare .col p{font-size:13px}
-  .step{flex-direction:column;gap:12px}
-  .step::before{width:32px;height:32px;font-size:13px}
+  .step{padding:24px 20px 24px 0}
+  .step::before{width:34px;height:34px;font-size:13px;top:24px;left:-16px}
+  .step h3,.step h4{padding-left:42px;font-size:17px}
+  .step p{padding-left:42px;font-size:14px}
+  .step pre{margin-left:42px}
+  .step .callout{margin-left:42px}
   .prose table{font-size:12.5px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .prose th,.prose td{padding:8px 10px}
   .nav-links{display:none}
@@ -258,9 +266,12 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
   .prose h2{font-size:18px;padding-left:12px}
   .callout{padding:14px 16px;gap:10px;font-size:13px}
   .callout .icon{font-size:16px}
-  .step{padding:14px;gap:12px}
-  .step h4{font-size:14.5px}
-  .step p{font-size:13px}
+  .step{padding:20px 16px 20px 0}
+  .step::before{width:30px;height:30px;font-size:12px;left:-14px}
+  .step h3,.step h4{padding-left:36px;font-size:16px}
+  .step p{padding-left:36px;font-size:13px}
+  .step pre{margin-left:36px}
+  .step .callout{margin-left:36px}
   .highlight{padding:16px 18px}
   .prose pre{font-size:11.5px;padding:14px;line-height:1.6}
   .compare .col{padding:14px;border-radius:12px}
