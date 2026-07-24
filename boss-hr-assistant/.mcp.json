@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "boss-hr-assistant": {
+      "command": "python",
+      "args": ["d:\\work\\treaWork\\boss-hr-assistant\\server.py"],
+      "env": {
+        "NO_PROXY": "localhost,127.0.0.1"
+      }
+    }
+  }
+}

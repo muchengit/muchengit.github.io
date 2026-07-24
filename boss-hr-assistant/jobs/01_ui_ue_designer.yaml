@@ -1,0 +1,88 @@
+# 岗位1: UI/UE美工设计师
+# 应用系统开发运维类 | UI/UE | UI/UE美工设计师
+
+job:
+  title: "UI/UE美工设计师"
+  salary: "面议"
+  city: "北京"
+  experience: "不限"
+
+company:
+  name: "（招聘公司）"
+  description: "负责公司Web/APP多端产品视觉设计及AI虚拟IP角色全案设计"
+
+# 简历评分标准
+scoring:
+  # ===== 硬性要求（不满足直接扣大分）=====
+  must_have:
+    - name: "设计工具"
+      keywords: ["PS", "Photoshop", "AI", "Illustrator", "Figma", "Axure", "Sketch", "Adobe"]
+      weight: 15
+      required: true
+      description: "精通PS、AI、Figma、Axure等主流设计工具"
+
+    - name: "UI设计经验"
+      keywords: ["UI设计", "美工", "视觉设计", "界面设计", "Web设计", "APP设计", "交互设计", "用户体验"]
+      weight: 15
+      required: true
+      description: "具备互联网UI设计、美工设计相关工作经验"
+
+    - name: "切图标注能力"
+      keywords: ["切图", "标注", "适配", "还原", "前端适配", "设计落地"]
+      weight: 12
+      required: true
+      description: "可精准输出切图、标注，保障设计高效落地还原"
+
+  # ===== 加分项 =====
+  nice_to_have:
+    - name: "AI虚拟IP设计"
+      keywords: ["虚拟角色", "IP形象", "角色设计", "虚拟人", "虚拟IP", "人设", "造型", "二次元", "写实"]
+      weight: 12
+      description: "具备原创虚拟角色/IP形象设计能力"
+
+    - name: "场景视觉设计"
+      keywords: ["场景设计", "氛围", "沉浸", "道具", "背景", "渲染", "视觉场景"]
+      weight: 8
+      description: "具备场景视觉设计能力"
+
+    - name: "品牌物料设计"
+      keywords: ["品牌", "画册", "海报", "Banner", "宣传", "物料", "展板", "PPT", "推文", "企业宣传"]
+      weight: 8
+      description: "具备品牌宣传物料设计能力"
+
+    - name: "多端设计"
+      keywords: ["Web", "APP", "多端", "双端", "小程序", "响应式", "跨平台"]
+      weight: 6
+      description: "Web/APP双端界面设计经验"
+
+    - name: "色彩与版式"
+      keywords: ["色彩", "版式", "排版", "审美", "视觉规范", "设计规范", "视觉体系"]
+      weight: 6
+      description: "良好的色彩审美和版式把控能力"
+
+    - name: "大厂经验"
+      keywords: ["字节", "腾讯", "阿里", "百度", "美团", "京东", "网易", "小米", "大厂"]
+      weight: 5
+      description: "大厂设计岗位经验"
+
+  # ===== 减分项 =====
+  negative:
+    - name: "纯开发背景"
+      keywords: ["后端开发", "前端开发", "Java", "Python", "程序员", "开发工程师"]
+      weight: -15
+      description: "简历偏向开发而非设计"
+
+    - name: "无设计工具"
+      keywords: []
+      weight: -10
+      description: "未提及任何设计工具"
+
+# 简历文件命名格式
+naming:
+  format: "{name}_{job_title}_{score}分_{city}_{experience}"
+  # 示例: 张三_UIUE美工设计师_96分_北京_5年.pdf
+
+# 索要简历的消息模板
+messages:
+  request_resume: "您好！您的作品集和经历很匹配我们的UI/UE设计师岗位，方便发一份完整简历（含作品集链接）给我吗？PDF或Word格式都可以，谢谢！"
+  received_thanks: "收到您的简历，我们会尽快评估并回复您，请保持关注，谢谢！"

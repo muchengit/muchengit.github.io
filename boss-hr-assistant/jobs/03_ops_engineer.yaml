@@ -1,0 +1,86 @@
+# 岗位3: 常规运维工程师 - 中级
+# 应用系统开发运维类 | 常规运维 | 中级
+
+job:
+  title: "常规运维工程师"
+  salary: "面议"
+  city: "北京"
+  experience: "3-5年"
+
+company:
+  name: "（招聘公司）"
+  description: "负责应用系统权限、数据运维及使用咨询"
+
+# 简历评分标准
+scoring:
+  # ===== 硬性要求 =====
+  must_have:
+    - name: "运维经验"
+      keywords: ["运维", "应用运维", "系统运维", "故障处理", "监控", "预案", "生产环境"]
+      weight: 18
+      required: true
+      description: "3-5年运维经验，有故障处理、监控实战经验"
+
+    - name: "数据库运维"
+      keywords: ["oracle", "MySQL", "Polardb", "数据库", "SQL", "关系型数据库"]
+      weight: 15
+      required: true
+      description: "熟悉oracle、MySQL、Polardb等主流关系型数据库"
+
+    - name: "微服务容器"
+      keywords: ["微服务", "容器", "Docker", "K8S", "Kubernetes", "容器治理", "服务治理"]
+      weight: 12
+      required: true
+      description: "有微服务、容器治理实战经验"
+
+  # ===== 加分项 =====
+  nice_to_have:
+    - name: "ITIL认证"
+      keywords: ["ITIL", "事件管理", "流程管理", "变更管理", "服务管理"]
+      weight: 10
+      description: "熟悉ITIL理论，有事件管理流程落地经验"
+
+    - name: "企业级运维"
+      keywords: ["企业级", "业务系统", "统建系统", "应用系统", "集团", "ERP", "OA"]
+      weight: 8
+      description: "有企业级业务系统运维经验"
+
+    - name: "云平台"
+      keywords: ["阿里云", "腾讯云", "华为云", "AWS", "云上", "云平台", "云计算"]
+      weight: 6
+      description: "了解云上中间件、操作系统、网络"
+
+    - name: "自动化运维"
+      keywords: ["自动化", "Ansible", "Terraform", "Shell", "Python", "脚本", "CI/CD", "Jenkins"]
+      weight: 6
+      description: "有自动化运维和脚本开发能力"
+
+    - name: "团队管理"
+      keywords: ["团队", "管理", "组建", "带领", "leader", "主管"]
+      weight: 5
+      description: "具备应用运维管理体系和团队建设能力"
+
+    - name: "大厂经验"
+      keywords: ["字节", "腾讯", "阿里", "百度", "美团", "京东", "华为", "大厂"]
+      weight: 5
+      description: "大厂运维经验"
+
+  # ===== 减分项 =====
+  negative:
+    - name: "纯开发背景"
+      keywords: ["后端开发", "前端开发", "全栈开发", "软件开发"]
+      weight: -12
+      description: "简历偏向开发而非运维"
+
+    - name: "经验不足"
+      keywords: ["应届", "实习", "1年", "不到1年"]
+      weight: -15
+      description: "经验不足3年"
+
+# 简历文件命名格式
+naming:
+  format: "{name}_{job_title}_{score}分_{city}_{experience}"
+
+messages:
+  request_resume: "您好！您的经历很匹配我们的常规运维工程师岗位，方便发一份完整简历给我吗？PDF或Word格式都可以，谢谢！"
+  received_thanks: "收到您的简历，我们会尽快评估并回复您，请保持关注，谢谢！"

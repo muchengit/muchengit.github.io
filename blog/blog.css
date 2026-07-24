@@ -41,7 +41,7 @@ img{max-width:100%;display:block;border-radius:12px}
 /* Nav */
 nav{position:fixed;top:16px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:center}
 .nav-in{
-  max-width:1180px;width:calc(100% - 64px);
+  max-width:var(--maxw);width:calc(100% - 64px);
   display:flex;align-items:center;justify-content:space-between;
   padding:10px 14px 10px 18px;
   background:rgba(10,14,26,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
@@ -263,6 +263,9 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
     padding:16px;border-radius:16px;
     border:1px solid var(--border);
   }
+  .nav-in{width:calc(100% - 44px);padding:8px 10px 8px 14px}
+  .logo{font-size:12px}
+  .lang-btn{font-size:10px;padding:5px 10px}
 }
 @media(max-width:500px){
   body{font-size:14px;line-height:1.75}

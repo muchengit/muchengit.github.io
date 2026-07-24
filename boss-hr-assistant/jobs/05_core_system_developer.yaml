@@ -1,0 +1,101 @@
+# 岗位5: 核心业务系统开发工程师 - 高级
+# 应用系统开发运维类 | 核心业务系统开发 | 高级
+
+job:
+  title: "核心业务系统开发工程师"
+  salary: "面议"
+  city: "北京"
+  experience: "6年以上"
+
+company:
+  name: "（招聘公司）"
+  description: "负责核心技术问题攻关及系统架构改进"
+
+# 简历评分标准
+scoring:
+  # ===== 硬性要求 =====
+  must_have:
+    - name: "Java高级开发"
+      keywords: ["Java", "Java EE", "J2EE", "Spring", "SpringBoot", "MyBatis", "JVM"]
+      weight: 18
+      required: true
+      description: "扎实的Java基础，精通Java EE、数据库、缓存、消息队列"
+
+    - name: "分布式架构"
+      keywords: ["Spring Cloud", "SpringCloud", "Dubbo", "Zookeeper", "微服务", "分布式", "Springboot", "Spring Boot"]
+      weight: 15
+      required: true
+      description: "精通分布式架构，熟悉主流微服务框架"
+
+    - name: "经验年限"
+      keywords: ["6年", "7年", "8年", "10年", "5-10年", "6年以上", "8年以上"]
+      weight: 12
+      required: true
+      description: "相关工作经验6年以上，有独立带队经验"
+
+  # ===== 加分项 =====
+  nice_to_have:
+    - name: "高并发经验"
+      keywords: ["高并发", "高性能", "高可用", "大型网站", "秒杀", "流量", "并发"]
+      weight: 10
+      description: "有高并发、高性能、高可用大型网站构建经验"
+
+    - name: "DDD领域驱动"
+      keywords: ["DDD", "领域驱动", "Domain", "设计模式", "架构设计", "系统架构"]
+      weight: 8
+      description: "有领域驱动设计实践经验"
+
+    - name: "数据库调优"
+      keywords: ["oracle", "Polardb", "MySQL", "性能优化", "调优", "索引", "分库分表", "SQL优化"]
+      weight: 7
+      description: "熟悉主流关系型数据库性能优化"
+
+    - name: "Linux调优"
+      keywords: ["Linux", "JVM", "tomcat", "nginx", "调优", "性能", "网络协议", "TCP"]
+      weight: 6
+      description: "精通Linux常用命令、JVM/Tomcat/Nginx调优"
+
+    - name: "AI能力"
+      keywords: ["AI", "AI辅助编程", "AI Agent", "大模型", "LLM", "GPT", "Copilot", "人工智能", "AIGC"]
+      weight: 8
+      description: "有AI辅助编程、AI Agent、大模型应用经验"
+
+    - name: "BIP/NCC经验"
+      keywords: ["BIP", "NCC", "用友", "NC", "企业级", "ERP", "toB"]
+      weight: 6
+      description: "参与过BIP/NCC相关产品开发"
+
+    - name: "团队管理"
+      keywords: ["团队", "带队", "管理", "技术负责人", "架构师", "leader", "主管", "技术赋能"]
+      weight: 5
+      description: "有团队技术赋能和管理经验"
+
+    - name: "大厂经验"
+      keywords: ["字节", "腾讯", "阿里", "百度", "美团", "京东", "华为", "大厂"]
+      weight: 5
+      description: "大厂核心系统开发经验"
+
+  # ===== 减分项 =====
+  negative:
+    - name: "经验不足"
+      keywords: ["应届", "实习", "1年", "2年", "3年", "4年"]
+      weight: -15
+      description: "经验不足6年"
+
+    - name: "非Java技术栈"
+      keywords: ["PHP", "Python开发", "Go开发", ".NET", "C#", "前端开发"]
+      weight: -12
+      description: "非Java技术栈"
+
+    - name: "纯运维背景"
+      keywords: ["运维", "系统管理员", "网络管理员"]
+      weight: -8
+      description: "简历偏向运维而非开发"
+
+# 简历文件命名格式
+naming:
+  format: "{name}_{job_title}_{score}分_{city}_{experience}"
+
+messages:
+  request_resume: "您好！您的经历很匹配我们的核心业务系统开发工程师（高级）岗位，方便发一份完整简历给我吗？PDF或Word格式都可以，谢谢！"
+  received_thanks: "收到您的简历，我们会尽快评估并回复您，请保持关注，谢谢！"
