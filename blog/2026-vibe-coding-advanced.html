@@ -1,0 +1,480 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后 | Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</title><meta name="description" content="代码量越过 10 万行后，AI 编程真正会遇到的七个问题：上下文装不下、项目结构失控、技术债累积。本文给出目录拆分、规则文件、测试与重构提示词范式，以及一份可维护性检查清单。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+
+<header class="hero">
+  <img src="2026-vibe-advanced-hero.jpg" alt="Large AI-generated codebase" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">AI 编程</span> <span class="en-only">|</span> <span class="en-only">AI Coding</span></div>
+    <h1 class="reveal"><span class="zh-only">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</span><span class="en-only">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.08.28 — 从"能跑"到"能维护"，一份踩过坑才写得出的实战指南</span><span class="en-only">2026.08.28 — From "it runs" to "it can be maintained": a field guide written after the mistakes</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">10 万行，是一个什么概念</span><span class="en-only">What 100,000 Lines Actually Means</span></h2>
+  <p>
+    <span class="zh-only">2026 年 3 月，我接手了一个"发票管理 SaaS"的项目。到 6 月它长成了这样：前端 4.1 万行、后端 5.8 万行、脚本 2.2 万行、测试 1.4 万行，合计约 <strong>13.5 万行</strong>。其中 91% 是 AI 写的——准确地说，是我在旁边盯着 AI 写的。</span>
+    <span class="en-only">In March 2026 I took over an "invoice management SaaS" project. By June it looked like this: 41k lines of frontend, 58k of backend, 22k of scripts, 14k of tests — about <strong>135,000 lines</strong> in total. Ninety-one percent of it was AI-written; more precisely, AI-written while I watched.</span>
+  </p>
+  <p>
+    <span class="zh-only">就在这三个月里，我遇到了"vibe coding"教程里从来不提的那一面：<strong>代码能跑，但项目开始失控了</strong>。不是 AI 写不出正确的代码，恰恰相反，它写得又快又漂亮。问题是它对整个项目的理解开始出现缝隙——同一个约定在三个地方被理解成三种意思，同一个函数被实现了两遍，改完调用方忘了改类型定义。</span>
+    <span class="en-only">During those three months I met the side of vibe coding that tutorials never mention: <strong>the code runs, but the project starts to slip out of your hands</strong>. It isn't that the AI can't write correct code — quite the opposite, it writes it fast and beautifully. The problem is that its grasp of the project develops gaps: the same convention understood three different ways in three places, the same function implemented twice, a caller updated while the type definition was forgotten.</span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">先说最重要的一句：<strong>10 万行不是问题，"一次让 AI 看的东西太多"才是问题。</strong>行数只是症状。你真正需要管理的是上下文——你每个会话喂给模型的信息量。</span><span class="en-only">The single most important thing to say up front: <strong>100,000 lines isn't the problem — "too much for the AI to look at once" is.</strong>Line count is just a symptom. What you actually need to manage is context: how much information you feed the model each session.</span></p>
+  </div>
+  <p>
+    <span class="zh-only">先做个粗算。13.5 万行代码，按平均每行 8 个 token 算，全部塞进上下文大约需要 <strong>108 万 token</strong>。2026 年的模型窗口虽然已经普遍到 20 万到 100 万 token，但即使窗口够大，也不代表塞满之后还能正常工作——系统提示、工具定义、历史对话、文件读取记录都要占位置。更关键的是，就算技术上装得下，超过一定规模之后，模型对上下文的"注意力"会明显衰减。</span>
+    <span class="en-only">Let's do rough arithmetic. 135,000 lines at roughly 8 tokens per line is about <strong>1.08 million tokens</strong> to hold the whole project. Model windows in 2026 commonly run from 200k to 1M tokens, but a window being big enough doesn't mean the model still works well when it's full — the system prompt, tool definitions, conversation history, and file-read logs all take up room. And even when it technically fits, past a certain size the model's <em>attention</em> to the context degrades noticeably.</span>
+  </p>
+  <blockquote>
+    <span class="zh-only">把上下文窗口当成内存，不是硬盘。内存不够会崩，硬盘不够只是慢——而 AI 的失败方式更像内存不够：不是变慢，是直接开始胡说。</span>
+    <span class="en-only">Think of the context window as RAM, not disk. Running out of RAM crashes; running out of disk just gets slow. And the way AI fails resembles running out of RAM: it doesn't get slower — it starts making things up.</span>
+  </blockquote>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">上下文装不下时的 7 个真实表现</span><span class="en-only">Seven Real Symptoms of an Overloaded Context</span></h2>
+  <p>
+    <span class="zh-only">这三个月里我记录了 214 次"AI 犯错"，逐条归类后发现，其中 <strong>63% 属于上下文不足</strong>，而不是模型变笨。下面这张表是最常见的七种表现，左边是它做了什么，右边是它为什么会这样。</span>
+    <span class="en-only">Over those three months I logged 214 "the AI got it wrong" incidents. After categorizing each one, <strong>63% were caused by insufficient context</strong> — not by the model getting dumber. Here are the seven most common symptoms: on the left, what it did; on the right, why.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">症状</span><span class="en-only">Symptom</span></th>
+        <th><span class="zh-only">典型表现</span><span class="en-only">Typical behavior</span></th>
+        <th><span class="zh-only">根因</span><span class="en-only">Root cause</span></th>
+        <th><span class="zh-only">占比</span><span class="en-only">Share</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">忘记约定</span><span class="en-only">Forgets conventions</span></td>
+        <td><span class="zh-only">规则文件里写着"金额一律用整数分存储"，它写成了浮点数</span><span class="en-only">Rules say "store money as integer cents" — it wrote floats</span></td>
+        <td><span class="zh-only">规则文件被稀释（超过 200 行后前几条约定基本失效）</span><span class="en-only">Diluted rules (past ~200 lines the early conventions stop holding)</span></td>
+        <td><span class="zh-only">24%</span><span class="en-only">24%</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">重复实现</span><span class="en-only">Duplicate implementations</span></td>
+        <td><span class="zh-only">项目里已有 <code>formatCurrency()</code>，它又造了一个 <code>formatMoney()</code></span><span class="en-only">The project already has <code>formatCurrency()</code>; it wrote <code>formatMoney()</code> too</span></td>
+        <td><span class="zh-only">没做全库检索，只看了你指定的那几个文件</span><span class="en-only">No repo-wide search, only the files you named</span></td>
+        <td><span class="zh-only">19%</span><span class="en-only">19%</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">改 A 忘 B</span><span class="en-only">Changes A, forgets B</span></td>
+        <td><span class="zh-only">改了调用方，忘了同步改类型定义和文档</span><span class="en-only">Updated the caller, forgot the type definition and the docs</span></td>
+        <td><span class="zh-only">只读了局部文件，没看到反向依赖</span><span class="en-only">Read only a fragment, missed reverse dependencies</span></td>
+        <td><span class="zh-only">17%</span><span class="en-only">17%</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">文件越滚越大</span><span class="en-only">Files keep growing</span></td>
+        <td><span class="zh-only">一个函数长到 400 行，还在往里加 <code>if</code></span><span class="en-only">One function reached 400 lines and kept collecting <code>if</code> branches</span></td>
+        <td><span class="zh-only">没人告诉它"超过 100 行就要拆"</span><span class="en-only">Nobody told it "split anything past 100 lines"</span></td>
+        <td><span class="zh-only">12%</span><span class="en-only">12%</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">边界缺失</span><span class="en-only">Missing edge cases</span></td>
+        <td><span class="zh-only">数组直接取下标，越界时抛了个看不懂的错</span><span class="en-only">Indexing an array directly; a cryptic crash on out-of-range</span></td>
+        <td><span class="zh-only">看不到调用方对空值和边界的既有约定</span><span class="en-only">Never saw the caller's null and boundary conventions</span></td>
+        <td><span class="zh-only">11%</span><span class="en-only">11%</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">幻觉接口</span><span class="en-only">Hallucinated APIs</span></td>
+        <td><span class="zh-only">调用了一个项目里根本不存在的函数</span><span class="en-only">Calls a function that does not exist in the project</span></td>
+        <td><span class="zh-only">凭记忆猜签名，而不是去读</span><span class="en-only">Guessed the signature from memory instead of reading</span></td>
+        <td><span class="zh-only">9%</span><span class="en-only">9%</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">推倒重来</span><span class="en-only">Rewrites from scratch</span></td>
+        <td><span class="zh-only">长会话后突然说"这个方案不可行"，并重写你上周的代码</span><span class="en-only">After a long session: "this approach won't work" — and rewrites last week's code</span></td>
+        <td><span class="zh-only">长会话里的注意力衰减，早期内容权重被压低</span><span class="en-only">Attention decay in long sessions; early content gets down-weighted</span></td>
+        <td><span class="zh-only">8%</span><span class="en-only">8%</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout warn">
+    <strong><span class="zh-only">第 7 条最值得警惕</span><span class="en-only">Symptom 7 deserves the most caution</span></strong>
+    <p><span class="zh-only">"推倒重来"看着像模型能力问题，其实是上下文问题——它被淹没了。很多人的第一反应是"换更强的模型"，结果只是把更大的上下文用同样错误的方式填满。正确做法是<strong>把会话切短</strong>：一个任务一个会话，做完就开新的。</span><span class="en-only">"Rewrites from scratch" looks like a model-capability problem, but it's a context problem — it was drowning. The instinctive fix is "use a stronger model," which just fills a bigger context the same wrong way. The right move is to <strong>shorten the session</strong>: one task per session, then start a fresh one.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第一步：让 AI 只看它该看的部分</span><span class="en-only">Step 1: Make the AI See Only What It Should</span></h2>
+  <p>
+    <span class="zh-only">现在的主流 AI 编程工具都提供了限定范围的能力，但很多人只用其中一种，用错了地方。三种方式各有明确的适用场景，我按我实际的使用频率从高到低排。</span>
+    <span class="en-only">Every major AI coding tool now lets you scope what the model sees, but most people use only one of them, in the wrong place. Here's how I actually use the three, ordered by frequency.</span>
+  </p>
+  <h3><span class="zh-only">1）<code>@folder</code>：我的主力，占日常任务的 90%</span><span class="en-only">1) <code>@folder</code>: My default, ~90% of daily tasks</span></h3>
+  <p>
+    <span class="zh-only">指定一个目录，只让它读这个目录。这是最精确的上下文控制——你把"这次任务的全部世界"压缩到 2000 到 4000 行，AI 的表现会立刻变好。关键前提是<strong>你的目录必须按职责切干净</strong>，否则你只是把混乱缩小了。</span>
+    <span class="en-only">Point it at one directory and let it read only that. This is the tightest control you can get — you compress "the entire world of this task" into 2,000–4,000 lines and the AI immediately improves. The prerequisite is that <strong>your directories must be cleanly cut by responsibility</strong>; otherwise you've just shrunk the mess.</span>
+  </p>
+  <h3><span class="zh-only">2）<code>@codebase</code>：只用来"找东西"，不用来"干活的"</span><span class="en-only">2) <code>@codebase</code>: For finding things, not for doing the work</span></h3>
+  <p>
+    <span class="zh-only">全库语义检索。在 13 万行的项目上跑一次要 40 到 70 秒，而且会返回大量不相关的片段。它真正的用途是回答"这个功能到底在哪儿实现过"这类查找问题。用它来生成代码，等于把整个项目倒进上下文，正是我们要避免的。</span>
+    <span class="en-only">Repo-wide semantic search. On a 135k-line project it takes 40–70 seconds and returns a lot of irrelevant chunks. Its real job is answering "where was this feature implemented before?" Use it to generate code and you're pouring the whole project into the context — exactly what we're trying to avoid.</span>
+  </p>
+  <h3><span class="zh-only">3）分层目录：物理上的上下文隔离</span><span class="en-only">3) Layered directories: physical context isolation</span></h3>
+  <p>
+    <span class="zh-only">这是最根本的一条。<strong>目录结构就是你的上下文策略</strong>——一个目录对应一个职责，AI 的一次会话就对应一个目录。这样你不需要每次都提醒它"别看别的"，结构本身已经替你说了。</span>
+    <span class="en-only">This is the most fundamental one. <strong>Your directory layout is your context strategy</strong> — one directory, one responsibility, one AI session. Then you never have to say "don't look at anything else"; the structure says it for you.</span>
+  </p>
+  <pre data-lang="text">invoice-crm/
+├── CLAUDE.md              # 规则文件，控制在 60 行以内
+├── docs/
+│   ├── requirements.md    # 需求，写在代码前面
+│   └── adr/               # 架构决策记录：为什么这么设计
+├── src/
+│   ├── domain/            # ~5k 行   业务规则，纯函数，不依赖任何框架
+│   ├── api/               # ~3k 行   路由 + 参数校验，不写业务逻辑
+│   ├── features/          # ~12k 行  按业务切分，一个子目录 = 一个功能
+│   │   ├── invoice/
+│   │   └── payment/
+│   ├── infra/             # ~2k 行   第三方 API、数据库、队列
+│   └── ui/                # ~8k 行   组件，不含业务规则
+└── tests/</pre>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">按"一个人一次能读完"来切目录</span><span class="en-only">Cut Directories by "What One Person Reads in One Sitting"</span></h3>
+      <p><span class="zh-only">判断标准不是"逻辑上属于同一类"，而是"我需要理解它才能改它吗"。需要一起改的放一个目录，不需要的分开。上面那个结构里，<code>src/domain/</code> 约 5 千行，<code>src/api/</code> 约 3 千行，都是单次会话能吃下的规模。</span><span class="en-only">The test isn't "do these belong to the same category" but "do I need to understand one to change the other." Things that change together go together; everything else splits. In the layout above, <code>src/domain/</code> is about 5k lines and <code>src/api/</code> about 3k — both comfortably within one session.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">先给 AI 一个"我该看哪"的入口</span><span class="en-only">Give the AI a Single "Start Here" Entry Point</span></h3>
+      <p><span class="zh-only">在规则文件里写清楚每类任务的入口目录，比如"改接口看 <code>src/api/</code>，改业务规则看 <code>src/domain/</code>"。这样连你自己都不用每次重新想"这次该让它读哪儿"。</span><span class="en-only">In your rules file, map task types to entry directories: "API changes start in <code>src/api/</code>; business-rule changes start in <code>src/domain/</code>." Then even you don't have to re-decide "where should it look this time."</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">会话结束就换新会话</span><span class="en-only">Start a New Session When the Task Ends</span></h3>
+      <p><span class="zh-only">不要在一个会话里连做三件事。我的习惯是：一次会话 = 一个可交付的小任务。做完、开新会话、重新读规则文件。这个动作在 2026 年几乎是零成本，但它把我遇到"推倒重来"的次数从每周三四次降到一个月一次。</span><span class="en-only">Don't do three things in one session. My rule: one session equals one deliverable-sized task. Finish, open a new session, re-read the rules file. The action costs almost nothing in 2026, and it took my "rewrites from scratch" incidents from three or four a week to about one a month.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第二步：给 AI 写一份"项目说明文档"</span><span class="en-only">Step 2: Write a Project Brief for the AI</span></h2>
+  <p>
+    <span class="zh-only">这就是大家说的 CLAUDE.md、AGENTS.md、<code>.cursor/rules</code>、<code>.windsurfrules</code>、<code>.github/copilot-instructions.md</code>——名字不同，作用一样：<strong>把"你脑子里那套规矩"变成 AI 每次都会读的文件</strong>。</span>
+    <span class="en-only">This is what people mean by CLAUDE.md, AGENTS.md, <code>.cursor/rules</code>, <code>.windsurfrules</code>, or <code>.github/copilot-instructions.md</code> — different names, one job: <strong>turning the rules in your head into a file the AI reads every time</strong>.</span>
+  </p>
+  <p>
+    <span class="zh-only">大部分人写失败，是因为写成了说明书：把项目从头到尾讲一遍，两百行，AI 读完什么也记不住。<strong>好的规则文件只写"不知道就会做错"的东西</strong>。能被代码本身看出来的信息（函数名、目录名）不要写，能被 linter 和类型检查发现的错误也不要写。</span>
+    <span class="en-only">Most people fail at this by writing a manual: a full tour of the project, 200 lines, of which the AI remembers nothing. <strong>A good rules file contains only what the AI would get wrong without it</strong>. Don't write what the code already shows (function names, directory names), and don't write what a linter or type checker already catches.</span>
+  </p>
+  <pre data-lang="markdown"># CLAUDE.md
+
+## 1. 这是什么
+发票管理 SaaS。2 名开发者，没有专职 QA。目标是稳定，不是优雅。
+
+## 2. 技术栈与版本（不要升级）
+- Node 20.11 / Next.js 14.2（App Router）
+- TypeScript 5.4，strict 模式，禁止 any
+- 数据库 PostgreSQL 16，ORM 用 Drizzle，禁止手写 SQL
+- 测试 Vitest 1.6，用 expect 风格，不要用 jest 语法
+
+## 3. 目录职责
+- src/domain/    纯业务规则，禁止 import 任何 UI 或数据库代码
+- src/api/       只做参数校验和转发，业务逻辑一律不写在这里
+- src/features/  页面代码，一个子目录对应一个业务功能
+- src/infra/     第三方 API 封装，密钥只从 process.env 读
+
+## 4. 不可违反的约定
+- 金额一律用整数「分」存储，字段名以 Cents 结尾，禁止浮点
+- 所有对外入参用 zod 校验
+- 不新增依赖，先问我
+- 注释用中文，标识符用英文
+
+## 5. 怎么跑
+npm run dev        本地起服务
+npm test           跑全部测试，必须全绿
+npm run typecheck  类型检查，必须无错误
+npm run lint
+
+## 6. 已知的坑
+- src/infra/ocr.ts 的重试逻辑不要动，OCR 服务商限流 2 QPS
+- src/api/export-legacy.ts 已废弃，新代码不要引用</pre>
+  <div class="callout info">
+    <strong><span class="zh-only">为什么是 60 行这个上限</span><span class="en-only">Why 60 Lines Is the Ceiling</span></strong>
+    <p><span class="zh-only">这是我自己调出来的数。我的规则文件一开始有 180 行，里面 70% 是重复的"要写测试""注释用中文"这类 AI 本来就会做的事。删到 60 行之后，出错率反而下降了——因为每条都足够"刺耳"，AI 不会忽略。<strong>规则文件要减，不要加。</strong>每加一条，就把已有的挤出去。</span><span class="en-only">I tuned this number myself. My rules file started at 180 lines, 70% of it redundant reminders like "write tests" and "comment in Chinese" that the AI already does. Trimming it to 60 lines <em>lowered</em> my error rate, because every remaining line was sharp enough to notice. <strong>Rules files should be subtracted, not added to.</strong>Every line you add pushes another one out.</span></p>
+  </div>
+  <p>
+    <span class="zh-only">还有一个容易忽略的细节：<strong>规则文件本身也要版本控制</strong>，并且每次踩坑之后立刻补一条。我那个项目里有 11 条约定，每一条后面都标注了来源，比如"（3 月 12 日：金额用分存储，否则对账差 0.01）"。这样三个月后的你一眼就知道这条为什么存在，也能判断它是否已经过时。</span>
+    <span class="en-only">One easily missed detail: <strong>the rules file belongs in version control</strong>, and you add a line the moment you hit a bug. My project has 11 conventions, each annotated with its origin — for example "(Mar 12: store money in cents, otherwise reconciliation drifts by 0.01)." Three months later you can see instantly why a rule exists and whether it's still relevant.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第三步：让 AI 写测试</span><span class="en-only">Step 3: Have the AI Write the Tests</span></h2>
+  <p>
+    <span class="zh-only">"让 AI 写测试"这句话本身没有信息量。同样是写测试，提示词里少一句话，结果就可能是"它写了一个空的 <code>it()</code> 就算完成"。我用的提示词范式有五个固定部分，缺一不可：</span>
+    <span class="en-only">"Have the AI write tests" carries almost no information. The same request with one line missing can produce an empty <code>it()</code> and a green checkmark. My prompt template has five fixed parts, and none of them is optional.</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>限定读取范围</strong>：明确写出"只读这两个文件"。这是防止它顺手大改的关键。</span><span class="en-only"><strong>Scope the reads</strong>: state "read only these two files." This is what stops it from making sweeping edits on the way.</span></li>
+    <li><span class="zh-only"><strong>先列场景再写代码</strong>：要求它先输出要覆盖的场景清单，你确认后再让它写。这一步花 30 秒，能省掉一小时返工。</span><span class="en-only"><strong>List the cases first</strong>: have it output the scenarios it will cover, you approve, then it writes. Thirty seconds here saves an hour of rework.</span></li>
+    <li><span class="zh-only"><strong>规定风格</strong>：测试框架、断言风格、路径写法，全部写死。</span><span class="en-only"><strong>Pin the style</strong>: test framework, assertion style, import paths — all specified.</span></li>
+    <li><span class="zh-only"><strong>要求它自己跑</strong>："写完运行 <code>npx vitest run 路径</code>，把失败的用例原样贴给我"，而不是"确保测试通过"。</span><span class="en-only"><strong>Make it run them</strong>: "then run <code>npx vitest run path</code> and paste the failures verbatim" — not "make sure the tests pass."</span></li>
+    <li><span class="zh-only"><strong>发现问题只报告、不修改</strong>：这一条最容易被忽略，但它能保护你的代码不被 AI 顺手改掉。</span><span class="en-only"><strong>Report problems, don't fix them</strong>: the most-missed clause, and the one that keeps the AI from quietly rewriting your code.</span></li>
+  </ol>
+  <pre data-lang="prompt">先写测试，不要写实现。
+
+目标：给 src/domain/invoice.ts 的 calculateTax() 补测试。
+
+要求：
+1. 只读 src/domain/invoice.ts 和 src/domain/types.ts，不要读其他文件
+2. 先列出你要覆盖的场景清单给我确认，我确认后再写代码
+3. 用 Vitest 的 describe / it / expect 风格，import 用相对路径
+4. 每个用例写一行中文说明
+5. 写完后运行 npx vitest run src/domain/invoice.test.ts，
+   把失败的用例原样贴给我
+6. 如果发现实现本身有 bug，只报告，不要修改实现</pre>
+  <p>
+    <span class="zh-only">这套范式在我的项目里跑了一个月，测试覆盖率从 11% 涨到 43%，而且<strong>新增功能的测试基本都是一次写对的</strong>。以前我让 AI 直接写实现，再回头补测试——覆盖率上去了，但我自己也不知道哪些用例是真的在测东西。现在是先写测试，测试本身就是需求的另一种表述。</span>
+    <span class="en-only">Running this template for a month took test coverage from 11% to 43%, and <strong>tests for new features mostly came out right on the first pass</strong>. I used to have the AI write the implementation and backfill tests afterward — coverage went up, but I had no idea which cases were actually testing anything. Writing tests first means the test is a second form of the requirement.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">任务类型</span><span class="en-only">Task type</span></th>
+        <th><span class="zh-only">提示词要点</span><span class="en-only">Key prompt elements</span></th>
+        <th><span class="zh-only">预期产出</span><span class="en-only">Expected output</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">写新功能</span><span class="en-only">New feature</span></td>
+        <td><span class="zh-only">限定读取范围 + 先列场景 + 一次只做一个功能</span><span class="en-only">Scope reads, list cases first, one feature at a time</span></td>
+        <td><span class="zh-only">一次提交只动 3 到 5 个文件</span><span class="en-only">A commit touching only 3–5 files</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">修 bug</span><span class="en-only">Fix a bug</span></td>
+        <td><span class="zh-only">先写一个能复现的失败测试，再改实现</span><span class="en-only">A failing reproducing test first, then the fix</span></td>
+        <td><span class="zh-only">一个失败用例 + 一个补丁</span><span class="en-only">One failing case plus one patch</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">重构</span><span class="en-only">Refactor</span></td>
+        <td><span class="zh-only">行为完全不变，由现有测试担保；每步跑一次测试</span><span class="en-only">Behavior identical, guaranteed by existing tests; run tests each step</span></td>
+        <td><span class="zh-only">diff + 测试全绿</span><span class="en-only">A diff with all tests green</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">在旧模块里加东西</span><span class="en-only">Extend an old module</span></td>
+        <td><span class="zh-only">先读同目录的同类实现，模仿它的风格</span><span class="en-only">Read sibling implementations first and mirror their style</span></td>
+        <td><span class="zh-only">风格一致的实现</span><span class="en-only">Implementation matching existing style</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">补文档</span><span class="en-only">Write docs</span></td>
+        <td><span class="zh-only">只读该模块的公开导出，不要读实现细节</span><span class="en-only">Read only the module's public exports, not internals</span></td>
+        <td><span class="zh-only">含输入输出和 3 个例子的 README</span><span class="en-only">A README with inputs, outputs, and 3 examples</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第四步：让 AI 做重构</span><span class="en-only">Step 4: Have the AI Do the Refactoring</span></h2>
+  <p>
+    <span class="zh-only">重构是 AI 最容易帮倒忙的地方，因为它"看到哪里不顺就改哪里"，而重构最忌讳的就是顺手改别的。下面这个对比，是我用一次 800 行的真实教训换来的。</span>
+    <span class="en-only">Refactoring is where AI most often helps backwards, because it "fixes whatever looks wrong" — and refactoring is precisely the moment you must not change anything else. The comparison below came from one real 800-line mistake I made.</span>
+  </p>
+  <div class="compare">
+    <div class="col bad">
+      <h4><span class="zh-only">会出事的请求</span><span class="en-only">The request that goes wrong</span></h4>
+      <p>
+        <span class="zh-only">"重构一下 invoice 模块，让代码更清晰。"<br><br>结果是：它重写了 800 行代码，顺手"优化"了 12 处业务逻辑，其中 3 处改变了行为。全部测试通过——因为那些测试覆盖的是它自己刚刚改掉的语义。这一句话让我花了 4 个小时回滚。</span>
+        <span class="en-only">"Refactor the invoice module, make it cleaner."<br><br>The result: it rewrote 800 lines and "improved" 12 pieces of business logic, 3 of which changed behavior. Every test passed — because those tests now covered the semantics it had just changed. That one sentence cost me four hours of rollback.</span>
+      </p>
+    </div>
+    <div class="col good">
+      <h4><span class="zh-only">能安全执行的请求</span><span class="en-only">The request that is safe</span></h4>
+      <p>
+        <span class="zh-only">给出<strong>拆分目标</strong>（拆成哪几个文件、按什么依据拆）、<strong>边界</strong>（只读这个目录）、<strong>验收标准</strong>（现有测试必须全绿、行为完全不变）、<strong>过程约束</strong>（每拆一个就跑一次测试，失败就停）、以及<strong>禁止项</strong>（不要改命名、格式、任何没被要求的逻辑）。<br><br>同样的 800 行，这次只用了 35 分钟，diff 干净，业务行为零变化。</span>
+        <span class="en-only">Give it a <strong>split target</strong> (which files, split on what basis), a <strong>boundary</strong> (read only this directory), an <strong>acceptance criterion</strong> (existing tests stay green, behavior identical), a <strong>process constraint</strong> (run tests after each split, stop on failure), and a <strong>prohibition list</strong> (don't rename, don't reformat, don't touch logic you weren't asked about).<br><br>Same 800 lines: 35 minutes, a clean diff, zero behavior change.</span>
+      </p>
+    </div>
+  </div>
+  <pre data-lang="prompt">重构任务：把 src/features/invoice/list.tsx 拆成 3 个文件。
+
+约束：
+1. 只读 src/features/invoice/ 目录，不要读其他目录
+2. 行为完全不变，现有测试必须全绿
+3. 拆分依据：Container 组件、Toolbar 组件、useInvoiceList hook
+4. 每拆一个文件就运行一次 npm test，失败立刻停下来告诉我
+5. 不要顺手改任何命名、格式，或你没被要求的逻辑
+6. 全部完成后给我一个 diff 摘要：新增和删除了哪些文件、各多少行</pre>
+  <div class="callout success">
+    <strong><span class="zh-only">第 4 条是安全阀</span><span class="en-only">Constraint 4 Is the Safety Net</span></strong>
+    <p><span class="zh-only">"每一步跑一次测试，失败就停"这九个字，能把一次可能持续半小时的失控变成一次 30 秒的中断。我后来把它写进了 <code>CLAUDE.md</code>，对所有任务生效。</span><span class="en-only">Those words — "run the tests after each step and stop on failure" — turn a possible half-hour runaway into a 30-second interruption. I later moved them into <code>CLAUDE.md</code> so they apply to every task, not just refactors.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">技术债是怎么累积起来的</span><span class="en-only">How Technical Debt Actually Accumulates</span></h2>
+  <p>
+    <span class="zh-only">6 月底我做了一次全面体检：让 AI 扫一遍全项目出报告，再人工抽查验证。下面的数字不是估计，是统计结果。</span>
+    <span class="en-only">At the end of June I ran a full audit: the AI scanned the project and produced a report, which I then verified by hand. These numbers are counts, not estimates.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">债务类型</span><span class="en-only">Type of debt</span></th>
+        <th><span class="zh-only">数量</span><span class="en-only">Count</span></th>
+        <th><span class="zh-only">产生原因</span><span class="en-only">How it accumulated</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">没有测试覆盖的导出函数</span><span class="en-only">Exported functions with no test coverage</span></td>
+        <td><span class="zh-only">412 个（占 68%）</span><span class="en-only">412 (68%)</span></td>
+        <td><span class="zh-only">先写实现、测试以后再说——"以后"没来过</span><span class="en-only">Implementation first, tests "later" — and later never came</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">重复实现（同一逻辑出现在 3 个以上文件）</span><span class="en-only">Duplicate implementations (same logic in 3+ files)</span></td>
+        <td><span class="zh-only">47 处</span><span class="en-only">47 instances</span></td>
+        <td><span class="zh-only">每次改动的上下文不同，AI 看不到已有的那份</span><span class="en-only">Each change had different context; the AI never saw the existing copy</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">超过 100 行的函数</span><span class="en-only">Functions over 100 lines</span></td>
+        <td><span class="zh-only">88 个</span><span class="en-only">88</span></td>
+        <td><span class="zh-only">"继续加一个分支"是最容易下达的指令</span><span class="en-only">"Just add one more branch" is the easiest instruction to give</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">硬编码的 URL 和密钥</span><span class="en-only">Hardcoded URLs and secrets</span></td>
+        <td><span class="zh-only">12 处</span><span class="en-only">12</span></td>
+        <td><span class="zh-only">为了"先跑起来"，规则文件里那条约定被淹没了</span><span class="en-only">"Make it run first" drowned out the convention in the rules file</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">从未被调用过的导出（死代码）</span><span class="en-only">Never-called exports (dead code)</span></td>
+        <td><span class="zh-only">236 个</span><span class="en-only">236</span></td>
+        <td><span class="zh-only">每个新会话都"顺手加个工具函数"，用不上也不删</span><span class="en-only">Each new session added a "utility" that never got used and never got deleted</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">单次提交改动超过 30 个文件</span><span class="en-only">Commits touching more than 30 files</span></td>
+        <td><span class="zh-only">19 次</span><span class="en-only">19</span></td>
+        <td><span class="zh-only">一次让它"把整个功能做完"，它就把整条链路都改了</span><span class="en-only">Asking for "the whole feature" in one go changed the entire chain</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="highlight">
+    <p><span class="zh-only">把这 6 行加总，我的结论是：<strong>AI 不会欠债，它只是不还债。欠下的债，来源是你给的模糊指令。</strong>没有测试，是因为你说"先实现功能"；有重复实现，是因为你没限定它读哪些文件；有死代码，是因为你从不要求它删东西。</span><span class="en-only">Adding up those six rows, my conclusion is: <strong>the AI doesn't incur debt — it just doesn't pay it off. The debt comes from vague instructions.</strong> No tests because you said "build the feature first." Duplicates because you didn't scope its reads. Dead code because you never asked it to delete anything.</span></p>
+  </div>
+  <p>
+    <span class="zh-only">再换个说法：技术债的本质是<strong>"未来的你"要为今天省下的时间付利息</strong>。我粗略估算过，每 1000 行 AI 生成的代码，后续维护成本大约是 4 到 6 小时。按 13.5 万行算，这笔"利息"在 540 到 810 小时之间——相当于两到三个月的工作时间，全部是利息。</span>
+    <span class="en-only">Put differently: technical debt means <strong>your future self pays interest on the time you saved today</strong>. My rough estimate is 4–6 hours of maintenance per 1,000 lines of AI-generated code. At 135,000 lines, that interest runs 540–810 hours — two to three months of work, all of it interest.</span>
+  </p>
+  <div class="callout warn">
+    <strong><span class="zh-only">一个很反直觉的事实</span><span class="en-only">A Counterintuitive Fact</span></strong>
+    <p><span class="zh-only">我做过一个对照实验：同样 3 个功能，一个用 AI 写完再补测试，另一个让 AI 先写测试再写实现。前者总耗时 4.2 小时，后者 4.6 小时——<strong>后者多花 24 分钟</strong>。但三个月后我要给第一个加一个新字段时，第二个的改动用了 18 分钟，第一个用了 3 小时。<strong>那 24 分钟不是开销，是订阅。</strong></span><span class="en-only">I ran a controlled comparison: the same three features, one written by AI then backfilled with tests, the other with tests written first. The first took 4.2 hours total, the second 4.6 — <strong>24 minutes more</strong>. Three months later, adding one new field took 18 minutes in the second project and 3 hours in the first. <strong>Those 24 minutes weren't a cost; they were a subscription.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">从"能跑"到"能维护"：一份检查清单</span><span class="en-only">From "It Runs" to "It Can Be Maintained": A Checklist</span></h2>
+  <p>
+    <span class="zh-only">这份清单是我把 13.5 万行的项目从"能跑"整理到"能维护"时逐条写下来的。每一条都可以在十分钟内验证完。建议每两周过一遍，不要等到项目失控了才回头看。</span>
+    <span class="en-only">This checklist came from actually taking a 135,000-line project from "it runs" to "it can be maintained." Every item takes under ten minutes to verify. Run through it every two weeks rather than waiting until the project is out of control.</span>
+  </p>
+  <ul>
+    <li><span class="zh-only">每个目录都有唯一职责，且职责写进了规则文件</span><span class="en-only">Every directory has one responsibility, and it's written in the rules file</span></li>
+    <li><span class="zh-only">规则文件不超过 60 行，超了就删旧的</span><span class="en-only">The rules file is under 60 lines; if it's over, delete old lines</span></li>
+    <li><span class="zh-only">每个公开函数至少有一个测试，核心业务路径覆盖率不低于 70%</span><span class="en-only">Every public function has at least one test; core paths at 70%+ coverage</span></li>
+    <li><span class="zh-only">没有超过 100 行的函数</span><span class="en-only">No function exceeds 100 lines</span></li>
+    <li><span class="zh-only">没有 3 处以上重复的逻辑</span><span class="en-only">No logic duplicated in more than three places</span></li>
+    <li><span class="zh-only">密钥和 URL 全部走配置，没有硬编码</span><span class="en-only">All secrets and URLs come from config, none hardcoded</span></li>
+    <li><span class="zh-only">AI 每次提交的 diff 不超过 400 行，超过就要求它拆成多次</span><span class="en-only">Each AI commit touches under 400 lines; if more, split it</span></li>
+    <li><span class="zh-only">每周有一次 45 分钟"AI 不参与"的代码阅读</span><span class="en-only">One 45-minute code-reading session per week with no AI involved</span></li>
+    <li><span class="zh-only">三个月后的你（或一个新人）只读规则文件就能上手</span><span class="en-only">You in three months — or a new hire — can start from the rules file alone</span></li>
+    <li><span class="zh-only">依赖清单里没有超过 6 个月没更新的库</span><span class="en-only">No dependency in the manifest hasn't been updated in 6+ months</span></li>
+    <li><span class="zh-only">CI 能跑通，而且 AI 写完代码必须自己先跑一次 CI</span><span class="en-only">CI passes, and the AI always runs CI before handing work back</span></li>
+    <li><span class="zh-only">每三个月做一次"如果现在重写还来得及吗"的评估</span><span class="en-only">Every three months: ask "if we rewrote today, would it still be worth it?"</span></li>
+  </ul>
+  <p>
+    <span class="zh-only">最后一条看起来像鸡汤，其实是唯一一条需要你做判断而不是让 AI 做的。它不是在问"代码好不好"，而是在问"这个项目还在值得做吗"。如果答案是"不确定"，那么正确的决定可能是停下来重构，而不是继续用 AI 加速。</span>
+    <span class="en-only">The last item sounds like motivational fluff, but it's the only one that requires your judgment rather than the AI's. It isn't asking "is the code good" — it's asking "is this project still worth doing?" If the answer is "unsure," the right move may be to stop and restructure rather than keep accelerating with AI.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">我踩过的三个坑</span><span class="en-only">Three Mistakes I Actually Made</span></h2>
+  <p>
+    <span class="zh-only">这一节可能比前面的方法论更有用，因为方法论到处都有，教训不容易。</span>
+    <span class="en-only">This section may be more useful than the methods above, because methods are everywhere and lessons are not.</span>
+  </p>
+  <h3><span class="zh-only">坑一：让它一次写完整个功能</span><span class="en-only">Mistake 1: Asking It to Build a Whole Feature at Once</span></h3>
+  <p>
+    <span class="zh-only">"帮我实现完整的发票作废流程，包括前端按钮、后端接口、状态机和通知。" 它花了 40 分钟写了 6 个文件、900 行代码，看起来非常完整。问题是我没有先说清楚"作废"的三种情况（全部作废、部分作废、超时自动作废），它自己假设了只有一种，然后按自己的假设把状态机写死了。两小时后我让它加一个"部分作废"，它说我原来的设计不支持——那正是它自己设计的。返工花了我 3 小时。</span>
+    <span class="en-only">"Implement the complete invoice voiding flow — frontend button, backend endpoint, state machine, and notification." It spent 40 minutes producing 6 files and 900 lines that looked complete. The problem was that I never said what "voiding" means: it has three cases (full void, partial void, auto-void on timeout). The AI assumed one, then hardcoded the state machine around its own assumption. Two hours later I asked for partial voiding, and it said the design I had "designed" didn't support it — the design it had written. The rework cost me three hours.</span>
+  </p>
+  <h3><span class="zh-only">坑二：没有规则文件，每个新会话都要重新解释</span><span class="en-only">Mistake 2: No Rules File, So Every Session Started From Zero</span></h3>
+  <p>
+    <span class="zh-only">项目前两个月我就是裸奔的。每次开新会话，都要重新交代"用 TypeScript、不要用 any、金额用分存、注释用中文、测试用 Vitest"。这个交代每次大约 2 分钟，一个项目 40 多次，累计超过 80 分钟。更贵的不是时间，是<strong>我漏掉某条规则的那些时候</strong>——比如有一次我没提"金额用分"，它就把金额写成了浮点数，我在对账的时候才发现少了 0.03 元。</span>
+    <span class="en-only">For the first two months I ran with no rules file. Every new session meant re-explaining: "use TypeScript, no <code>any</code>, store money in cents, comment in Chinese, test with Vitest." That briefing took about two minutes; over forty sessions it added up to more than 80 minutes. The expensive part wasn't the time — it was the sessions where <strong>I forgot a rule</strong>. Once I didn't mention "store money in cents," it wrote floats, and I found the missing $0.03 during reconciliation.</span>
+  </p>
+  <h3><span class="zh-only">坑三：把"测试通过"当成"没有 bug"</span><span class="en-only">Mistake 3: Treating "Tests Pass" as "No Bugs"</span></h3>
+  <p>
+    <span class="zh-only">覆盖率数字一度涨到 43%，我以为安全了。后来线上出了 3 个 bug，全部集中在最关键的开票、作废、退款三条路径上——<strong>而这三条路径恰好是我从来没让 AI 写测试的地方</strong>，因为"主流程都跑通了，测试补一补就行"。覆盖率高的地方都是简单的地方，测试没覆盖的地方才是会赔钱的地方。</span>
+    <span class="en-only">Coverage once climbed to 43% and I felt safe. Then three bugs shipped to production, all on the three most critical paths: issuing, voiding, and refunding — <strong>and those were exactly the paths I'd never had the AI write tests for</strong>, because "the main flow works, I'll backfill tests later." Coverage was high on the easy parts; the untested parts were the parts that cost money.</span>
+  </p>
+  <div class="callout tip">
+    <strong><span class="zh-only">三个坑的共同点</span><span class="en-only">What the Three Mistakes Have in Common</span></strong>
+    <p><span class="zh-only">回看这三个坑，触发条件是同一个：<strong>我把 AI 当成了"提效工具"，而没有当成"一个新的实习生"</strong>。新来的实习生不知道你的规矩，你不告诉他；你不说清楚需求，他就按自己的理解做；你不检查他的代码，他留的错就进了主干。对 AI 也要做同样的事——只不过它学得更快，也忘得更快。</span><span class="en-only">Looking back, all three share one trigger: <strong>I treated the AI as a productivity tool rather than a new intern</strong>. A new intern doesn't know your conventions unless you tell them; hand them an unclear spec and they'll do what they think is right; don't check their work and their mistakes land in main. The same applies to AI — it just learns faster, and forgets faster too.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">如果你刚开始：一个 4 周的落地节奏</span><span class="en-only">If You're Starting: A Four-Week Plan</span></h2>
+  <p>
+    <span class="zh-only">不用一次做完所有事。下面这四周，每周只做一件事，每件大概半天到一天。</span>
+    <span class="en-only">You don't have to do everything at once. Four weeks, one thing each, roughly half a day to a full day per week.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">第 1 周：整理目录，写规则文件</span><span class="en-only">Week 1: Tidy the Directories, Write the Rules File</span></h3>
+      <p><span class="zh-only">把现有项目按职责重新分目录，一个目录不超过 4000 行。然后写 <code>CLAUDE.md</code>，只写"不知道就会做错"的六类信息，控制在 60 行内。这一周结束时，你的 AI 会明显变准——如果没变准，说明目录还没切干净。</span><span class="en-only">Re-slice the project by responsibility, no directory over 4,000 lines. Then write <code>CLAUDE.md</code> with only the six categories of information the AI would get wrong otherwise, under 60 lines. By week's end your AI should be visibly sharper — if it isn't, the directories aren't clean yet.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 2 周：补齐三条核心路径的测试</span><span class="en-only">Week 2: Cover the Three Critical Paths</span></h3>
+      <p><span class="zh-only">不要追求覆盖率数字，只挑你最怕出问题的三条业务路径，用上面那个"先写测试"的提示词范式把它们写出来。覆盖率可能只从 20% 涨到 30%，但你的三条主流程从此有了保护。</span><span class="en-only">Don't chase a coverage number. Pick the three business paths you're most afraid of breaking and write them with the test-first prompt template. Coverage might only go from 20% to 30%, but your three main flows now have a safety net.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 3 周：清理重复实现和死代码</span><span class="zh-only">Week 3: Clear Out Duplicates and Dead Code</span></h3>
+      <p><span class="zh-only">用体检报告里那张表当清单，一次处理一类。每一次重构都用那个带 6 条约束的提示词。这一周通常能消掉一半的重复实现，工作区的噪音会明显下降。</span><span class="en-only">Use the audit table as your worklist, one category at a time. Every refactor uses that 6-constraint prompt. This week usually clears half the duplicates, and the noise in your workspace drops noticeably.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 4 周：把清单变成每周习惯</span><span class="en-only">Week 4: Turn the Checklist Into a Weekly Habit</span></h3>
+      <p><span class="zh-only">在日历上固定每周 45 分钟，关掉所有 AI 工具，只读 diff、跑测试、过一遍清单。这一步没有任何技术含量，但它才是让前面三周不白做的关键。</span><span class="en-only">Put a recurring 45-minute block on your calendar: every AI tool closed, just read diffs, run tests, walk the checklist. There's nothing technical about it, and it's what keeps the previous three weeks from being wasted.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">写在最后</span><span class="en-only">Closing Thoughts</span></h2>
+  <p>
+    <span class="zh-only">vibe coding 的入门文章会告诉你"先跑起来再说"，这句话在 5000 行以内是对的，在 10 万行以后是灾难。因为代码量一大，<strong>"跑起来"的成本就会由别人来付</strong>——由那个三个月后回来、发现 AI 留下的 47 处重复实现和 236 个死代码的你来付。</span>
+    <span class="en-only">Vibe-coding primers tell you to "get it running first." That's right up to about 5,000 lines, and a disaster past 100,000. Because as the codebase grows, <strong>the cost of "it runs" gets paid by someone else</strong> — by you, three months later, staring at 47 duplicate implementations and 236 dead exports.</span>
+  </p>
+  <p>
+    <span class="zh-only">但我想说的是另一面：10 万行不是一道墙，它是<strong>一道可以爬过去的坡</strong>。让 AI 写 10 万行难，但让 AI 在一个结构清晰、规则明确、测试扎实的 10 万行项目里继续工作，并不难。区别只在于你提前做了哪几件事：分好目录、写好规则、让它先写测试、每周自己看一眼。</span>
+    <span class="en-only">But here's the other side: 100,000 lines isn't a wall, it's <strong>a slope you can climb</strong>. Getting AI to write 100,000 lines is hard; getting AI to keep working inside a well-structured, clearly-ruled, well-tested 100,000-line project is not. The difference is entirely in what you set up beforehand: clean directories, written rules, tests first, and a weekly look with your own eyes.</span>
+  </p>
+  <blockquote>
+    <span class="zh-only">AI 写得快，是你的项目跑得快的唯一原因，也是你项目失控的唯一原因。区别在方向，不在速度。</span>
+    <span class="en-only">AI writing fast is the only reason your project moves quickly — and the only reason it can go out of control. The difference is direction, not speed.</span>
+  </blockquote>
+  <p>
+    <span class="zh-only">如果你也在某个 10 万行的项目里挣扎，欢迎把具体的困境发在评论区——是上下文装不下，还是规则写不清楚，还是技术债已经失控了？我会挑典型的写成单独一篇。</span>
+    <span class="en-only">If you're struggling in a 100,000-line project of your own, drop the specific situation in the comments — context overflow, unclear rules, or debt already out of control? I'll write up the typical ones as separate articles.</span>
+  </p>
+  <hr>
+  <p>
+    <span class="zh-only">相关阅读：<a href="2026-ai-coding-landscape.html">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</a> · <a href="2025-vibe-coding.html">Vibe coding 入门：先搞清楚这三个概念</a> · <a href="2025-ai-agent-guide.html">AI Agent 实战指南：从对话到能干活</a></span>
+    <span class="en-only">Related reading: <a href="2026-ai-coding-landscape.html">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</a> · <a href="2025-vibe-coding.html">Vibe Coding 101: Three Concepts to Understand First</a> · <a href="2025-ai-agent-guide.html">The Practical AI Agent Guide: From Chat to Actually Doing Work</a></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

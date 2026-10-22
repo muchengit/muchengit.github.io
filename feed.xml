@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>木尘 · AI 编程实践者</title>
+    <link>https://muchengit.github.io/</link>
+    <atom:link href="https://muchengit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>AI 编程实践者，教普通人用 AI 做属于自己的产品。记录 AI 编程实战、独立开发复盘与普通人做出产品的完整路径。</description>
+    <language>zh-CN</language>
+    <copyright>© 2026 Mu Chen</copyright>
+    <lastBuildDate>2026-10-22T08:00:00+08:00</lastBuildDate>
+    <generator>muchengit.github.io</generator>
+    <item>
+      <title>AI 写的代码跑不起来怎么办：普通人的排查手册</title>
+      <link>https://muchengit.github.io/blog/2026-ai-debug-handbook.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-ai-debug-handbook.html</guid>
+      <pubDate>2026-10-22</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[AI 写的代码跑不起来怎么办：普通人的排查手册 — When AI-Generated Code Won't Run: A Debugging Handbook for Non-Developers]]></description>
+    </item>
+    <item>
+      <title>不卖软件卖服务：用 AI 接单赚钱的 4 种活法</title>
+      <link>https://muchengit.github.io/blog/2026-ai-services.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-ai-services.html</guid>
+      <pubDate>2026-10-21</pubDate>
+      <category>副业</category>
+      <description><![CDATA[不卖软件卖服务：用 AI 接单赚钱的 4 种活法 — Don't Sell Software, Sell Services: 4 Ways to Earn with AI]]></description>
+    </item>
+    <item>
+      <title>把用户数据交给模型之前：AI 应用的隐私红线</title>
+      <link>https://muchengit.github.io/blog/2026-privacy-red-lines.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-privacy-red-lines.html</guid>
+      <pubDate>2026-10-20</pubDate>
+      <category>实战</category>
+      <description><![CDATA[把用户数据交给模型之前：AI 应用的隐私红线 — Before You Hand User Data to a Model: Privacy Rules for AI Apps]]></description>
+    </item>
+    <item>
+      <title>不会写代码的人，怎么用 AI 做数据分析</title>
+      <link>https://muchengit.github.io/blog/2026-data-analysis.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-data-analysis.html</guid>
+      <pubDate>2026-10-19</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[不会写代码的人，怎么用 AI 做数据分析 — Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers]]></description>
+    </item>
+    <item>
+      <title>2026 终极指南：从零到第一个 AI 产品的 90 天</title>
+      <link>https://muchengit.github.io/blog/2026-zero-to-first-product.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-zero-to-first-product.html</guid>
+      <pubDate>2026-10-18</pubDate>
+      <category>入门</category>
+      <description><![CDATA[2026 终极指南：从零到第一个 AI 产品的 90 天 — The 2026 Playbook: From Zero to Your First AI Product in 90 Days]]></description>
+    </item>
+    <item>
+      <title>把 AI 接进你的日常：邮件、表格和日程自动化实践</title>
+      <link>https://muchengit.github.io/blog/2026-ai-daily-automation.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-ai-daily-automation.html</guid>
+      <pubDate>2026-10-17</pubDate>
+      <category>实战</category>
+      <description><![CDATA[把 AI 接进你的日常：邮件、表格和日程自动化实践 — Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar]]></description>
+    </item>
+    <item>
+      <title>一个人的 AI 小产品怎么活下去：运维、成本与备份</title>
+      <link>https://muchengit.github.io/blog/2026-indie-ops-keep-alive.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-indie-ops-keep-alive.html</guid>
+      <pubDate>2026-10-16</pubDate>
+      <category>独立开发</category>
+      <description><![CDATA[一个人的 AI 小产品怎么活下去：运维、成本与备份 — Keeping a One-Person AI Product Alive: Operations, Costs, and Backups]]></description>
+    </item>
+    <item>
+      <title>让 AI 读长文档：处理合同、论文和 PDF 的实用方法</title>
+      <link>https://muchengit.github.io/blog/2026-long-doc-ai.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-long-doc-ai.html</guid>
+      <pubDate>2026-10-15</pubDate>
+      <category>AI 技巧</category>
+      <description><![CDATA[让 AI 读长文档：处理合同、论文和 PDF 的实用方法 — Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs]]></description>
+    </item>
+    <item>
+      <title>可以直接抄的 10 个 AI 小产品：普通人怎么选</title>
+      <link>https://muchengit.github.io/blog/2026-small-products.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-small-products.html</guid>
+      <pubDate>2026-10-12</pubDate>
+      <category>产品</category>
+      <description><![CDATA[可以直接抄的 10 个 AI 小产品：普通人怎么选 — 10 AI Micro-Products You Can Copy: How a Beginner Should Choose One]]></description>
+    </item>
+    <item>
+      <title>让 AI 一次做对：把需求写成验收清单</title>
+      <link>https://muchengit.github.io/blog/2026-acceptance-criteria.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-acceptance-criteria.html</guid>
+      <pubDate>2026-10-08</pubDate>
+      <category>AI 技巧</category>
+      <description><![CDATA[让 AI 一次做对：把需求写成验收清单 — Getting It Right the First Time: Writing Requirements as Acceptance Criteria]]></description>
+    </item>
+    <item>
+      <title>用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</title>
+      <link>https://muchengit.github.io/blog/2026-ai-product-pricing.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-ai-product-pricing.html</guid>
+      <pubDate>2026-10-06</pubDate>
+      <category>产品</category>
+      <description><![CDATA[用 AI 做产品怎么赚钱：定价、获客与一次真实复盘 — How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem]]></description>
+    </item>
+    <item>
+      <title>从 Demo 到上线：AI 生成代码的生产化改造清单</title>
+      <link>https://muchengit.github.io/blog/2026-from-demo-to-production.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-from-demo-to-production.html</guid>
+      <pubDate>2026-09-15</pubDate>
+      <category>实战</category>
+      <description><![CDATA[从 Demo 到上线：AI 生成代码的生产化改造清单 — From Demo to Production: A Production-Readiness Checklist for AI-Generated Code]]></description>
+    </item>
+    <item>
+      <title>Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</title>
+      <link>https://muchengit.github.io/blog/2026-vibe-coding-advanced.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-vibe-coding-advanced.html</guid>
+      <pubDate>2026-08-28</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后 — Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines]]></description>
+    </item>
+    <item>
+      <title>2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</title>
+      <link>https://muchengit.github.io/blog/2026-ai-coding-landscape.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2026-ai-coding-landscape.html</guid>
+      <pubDate>2026-08-12</pubDate>
+      <category>工具评测</category>
+      <description><![CDATA[2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南 — The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest]]></description>
+    </item>
+    <item>
+      <title>不会写代码的人，如何用 Cursor 做出人生第一个产品</title>
+      <link>https://muchengit.github.io/blog/build-with-cursor.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/build-with-cursor.html</guid>
+      <pubDate>2026-07-14</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[不会写代码的人，如何用 Cursor 做出人生第一个产品 — How to Build Your First Product with Cursor (No Coding Experience Needed)]]></description>
+    </item>
+    <item>
+      <title>我用 AI 做了一款产品，全程没写一行代码</title>
+      <link>https://muchengit.github.io/blog/ship-without-code.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/ship-without-code.html</guid>
+      <pubDate>2026-06-02</pubDate>
+      <category>实战</category>
+      <description><![CDATA[我用 AI 做了一款产品，全程没写一行代码 — I Shipped a Product Without Writing a Single Line of Code]]></description>
+    </item>
+    <item>
+      <title>Prompt 工程没有你想的那么复杂</title>
+      <link>https://muchengit.github.io/blog/prompt-engineering.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/prompt-engineering.html</guid>
+      <pubDate>2026-04-18</pubDate>
+      <category>AI 技巧</category>
+      <description><![CDATA[Prompt 工程没有你想的那么复杂 — Prompt Engineering Is Simpler Than You Think]]></description>
+    </item>
+    <item>
+      <title>写给想用 AI 做东西但不知道从何开始的人</title>
+      <link>https://muchengit.github.io/blog/getting-started-with-ai.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/getting-started-with-ai.html</guid>
+      <pubDate>2026-02-09</pubDate>
+      <category>入门</category>
+      <description><![CDATA[写给想用 AI 做东西但不知道从何开始的人 — For Those Who Want to Build with AI But Don't Know Where to Start]]></description>
+    </item>
+    <item>
+      <title>AI 产品从 0 到 1：8 个产品的血泪教训</title>
+      <link>https://muchengit.github.io/blog/2025-ai-product-lessons.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-ai-product-lessons.html</guid>
+      <pubDate>2025-10-30</pubDate>
+      <category>产品</category>
+      <description><![CDATA[AI 产品从 0 到 1：8 个产品的血泪教训 — Building AI Products from Scratch: Lessons from 8 Products]]></description>
+    </item>
+    <item>
+      <title>多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</title>
+      <link>https://muchengit.github.io/blog/2025-multi-agent.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-multi-agent.html</guid>
+      <pubDate>2025-09-22</pubDate>
+      <category>Agent</category>
+      <description><![CDATA[多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南 — Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph]]></description>
+    </item>
+    <item>
+      <title>2025 AI 独立开发者生存指南（含真实盈亏复盘）</title>
+      <link>https://muchengit.github.io/blog/2025-indie-dev-survival.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-indie-dev-survival.html</guid>
+      <pubDate>2025-08-15</pubDate>
+      <category>独立开发</category>
+      <description><![CDATA[2025 AI 独立开发者生存指南（含真实盈亏复盘） — The 2025 AI Indie Developer Survival Guide (With Real P&L)]]></description>
+    </item>
+    <item>
+      <title>AI 出海掘金：一个人做 Niche Product 赚美金</title>
+      <link>https://muchengit.github.io/blog/2025-ai-overseas.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-ai-overseas.html</guid>
+      <pubDate>2025-07-05</pubDate>
+      <category>出海</category>
+      <description><![CDATA[AI 出海掘金：一个人做 Niche Product 赚美金 — Building a Niche Product with AI and Earning in USD]]></description>
+    </item>
+    <item>
+      <title>AI 副业变现 12 条路：普通人可复制的收入路径</title>
+      <link>https://muchengit.github.io/blog/2025-ai-side-hustle-12.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-ai-side-hustle-12.html</guid>
+      <pubDate>2025-06-10</pubDate>
+      <category>副业</category>
+      <description><![CDATA[AI 副业变现 12 条路：普通人可复制的收入路径 — 12 AI Side Hustle Paths Anyone Can Replicate]]></description>
+    </item>
+    <item>
+      <title>推理模型时代来了：从生成到思考的范式转变</title>
+      <link>https://muchengit.github.io/blog/2025-reasoning-models.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-reasoning-models.html</guid>
+      <pubDate>2025-05-20</pubDate>
+      <category>趋势</category>
+      <description><![CDATA[推理模型时代来了：从生成到思考的范式转变 — The Era of Reasoning Models: From Generation to Thinking]]></description>
+    </item>
+    <item>
+      <title>一个人 + AI = 产品：Vibe Coding 实战手册</title>
+      <link>https://muchengit.github.io/blog/2025-vibe-coding.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-vibe-coding.html</guid>
+      <pubDate>2025-04-12</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[一个人 + AI = 产品：Vibe Coding 实战手册 — One Person + AI = Product: The Vibe Coding Playbook]]></description>
+    </item>
+    <item>
+      <title>AI Agent 入门：从概念到工程化落地</title>
+      <link>https://muchengit.github.io/blog/2025-ai-agent-guide.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-ai-agent-guide.html</guid>
+      <pubDate>2025-03-08</pubDate>
+      <category>Agent</category>
+      <description><![CDATA[AI Agent 入门：从概念到工程化落地 — AI Agent 101: From Concept to Production]]></description>
+    </item>
+    <item>
+      <title>AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</title>
+      <link>https://muchengit.github.io/blog/2025-ai-coding-tools-2025.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-ai-coding-tools-2025.html</guid>
+      <pubDate>2025-02-15</pubDate>
+      <category>工具评测</category>
+      <description><![CDATA[AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code — The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code]]></description>
+    </item>
+    <item>
+      <title>DeepSeek-R1 深度解读：开源如何震动全球 AI 圈</title>
+      <link>https://muchengit.github.io/blog/2025-deepseek-r1.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2025-deepseek-r1.html</guid>
+      <pubDate>2025-01-28</pubDate>
+      <category>深度解析</category>
+      <description><![CDATA[DeepSeek-R1 深度解读：开源如何震动全球 AI 圈 — DeepSeek-R1: How Open Source Shocked the Global AI Community]]></description>
+    </item>
+    <item>
+      <title>2024 AI 年度总结：从百模大战到落地为王</title>
+      <link>https://muchengit.github.io/blog/2024-ai-year-review.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-ai-year-review.html</guid>
+      <pubDate>2024-12-28</pubDate>
+      <category>年度总结</category>
+      <description><![CDATA[2024 AI 年度总结：从百模大战到落地为王 — 2024 AI Year in Review: From Model Wars to Real-World Impact]]></description>
+    </item>
+    <item>
+      <title>2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你</title>
+      <link>https://muchengit.github.io/blog/2024-chinese-ai-tools.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-chinese-ai-tools.html</guid>
+      <pubDate>2024-11-15</pubDate>
+      <category>工具评测</category>
+      <description><![CDATA[2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你 — 2024 Chinese AI Tools: Which One is Right for You]]></description>
+    </item>
+    <item>
+      <title>Cursor 入门到精通：2024 最强 AI 编程工具实战</title>
+      <link>https://muchengit.github.io/blog/2024-cursor-guide.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-cursor-guide.html</guid>
+      <pubDate>2024-10-20</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[Cursor 入门到精通：2024 最强 AI 编程工具实战 — The Complete Cursor Guide: Mastering AI Coding in 2024]]></description>
+    </item>
+    <item>
+      <title>ChatGPT 使用秘籍：10 个让输出质量翻倍的实战技巧</title>
+      <link>https://muchengit.github.io/blog/2024-chatgpt-tips.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-chatgpt-tips.html</guid>
+      <pubDate>2024-09-08</pubDate>
+      <category>AI 技巧</category>
+      <description><![CDATA[ChatGPT 使用秘籍：10 个让输出质量翻倍的实战技巧 — 10 ChatGPT Tips to Double Your Output Quality]]></description>
+    </item>
+    <item>
+      <title>AI 做副业的 N 种可能：2024 年普通人实操路径</title>
+      <link>https://muchengit.github.io/blog/2024-ai-side-hustle.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-ai-side-hustle.html</guid>
+      <pubDate>2024-08-12</pubDate>
+      <category>副业</category>
+      <description><![CDATA[AI 做副业的 N 种可能：2024 年普通人实操路径 — AI Side Hustles: Practical Paths for Ordinary People in 2024]]></description>
+    </item>
+    <item>
+      <title>AI 视频生成革命：从 Sora 到可灵的视觉新纪元</title>
+      <link>https://muchengit.github.io/blog/2024-ai-video-revolution.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-ai-video-revolution.html</guid>
+      <pubDate>2024-07-22</pubDate>
+      <category>视频生成</category>
+      <description><![CDATA[AI 视频生成革命：从 Sora 到可灵的视觉新纪元 — The AI Video Revolution: From Sora to Kling]]></description>
+    </item>
+    <item>
+      <title>AI 绘画工具全攻略：Midjourney / Stable Diffusion / Flux 怎么选</title>
+      <link>https://muchengit.github.io/blog/2024-ai-art-guide.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-ai-art-guide.html</guid>
+      <pubDate>2024-06-15</pubDate>
+      <category>AI 绘画</category>
+      <description><![CDATA[AI 绘画工具全攻略：Midjourney / Stable Diffusion / Flux 怎么选 — The Complete AI Art Guide: Midjourney vs SD vs Flux]]></description>
+    </item>
+    <item>
+      <title>不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</title>
+      <link>https://muchengit.github.io/blog/2024-no-code-ai-build.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-no-code-ai-build.html</guid>
+      <pubDate>2024-05-10</pubDate>
+      <category>AI 编程</category>
+      <description><![CDATA[不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程 — Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow]]></description>
+    </item>
+    <item>
+      <title>Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程</title>
+      <link>https://muchengit.github.io/blog/2024-claude-guide.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-claude-guide.html</guid>
+      <pubDate>2024-04-03</pubDate>
+      <category>AI 技巧</category>
+      <description><![CDATA[Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程 — The Deep Claude Guide: Why It Beats ChatGPT for Writing & Coding]]></description>
+    </item>
+    <item>
+      <title>独立开发者 AI 工具栈搭建指南（2024 版）</title>
+      <link>https://muchengit.github.io/blog/2024-indie-dev-toolkit.html</link>
+      <guid isPermaLink="true">https://muchengit.github.io/blog/2024-indie-dev-toolkit.html</guid>
+      <pubDate>2024-02-18</pubDate>
+      <category>工具栈</category>
+      <description><![CDATA[独立开发者 AI 工具栈搭建指南（2024 版） — The Indie Developer AI Toolkit Guide (2024 Edition)]]></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>从 Demo 到上线：AI 生成代码的生产化改造清单 | From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</title><meta name="description" content="用 AI 五天做出的 Demo，上线后被硬编码的密钥、缺失的错误处理和失控的模型调用成本接连打脸。本文用真实数字拆解「能跑」与「能上线」之间的 6 个差距，并给出一份 12 项的上线检查清单。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-production-hero.jpg" alt="Deployment checklist on screen" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag">实战 <span class="en-only">|</span> <span class="en-only">Case Study</span></div>
+    <h1 class="reveal"><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.09.15 — 五周改造，从「能跑」到「能上线」的完整清单</span><span class="en-only">2026.09.15 — Five weeks of turning a working demo into a product that survives real users</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">「它跑起来了」是我最常说的一句话</span><span class="en-only">"It Runs" Was My Most Repeated Sentence</span></h2>
+
+  <p>
+    <span class="zh-only">2026 年 5 月，我用 AI 做了一个小工具：上传一份合同，AI 帮你标出可能踩坑的条款——付款周期太长、违约金对不上、无限责任、没写验收标准这种。代码全部由 AI 生成，从前端界面到后端接口，5 天搞定。本地 <code>localhost</code> 打开一切正常，界面还挺像样。</span>
+    <span class="en-only">In May 2026 I used AI to build a small tool: upload a contract and the AI flags the clauses that are likely to bite you — payment terms that are too long, mismatched penalties, unlimited liability, missing acceptance criteria. Every line was AI-generated, from the frontend to the API, and it took five days. It ran perfectly on <code>localhost</code>, and the interface looked decent.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">我给三个朋友演示，每个人都说"这就能直接卖了吧"。我信了，于是买了域名（¥68/年）、一台 2 核 4G 的服务器（¥68/月）、接了 DeepSeek 的 API、写了支付回调。第一天部署完，网站能打开，我高兴得跟什么似的。第二天开始，麻烦就来了。</span>
+    <span class="en-only">I demoed it to three friends and each of them said "you could sell this right now." I believed them, so I bought a domain (¥68/year), a 2-core 4GB server (¥68/month), wired up the DeepSeek API, and wrote the payment callback. On the first day the site went live and I was thrilled. Starting the next day, the trouble arrived.</span>
+  </p>
+
+  <div class="highlight">
+    <p><span class="zh-only">后来我把这句话想明白了：<strong>Demo 的验收标准是「5 个功能能演一遍」，上线的验收标准是「在真实用户、真实数据、真实故障下，连续 30 天不出事」。</strong>这两件事需要的代码量并不一样 —— 我这次量了一下，改造成本大约是 Demo 开发成本的三倍。</span><span class="en-only">I later boiled it down to this: <strong>a demo is accepted when "the five features can be demoed"; a production release is accepted when "nothing breaks for 30 days under real users, real data, and real failures."</strong>Those two bars need very different amounts of code — I measured it this time, and the retrofit cost came to roughly three times the cost of building the demo in the first place.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">「能跑」和「能上线」之间的 6 个真实差距</span><span class="en-only">Six Real Gaps Between "It Runs" and "It's Live"</span></h2>
+
+  <p>
+    <span class="zh-only">AI 写代码的时候，会默认一堆前提：单机运行、开发环境、只有你一个人在用、网络不会抖、失败了可以重来。上线这件事，恰好把这五个前提全部推翻。我踩到的 6 个差距，按出现的先后顺序是这样的。</span>
+    <span class="en-only">When AI writes code it silently assumes a pile of things: a single machine, a development environment, only you using it, a network that never hiccups, and failures you can retry away. Going live invalidates all five assumptions. Here are the six gaps I hit, in the order I hit them.</span>
+  </p>
+
+  <ul>
+    <li><span class="zh-only"><strong>密钥硬编码在代码里。</strong>AI 生成的 <code>config.js</code> 里有这么一行：<code>const API_KEY = "sk-xxxxxxxx"</code>。Demo 阶段无所谓，反正只有你看得到。</span><span class="en-only"><strong>Secrets hardcoded in the source.</strong> The AI-generated <code>config.js</code> contained a line like <code>const API_KEY = "sk-xxxxxxxx"</code>. Harmless during a demo, since you are the only person who sees it.</span></li>
+    <li><span class="zh-only"><strong>错误处理等于一句弹窗。</strong>所有 <code>catch</code> 块里都是 <code>alert('出错了')</code>。用户看到一句废话，而你知道得比他还少。</span><span class="en-only"><strong>Error handling is one toast.</strong> Every <code>catch</code> block contained <code>alert('something went wrong')</code>. The user gets a useless message and you know even less than they do.</span></li>
+    <li><span class="zh-only"><strong>没有日志，没有监控。</strong>代码跑完就消失了。用户说"我昨天上午提交失败过"，你想查也查不到，因为那件事没有被记录下来。</span><span class="en-only"><strong>No logs, no monitoring.</strong> Code ran and vanished. A user says "my upload failed yesterday morning" and there is nothing to look up, because the event was never recorded.</span></li>
+    <li><span class="zh-only"><strong>成本没有上限。</strong>模型调用既不限流也没有预算闸门。一个写错的小脚本循环了 800 次，账单就成了一条往上爬的直线。</span><span class="en-only"><strong>No ceiling on cost.</strong> Model calls were neither rate-limited nor budget-capped. A small buggy script looped 800 times and the bill became a straight line climbing up.</span></li>
+    <li><span class="zh-only"><strong>出了问题不能回滚。</strong>每次上线都是直接覆盖线上代码。发现 bug 只能改代码重新部署，一轮 20 分钟；半夜出 bug，那 20 分钟会显得很长。</span><span class="en-only"><strong>No way to roll back.</strong> Every deploy overwrote the live code in place. The only fix was to edit and redeploy — a 20-minute cycle that feels much longer at 3 a.m.</span></li>
+    <li><span class="zh-only"><strong>没有测试。</strong>改一行，不知道会不会弄坏别的功能。唯一的测试方式是"我自己再点一遍"，而我点的是我熟悉的路径。</span><span class="en-only"><strong>No tests.</strong> Change one line and you cannot tell what else you broke. The only test is "I'll click through it again myself" — and I only click the paths I know.</span></li>
+  </ul>
+
+  <div class="callout info">
+    <div>
+
+      <strong><span class="zh-only">这 6 条不是我的个人偏好</span><span class="en-only">These Six Are Not Personal Preferences</span></strong>
+      <p><span class="zh-only">它们是 AI 生成代码的默认假设：单机、开发环境、只有一个用户、网络稳定、失败可重试。你不需要重新发明生产化工程，你只需要意识到这些假设存在，然后一条条把它们改掉。</span><span class="en-only">They are the default assumptions baked into AI-generated code: single machine, dev environment, one user, stable network, failures are retryable. You do not need to reinvent production engineering — you just need to notice those assumptions exist and remove them one by one.</span></p>
+  
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第一课：密钥不能住在代码里</span><span class="en-only">Lesson One: Secrets Must Not Live in Your Code</span></h2>
+
+  <p>
+    <span class="zh-only">最简单的一条原则：凡是叫 <code>key</code>、<code>token</code>、<code>secret</code>、<code>password</code> 的东西，都不应该出现在源码里，更不应该出现在 Git 历史里。本地开发时用 <code>.env</code> 文件，部署时用云平台的环境变量面板，两边代码只写读取逻辑。</span>
+    <span class="en-only">The simplest rule of all: anything named <code>key</code>, <code>token</code>, <code>secret</code>, or <code>password</code> does not belong in source code, and even less so in Git history. Use a <code>.env</code> file locally, the platform's environment-variable panel in production, and let the code only read them.</span>
+  </p>
+
+  <pre data-lang="bash"><code># .env —— 只存在于你自己的机器上，绝不提交
+DEEPSEEK_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxx
+APP_SESSION_SECRET=3f9a1c2e7b4d8a65
+
+# .gitignore 里一定要有这几行
+.env
+.env.*
+!.env.example
+
+# 本地运行时把 .env 读进环境变量
+node --env-file=.env server.js
+
+# 代码里只读环境变量，永远不写死
+const apiKey = process.env.DEEPSEEK_API_KEY;</code></pre>
+
+  <p>
+    <span class="zh-only">仓库里保留一个 <code>.env.example</code>，里面只写变量名不写值，这样别人 clone 下来也知道要配什么。至于部署：服务器上用 systemd 或 Docker 的 <code>env_file</code>，托管平台就用它们的环境变量面板。别做的事只有一件：把密钥写进 <code>Dockerfile</code>、写进 <code>docker-compose.yml</code> 的 environment、或者贴到聊天群里。</span>
+    <span class="en-only">Keep an <code>.env.example</code> in the repo with the variable names but no values, so anyone who clones it knows what to configure. For deployment, use systemd's or Docker's <code>env_file</code> locally and the platform's environment-variable panel on managed hosts. There is exactly one thing not to do: never put a key in the <code>Dockerfile</code>, in <code>docker-compose.yml</code>'s environment block, or in a chat group.</span>
+  </p>
+
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">上线前该有的样子</span><span class="en-only">What production should look like</span></h4>
+      <p><span class="zh-only">密钥放在平台的环境变量面板里；代码里只出现 <code>process.env.DEEPSEEK_API_KEY</code>；本地用 <code>.env</code> 并写进 <code>.gitignore</code>；仓库只留 <code>.env.example</code>；给 key 设置单日消费上限，异常用量自动告警。</span><span class="en-only">The key lives in the platform's environment-variable panel; the code only ever mentions <code>process.env.DEEPSEEK_API_KEY</code>; locally you use a <code>.env</code> that is in <code>.gitignore</code>; the repo keeps only <code>.env.example</code>; and the key has a daily spend cap with an alert on abnormal usage.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">AI 常给的样子</span><span class="en-only">What AI usually gives you</span></h4>
+      <p><span class="zh-only">密钥写在 <code>src/config.js</code> 里，跟着代码一起提交；或者写进 <code>docker-compose.yml</code> 的 environment，跟着镜像一起构建。"本地能跑就行"在 Demo 阶段是真话，在上线阶段是定时炸弹。</span><span class="en-only">The key sits in <code>src/config.js</code> and is committed with the code; or it is baked into <code>docker-compose.yml</code>'s environment and ships inside the image. "It runs locally" is true during a demo and a time bomb at launch.</span></p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div>
+
+      <strong><span class="zh-only">真实事故：密钥泄漏</span><span class="en-only">Real Incident: Key Leak</span></strong>
+      <p><span class="zh-only">2026 年 4 月，我在一个开源项目模板里用了自己的 DeepSeek key，直接写死在前端 config 文件里。仓库是私有的，我一直觉得没事。问题出在：一个朋友 fork 了这个模板并发到了社区。当天晚上 11 点我收到平台邮件，说这个 key 的调用量异常，已自动冻结。我登录账单一看——8 小时里被刷了 190 万 token，¥1,340。这是我为「密钥不进代码」这件事交的第一笔学费。</span><span class="en-only">In April 2026 I used my own DeepSeek key inside an open-source project template, hardcoded in a frontend config file. The repo was private and I assumed that was enough. What actually happened: a friend forked the template and shared it with a community. At 11 p.m. I got an email from the provider saying usage on that key was abnormal and the key had been auto-frozen. The billing page told the rest — 1.9 million tokens burned in eight hours, ¥1,340. That was the first tuition I paid for the rule &quot;no secrets in code&quot;.</span></p>
+      <p><span class="zh-only">钱不算多，要命的是那天正好有一笔收入要提现，余额被冻结导致提现失败，我多等了 3 个工作日。事后我做了 5 件事：立刻 revoke 掉旧 key；换新 key；在平台把单日消费上限设成 ¥50；加了一条"当日调用量超过 3 倍均值就报警"的规则；最后把 <code>git log -S "sk-"</code> 写进上线检查清单——这条能查出历史里有没有漏网的密钥，包括那些你以为已经删干净的。</span><span class="en-only">The money was not the worst part. The worst part was that I had a payout scheduled that night; the frozen balance blocked it and I lost three business days. Afterwards I did five things: revoked the old key immediately; issued a new one; set a ¥50 daily spend cap on the provider; added an alert for "daily calls above 3× the average"; and finally put <code>git log -S "sk-"</code> into my launch checklist, because that command finds keys you thought you already deleted.</span></p>
+  
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第二课：把每一个外部输入都当成陌生人</span><span class="en-only">Lesson Two: Treat Every External Input as a Stranger</span></h2>
+
+  <p>
+    <span class="zh-only">Demo 阶段输入都来自你自己：你的测试合同、你敲的关键词。上线之后，输入来自陌生人——上传的文件、表单里填的字段、URL 上的参数、甚至伪造的请求头。这些东西都要当作"敌人"来对待，而不是"数据"。</span>
+    <span class="en-only">During the demo, every input came from you: your own test contract, your own keywords. Once you are live, inputs come from strangers — uploaded files, form fields, URL parameters, even forged headers. All of them should be treated as hostile data rather than as data.</span>
+  </p>
+
+  <ul>
+    <li><span class="zh-only"><strong>输入校验要在入口做。</strong>校验类型、长度、范围、格式。文件上传要限制扩展名和大小（我只收 pdf/docx 且不超过 10MB）。不要相信前端的校验，因为前端可以被绕过。</span><span class="en-only"><strong>Validate at the boundary.</strong> Check type, length, range, and format. For uploads, restrict the extension and the size (I only accept pdf/docx up to 10MB). Never trust validation on the frontend, because the frontend can be bypassed.</span></li>
+    <li><span class="zh-only"><strong>SQL 注入。</strong>AI 特别喜欢写字符串拼接的 SQL：<code>db.query("SELECT * FROM users WHERE email = '" + email + "'")</code>。正确写法是参数化查询：<code>db.query("SELECT * FROM users WHERE email = ?", [email])</code>。ORM 也一样，用它的查询构造器，别自己拼。</span><span class="en-only"><strong>SQL injection.</strong> AI loves string-concatenated SQL: <code>db.query("SELECT * FROM users WHERE email = '" + email + "'")</code>. Use parameterised queries instead: <code>db.query("SELECT * FROM users WHERE email = ?", [email])</code>. The same goes for ORMs — use the query builder, never raw concatenation.</span></li>
+    <li><span class="zh-only"><strong>命令注入。</strong>不要把用户输入拼进 shell。AI 常写 <code>exec('ffmpeg -i ' + filePath)</code>，一个带空格或分号的文件名就完蛋。正确做法是参数数组：<code>execFile('ffmpeg', ['-i', filePath])</code>。</span><span class="en-only"><strong>Command injection.</strong> Never concatenate user input into a shell command. AI likes <code>exec('ffmpeg -i ' + filePath)</code>, and one filename with a space or a semicolon is all it takes. Use an argument array instead: <code>execFile('ffmpeg', ['-i', filePath])</code>.</span></li>
+    <li><span class="zh-only"><strong>XSS。</strong>用户内容要先转义再渲染。不要用 <code>innerHTML</code> 直接塞用户字符串，用 <code>textContent</code>，或者用框架默认的转义机制。合同内容一定会包含 <code>&lt;</code> 和 <code>&amp;</code> 这类字符，不转义一定会出事。</span><span class="en-only"><strong>XSS.</strong> Escape user content before rendering it. Don't stuff user strings into <code>innerHTML</code>; use <code>textContent</code> or let your framework's default escaping handle it. Contract text is guaranteed to contain characters like <code>&lt;</code> and <code>&amp;</code>, so skipping escaping is a matter of when, not if.</span></li>
+    <li><span class="zh-only"><strong>依赖漏洞。</strong>AI 很爱用"看起来很流行"的包，其中一部分已经三年没更新了。每次上线前跑一次 <code>npm audit</code>，把 high 和 critical 级别先修掉；暂时修不掉的，至少确认你的代码没有调用那个有漏洞的功能。</span><span class="en-only"><strong>Dependency vulnerabilities.</strong> AI loves packages that "look popular", and some of them have not been updated in three years. Run <code>npm audit</code> before every release and fix the high and critical ones; if something cannot be fixed yet, at least confirm your code never calls the vulnerable path.</span></li>
+  </ul>
+
+  <div class="callout tip">
+    <div>
+
+      <strong><span class="zh-only">5 分钟自查法</span><span class="en-only">A 5-Minute Self-Check</span></strong>
+      <p><span class="zh-only">把 AI 生成的代码通读一遍，凡是出现 <code>exec</code>、拼接的 SQL、<code>innerHTML</code> 的地方，全部标出来。这三样加上硬编码密钥，基本覆盖了 90% 的线上安全问题。我第一次做这件事的时候，标出了 7 处，全部是我在 Demo 阶段根本不会注意到的地方。</span><span class="en-only">Read through the AI-generated code once and mark every occurrence of <code>exec</code>, concatenated SQL, and <code>innerHTML</code>. Those three, plus hardcoded secrets, cover about 90% of real production security incidents. The first time I did this I marked seven spots — none of which I would ever have noticed while building the demo.</span></p>
+  
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第三课：先量，再优化</span><span class="en-only">Lesson Three: Measure First, Then Optimize</span></h2>
+
+  <p>
+    <span class="zh-only">性能这件事最怕凭感觉。我给自己定的规矩是：先给每个关键接口加一行耗时日志，让真实用户跑一遍，把数字记在纸上，再决定改什么。下面是我这次实际改出来的效果。</span>
+    <span class="en-only">Performance work goes wrong when you go by feel. My rule was: add one timing log to every critical endpoint, let real users exercise it, write the numbers down, and only then decide what to change. Here is what actually moved after the fixes.</span>
+  </p>
+
+  <ul>
+    <li><span class="zh-only"><strong>首屏 4.2s → 1.3s。</strong>打包进首屏的 JS 有 1.8MB，其中一半是 AI 塞进去但根本没用到的图标库和日期库。删掉无用依赖、路由懒加载、图片转 WebP 之后，gzip 后只剩 620KB。</span><span class="en-only"><strong>First paint 4.2s → 1.3s.</strong> The initial JS bundle was 1.8MB, and half of it was icon and date libraries the AI pulled in that nothing actually used. After dropping unused dependencies, lazy-loading routes, and converting images to WebP, the gzipped bundle was 620KB.</span></li>
+    <li><span class="zh-only"><strong>列表接口 P95 2.6s → 180ms。</strong>典型的 N+1 查询：页面要显示 20 份合同，每份合同再单独查一次签署人，一页打了 47 次数据库。改成一次 JOIN 之后变成 3 次查询。</span><span class="en-only"><strong>List endpoint P95 2.6s → 180ms.</strong> A textbook N+1: the page shows 20 contracts and looks up one signatory per contract, so a single page view fired 47 database queries. One JOIN brought it down to 3.</span></li>
+    <li><span class="zh-only"><strong>最慢的 SQL 3.1s → 12ms。</strong><code>contracts</code> 表没给 <code>status + created_at</code> 建索引。EXPLAIN 出来是全表扫描，加了个复合索引之后变成走索引。</span><span class="en-only"><strong>Slowest SQL 3.1s → 12ms.</strong> The <code>contracts</code> table had no index on <code>status + created_at</code>. EXPLAIN showed a full table scan; a composite index turned it into an index scan.</span></li>
+    <li><span class="zh-only"><strong>偶发 502 消失了。</strong>AI 生成的代码每次请求都新建数据库连接，100 个并发直接把连接数打满。改成连接池，最大 10 个连接之后，502 从"每天十几次"变成 0。</span><span class="en-only"><strong>The random 502s vanished.</strong> The AI-generated code opened a new database connection per request, so 100 concurrent users exhausted the connection limit. With a pool capped at 10 connections, the 502s went from "a dozen a day" to zero.</span></li>
+  </ul>
+
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">该做的顺序</span><span class="en-only">The right order</span></h4>
+      <p><span class="zh-only">先给接口加耗时日志 → 找到最慢的 3 条 SQL → 用 EXPLAIN 看执行计划 → 加索引、消灭 N+1 → 再删无用前端依赖 → 最后才考虑缓存和 CDN。每一步都有数字支撑。</span><span class="en-only">Add timing logs → find the three slowest SQL statements → read their EXPLAIN plans → add indexes and kill the N+1 → then drop unused frontend dependencies → only afterwards consider caching and a CDN. Every step is backed by a number.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">常见的误区</span><span class="en-only">The common mistake</span></h4>
+      <p><span class="zh-only">一上来就加 Redis、换更大的服务器、把接口挂 CDN。这些都是在还没定位问题之前的猜测，很可能花三天时间还没效果——因为慢的根本不是数据库，而是那段一次查 47 次的循环。</span><span class="en-only">Adding Redis, buying a bigger server, putting the API behind a CDN. All of these are guesses made before you know what is slow, and they can burn three days with no result, because the bottleneck was never the database — it was a loop that queried 47 times.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第四课：模型调用要算账</span><span class="en-only">Lesson Four: Budget Your Model Calls</span></h2>
+
+  <p>
+    <span class="zh-only">AI 应用和普通 SaaS 最大的区别是：你的成本和用户使用量成正比，而且是变动成本。Demo 阶段 10 个用户一天几分钱，1 万用户一天可能几百块。所以这件事必须在写第一行代码之前算清楚，而不是等账单来了再 surprise。</span>
+    <span class="en-only">The biggest difference between an AI app and an ordinary SaaS is that your cost scales with usage and is a variable cost. Ten users cost pennies a day during the demo; ten thousand users can cost hundreds a day. So you compute this before writing the first line of code, not when the invoice arrives.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">我的估算法就三步：<strong>一是数调用频次</strong>（一个用户一天用几次，保守一点按 8 次算）；<strong>二是估 token 量</strong>（我这次平均输入 1500 token、输出 400 token，包含那段固定的系统提示词）；<strong>三是乘单价</strong>，然后再留 30% 冗余。公式很简单：月成本 ≈ 日活 × 人均调用次数 × 30 ×（平均输入 token × 输入单价 + 平均输出 token × 输出单价）。</span>
+    <span class="en-only">My estimation is three steps: <strong>count the call frequency</strong> (how many times one person uses the product per day — I used a conservative 8); <strong>estimate the tokens</strong> (for me, 1,500 input and 400 output tokens on average, including the fixed system prompt); <strong>multiply by the price</strong>, then add a 30% buffer. The formula is simple: monthly cost ≈ DAU × calls per user × 30 × (avg input tokens × input price + avg output tokens × output price).</span>
+  </p>
+
+  <p>
+    <span class="zh-only">下面是<strong>日活 1000 用户</strong>的月度成本估算，按上面那套假设算出来的：</span>
+    <span class="en-only">Below is the <strong>monthly cost estimate for 1,000 daily active users</strong>, using the assumptions above:</span>
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">成本项</span><span class="en-only">Cost item</span></th>
+        <th><span class="zh-only">单价</span><span class="en-only">Unit price</span></th>
+        <th><span class="zh-only">月用量</span><span class="en-only">Monthly volume</span></th>
+        <th><span class="zh-only">月成本</span><span class="en-only">Monthly cost</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">主力模型输入（未命中缓存）</span><span class="en-only">Main model input (cache miss)</span></td>
+        <td>¥2 / 百万 token</td>
+        <td>210 百万 token</td>
+        <td>¥420</td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">主力模型输入（命中缓存）</span><span class="en-only">Main model input (cache hit)</span></td>
+        <td>¥0.2 / 百万 token</td>
+        <td>150 百万 token</td>
+        <td>¥30</td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">主力模型输出</span><span class="en-only">Main model output</span></td>
+        <td>¥8 / 百万 token</td>
+        <td>96 百万 token</td>
+        <td>¥768</td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">轻量模型（分类 / 摘要）</span><span class="en-only">Lightweight model (classify / summarize)</span></td>
+        <td>¥0.5 / 百万 token</td>
+        <td>80 百万 token</td>
+        <td>¥40</td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">服务器 2C4G</span><span class="en-only">Server 2C4G</span></td>
+        <td>¥68 / 月</td>
+        <td>1 台</td>
+        <td>¥68</td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">对象存储 + CDN</span><span class="en-only">Object storage + CDN</span></td>
+        <td>¥30 / 月</td>
+        <td>300 GB</td>
+        <td>¥30</td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">错误上报 + 日志</span><span class="en-only">Error reporting + logs</span></td>
+        <td><span class="zh-only">免费额度内</span><span class="en-only">Within free tier</span></td>
+        <td>—</td>
+        <td>¥0</td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">合计</span><span class="en-only">Total</span></strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td><strong>≈ ¥1,356 / 月</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <span class="zh-only">平均下来每个活跃用户每月 ¥1.36，每天 ¥45 左右。看起来不多，但这只是"每人每天 8 次调用"这个假设下的静态估算——如果需求变成"每人每天不限次数"，这一列会直接变成十倍。真正吓人的不是单价，而是<strong>没有上限</strong>：一次写错的循环，一个爬虫，一个被分享出去的免费额度，都能在两小时内刷掉你一整天的预算。</span>
+    <span class="en-only">That works out to about ¥1.36 per active user per month, roughly ¥45 a day. It looks affordable, but this is only a static estimate under the assumption of 8 calls per user per day — if the product becomes "unlimited calls", that column is 10× larger. The scary part is not the unit price but the <strong>absence of a ceiling</strong>: one buggy loop, one crawler, or one shared free tier can burn a full day's budget in two hours.</span>
+  </p>
+
+  <pre data-lang="javascript"><code>// 每个用户：每分钟最多 5 次、每天最多 200 次模型调用
+const RATE_LIMIT = { perMinute: 5, perDay: 200 };
+
+export async function callModel(userId, prompt) {
+  const dayKey = `llm:${userId}:${today()}`;
+
+  // 1) 用户级日配额
+  const used = await redis.incr(dayKey);
+  await redis.expire(dayKey, 86400);
+  if (used > RATE_LIMIT.perDay) {
+    throw new Error('今日额度已用完，请明天再试');
+  }
+
+  // 2) 全局预算闸门：当日花超了就不再调用模型
+  const spent = await redis.get('llm:budget:today');
+  if (Number(spent) > DAILY_BUDGET_YUAN) {
+    throw new Error('今日预算已用尽，已临时停用 AI 功能');
+  }
+
+  // 3) 真正调用
+  return openai.chat.completions.create({
+    model: 'deepseek-chat',
+    messages: [{ role: 'user', content: prompt }],
+  });
+}</code></pre>
+
+  <div class="callout info">
+    <div>
+
+      <strong><span class="zh-only">缓存是最容易被忽略的省钱手段</span><span class="en-only">Caching Is the Cheapest Saving You Will Miss</span></strong>
+      <p><span class="zh-only">我的系统提示词每次调用都一样，大约 1200 token。开了 prompt caching 之后，这部分单价从 ¥2/百万 降到 ¥0.2/百万。一个月下来，命中缓存的那 1.5 亿 token 省了约 <strong>¥270</strong> —— 折合每个活跃用户 0.27 元。别小看这个数字：缓存基本上就是改一行配置的事，比限流还简单。</span><span class="en-only">My system prompt is identical on every call — about 1,200 tokens. With prompt caching enabled, that part drops from ¥2 to ¥0.2 per million tokens. Over a month, the 150 million cached tokens saved roughly <strong>¥270</strong>, which is ¥0.27 per active user. Don't underestimate it: caching is essentially a one-line configuration change, simpler than rate limiting.</span></p>
+  
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第五课：出事的时候，你必须看得见</span><span class="en-only">Lesson Five: When It Breaks, You Must Be Able to See It</span></h2>
+
+  <p>
+    <span class="zh-only">上线前我给自己设的最后一道心理防线是：出问题时，你得能在 5 分钟内回答"哪个用户在什么时候遇到了什么错误"。做不到这一点，前面所有的努力都会在第一次线上故障里被冲垮——因为你连问题出在哪都不知道。</span>
+    <span class="en-only">The last line of defence I drew before going live was this: when something breaks, you must be able to answer "which user, at what time, hit what error" within five minutes. If you can't, everything else you built gets wiped out by the first real incident, because you won't even know where to look.</span>
+  </p>
+
+  <h3><span class="zh-only">最少要有的 5 条日志</span><span class="en-only">The 5 Logs You Cannot Skip</span></h3>
+
+  <ul>
+    <li><span class="zh-only">每个请求的入口日志：用户 ID、路径、耗时、结果状态。</span><span class="en-only">Entry log for every request: user ID, path, duration, outcome status.</span></li>
+    <li><span class="zh-only">每次模型调用的日志：模型名、输入输出 token 数、耗时、有没有重试、是否命中缓存。</span><span class="en-only">Log for every model call: model name, input/output token counts, duration, retry count, cache hit.</span></li>
+    <li><span class="zh-only">每笔写操作（创建 / 修改 / 删除）：谁做的、改了哪个对象、改前改后的关键字段。</span><span class="en-only">Every write operation (create / update / delete): who did it, which object, the key fields before and after.</span></li>
+    <li><span class="zh-only">每一次外部依赖失败：超时、5xx、重试了几次、最后放弃了没有。</span><span class="en-only">Every external dependency failure: timeout, 5xx, retry count, and whether it ultimately gave up.</span></li>
+    <li><span class="zh-only">每一条异常：完整堆栈 + 用户 ID + request id，三者必须能串成一条线。</span><span class="en-only">Every exception: the full stack trace plus user ID plus request id, and all three must be joinable into a single thread.</span></li>
+  </ul>
+
+  <h3><span class="zh-only">1 个错误上报 + 2 个告警</span><span class="en-only">1 Error Reporter + 2 Alerts</span></h3>
+
+  <ul>
+    <li><span class="zh-only"><strong>错误上报：</strong>Sentry 的免费版就够了。它能自动关联到具体 commit，异常一多就发邮件通知，比你自己翻日志快十倍。</span><span class="en-only"><strong>Error reporting:</strong> the free Sentry tier is enough. It links errors to the exact commit and emails you when the volume spikes — ten times faster than reading logs by hand.</span></li>
+    <li><span class="zh-only"><strong>告警一（可用性）：</strong>5 分钟内错误率超过 2%，或者连续 10 个请求失败，立刻通知我。</span><span class="en-only"><strong>Alert 1 (availability):</strong> error rate above 2% over 5 minutes, or 10 consecutive failed requests — notify me immediately.</span></li>
+    <li><span class="zh-only"><strong>告警二（成本）：</strong>当日模型调用费用达到日预算的 50% 和 100% 时各通知一次。</span><span class="en-only"><strong>Alert 2 (cost):</strong> notify once when the day's model spend reaches 50% of the daily budget and again at 100%.</span></li>
+  </ul>
+
+  <pre data-lang="javascript"><code>// 结构化日志：一行一个 JSON，方便 grep，也方便以后接日志平台
+function log(event, fields = {}) {
+  console.log(JSON.stringify({
+    ts: new Date().toISOString(),
+    event,          // 事件名，例如 'llm.call'
+    requestId,      // 贯穿一次请求的追踪 ID
+    userId: fields.userId,
+    ...fields,
+  }));
+}
+
+log('llm.call', { model: 'deepseek-chat', inTokens: 1520, outTokens: 430, ms: 2140, cached: true });
+log('payment.webhook', { orderId: 'A20260915', amount: 39, ok: false });</code></pre>
+
+  <p>
+    <span class="zh-only">最后一条经验：request id 要从网关一路传到日志和错误上报里。没有它，用户截图说"刚才失败了"，你只能靠时间范围去猜，猜错的概率很高。</span>
+    <span class="en-only">One last piece of advice: the request id must travel from the gateway all the way into your logs and error reports. Without it, when a user sends a screenshot saying "it just failed", you can only guess by time window — and you will guess wrong more often than you would like.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">我这次是怎么一步步改的</span><span class="en-only">How I Refactored It, Step by Step</span></h2>
+
+  <p>
+    <span class="zh-only">整个改造花了 3 周，顺序比内容更重要。下面是我实际走过的六步，你可以按这个顺序照着做，也可以按自己的项目裁剪。</span>
+    <span class="en-only">The whole retrofit took three weeks, and the order mattered more than the content. These are the six steps I actually took — you can follow them as-is or adapt them to your project.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">第 1 步：先补日志和错误上报（0.5 天）</span><span class="en-only">Step 1: Add logs and error reporting first (half a day)</span></h3>
+      <p><span class="zh-only">在改任何功能之前，先让系统"能说话"。没有日志，后面所有的优化都是盲改——你连改完有没有变好都不知道。这一步做完，我只花了一个下午。</span><span class="en-only">Before touching a single feature, make the system able to talk. Without logs, every later optimisation is blind — you would not know whether your change helped. This took me one afternoon.</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">第 2 步：把密钥搬出代码（1 天）</span><span class="en-only">Step 2: Move every secret out of the code (one day)</span></h3>
+      <p><span class="zh-only">换环境变量、轮换所有已经在 Git 历史里出现过的 key、把 <code>.env</code> 写进 <code>.gitignore</code>、在 CI 里加一条 <code>git log -S "sk-"</code> 的检查。顺手把 DeepSeek 的单日消费上限设成 ¥50。</span><span class="en-only">Switch to environment variables, rotate every key that ever appeared in Git history, add <code>.env</code> to <code>.gitignore</code>, and put a <code>git log -S "sk-"</code> check in CI. While I was there I also set a ¥50 daily cap on the model provider.</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">第 3 步：给每个外部调用加超时和重试（1 天）</span><span class="en-only">Step 3: Add timeouts and retries to every external call (one day)</span></h3>
+      <p><span class="zh-only">模型调用、数据库、对象存储，全部加超时；只有幂等的调用才重试，重试次数上限 2 次，并且重试之间要等一个递增的间隔。这一步顺手解决了一个必现的 bug：模型偶尔会卡住 30 秒，把整个请求线程占死。</span><span class="en-only">Model calls, the database, object storage — all of them got a timeout. Only idempotent calls are retried, at most twice, with a growing delay between attempts. This also killed a reproducible bug: the model would occasionally hang for 30 seconds and pin the request thread.</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">第 4 步：加索引、消灭 N+1（2 天）</span><span class="en-only">Step 4: Add indexes and kill the N+1 (two days)</span></h3>
+      <p><span class="zh-only">先用 EXPLAIN 找出最慢的 3 条 SQL，再动手改。改完之后列表接口 P95 从 2.6s 降到 180ms，首屏 JS 从 1.8MB 降到 620KB。这一步是用户感知最强的一次优化。</span><span class="en-only">Use EXPLAIN to find the three slowest SQL statements first, then change the code. Afterwards the list endpoint's P95 went from 2.6s to 180ms and the initial JS from 1.8MB to 620KB. This was the optimisation users noticed most.</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">第 5 步：加限流、缓存和预算闸门（2 天）</span><span class="en-only">Step 5: Add rate limiting, caching and a budget gate (two days)</span></h3>
+      <p><span class="zh-only">每个用户每分钟 5 次、每天 200 次；固定 prompt 开缓存；当日预算超过 80% 时自动把非关键功能降级到轻量模型。做完这一步，我那个写错的小脚本再也刷不动账单了。</span><span class="en-only">Five calls per minute and 200 per day per user; caching for the fixed prompt; automatic downgrade to a lightweight model once 80% of the daily budget is gone. After this, my buggy script could no longer make the bill move.</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">第 6 步：补 8 个端到端测试 + 一键回滚（4 天）</span><span class="en-only">Step 6: Add 8 end-to-end tests and one-command rollback (four days)</span></h3>
+      <p><span class="zh-only">测试覆盖注册、上传、支付、模型调用、失败重试这 5 条主路径；顺手写了 <code>deploy.sh --rollback v12</code> 这个脚本。这一步最花时间，但也是让我后来敢睡觉的一步。</span><span class="en-only">The tests cover the five main paths: signup, upload, payment, model calls, and failed-call retries. I also wrote the <code>deploy.sh --rollback v12</code> script along the way. This was the most time-consuming step and the one that finally let me sleep at night.</span></p>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div>
+
+      <strong><span class="zh-only">顺序上的教训</span><span class="en-only">A Lesson About Ordering</span></strong>
+      <p><span class="zh-only">第 1 步（补日志）我原本想放到最后，结果改到一半又回来补了一遍，白花了一天半。凡是要靠"观察"才能做好的事，都应该放在最前面——因为观察需要时间，你需要留出时间去观察。</span><span class="en-only">I originally planned to do step 1 (adding logs) last, then came back halfway through and did it anyway, wasting a day and a half. Anything that depends on <strong>observation</strong> belongs at the front, because observation takes time and you need to leave time for it.</span></p>
+  
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">上线前的 12 项检查</span><span class="en-only">The 12-Item Pre-Launch Checklist</span></h2>
+
+  <p>
+    <span class="zh-only">这是我实际用的清单，每次上线前逐条打勾，用不了 5 分钟。前 5 条是安全，后 4 条是可观测性，最后 3 条是保命的。</span>
+    <span class="en-only">This is the checklist I actually use. I tick it off before every release; it takes less than five minutes. The first five are security, the next four are observability, and the last three are the ones that keep you in business.</span>
+  </p>
+
+  <ol>
+    <li><span class="zh-only">☐ 仓库里搜不到任何密钥：<code>git grep -n "sk-\|api_key\|secret"</code> 没有结果，<code>git log -S "sk-"</code> 也查不到历史泄漏。</span><span class="en-only">☐ No secrets in the repo: <code>git grep -n "sk-\|api_key\|secret"</code> returns nothing, and <code>git log -S "sk-"</code> finds no leak in history.</span></li>
+    <li><span class="zh-only">☐ 所有密钥都来自环境变量，代码里没有硬编码的 key，也没有 <code>.env</code> 被提交。</span><span class="en-only">☐ Every secret comes from an environment variable, no key is hardcoded, and no <code>.env</code> was committed.</span></li>
+    <li><span class="zh-only">☐ 每个对外接口都做了输入校验（类型、长度、范围、格式），文件上传限制了类型和大小。</span><span class="en-only">☐ Every public endpoint validates its input (type, length, range, format), and file uploads are restricted by type and size.</span></li>
+    <li><span class="zh-only">☐ 没有把用户输入拼进 SQL、shell 命令或 HTML。</span><span class="en-only">☐ No user input is concatenated into SQL, shell commands, or HTML.</span></li>
+    <li><span class="zh-only">☐ <code>npm audit</code> 没有 high / critical 级别的漏洞。</span><span class="en-only">☐ <code>npm audit</code> reports no high or critical vulnerabilities.</span></li>
+    <li><span class="zh-only">☐ 每个外部调用都有超时，重试只加在幂等操作上，重试次数不超过 2 次。</span><span class="en-only">☐ Every external call has a timeout, retries are only used on idempotent operations, and never more than twice.</span></li>
+    <li><span class="zh-only">☐ 关键路径至少有 1 条日志，带 request id，能和错误上报对上。</span><span class="en-only">☐ Every critical path logs at least once, carries a request id, and can be joined with the error reports.</span></li>
+    <li><span class="zh-only">☐ 错误上报已经接上，而且我真的触发过一次测试告警确认它能响。</span><span class="en-only">☐ Error reporting is connected, and I have triggered a test alert to confirm it actually fires.</span></li>
+    <li><span class="zh-only">☐ 两个告警都生效了：错误率告警 + 当日费用告警。</span><span class="en-only">☐ Both alerts work: the error-rate alert and the daily-spend alert.</span></li>
+    <li><span class="zh-only">☐ 模型调用有用户级限流和当日预算上限，脚本批量调用会被挡下来。</span><span class="en-only">☐ Model calls have per-user rate limits and a daily budget cap, so scripted bursts get blocked.</span></li>
+    <li><span class="zh-only">☐ 数据库有备份，并且我演练过一次真的从备份恢复（不是"备份存在"，是恢复过）。</span><span class="en-only">☐ The database is backed up, and I have actually restored from a backup once — not "a backup exists", but a real restore.</span></li>
+    <li><span class="zh-only">☐ 上一个版本的代码和配置还在，能一键回滚，而且我知道回滚要花多长时间。</span><span class="en-only">☐ The previous version's code and config are still around, can be rolled back with one command, and I know how long that takes.</span></li>
+  </ol>
+
+  <p>
+    <span class="zh-only">如果第 11、12 条没过，就先别上线。这两条是保命的，其余 10 条是让你少受点苦。</span>
+    <span class="en-only">If items 11 and 12 are not green, do not launch. Those two keep you in business; the other ten just save you from pain.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">回滚与灰度：别把鸡蛋放在一个篮子里</span><span class="en-only">Rollback and Gradual Release: Don't Keep All Eggs in One Basket</span></h2>
+
+  <p>
+    <span class="zh-only">上线不是"部署一次"，而是"部署一个退得回来的版本"。我以前每次上线都直接覆盖线上代码，出了 bug 只能改代码重新部署，一轮 20 分钟；半夜出 bug，那 20 分钟会显得格外长。</span>
+    <span class="en-only">Launching is not "deploying once", it is "deploying a version you can go back to". I used to overwrite the live code on every release, which meant a bug could only be fixed by editing and redeploying — a 20-minute cycle that feels much longer in the middle of the night.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">现在我的做法有三条：</span><span class="en-only">My current setup rests on three decisions:</span>
+  </p>
+
+  <ul>
+    <li><span class="zh-only"><strong>每个版本都能一键回滚。</strong>每次上线打一个版本号，旧的构建产物至少保留 7 天，回滚就是一条命令：<code>deploy.sh --rollback v12</code>。</span><span class="en-only"><strong>Every version rolls back with one command.</strong> Each release gets a version number, the old build artefacts are kept for at least 7 days, and rolling back is <code>deploy.sh --rollback v12</code>.</span></li>
+    <li><span class="zh-only"><strong>配置和代码分开。</strong>改配置（换个模型、调个限额、改一句提示词）不需要重新构建，5 秒生效，出问题改回去也是 5 秒。很多"事故"其实只需要改一行配置。</span><span class="en-only"><strong>Config is separated from code.</strong> Changing configuration (a different model, a different limit, one line of prompt) needs no rebuild: it takes effect in 5 seconds, and reverting it also takes 5 seconds. Plenty of "incidents" are really a one-line config change.</span></li>
+    <li><span class="zh-only"><strong>数据库变更向前兼容。</strong>先加新字段（不动旧字段），应用同时兼容新旧两种结构，下一次上线再删旧字段。这样回滚应用不会因为表结构对不上而失败。</span><span class="en-only"><strong>Schema changes are forward-compatible.</strong> Add the new column first without touching the old one, make the app handle both shapes, and drop the old column in a later release. That way rolling the app back never fails because the table shape moved on.</span></li>
+  </ul>
+
+  <blockquote>
+    <span class="zh-only">「回滚方案必须在出故障之前就演练过。没演练过的回滚方案，等于没有回滚方案。」</span>
+    <span class="en-only">"A rollback plan you have not rehearsed is not a rollback plan."</span>
+  </blockquote>
+
+  <p>
+    <span class="zh-only">再说灰度。我的用户量不大，所以我的"灰度"是按比例放流量：</span>
+    <span class="en-only">Now for gradual release. My audience is small, so my "gradual release" is simply routing a share of traffic:</span>
+  </p>
+
+  <ul>
+    <li><span class="zh-only">新版本先给 10% 的用户用，观察 24 小时 → 放到 50%，再观察 24 小时 → 全量。</span><span class="en-only">Ship the new version to 10% of users and watch for 24 hours → move to 50% and watch 24 hours more → then go to 100%.</span></li>
+    <li><span class="zh-only">观察四个指标：错误率、P95 延迟、当日费用、用户投诉数。</span><span class="en-only">Watch four metrics: error rate, P95 latency, daily spend, and the number of user complaints.</span></li>
+    <li><span class="zh-only">任何一个指标比基线差 20% 以上，立刻把比例调回去，不用整体回滚。</span><span class="en-only">If any metric is more than 20% worse than baseline, dial the percentage back immediately — no full rollback needed.</span></li>
+  </ul>
+
+  <p>
+    <span class="zh-only">对独立开发者来说，灰度还有一个更省事的版本：用 feature flag（一个配置项开关）把新功能关掉。新功能出问题，不用回滚整个版本，关掉开关就行。这比任何架构都简单，而且几乎不需要额外成本。</span>
+    <span class="en-only">For a solo developer there is an even cheaper form of gradual release: a feature flag — a single configuration switch. If the new feature misbehaves, you turn the switch off instead of rolling back the whole release. It is simpler than any architecture and costs almost nothing.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">这一趟花了多久，下次我会怎么做</span><span class="en-only">How Long This Took and What I'd Do Differently</span></h2>
+
+  <p>
+    <span class="zh-only">从"Demo 能跑"到"敢接真实用户"，这次一共花了 5 周：Demo 开发 5 天，生产化改造 3 周，灰度加观察 1 周。踩了 7 个坑——密钥泄漏（上面那个）、支付回调重复通知导致用户被扣了两次钱、模型超时没有重试、列表页 N+1、没做限流被自己写的小脚本刷掉 ¥380、移动端首屏 8 秒、数据库连接没池化偶尔 502。平均每个坑花掉我一天。</span>
+    <span class="en-only">From "the demo runs" to "I dare take real users", the whole thing took five weeks: five days to build the demo, three weeks of production hardening, one week of gradual release and observation. I hit seven real problems — the key leak described above, a payment webhook that notified twice and double-charged a user, no retry on model timeouts, the N+1 on the list page, no rate limiting so my own buggy script burned ¥380, an 8-second mobile first paint, and occasional 502s from an unpooled database connection. On average, each one cost me a day.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">如果重来一次，这四件事我会从第一天就做：</span><span class="en-only">If I did it again, these four things would happen on day one:</span>
+  </p>
+
+  <ol>
+    <li><span class="zh-only">日志和错误上报从第一天就写，别等。</span><span class="en-only">Write the logs and error reporting on day one. Don't wait.</span></li>
+    <li><span class="zh-only">密钥从第一行代码起就走环境变量，不存在"等上线再改"这回事。</span><span class="en-only">Secrets live in environment variables from the very first line. There is no such thing as "I'll fix it before launch".</span></li>
+    <li><span class="zh-only">模型调用第一天就接限流和预算闸门，别用"回头再加"安慰自己。</span><span class="en-only">Rate limits and a budget gate go in on day one. Don't comfort yourself with "I'll add it later".</span></li>
+    <li><span class="zh-only">给每个外部依赖写一份"如果它挂了会怎样"的问题清单，逐条回答。答不上来的那一条，就是你下次会半夜被叫醒的那一条。</span><span class="en-only">For every external dependency, write down the question "what happens if this is down?" and answer each one. The one you cannot answer is the one that will wake you at 2 a.m.</span></li>
+  </ol>
+
+  <div class="callout success">
+    <div>
+
+      <strong><span class="zh-only">结论</span><span class="en-only">The Takeaway</span></strong>
+      <p><span class="zh-only">AI 写代码的速度没有变慢，是"以为做完了"的标准太宽松。把"能跑"改成"能扛住真实世界"，这件事 AI 帮不了你——但这份清单可以。</span><span class="en-only">AI did not get slower at writing code. My definition of "finished" was simply too loose. Changing "it runs" into "it survives the real world" is not something AI can do for you — but this checklist can.</span></p>
+  
+    </div>
+  </div>
+
+  <blockquote>
+    <span class="zh-only">「AI 把'做出来'的时间从三个月压缩到了三天。剩下的九十分，都花在让它别塌上。」</span>
+    <span class="en-only">"AI compressed the time it takes to build something from three months to three days. The other ninety days are spent making sure it doesn't collapse."</span>
+  </blockquote>
+
+  <p>
+    <span class="zh-only">如果你也在做 AI 产品，欢迎在评论区告诉我你被哪一个坑绊倒过。我很想知道，是不是同一批人踩同一批坑。</span>
+    <span class="en-only">If you are building an AI product too, tell me in the comments which pit caught you. I am curious whether it is the same set of people falling into the same set of holes.</span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

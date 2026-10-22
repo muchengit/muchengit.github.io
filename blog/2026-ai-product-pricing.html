@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>用 AI 做产品怎么赚钱：定价、获客与一次真实复盘 | How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</title><meta name="description" content="从模型成本拆解到订阅、按量、买断三种定价模型，再到四个真正有效的获客渠道和一次亏损项目的真实复盘，把「AI 产品怎么赚钱」拆成普通人能照着做的步骤。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-pricing-hero.jpg" alt="Pricing and revenue dashboard" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">产品</span><span class="en-only">| Product</span></div>
+    <h1 class="reveal"><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.06 — 把成本、定价、获客摊开算一遍，包括一个赔了钱的失败项目</span><span class="en-only">2026.10.06 — Cost, pricing, and acquisition laid out in the open, including one project that lost money</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">先别急着定价，先算清楚你每个月要烧多少钱</span><span class="en-only">Don't Set a Price Yet: Figure Out What You Burn Every Month</span></h2>
+  <p>
+    <span class="zh-only">大部分独立开发者做 AI 产品时的顺序是反的：先想"我该卖多少钱"，做了三个月才发现成本比想象中高好几倍，于是要么赔本硬撑，要么默默把服务关掉。我自己第一次做付费产品就是这么干的：定价页写的是"¥19/月 无限次生成"，上线第三周就发现每个重度用户的模型成本超过 ¥70。</span>
+    <span class="en-only">Most indie developers price in the wrong order: decide what to charge first, then discover three months later that the real cost is several times higher than assumed. Either you keep running at a loss or you quietly shut the service down. My first paid product went exactly that way: the pricing page said "¥19/month, unlimited generations," and by week three I found that heavy users were costing me over ¥70 each in model calls.</span>
+  </p>
+  <p>
+    <span class="zh-only">一个 AI 产品的成本就三块：<strong>模型调用费</strong>（通常是最大头）、<strong>基础设施</strong>（服务器、数据库、CDN、对象存储）、<strong>你自己的时间</strong>（客服、迭代、答疑，这一块最容易被忽略）。先把这三块拆成数字，再谈价格。</span>
+    <span class="en-only">An AI product has exactly three cost buckets: <strong>model API calls</strong> (usually the biggest), <strong>infrastructure</strong> (hosting, database, CDN, object storage), and <strong>your own time</strong> (support, iteration, questions — the one people forget most). Break these three into numbers first, and only then talk about price.</span>
+  </p>
+  <p>
+    <span class="zh-only">拿我那个「AI 简历优化器」举例：平均每个用户一个月调 12 次模型，每次输入约 2000 token、输出约 1500 token，用中等价位的模型，单次成本 ¥0.35，那一个月的模型成本就是 ¥4.2；服务器 + 数据库按 ¥290/月摊到 87 个付费用户头上，人均约 ¥3.3；支付通道收 3% 加每笔 ¥2。三个加起来，人均月成本 ¥9 上下。</span>
+    <span class="en-only">Take my "AI Resume Optimizer" as an example: the average user triggers the model 12 times a month, roughly 2,000 input tokens and 1,500 output tokens per call, at a mid-tier model price of ¥0.35 per call — that's ¥4.2 of model cost per user per month. Hosting and database come to ¥290/month, spread over 87 paying users, so about ¥3.3 each. Payment fees are 3% plus ¥2 per transaction. All together, roughly ¥9 of cost per paying user per month.</span>
+  </p>
+  <blockquote>
+    <span class="zh-only">定价的第一原则：先算成本，再定价格。反过来做的人，最后都在用自己的钱补贴用户。</span>
+    <span class="en-only">First rule of pricing: compute the cost, then set the price. People who do it backwards end up subsidising their users with their own money.</span>
+  </blockquote>
+  <p>
+    <span class="zh-only">再加一条经验值：<strong>毛利率至少要留到 60% 以上</strong>，也就是售价至少是成本的 2.5 倍。原因很现实——模型会涨价、汇率会动、用户会问出你没预料过的长任务、还会有那 5% 的退款和坏账。留不出 50% 利润空间的产品，本质上是一份没有薪水的工作。</span>
+    <span class="en-only">Add one rule of thumb: <strong>keep gross margin above 60%</strong>, meaning the price should be at least 2.5x your cost. The reason is mundane — models get more expensive, exchange rates move, users send tasks you never anticipated, and roughly 5% of payments are refunded or fail. If you can't leave 50% margin, the product is really an unpaid job.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">三种定价模型，选错一种，白干一年</span><span class="en-only">Three Pricing Models: Pick the Wrong One and You'll Waste a Year</span></h2>
+  <p>
+    <span class="zh-only">主流做法就三种：订阅制（按月/年付固定费用）、按量计费（用多少付多少）、一次性买断（付一次拿走）。下面这张表是我用来做决策的对照表，每次新产品立项都会重新看一遍。</span>
+    <span class="en-only">There are three mainstream models: subscription (a fixed fee per month or year), usage-based (pay for what you consume), and one-time purchase (pay once, keep it). This is the table I re-read every time I start a new product.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">定价模型</span><span class="en-only">Pricing model</span></th>
+        <th><span class="zh-only">适合什么产品</span><span class="en-only">Fits what kind of product</span></th>
+        <th><span class="zh-only">优点</span><span class="en-only">Upside</span></th>
+        <th><span class="zh-only">风险</span><span class="en-only">Risk</span></th>
+        <th><span class="zh-only">我的真实例子</span><span class="en-only">A real example of mine</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">订阅制</span><span class="en-only">Subscription</span></td>
+        <td><span class="zh-only">持续产生价值、用户每天都可能打开的产品</span><span class="en-only">Products that create value continuously and users may open daily</span></td>
+        <td><span class="zh-only">收入可预测，能提前算现金流</span><span class="en-only">Predictable revenue; you can forecast cash flow</span></td>
+        <td><span class="zh-only">用户用得少会觉得亏，会想退订</span><span class="en-only">Light users feel cheated and ask to cancel</span></td>
+        <td><span class="zh-only">AI 简历优化器，¥29/月</span><span class="en-only">AI Resume Optimizer, ¥29/month</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">按量计费</span><span class="en-only">Usage-based</span></td>
+        <td><span class="zh-only">用量波动大、单次成本能精确算出来的产品</span><span class="en-only">Products with volatile usage where per-call cost is precisely known</span></td>
+        <td><span class="zh-only">用多少付多少，对成本最友好</span><span class="en-only">Pay per use; friendliest to your margin</span></td>
+        <td><span class="zh-only">收入不稳定，用户有心理负担，账算不清会吵架</span><span class="en-only">Unstable revenue; users feel uneasy; unclear bills cause arguments</span></td>
+        <td><span class="zh-only">API 转售、批量文案生成</span><span class="en-only">API resale, bulk copy generation</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">一次性买断</span><span class="en-only">One-time purchase</span></td>
+        <td><span class="zh-only">交付物固定、边际成本接近 0 的数字产品</span><span class="en-only">Digital products with a fixed deliverable and near-zero marginal cost</span></td>
+        <td><span class="zh-only">现金来得最快，不用维护订阅</span><span class="en-only">Fastest cash, no subscription to maintain</span></td>
+        <td><span class="zh-only">只有一次性收入，没有复购</span><span class="en-only">One-off income only, no repeat purchases</span></td>
+        <td><span class="zh-only">Notion 模板包，¥39–¥99 不等</span><span class="en-only">Notion template packs, ¥39–¥99 each</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">新手首选：订阅制</span><span class="en-only">Default for beginners: Subscription</span></h4>
+      <p><span class="zh-only">用户最容易理解「每月付 29 块」这件事，转化页面也好写、客服也好解释。收入固定，你才能安心去做产品而不是盯着账单。适合 80% 的第一次尝试。</span><span class="en-only">Users instantly understand "29 bucks a month", which makes the pricing page easy to write and support calls easy to handle. Fixed revenue means you can focus on the product instead of watching the billing dashboard. Right for about 80% of first attempts.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">新手慎用：按量计费</span><span class="en-only">Careful for beginners: Usage-based</span></h4>
+      <p><span class="zh-only">不是模型不好，是账真的算不清。用户不知道这次要花几块钱，用量涨了又心疼，于是干脆不用。除非你的产品本身就是"帮别人省算力"的，否则第一个版本不要碰。</span><span class="en-only">The model isn't the problem — the billing is. Users can't predict what a task will cost, get nervous when usage climbs, and then stop using it. Unless your product is literally about saving compute, don't touch this in version one.</span></p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">一次性买断也别急着否定。它有两个好处：一是现金来得快，做完就能收钱；二是边际成本几乎为零，一份模板卖 500 份和卖 5 份成本一样。我的模板包现在每月稳定出 38 单左右，月流水 ¥3,100 左右，扣掉平台抽成后净赚约 ¥3,000，<strong>每天只需要花 20 分钟更新</strong>。缺点是它不解决"长期复购"，所以我把它当成一条稳定的现金流，而不是主战场。</span>
+    <span class="en-only">One-time purchase deserves a fair hearing too. Two advantages: cash arrives fast (you can charge the moment it's done), and marginal cost is essentially zero — selling a template 500 times costs the same as selling it 5 times. My template pack now sells around 38 orders a month for about ¥3,100 gross and roughly ¥3,000 net after platform fees, and needs only <strong>20 minutes a day</strong> to maintain. The downside is no repeat purchases, so I treat it as steady cash flow rather than the main event.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">AI 产品特有的坑：用户越用，你亏得越多</span><span class="en-only">The AI-Specific Trap: The More Users Use It, the More You Lose</span></h2>
+  <p>
+    <span class="zh-only">这是普通 SaaS 和 AI 产品最本质的区别。普通软件的成本几乎不随使用量增长，用户用得越多你越赚；AI 产品的成本<strong>严格随调用次数线性增长</strong>，所以如果定价是固定的，重度用户会把你的利润吃干，甚至把你拖成负毛利。</span>
+    <span class="en-only">This is the fundamental difference between ordinary SaaS and an AI product. Classic software costs almost nothing no matter how much it's used, so heavy users make you richer. An AI product's cost grows <strong>strictly linearly with calls</strong>, so with a flat price, heavy users eat your entire profit and can drag you into negative margin.</span>
+  </p>
+  <p>
+    <span class="zh-only">还是简历优化器这个例子，套餐价 ¥29/月，我们看不同用量的用户分别花多少：</span>
+    <span class="en-only">Back to the resume optimizer at ¥29/month. Here's what each tier of user costs you:</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">用户分层</span><span class="en-only">User segment</span></th>
+        <th><span class="zh-only">月调用次数</span><span class="en-only">Calls / month</span></th>
+        <th><span class="zh-only">月模型成本</span><span class="en-only">Monthly model cost</span></th>
+        <th><span class="zh-only">付给我们的钱</span><span class="en-only">What they pay us</span></th>
+        <th><span class="zh-only">毛利</span><span class="en-only">Margin</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">轻度用户（占 70%）</span><span class="en-only">Light users (70%)</span></td>
+        <td>5</td>
+        <td>¥1.75</td>
+        <td>¥29</td>
+        <td><span class="zh-only">+¥27.25</span><span class="en-only">+¥27.25</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">中度用户（占 25%）</span><span class="en-only">Medium users (25%)</span></td>
+        <td>25</td>
+        <td>¥8.75</td>
+        <td>¥29</td>
+        <td><span class="zh-only">+¥20.25</span><span class="en-only">+¥20.25</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">重度用户（占 5%）</span><span class="en-only">Heavy users (5%)</span></td>
+        <td>180</td>
+        <td>¥63.00</td>
+        <td>¥29</td>
+        <td><span class="zh-only">−¥34.00</span><span class="en-only">−¥34.00</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">加权平均</span><span class="en-only">Weighted average</span></td>
+        <td>—</td>
+        <td>¥9.10</td>
+        <td>¥29</td>
+        <td><span class="zh-only">+¥19.90</span><span class="en-only">+¥19.90</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <span class="zh-only">5% 的人贡献了负毛利。一开始我没做额度限制，40 个重度用户一个月能吃掉 ¥1,360 的利润，眼看着稳赚的订阅制变成"高级陪跑"。这是我第一次真切体会到"AI 产品必须按成本设计收费结构"这句话的分量。</span>
+    <span class="en-only">Five percent of users contributed negative margin. Without quotas, 40 heavy users erased ¥1,360 of profit in one month, and a comfortable subscription business turned into an expensive babysitting service. That's when I truly felt the weight of "an AI product must be priced around its cost structure."</span>
+  </p>
+  <h3><span class="zh-only">三个解法，我全都用上了</span><span class="en-only">Three Fixes — I Use All Three Together</span></h3>
+  <ol>
+    <li><span class="zh-only"><strong>套餐额度：</strong>每档套餐写死包含多少次生成，用完就提示升级或按次加购。我现在的标准档是"每月 20 次，够一个正常求职者用"。</span><span class="en-only"><strong>Plan quotas:</strong> each tier includes a fixed number of generations, then you prompt an upgrade or buy extra credits. My standard plan now says "20 per month, enough for a normal job seeker."</span></li>
+    <li><span class="zh-only"><strong>用量分层：</strong>软提醒 + 硬上限两道线。超过 30 次开始弹提示"你的额度快用完了"，超过 60 次直接锁定升级。关键是这两条线要写在套餐说明里，别让用户觉得突然被卡住。</span><span class="en-only"><strong>Tiered usage:</strong> a soft warning plus a hard cap. Past 30 calls you get "you're running low," past 60 calls the account locks until upgrade. The key: state both lines in the plan description so users never feel ambushed.</span></li>
+    <li><span class="zh-only"><strong>把成本高的功能单独收费：</strong>高清导出、批量生成 100 条、长文档总结（每次要读 3 万 token），这些不吃套餐额度，单独标 ¥9、¥39。这样重度用户自己会选择，而不是被你卡死。</span><span class="en-only"><strong>Charge expensive features separately:</strong> HD export, bulk generation of 100 items, long-document summaries (30k tokens per call) don't draw from the quota — they carry their own ¥9 or ¥39 price. Heavy users then self-select the expensive path instead of being blocked.</span></li>
+  </ol>
+  <div class="callout warn">
+    <strong><span class="zh-only">警告：免费额度是最容易被忽略的坑</span><span class="en-only">Warning: the free tier is the most overlooked hole</span></strong>
+    <p><span class="zh-only">我的配音工具上线时给了"免费生成 10 次"，结果 312 个试用用户平均各用 8 次，成本 ¥4,600 左右，换来 0 笔订单（他们本来也就是抱着试试看的心态）。<strong>免费额度要按成本算上限</strong>——比如单次成本 ¥4.6，最多只给 1 次，剩下 9 次让用户自己决定要不要花钱。</span><span class="en-only">My voice tool launched with "10 free generations." 312 trial users used 8 each on average — about ¥4,600 of cost for zero orders (they were only window-shopping anyway). <strong>Cap your free allowance by cost</strong>: if one call costs ¥4.6, give one free call and let users pay for the other nine.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">定价页怎么写：4 个必写的要素</span><span class="en-only">Writing the Pricing Page: The 4 Things You Must Include</span></h2>
+  <p>
+    <span class="zh-only">定价页不是产品说明书，它是整个转化漏斗里最贵的一页。访问定价页的人已经想买了，你只需要消除他的疑虑。我核对过自己的转化数据：从定价页到付款的转化率差 3 倍，主要差别就在下面这四件事有没有写清楚。</span>
+    <span class="en-only">The pricing page isn't a manual — it's the most expensive page in your funnel. People who land there already want to buy; your only job is to remove doubt. Looking at my own conversion data, pricing-page-to-payment varied by 3x depending on whether these four things were clear.</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>卖的是结果，不是功能。</strong>"帮你把简历改到能投出去"比"基于大模型的智能简历优化引擎"好卖十倍。</span><span class="en-only"><strong>Sell the outcome, not the features.</strong> "Get your resume good enough to send" outsells "an intelligent LLM-powered resume optimisation engine" by 10x.</span></li>
+    <li><span class="zh-only"><strong>价格 + 周期 + 包含什么额度，一屏之内写完。</strong>不要让用户点三次才知道要付多少钱。</span><span class="en-only"><strong>Price, billing period, and included allowance — all on one screen.</strong> Nobody should need three clicks to find out what they'll pay.</span></li>
+    <li><span class="zh-only"><strong>超额怎么算，超出会怎样。</strong>这是 AI 产品专属的一段，不写清楚就会产生退款和差评。</span><span class="en-only"><strong>What happens when you exceed it.</strong> This paragraph is specific to AI products, and omitting it is where refunds and bad reviews come from.</span></li>
+    <li><span class="zh-only"><strong>试用、退款、取消政策。</strong>我的写法是："免费改 1 份，不满意 24 小时内全额退款，随时取消。"没有退款承诺的定价页，转化率要打折。</span><span class="en-only"><strong>Trial, refund, and cancellation policy.</strong> Mine reads: "One free rewrite — full refund within 24 hours if you're not happy, cancel anytime." A pricing page without a refund promise converts measurably worse.</span></li>
+  </ol>
+  <div class="callout tip">
+    <strong><span class="zh-only">改写前后：同一个产品，两种写法</span><span class="en-only">Before and after: the same product, two versions</span></strong>
+    <p><span class="zh-only"><strong>改写前：</strong>"我们的 AI 简历优化工具基于先进的大模型，支持 PDF / Word 多格式，一键生成专业简历，效率提升 10 倍。"<br><strong>改写后：</strong>"投 30 份简历之前，先让它帮你改 1 份。¥29/月，包含 20 次改写；改到满意为止，不满意 24 小时内全额退款。"<br>区别在于：改写前说的是我有什么，改写后说的是你得到什么、你要花多少钱、出了事怎么办。</span><span class="en-only"><strong>Before:</strong> "Our AI resume optimiser is powered by advanced large models, supports PDF and Word, generates professional resumes in one click, 10x more efficient."<br><strong>After:</strong> "Before you send 30 applications, let it fix one for you. ¥29/month, 20 rewrites included. Rework it until you're happy — full refund within 24 hours if you're not."<br>The difference: the first version talks about what I have; the second talks about what you get, what it costs, and what happens if it goes wrong.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">定价配置长什么样：一段 YAML 的事</span><span class="en-only">What Pricing Config Looks Like: One YAML File</span></h2>
+  <p>
+    <span class="zh-only">别把价格写死在代码里。我把定价做成了一个配置文件，后端每次调用前先读一次，这样调价、限流、改额度都不用改代码，也不用发版。下面是我现在实际在用的那份配置（做了脱敏和简化）：</span>
+    <span class="en-only">Don't hardcode prices in code. I keep pricing in a config file that the backend reads before every request, so I can adjust prices, quotas, and limits without touching code or shipping a release. Here's the config I actually run today (simplified and anonymised):</span>
+  </p>
+  <pre data-lang="yaml"><code># pricing.yaml — 价格、额度与成本护栏
+plan: pro
+price: 29                    # 元 / 月
+currency: CNY
+interval: month
+
+included:
+  generations: 20             # 每月包含 20 次生成
+  max_output_tokens: 2000     # 单次输出上限，防止一次烧太多
+  max_input_tokens: 6000      # 单次输入上限
+  concurrency: 1              # 同一时间只跑一个任务
+
+overage:
+  price: 2.5                  # 超额部分每次 2.5 元
+  soft_limit: 30              # 到 30 次开始提示
+  hard_limit: 60              # 到 60 次必须升级
+
+cost_guard:                   # 成本护栏：别让自己被单个用户拖垮
+  max_cost_per_user: 12       # 单用户单月成本上限
+  max_cost_per_month: 800     # 全站单月成本上限
+  alert_ratio: 0.6            # 用掉 60% 就预警
+
+expensive_features:           # 高成本功能单独收费，不吃套餐额度
+  - id: hd_export
+    price: 9
+  - id: batch_100
+    price: 39</code></pre>
+  <p>
+    <span class="zh-only">几个关键点值得单独说。<code>max_output_tokens</code> 和 <code>max_input_tokens</code> 是防单次失控的护栏——没有它，一个用户上传一本 200 页的书再点一次"深度优化"，一次就能吃掉 ¥8。<code>cost_guard</code> 里的三个值让你在月底之前就知道要出事，而不是月底看账单才知道。<code>expensive_features</code> 则是"用得多的用户自己掏钱"的机制：我的批量功能上线一个月，占了当月总收入的 11%，但只增加了 2% 的模型成本占比。</span>
+    <span class="en-only">A few details deserve their own mention. <code>max_output_tokens</code> and <code>max_input_tokens</code> guard against a single runaway request — without them, one user uploading a 200-page book and clicking "deep optimise" can burn ¥8 in one go. The three values under <code>cost_guard</code> tell you trouble is coming before month-end instead of after the invoice arrives. And <code>expensive_features</code> is the "heavy users pay for themselves" mechanism: my bulk feature now accounts for 11% of monthly revenue while adding only 2% to model cost share.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">获客：4 个真的有效的渠道</span><span class="en-only">Acquisition: 4 Channels That Actually Worked</span></h2>
+  <p>
+    <span class="zh-only">我把过去两年试过的渠道过了一遍，能带来付费用户的就这四个。其余的要么是虚荣指标，要么是纯粹浪费时间。</span>
+    <span class="en-only">I went back through every channel I tried over the past two years. Only four ever produced paying users; the rest were vanity metrics or wasted time.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">1. 写能搜到的东西（SEO + 内容）</span><span class="en-only">1. Write things people can search for (SEO + content)</span></h3>
+      <p><span class="zh-only">最慢但最持久。做法是：找到用户真正会搜的长尾问题（比如"简历项目经历怎么写才不空"），写一篇真正有用的长文，文中自然带到你的产品。我的模板店现在约 70% 的流量来自搜索，每个月稳定带来 ¥2,200 左右收入，而且完全免费。缺点是见效要 3–6 个月，这段时间你得有别的钱撑住。</span><span class="en-only">Slowest but most durable. Find the long-tail questions people actually search ("how to write resume project experience that isn't empty"), write a genuinely useful article, and mention your product naturally inside it. About 70% of my template shop traffic now comes from search, worth roughly ¥2,200/month at zero cost. The downside: 3–6 months to show up, so you need other income to survive the wait.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">2. 在垂直社群里"免费换反馈"</span><span class="en-only">2. Trade free work for feedback in vertical communities</span></h3>
+      <p><span class="zh-only">不要发广告。我做的是：在求职者聚集的群里（V2EX、即刻、豆瓣求职小组）连续 8 周，每周认真回答 5 个跟简历相关的问题，回答完顺带说一句"我做了个工具能帮你改简历，需要的话发你"。不主动推销，只在对方要的时候给。第 9 周的时候，有 23 个人找我要了工具，其中 11 个付了钱。</span><span class="en-only">Don't advertise. What I did: in job-seeker groups (V2EX, Jike, Douban job circles) I answered five resume-related questions seriously every week for eight weeks, and only after helping, said "I built a tool that can rewrite your resume — say the word and I'll send it over." No pitching, just offering. In week nine, 23 people asked for it and 11 paid.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">3. 发布平台的一次性爆发</span><span class="en-only">3. One-off burst from launch platforms</span></h3>
+      <p><span class="zh-only">Product Hunt 当天来了 840 个访问，转化率 2.1%，也就是 17 个付费用户。看起来不多，但这些人里有一个后来在 X 上发了一条推，带来 60 多个访问和 9 个付费用户——<strong>发布平台真正的价值是"第一次曝光 + 一个能替你说话的人"</strong>，而不是当天卖多少钱。</span><span class="en-only">Product Hunt sent 840 visitors on launch day and converted 2.1% — 17 paying users. Modest, but one of them later posted about it on X, which brought 60+ visits and 9 more paying users. <strong>The real value of a launch platform is first exposure plus one person willing to talk about you</strong>, not the revenue on launch day.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">4. 老用户带新用户（推荐返利）</span><span class="en-only">4. Referrals from existing paying users</span></h3>
+      <p><span class="zh-only">上线 3 个月之后才加的功能，给 20% 现金返利（返到余额，不走现金退款，省掉支付通道的手续费和税务麻烦）。效果比任何广告都稳：推荐来的用户付费率是普通用户的 2.3 倍，而且留存更高——因为他们是熟人介绍来的，用之前就已经知道好不好。占我新增付费用户的 18%。</span><span class="en-only">Added three months after launch: 20% cash back, paid as account credit rather than a refund, which avoids payment fees and tax headaches. Steadier than any ad: referred users convert at 2.3x the rate of cold traffic and retain better, because a friend already vouched for it. They now account for 18% of new paying users.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">两个"看起来很美但没啥用"的渠道</span><span class="en-only">Two Channels That Look Great and Do Almost Nothing</span></h2>
+  <p>
+    <span class="zh-only">这两个我都真金白银试过，结论是：以后不碰了。</span>
+    <span class="en-only">I paid real money to test both. Conclusion: not touching them again.</span>
+  </p>
+  <div class="compare">
+    <div class="col bad">
+      <h4><span class="zh-only">看起来很美：泛流量投放</span><span class="en-only">Looks great: broad paid traffic</span></h4>
+      <p><span class="zh-only">2025 年 8 月在 Facebook 和 Google Ads 上投了 ¥1,600，买到 210 次访问、3 个注册、<strong>0 个付费</strong>。最要命的是它还烧掉了 6 天时间去写广告文案和调人群包。对没有品牌词的早期产品来说，泛流量投放基本等于送钱。</span><span class="en-only">In August 2025 I spent ¥1,600 on Facebook and Google Ads and got 210 visits, 3 signups, and <strong>zero payments</strong>. Worst of all, it burned six days writing ad copy and tweaking audiences. For an early product with no brand search, broad paid traffic is essentially a donation.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">看起来很美：蹭热点和刷评论区</span><span class="en-only">Looks great: trend-jumping and comment farming</span></h4>
+      <p><span class="zh-only">在几个大 V 的评论区下面硬蹭产品、找无关热门帖留言，带来 40 次访问、0 个付费，还因为被判定为推广把其中一个账号封了 30 天。它满足的是"我今天有 40 个 PV"的虚荣，而真正的指标是付费。</span><span class="en-only">Dropping product links under big accounts' comments and dropping into unrelated hot threads brought 40 visits, 0 payments, and got one account banned for 30 days as spam. It satisfies the vanity metric of "40 pageviews today" while the metric that matters is paying users.</span></p>
+    </div>
+  </div>
+  <div class="callout info">
+    <strong><span class="zh-only">这 ¥1,600 换来的真正教训</span><span class="en-only">What that ¥1,600 Actually Taught Me</span></strong>
+    <p><span class="zh-only">省下的预算投到"渠道 2 深度回答问题"上——同样的 4 周，多做一个群，多回答 40 个问题，多拿到 23 个付费用户。所以判断渠道好坏的标准只有一条：<strong>7 天内能不能拿到第一个付费用户</strong>，拿不到就立刻停掉换下一个，别因为"再等等看"而在一个渠道上耗掉一个月。</span><span class="en-only">I redirected that budget into "channel 2, but deeper" — same four weeks, one extra community, 40 more answers, 23 more paying users. So the only test for a channel is: <strong>can you land a first paying user within 7 days?</strong> If not, kill it and move on. Don't let "let's give it more time" eat a month.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">真实复盘：4 个产品，4 组数字</span><span class="en-only">An Honest Post-Mortem: 4 Products, 4 Sets of Numbers</span></h2>
+  <p>
+    <span class="zh-only">下面是我实际跑过的几个产品的数据，2026 年 9 月的统计口径。赚钱的、持平的、赔钱的都在里面，我把亏损的那个也写全。</span>
+    <span class="en-only">Here are the numbers for products I actually shipped, measured as of September 2026. The winners, the break-even, and the loser are all in — including the full write-up of the one that lost money.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">产品</span><span class="en-only">Product</span></th>
+        <th><span class="zh-only">上线</span><span class="en-only">Launched</span></th>
+        <th><span class="zh-only">付费用户</span><span class="en-only">Paying users</span></th>
+        <th><span class="zh-only">月收入</span><span class="en-only">Monthly revenue</span></th>
+        <th><span class="zh-only">月成本</span><span class="en-only">Monthly cost</span></th>
+        <th><span class="zh-only">月净利</span><span class="en-only">Monthly profit</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">AI 简历优化器</span><span class="en-only">AI Resume Optimizer</span></td>
+        <td>2024.11</td>
+        <td>87</td>
+        <td>¥7,260</td>
+        <td>¥1,180</td>
+        <td><span class="zh-only">+¥6,080</span><span class="en-only">+¥6,080</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">Notion 模板包</span><span class="en-only">Notion template packs</span></td>
+        <td>2024.06</td>
+        <td><span class="zh-only">38 单</span><span class="en-only">38 orders</span></td>
+        <td>¥3,140</td>
+        <td>¥120</td>
+        <td><span class="zh-only">+¥3,020</span><span class="en-only">+¥3,020</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">AI 配音工具</span><span class="en-only">AI voice-over tool</span></td>
+        <td>2025.03</td>
+        <td>6</td>
+        <td>¥147</td>
+        <td>¥830</td>
+        <td><span class="zh-only">−¥683</span><span class="en-only">−¥683</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">AI 周报插件</span><span class="en-only">AI weekly-report extension</span></td>
+        <td>2025.07</td>
+        <td>0</td>
+        <td>¥0</td>
+        <td>¥0</td>
+        <td><span class="zh-only">¥0（已下架）</span><span class="en-only">¥0 (delisted)</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3><span class="zh-only">赚钱的那个：涨价是怎么做的</span><span class="en-only">The one that worked: how I raised the price</span></h3>
+  <p>
+    <span class="zh-only">简历优化器最早定价 ¥19/月。跑了半年发现三个信号同时出现：付费转化率稳定在 4.2%、老用户次月续费率 86%、模型成本只占收入的 23%。三个条件都满足"可以涨价"了，于是我把价格提到 ¥29/月。结果是流失了 8% 的用户，但收入涨了 40%——被砍掉的都是本来用不到 5 次的低价值用户，留下来的人反而用得更多了。</span>
+    <span class="en-only">The resume optimizer launched at ¥19/month. After six months, three signals lined up: conversion held steady at 4.2%, month-over-month renewal was 86%, and model cost was only 23% of revenue. All three "raise the price" conditions were met, so I moved to ¥29/month. Eight percent of users churned, but revenue rose 40% — the ones who left were low-value users making under five calls, and the ones who stayed started using it more.</span>
+  </p>
+  <h3><span class="zh-only">赔钱的那个：AI 配音工具为什么死</span><span class="en-only">The one that lost money: why the AI voice-over tool died</span></h3>
+  <p>
+    <span class="zh-only">2025 年 3 月上线，做的是"把文章转成播客配音"，卖点是 200 种音色。定价 ¥29/月，套餐写"每月 100 分钟"，成本侧一次合成的 TTS 费用约 ¥4.6，按字数折算每分钟约 ¥0.9。听起来毛利很厚对吧？<strong>问题出在用户根本不知道自己要多少分钟</strong>——写一篇 3000 字的稿子，合成出来是 4 分钟，但用户会试 5 次、每次改改重合成，一轮下来就是 20 分钟。重度用户一个月的真实成本是 ¥276，而收入只有 ¥29。</span>
+    <span class="en-only">Launched in March 2025: "turn your article into a podcast voice-over," with 200 voices as the hook. Priced at ¥29/month for "100 minutes included." A TTS synthesis cost about ¥4.6, roughly ¥0.9 per finished minute, so the margin looked healthy. <strong>The problem was that users had no idea how many minutes they needed.</strong> A 3,000-word script is 4 minutes of audio — but users retry five times, tweaking and regenerating, and one round burns 20 minutes. A heavy user's real monthly cost was ¥276 against ¥29 of revenue.</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>定价没按成本设计。</strong>我用"成本 × 3"倒推出一个数字就开始卖，没有做重度用户模型，等发现的时候已经亏了 4 个月。</span><span class="en-only"><strong>Pricing wasn't built around cost.</strong> I back-calculated "cost × 3," put it on the page, and never modelled heavy users. By the time I noticed, four months were gone.</span></li>
+    <li><span class="zh-only"><strong>免费额度太宽松。</strong>312 个试用用户平均用 8 次，成本约 ¥4,600，换来 0 笔订单。</span><span class="en-only"><strong>The free allowance was too generous.</strong> 312 trial users used 8 calls each — about ¥4,600 of cost for zero orders.</span></li>
+    <li><span class="zh-only"><strong>交付物被复制。</strong>生成的音频用户直接拿去用，有 6 个人把成品转卖。我没有任何技术手段阻止，也没有在页面写清授权范围。</span><span class="en-only"><strong>The output was easy to resell.</strong> People used the audio directly and six of them resold it. I had no way to stop them and never clearly stated the licence terms.</span></li>
+  </ol>
+  <p>
+    <span class="zh-only">失败原因说白了就一句：<strong>我把"用户想要什么"当成了"用户会怎么用"</strong>。用户想要"一个听起来很自然的声音"，但他们会花 20 分钟反复试。做这类产品，定价必须按"用户的最坏情况"来设计：要么按分钟计费，要么套餐额度压到 10 分钟，要么在生成前就要求用户选择时长。现在回头看，这个项目只需要 3 天就能发现问题，而我用了 4 个月。</span>
+    <span class="en-only">The failure boiled down to one thing: <strong>I confused "what users want" with "how users behave."</strong> Users want "a voice that sounds natural," but they will spend 20 minutes re-rolling. Products like this must be priced for the worst case: bill per minute, cap the allowance at 10 minutes, or make users pick a duration before generation. Looking back, I could have found this in three days. It took four months.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">什么时候该涨价，什么时候该砍功能</span><span class="en-only">When to Raise the Price, When to Cut Features</span></h2>
+  <p>
+    <span class="zh-only">这是两个不同的问题，混在一起就会做错决定。涨价的目的是多赚钱，砍功能的目的是省成本、让产品更聚焦。判断依据不一样。</span>
+    <span class="en-only">These are two different questions and mixing them leads to bad decisions. A price increase is about earning more; a feature cut is about reducing cost and focus. The signals differ.</span>
+  </p>
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">该涨价：四个信号</span><span class="en-only">Raise the price when: four signals</span></h4>
+      <p><span class="zh-only">① 付费转化率连续 4 周稳定在 3% 以上；② 次月续费率超过 80%；③ 模型成本占收入不到 30%；④ 老用户频繁问"能不能升级套餐"而不是"能不能退款"。四个里满足三个，就可以涨 20%–30%，别一次涨太狠。</span><span class="en-only">1) Conversion stable above 3% for four straight weeks; 2) month-over-month renewal above 80%; 3) model cost under 30% of revenue; 4) paying users keep asking "can I upgrade" rather than "can I get a refund". Hit three of the four and you can raise 20–30%. Don't raise more in one go.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">该砍功能：四个信号</span><span class="en-only">Cut features when: four signals</span></h4>
+      <p><span class="zh-only">① 某个功能 60% 以上的用户从来没用过；② 它占了你 30% 以上的成本但使用率不到 10%；③ 你为了它写了 200 行代码，删掉之后留存和付费都没有变化；④ 它需要持续依赖第三方 API，接口一变就要返工。满足两条，直接砍，别犹豫。</span><span class="en-only">1) Over 60% of users have never touched it; 2) it eats 30%+ of your cost but under 10% of users use it; 3) it took 200 lines of code and deleting it changed neither retention nor payment; 4) it depends on a third-party API that keeps changing. Hit two of those and cut it. No hesitation.</span></p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">我自己砍过三次：AI 周报插件里的"自定义模板"功能（60% 用户从没用过，删掉后周留存反而涨了 2 个百分点）；配音工具的"多语言配音"（占了 40% 的成本，只有 3 个人用过）；简历优化器的"PDF 导出"（虽然有 20% 用户在用，但它让我在每次改版时都要处理 PDF 排版 bug，最终改成了转图片导出）。</span>
+    <span class="en-only">I've cut three features myself: "custom templates" in the weekly-report extension (over 60% never used it, and weekly retention actually rose 2 points after removal); "multi-language voice-over" (40% of cost, three users ever); and "PDF export" in the resume optimizer (20% used it, but it made every redesign a PDF layout debugging session, so I switched to exporting images).</span>
+  </p>
+  <div class="callout success">
+    <strong><span class="zh-only">结论</span><span class="en-only">Conclusion</span></strong>
+    <p><span class="zh-only">做 AI 产品赚钱，顺序是：<strong>先算清成本 → 再选模型（新手选订阅）→ 用额度把"越用越亏"堵住 → 定价页只写四件事 → 获客先做社群深耕和内容 → 有了 20 个付费用户再谈涨价</strong>。这条链上任何一环跳过，后面都会加倍还回来。失败的代价比慢一点要大得多——我的配音工具多赔了四个月，换来的教训是：<strong>定价不是做完产品之后想出来的东西，它是产品设计的一部分。</strong></span><span class="en-only">To monetise an AI product, the order is: <strong>compute the cost → pick a model (beginners: subscription) → plug the "more use, more loss" leak with quotas → write only four things on the pricing page → grow through communities and content → only talk about a price rise once you have 20 paying users.</strong> Skipping any link makes the debt come back doubled. Being slow is far cheaper than being wrong: my voice tool lost four months to learn that <strong>pricing isn't something you think up after you build the product — it's part of the product design.</strong></span></p>
+  </div>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

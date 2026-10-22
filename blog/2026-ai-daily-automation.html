@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>把 AI 接进你的日常：邮件、表格和日程自动化实践 | Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</title><meta name="description" content="不用会编程，也能把每天 2 小时的重复劳动交给 AI。本文讲清哪三档自动化值得做、邮件/表格/日程三个真实案例、安全红线、成本，以及从一个自动化开始的四步走。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-ai-daily-automation-hero.jpg" alt="AI workflow automation" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">实战</span><span class="en-only">| Case Study</span></div>
+    <h1 class="reveal"><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.17 — 三个真实流程、一份安全红线、以及一个月到底要花多少钱</span><span class="en-only">2026.10.17 — Three real workflows, the safety lines, and what a month actually costs</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">每天 2 小时，是怎么没的</span><span class="en-only">How Two Hours a Day Disappears</span></h2>
+  <p>
+    <span class="zh-only">2026 年 5 月，我做了一件不太酷但很值的事：连续 14 天记录自己每天花在"复制粘贴、整理表格、回邮件"上的时间。结果是 <strong>平均每天 2 小时 07 分</strong>，两周累计 29 小时。按 14 天的记录里最接近的一次估算，其中大约 18 小时是<strong>规则明确、每次做法完全一样</strong>的活。</span>
+    <span class="en-only">In May 2026 I did something unfashionable but worthwhile: for 14 days straight I logged how long I spent on copy-paste, tidying spreadsheets, and answering email. The result: <strong>2 hours 7 minutes a day on average</strong>, 29 hours over two weeks. Estimating from the clearest case in the log, roughly 18 of those hours were <strong>work with fixed rules, done identically every time</strong>.</span>
+  </p>
+  <p>
+    <span class="zh-only">这 18 小时不是"重要工作"，但它是<strong>让你没时间做重要工作</strong>的原因：把客户发来的 30 封报价邮件按产品归类、把上个月的流水导进表格对齐、把每场会议纪要整理成待办——这些事不难，但它们占满了上午。</span>
+    <span class="en-only">Those 18 hours weren't "important work," but they were the reason there was no time for important work: sorting 30 quote emails by product, aligning last month's transaction export with the spreadsheet, turning every meeting into a todo list. None of it is hard. All of it fills the morning.</span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">这篇讲的不是"怎么写自动化脚本"——那是工程师的活。这篇讲的是<strong>怎么判断哪些活值得交出去、怎么在不懂代码的情况下交出去、以及哪些事无论如何不能交出去</strong>。我给的每个方案都不需要你写代码，但都需要你把流程说清楚。</span><span class="en-only">This isn't about writing automation scripts — that's an engineer's job. It's about <strong>deciding which work is worth handing off, handing it off without writing code, and knowing what must never be handed off</strong>. None of the approaches here needs you to code, but all of them need you to describe the process clearly.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">三档自动化</span><span class="en-only">Three Tiers of Automation</span></h2>
+  <p>
+    <span class="zh-only">"自动化"听起来像一个是非黑即白的开关，其实有三个档位。<strong>大部分人应该从中间那档开始</strong>，因为它风险最低、见效最快。</span>
+    <span class="en-only">"Automation" sounds like an on/off switch, but it has three tiers. <strong>Most people should start with the middle one</strong>, because it has the lowest risk and the fastest payoff.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">档位</span><span class="en-only">Tier</span></th>
+        <th><span class="zh-only">谁在动手</span><span class="en-only">Who acts</span></th>
+        <th><span class="zh-only">适合</span><span class="en-only">Good for</span></th>
+        <th><span class="zh-only">我的实际节省</span><span class="en-only">My actual saving</span></th>
+        <th><span class="zh-only">风险</span><span class="en-only">Risk</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh-only">1 档：AI 帮你做，你来执行</span><span class="en-only">Tier 1: AI does it, you execute</span></strong></td>
+        <td><span class="zh-only">AI 给出结果，你复制粘贴</span><span class="en-only">AI produces the output, you paste it</span></td>
+        <td><span class="zh-only">整理、分类、汇总、改写</span><span class="en-only">Sorting, grouping, summarising, rewriting</span></td>
+        <td><span class="zh-only">约 40 分钟/天</span><span class="en-only">~40 min/day</span></td>
+        <td><span class="zh-only">极低</span><span class="en-only">Very low</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">2 档：AI 触发，你审一遍</span><span class="en-only">Tier 2: AI triggers, you approve</span></strong></td>
+        <td><span class="zh-only">定时自动跑，结果进你的收件箱等你确认</span><span class="en-only">It runs on a schedule and waits in your inbox for approval</span></td>
+        <td><span class="zh-only">日报、待办清单、数据清洗</span><span class="en-only">Daily digests, todo lists, data cleanup</span></td>
+        <td><span class="zh-only">约 75 分钟/天</span><span class="en-only">~75 min/day</span></td>
+        <td><span class="zh-only">低</span><span class="en-only">Low</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">3 档：全自动</span><span class="en-only">Tier 3: Fully automatic</span></strong></td>
+        <td><span class="zh-only">自己跑，自己发出去</span><span class="en-only">Runs and sends on its own</span></td>
+        <td><span class="zh-only">内部通知、备份、同步</span><span class="en-only">Internal alerts, backups, syncs</span></td>
+        <td><span class="zh-only">约 110 分钟/天</span><span class="en-only">~110 min/day</span></td>
+        <td><span class="zh-only">中（会发错东西）</span><span class="en-only">Medium (it can send the wrong thing)</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout tip">
+    <strong><span class="zh-only">为什么从 2 档开始</span><span class="en-only">Why Start at Tier 2</span></strong>
+    <p><span class="zh-only">1 档不省事，只是把"复制粘贴"换成"复制 AI 的输出粘贴"，省得有限。3 档效率最高，但一旦发错一封邮件给客户，损失远大于省下的时间。<strong>2 档是唯一的甜点：AI 干活，你保留最后一道闸门。</strong>我自己的 4 个自动化，有 3 个停在 2 档。</span><span class="en-only">Tier 1 barely saves anything — you just swap one copy-paste for another. Tier 3 is most efficient, but one wrong email to a client costs more than the time you saved. <strong>Tier 2 is the sweet spot: the AI works, you keep the final gate.</strong>Of my four automations, three still live at Tier 2.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">哪些活值得自动化</span><span class="en-only">Which Work Is Worth Automating</span></h2>
+  <p>
+    <span class="zh-only">不是所有重复劳动都值得自动化。我用三个问题筛选，命中两条才动手：</span>
+    <span class="en-only">Not all repetitive work is worth automating. I screen with three questions and only start if two of them hit:</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>规则能不能写下来？</strong>如果你要向别人解释这件事，得用"看情况"这种词，那它就不适合自动化。</span><span class="en-only"><strong>Can the rules be written down?</strong> If explaining it to someone else requires the word "depending on," it isn't automation material.</span></li>
+    <li><span class="zh-only"><strong>做错了能撤回吗？</strong>发错一封内部通知可以撤回；发错一封报价给客户，追不回来。</span><span class="en-only"><strong>Can it be undone?</strong>A wrong internal notice can be recalled. A wrong quote sent to a client cannot.</span></li>
+    <li><span class="zh-only"><strong>它每月占你超过 30 分钟吗？</strong>低于这个数，搭建成本收不回来——<strong>你花两小时搭一个每月省 20 分钟的东西，半年才回本。</strong></span><span class="en-only"><strong>Does it eat more than 30 minutes a month?</strong>Below that, the setup never pays back — <strong>two hours of setup to save 20 minutes a month breaks even in half a year.</strong></span></li>
+  </ol>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">我做过或见过的活</span><span class="en-only">The task</span></th>
+        <th><span class="zh-only">每月耗时</span><span class="en-only">Monthly time</span></th>
+        <th><span class="zh-only">规则清晰？</span><span class="en-only">Clear rules?</span></th>
+        <th><span class="zh-only">可撤回？</span><span class="en-only">Reversible?</span></th>
+        <th><span class="zh-only">我的决定</span><span class="en-only">My call</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">每天早上汇总客户邮件</span><span class="en-only">Morning digest of client email</span></td>
+        <td><span class="zh-only">约 5 小时</span><span class="en-only">~5 hours</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only">做，2 档</span><span class="en-only">Do it, Tier 2</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">把银行流水按项目归类</span><span class="en-only">Categorize bank transactions by project</span></td>
+        <td><span class="zh-only">约 3 小时</span><span class="en-only">~3 hours</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only">做，2 档</span><span class="en-only">Do it, Tier 2</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">会议纪要转待办</span><span class="en-only">Meeting notes to todos</span></td>
+        <td><span class="zh-only">约 2 小时</span><span class="en-only">~2 hours</span></td>
+        <td><span class="zh-only">大部分是</span><span class="en-only">Mostly</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only">做，1 档起步</span><span class="en-only">Do it, start at Tier 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">给客户发报价单</span><span class="en-only">Sending quotes to clients</span></td>
+        <td><span class="zh-only">约 1.5 小时</span><span class="en-only">~1.5 hours</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only"><strong>否</strong></span><span class="en-only"><strong>No</strong></span></td>
+        <td><span class="zh-only">不做</span><span class="en-only">Don't</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">回复常见客户问题</span><span class="en-only">Replying to common questions</span></td>
+        <td><span class="zh-only">约 4 小时</span><span class="en-only">~4 hours</span></td>
+        <td><span class="zh-only">是</span><span class="en-only">Yes</span></td>
+        <td><span class="zh-only">半</span><span class="en-only">Partly</span></td>
+        <td><span class="zh-only">只做草稿</span><span class="en-only">Drafts only</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">"看情况"才能决定的活</span><span class="en-only">Anything that "depends"</span></td>
+        <td><span class="zh-only">不定</span><span class="en-only">Varies</span></td>
+        <td><span class="zh-only"><strong>否</strong></span><span class="en-only"><strong>No</strong></span></td>
+        <td><span class="zh-only">不定</span><span class="en-only">Varies</span></td>
+        <td><span class="zh-only">不做</span><span class="en-only">Don't</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">案例一：每天早上的邮件简报</span><span class="en-only">Case 1: The Morning Email Digest</span></h2>
+  <p>
+    <span class="zh-only">这是我做的第一个自动化，因为它的规则最清晰：<strong>每封邮件属于一个客户，每个客户有一个项目，每个项目有下一步动作。</strong>每天早上 8:30，生成一份简报发到我自己邮箱。</span>
+    <span class="en-only">This was my first automation because its rules were the cleanest: <strong>every email belongs to a client, every client has a project, every project has a next action.</strong>At 8:30 each morning it generated a digest to my own inbox.</span>
+  </p>
+  <p>
+    <span class="zh-only">难点不在技术，在<strong>规则怎么写</strong>。我第一版把规则写成"帮我总结重要邮件"，结果它把 30 封邮件里的 22 封标成重要——等于没筛。第二版我换了个写法：<strong>先让它给每封邮件打标签，再让它按标签分组，最后只把"需要我做事"的挑出来。</strong>准确率立刻从 27% 提到 78%。</span>
+    <span class="en-only">The hard part wasn't technical, it was <strong>how to phrase the rules</strong>. My first version said "summarize the important emails" and it flagged 22 of 30 as important — no filtering at all. My second version changed the shape: <strong>have it label each email first, then group by label, then surface only the ones that need me.</strong>Accuracy went from 27% to 78% immediately.</span>
+  </p>
+  <pre data-lang="prompt">任务：给这 30 封邮件分类并生成简报。
+
+第一步，先只做分类，不要做总结。对每封邮件输出三行：
+  发件人客户名 | 项目名 | 标签
+
+标签只能从这四个里选（不要自创）：
+  [需回复] 对方在等你回话
+  [需决策] 对方给了选项，要你拍板
+  [需跟进] 对方在推进，但不需要你现在回
+  [仅通知] 不需要任何动作
+
+第二步，按项目分组，只输出包含 [需回复] 或 [需决策] 的邮件。
+第三步，每个项目写一行下一步动作，20 字以内。
+如果一个项目没有任何 [需回复] 或 [需决策] 邮件，整个项目不要出现在简报里。
+
+规则：
+- 项目名如果邮件里没提，标为"未提及"，不要猜
+- 不要输出 [仅通知] 的邮件
+- 分类不确定时，选最保守的那个标签</pre>
+  <div class="callout success">
+    <strong><span class="zh-only">这个任务最终的样子</span><span class="en-only">What This Task Ended Up Being</span></strong>
+    <p><span class="zh-only">一个 40 行的 Python 脚本，用 <code>gmail-api</code> 读邮件，调一次模型做分类，把结果拼成 Markdown 发到我自己邮箱。<strong>搭建花了 2 小时 30 分</strong>（其中 1 小时是跟 AI 一起调提示词），现在每天早上省 11 分钟，半年就回本了。每月成本：模型调用约 $1.2。</span><span class="en-only">A 40-line Python script: <code>gmail-api</code> to read, one model call to classify, results assembled into Markdown and mailed to me. <strong>Setup took 2 hours 30 minutes</strong> (an hour of it spent tuning the prompt with AI). It now saves 11 minutes every morning and paid for itself in six months. Model cost: about $1.20/month.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">案例二：表格里的脏数据</span><span class="en-only">Case 2: Dirty Data in a Spreadsheet</span></h2>
+  <p>
+    <span class="zh-only">每个月月初我都要把三份来源不同的流水合并成一张表：日期格式三种、金额有人民币符号和千分位逗号、分类名有"市场推广"和"市场/推广"两种写法。<strong>手工整理一次 45 分钟，已经干了两年。</strong></span>
+    <span class="en-only">Every month I merge three transaction exports into one table: three date formats, amounts with a currency symbol and thousands separators, and a category written both "市场推广" and "市场/推广". <strong>Manual cleanup takes 45 minutes, and I've been doing it for two years.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">这个活完全符合"规则明确"，但有个陷阱：<strong>AI 不擅长做数据处理，只擅长描述规则。</strong>所以我没有让 AI 干活，而是让 AI 帮我把规则写清楚，然后用 Excel 自带的 Power Query 执行。</span>
+    <span class="en-only">This one passes the "clear rules" test perfectly, but there's a trap: <strong>AI is poor at data processing and good at describing rules.</strong>So I didn't have AI do the work. I had AI help me write the rules down, then let Excel's own Power Query execute them.</span>
+  </p>
+  <pre data-lang="text">清洗规则（AI 帮我整理成这份表，我再照着在 Power Query 里实现）
+
+列名        处理方式
+日期        识别 3 种格式：2026/1/5、2026-01-05、2026年1月5日 → 统一为 YYYY-MM-DD
+金额        去掉 ¥、$、逗号 → 转为数字，保留两位小数
+分类        建立映射表，把别名归到标准分类：
+             市场/推广 → 市场推广
+             市场推广费 → 市场推广
+             推广     → 市场推广
+             差旅/机票 → 差旅
+             差旅     → 差旅
+空值        分类为空 → 填 "未分类"，并单独列出来给我看
+异常        金额 = 0 或负数 → 不丢弃，单独标一列 is_suspicious
+
+对账        合并后总金额必须等于三份来源各自的总金额之和，
+             不等就报错并列出差异行，不要静默继续</pre>
+  <div class="callout info">
+    <strong><span class="zh-only">最后那行"对账"最重要</span><span class="en-only">That Last Reconciliation Line Matters Most</span></strong>
+    <p><span class="zh-only">我要求脚本在合并后自动核对总额，不等就报错停下。前 3 个月它真的报过错两次——一次是我映射表里"推广"归错了分类，一次是某个月有一笔重复导入。<strong>如果当时静默继续，这两个月的数据就是错的，而且很难被发现。</strong></span><span class="en-only">I made the script verify the totals after merging and stop on mismatch. In the first three months it flagged two real problems — one mis-mapped category, one duplicate import. <strong>Had it continued silently, those two months of data would have been wrong and nearly undetectable.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">案例三：会议纪要转待办</span><span class="en-only">Case 3: Meeting Notes to Todos</span></h2>
+  <p>
+    <span class="zh-only">每周 5 到 6 场会，会后整理纪要 15 到 20 分钟。这个场景的关键是：<strong>不要让 AI 直接写待办，要让它先提取"谁、做什么、什么时候"。</strong></span>
+    <span class="en-only">Five or six meetings a week, 15–20 minutes of note cleanup after each. The key here: <strong>don't ask AI to write the todos — have it extract "who, does what, by when" first.</strong></span>
+  </p>
+  <pre data-lang="prompt">下面是一段会议转录。请提取待办事项。
+
+每条待办必须包含：负责人、动作、截止时间。
+缺任何一项就写 "未指定"，不要猜。
+
+格式：
+- [负责人] 动作 | 截止：YYYY-MM-DD
+
+规则：
+- 只提取会上明确决定要做的事，不要把讨论过但没定的写成待办
+- 出现"再看看""回头再说"这类，直接归到"未指定"一类
+- 最后单独列一节「需要澄清」，放没定下来的事
+
+转录：
+[在这里粘贴转录文本]</pre>
+  <p>
+    <span class="zh-only">实测下来，"需要澄清"那一节最有用——它把"看起来定了但其实没定"的事挑了出来。我现在每周会花 5 分钟扫一眼这一节，往往就能避免一个白做的方向。</span>
+    <span class="en-only">The "needs clarification" section turned out to be the most valuable part — it surfaces things that looked decided but weren't. I now spend five minutes a week scanning it, and it regularly saves a wasted direction.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">安全红线</span><span class="en-only">The Safety Lines</span></h2>
+  <p>
+    <span class="zh-only">自动化最可怕的不是它坏了，是它<strong>成功地做错事</strong>。下面这几条是我给自己划的线，划得很保守，但一次都没后悔过。</span>
+    <span class="en-only">The scariest thing about automation isn't that it breaks — it's that it <strong>succeeds at doing the wrong thing</strong>. Here are the lines I drew for myself. Conservative, and I've never regretted them.</span>
+  </p>
+  <div class="callout warn">
+    <strong><span class="zh-only">四条绝对不要全自动的事</span><span class="en-only">Four Things That Must Never Be Fully Automated</span></strong>
+    <p>
+      <span class="zh-only">① <strong>对外发消息</strong>——报价、合同、道歉信、任何客户会看到的文字。<br>② <strong>动钱</strong>——付款、退款、转账、调价。<br>③ <strong>删东西</strong>——删文件、删记录、删会话。<br>④ <strong>涉及法律和承诺的表述</strong>——"我们保证""按合同规定"这类措辞。<br><br>共同点：<strong>这四类错误的代价都不是"重来一次"能解决的。</strong></span>
+      <span class="en-only">① <strong>Sending anything external</strong> — quotes, contracts, apology letters, any words a client will read.<br>② <strong>Moving money</strong> — payments, refunds, transfers, price changes.<br>③ <strong>Deleting things</strong> — files, records, conversations.<br>④ <strong>Anything legally binding</strong> — "we guarantee," "as per contract."<br><br>Common thread: <strong>none of these four mistakes is undone by doing it again.</strong></span>
+    </p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">具体动作</span><span class="en-only">Action</span></th>
+        <th><span class="zh-only">能做到第几档</span><span class="en-only">Highest safe tier</span></th>
+        <th><span class="zh-only">必须人工确认的东西</span><span class="en-only">Human must confirm</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">给自己发通知</span><span class="en-only">Notify yourself</span></td>
+        <td><span class="zh-only">3 档全自动</span><span class="en-only">Tier 3, automatic</span></td>
+        <td><span class="zh-only">无</span><span class="en-only">Nothing</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">往共享文档写内容</span><span class="en-only">Write to a shared doc</span></td>
+        <td><span class="zh-only">2 档</span><span class="en-only">Tier 2</span></td>
+        <td><span class="zh-only">内容是否会被当成最终版</span><span class="en-only">Whether it will be read as final</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">回复客户邮件</span><span class="en-only">Reply to client email</span></td>
+        <td><span class="zh-only">1 档（只出草稿）</span><span class="en-only">Tier 1, drafts only</span></td>
+        <td><span class="zh-only">承诺、金额、日期</span><span class="en-only">Promises, amounts, dates</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">修改数据库记录</span><span class="en-only">Modify database records</span></td>
+        <td><span class="zh-only">2 档 + 变更前备份</span><span class="en-only">Tier 2 plus a pre-change backup</span></td>
+        <td><span class="zh-only">影响行数是否合理</span><span class="en-only">Whether the affected row count makes sense</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">付款 / 发报价</span><span class="en-only">Payments / quotes</span></td>
+        <td><span class="zh-only">1 档（只做草稿）</span><span class="en-only">Tier 1, drafts only</span></td>
+        <td><span class="zh-only">全部</span><span class="en-only">Everything</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">自己写脚本，还是用现成工具</span><span class="en-only">Write a Script or Use a Ready-Made Tool</span></h2>
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">用现成工具（n8n / Zapier / Make 等）</span><span class="en-only">Ready-made tools (n8n / Zapier / Make)</span></h4>
+      <p>
+        <span class="zh-only"><strong>适合</strong>：流程标准、要连的应用多、你自己完全不懂代码。<br><br><strong>优势</strong>：可视化拖拽，1 到 2 小时能跑起来；出错了有日志可看；不用管服务器。<br><strong>代价</strong>：按次或按量收费，跑量大时比脚本贵；复杂逻辑会被平台的抽象卡住。<br><br><strong>我的用量</strong>：n8n 自托管，处理 4 个自动化，每月 $0 固定成本。</span>
+        <span class="en-only"><strong>Good for</strong>: standard flows, many apps to connect, no coding at all.<br><br><strong>Upside</strong>: visual drag-and-drop, running in 1–2 hours, readable logs, no server to manage.<br><strong>Cost</strong>: priced per run or per task — pricier at volume; the platform's abstractions block complex logic.<br><br><strong>My setup</strong>: self-hosted n8n, four automations, $0 fixed monthly cost.</span>
+      </p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">让 AI 帮你写脚本</span><span class="en-only">Have AI Write the Script</span></h4>
+      <p>
+        <span class="zh-only"><strong>适合</strong>：流程有一点点特殊逻辑、量大、要长期跑。<br><br><strong>优势</strong>：便宜（服务器 $5），逻辑完全可控，行为可预测。<br><strong>代价</strong>：前期要多花 1 到 2 小时；出错时你得看得懂一点代码才能修；平台换 API 时要改。<br><br><strong>我的用量</strong>：邮件简报 + 数据清洗，跑在 $5/月的 VPS 上，每月模型费 $1.2。</span>
+        <span class="en-only"><strong>Good for</strong>: slightly unusual logic, high volume, long-running.<br><br><strong>Upside</strong>: cheap ($5 server), fully controllable logic, predictable behavior.<br><strong>Cost</strong>: 1–2 extra hours up front; when it breaks you need to read a little code to fix it; API changes require edits.<br><br><strong>My setup</strong>: email digest plus data cleanup on a $5/month VPS, $1.20/month in model fees.</span>
+      </p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">别把这两者当成二选一。<strong>我自己的 4 个自动化里，两个用现成工具，两个是脚本。</strong>判断标准很简单：流程一步能说清就用工具；流程里出现"如果 A 且 B 但不是 C"这种条件，就值得让 AI 写个脚本。</span>
+    <span class="en-only">They're not mutually exclusive. <strong>Of my four automations, two use ready-made tools and two are scripts.</strong>The test is simple: if the flow can be described in one sentence, use a tool; if it contains "if A and B but not C," it's worth having AI write a script.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一个月要花多少钱</span><span class="en-only">What a Month Actually Costs</span></h2>
+  <p>
+    <span class="zh-only">这是最容易被高估的部分。AI 自动化真正的成本不是模型调用——<strong>模型调用是按"有用的事"计费的，量很小</strong>。我把自己 4 个自动化的成本列出来：</span>
+    <span class="en-only">This is the part people overestimate. The real cost of AI automation isn't model usage — <strong>model usage is billed on work that actually happened, and that volume is small</strong>. Here's what my four automations cost:</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">自动化</span><span class="en-only">Automation</span></th>
+        <th><span class="zh-only">运行频次</span><span class="en-only">Frequency</span></th>
+        <th><span class="zh-only">单次模型调用</span><span class="en-only">Tokens per run</span></th>
+        <th><span class="zh-only">月成本</span><span class="en-only">Monthly cost</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">邮件简报</span><span class="en-only">Email digest</span></td>
+        <td><span class="zh-only">每个工作日 1 次</span><span class="en-only">Once per workday</span></td>
+        <td><span class="zh-only">约 8k</span><span class="en-only">~8k</span></td>
+        <td><span class="zh-only">$1.20</span><span class="en-only">$1.20</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">流水清洗 + 对账</span><span class="en-only">Transaction cleanup</span></td>
+        <td><span class="zh-only">每月 2 次</span><span class="en-only">Twice a month</span></td>
+        <td><span class="zh-only">约 20k</span><span class="en-only">~20k</span></td>
+        <td><span class="zh-only">$0.40</span><span class="en-only">$0.40</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">会议纪要提取</span><span class="en-only">Meeting extraction</span></td>
+        <td><span class="zh-only">每周 5 次</span><span class="en-only">5 times a week</span></td>
+        <td><span class="zh-only">约 12k</span><span class="en-only">~12k</span></td>
+        <td><span class="zh-only">$1.60</span><span class="en-only">$1.60</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">周报草稿</span><span class="en-only">Weekly report draft</span></td>
+        <td><span class="zh-only">每周 1 次</span><span class="en-only">Once a week</span></td>
+        <td><span class="zh-only">约 15k</span><span class="en-only">~15k</span></td>
+        <td><span class="zh-only">$0.50</span><span class="en-only">$0.50</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">合计</span><span class="en-only">Total</span></strong></td>
+        <td><span class="zh-only">—</span><span class="en-only">—</span></td>
+        <td><span class="zh-only">—</span><span class="en-only">—</span></td>
+        <td><strong><span class="zh-only">$3.70</span><span class="en-only">$3.70</span></strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <span class="zh-only">加上服务器 $5、域名摊销 $0.5，<strong>月成本约 $9.2</strong>。对比节省的时间：每天约 68 分钟，一个月按 22 个工作日算约 25 小时。<strong>时薪折算超过 170 元</strong>——当然，比钱更重要的其实是那 25 小时里你现在能做点什么。</span>
+    <span class="en-only">Add a $5 server and $0.50 of amortized domain, and <strong>the monthly cost is about $9.20</strong>. Against the time saved: roughly 68 minutes a day, about 25 hours a month over 22 working days. <strong>That's an implied hourly rate north of ¥170</strong> — though what really matters is what you can now do with those 25 hours.</span>
+  </p>
+  <div class="callout success">
+    <strong><span class="zh-only">一个反直觉的发现</span><span class="en-only">A Counterintuitive Finding</span></strong>
+    <p><span class="zh-only">我原以为省时间最多的自动化（邮件简报）<strong>实际收益最低</strong>——因为省下的 11 分钟全花在我本来就会做的"扫一眼"上，真正没被替代掉的判断工作一分钟没省。收益最大的是流水清洗，因为那 45 分钟是完全消失的。<strong>优先自动化"让你感到痛苦"的活，而不是"看起来最耗时"的活。</strong></span>
+    <span class="en-only">I expected the email digest to pay off most — but it earned the least, because the 11 minutes it saved went straight back into the scanning I was already doing. The real win was transaction cleanup, where 45 minutes simply disappeared. <strong>Automate what hurts, not what looks most time-consuming.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">从一个自动化开始</span><span class="en-only">Start With One</span></h2>
+  <p>
+    <span class="zh-only">别一次做四个。挑一个最烦的，用四步走完。</span>
+    <span class="en-only">Don't do four at once. Pick the most annoying one and finish it in four steps.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">记一周，别拍脑袋</span><span class="en-only">Log for a Week — Don't Guess</span></h3>
+      <p><span class="zh-only">拿个小本子或备忘录，每天记三行：做了什么、花了多久、烦不烦。一周后你会发现"最烦"的那件事，往往不是"最耗时"的那件。</span><span class="en-only">Use a notes app. Three lines a day: what you did, how long, how annoying it felt. After a week you'll find the most annoying task often isn't the most time-consuming one.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">把规则写成一段文字</span><span class="en-only">Write the Rules as Prose</span></h3>
+      <p><span class="zh-only">用自然语言写清楚"输入是什么、怎么处理、输出是什么、有哪些例外"。<strong>如果这一步写不清楚，那这个活暂时不适合自动化</strong>——不是因为技术难，是因为你还没想明白。</span><span class="en-only">Describe "what goes in, how it's processed, what comes out, what the exceptions are" in plain language. <strong>If you can't write this clearly, the task isn't ready for automation</strong> — not because it's technically hard, but because you haven't thought it through.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">先手动跑三次</span><span class="en-only">Run It Manually Three Times</span></h3>
+      <p><span class="zh-only">用 AI 帮你模拟一遍这个流程，看它的输出对不对。<strong>三次都对了再搭自动化</strong>。这一步能避免你花两小时搭了个流程，结果第一步就错。</span><span class="en-only">Have AI simulate the flow first and check the output. <strong>Only build the automation once it's right three times.</strong>That avoids spending two hours on a flow that fails at step one.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">从 2 档开始，留一条后路</span><span class="en-only">Start at Tier 2 and Keep an Escape Hatch</span></h3>
+      <p><span class="zh-only">让它定时跑、结果进你邮箱、你确认后再走下一步。同时准备一个"手动重跑"的入口——<strong>任何自动化都要能被人随时接管</strong>，否则它一坏你就只能干等。</span><span class="en-only">Let it run on a schedule, deliver to your inbox, and only proceed after you approve. Also keep a manual re-run entry point — <strong>any automation must be takeable over by a human at any time</strong>, or you'll just wait when it breaks.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">写在最后</span><span class="en-only">Closing Thoughts</span></h2>
+  <p>
+    <span class="zh-only">自动化最大的好处不是省时间，是<strong>把注意力从"搬运信息"换到"判断信息"</strong>。那 25 小时省下来之后，我多做的不是更多工作，是把晚上还给自己的生活。</span>
+    <span class="en-only">The real benefit of automation isn't saving time — it's <strong>trading attention spent on moving information for attention spent on judging it.</strong>With those 25 hours back, I didn't do more work. I gave my evenings to my own life.</span>
+  </p>
+  <p>
+    <span class="zh-only">如果你也想试，先从最小的那个开始：<strong>找出你每天最烦的那 10 分钟，把它交给 AI 一次</strong>。不用搭系统，不用学编程，先让 AI 帮你把 30 封邮件分成四类，看看结果对不对。对了，再考虑后面的。</span>
+    <span class="en-only">If you want to try, start with the smallest possible version: <strong>find the most annoying ten minutes of your day and hand it to AI once.</strong>No system to build, no code to learn. Just let AI sort 30 emails into four buckets and see if it's right. If it is, consider what comes after.</span>
+  </p>
+  <hr>
+  <p>
+    <span class="zh-only">相关阅读：<a href="2026-ai-debug-handbook.html">AI 写的代码跑不起来怎么办：普通人的排查手册</a> · <a href="2026-long-doc-ai.html">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</a> · <a href="2025-ai-side-hustle-12.html">AI 副业变现 12 条路</a></span>
+    <span class="en-only">Related reading: <a href="2026-ai-debug-handbook.html">When AI-Generated Code Won't Run: A Debugging Handbook for Non-Developers</a> · <a href="2026-long-doc-ai.html">Making AI Read Long Documents: A Practical Guide</a> · <a href="2025-ai-side-hustle-12.html">12 AI Side Hustle Paths Anyone Can Replicate</a></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026 终极指南：从零到第一个 AI 产品的 90 天 | The 2026 Playbook: From Zero to Your First AI Product in 90 Days</title><meta name="description" content="90 天足够做出一个真的有人用、有人付钱的小型 AI 产品——前提是别把目标定成「做平台」。这份指南按周拆解了验证、构建、获客三个阶段的交付物、判断标准、工具清单和 5 个最常见的翻车原因。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-90days-hero.jpg" alt="90 day roadmap illustration" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">入门</span><span class="en-only">| Getting Started</span></div>
+    <h1 class="reveal"><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.18 — 每周做什么、交付什么、什么情况下该停下来，全写清楚</span><span class="en-only">2026.10.18 — What to do each week, what to ship, and when to stop — spelled out</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">90 天够吗？够，但前提是你别想着做平台</span><span class="en-only">Is 90 Days Enough? Yes — As Long as You're Not Trying to Build a Platform</span></h2>
+  <p>
+    <span class="zh-only">先给结论：<strong>90 天足够做出一个真的有人用、有人愿意付钱的小型 AI 产品</strong>。过去两年我用这套节奏跑过 5 个产品，其中 3 个在 90 天内拿到了付费用户，2 个被我砍掉（其中一个是第 74 天砍的，我会在最后复盘为什么该更早砍）。</span>
+    <span class="en-only">The short answer: <strong>90 days is enough to build a small AI product that real people use and pay for.</strong> I've run this cadence on five products in the past two years. Three had paying users inside 90 days; two were killed by me (one on day 74 — I'll explain why I should have killed it sooner).</span>
+  </p>
+  <p>
+    <span class="zh-only">但有个前提必须说在前面：<strong>你的目标不能是"做一个平台"</strong>。平台意味着多角色、多端、复杂权限、开放 API、还要有生态——那是 200 人的团队和 24 个月的事。90 天属于的是"一个具体的人，在一个具体的场景里，用一个具体的功能，替你省下一次具体的麻烦"。</span>
+    <span class="en-only">But one premise first: <strong>your goal cannot be "build a platform."</strong> A platform means multiple roles, multiple clients, complex permissions, public APIs, and an ecosystem — that's 200 people and 24 months. What 90 days can hold is this: <em>one specific person, in one specific situation, using one specific feature, saving one specific annoyance.</em></span>
+  </p>
+  <blockquote>
+    <span class="zh-only">90 天做不出一个平台，但足够做出一个有人掏钱的小工具。目标定得小一点，你才有机会在第 90 天还活着。</span>
+    <span class="en-only">90 days won't build you a platform, but it will build you a small tool people pay for. Aim small enough and you survive to day 90.</span>
+  </blockquote>
+  <p>
+    <span class="zh-only">这份指南按 30 天一段分成三段：前 30 天验证，中间 30 天构建，最后 30 天获客与迭代。每一周我都写了"做什么、交付什么、什么算通过"，你可以直接照着排自己的日程。每周一早上花 15 分钟看一遍那张里程碑表，比看任何教程都有用。</span>
+    <span class="en-only">This guide splits into three 30-day blocks: validate, build, then acquire and iterate. For each week I've written what to do, what to ship, and what counts as a pass — so you can schedule straight from it. Fifteen minutes every Monday morning with the milestone table is worth more than any tutorial.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第 1–30 天：验证——这一个月不许写代码</span><span class="en-only">Days 1–30: Validate — No Code This Month</span></h2>
+  <p>
+    <span class="zh-only">我把这一个月叫做"不许写代码月"。我知道这听起来很反常识，但这是整个 90 天里最省钱的一个月。我第一个产品就是在没验证的情况下写了 6 周，最后发现用户根本不需要它——那 6 周里我写的每一行都是沉没成本。</span>
+    <span class="en-only">I call this month "no code month." It sounds backwards, but it's the cheapest month of the whole 90 days. My first product got six weeks of code written before I validated anything, then discovered users didn't need it — every line of those six weeks was sunk cost.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">第 1 周：选一个窄到不能再窄的人群和场景</span><span class="en-only">Week 1: Pick a group and a scenario so narrow it feels silly</span></h3>
+      <p><span class="zh-only">交付物：<strong>一页需求说明</strong>，不超过 200 字，必须回答三个问题：帮谁（越具体越好，比如"刚毕业第一年、投了 50 份简历没回音的应届生"）、解决什么时刻的什么麻烦（"投简历前发现项目经历写得像流水账"）、他现在怎么解决（"打开 ChatGPT 问，然后照抄 AI 写的模板"）。<br><strong>判断标准：</strong>如果你要写上"所有需要效率的人"这种话，说明范围太大，回去再缩。</span><span class="en-only">Deliverable: a <strong>one-page brief</strong>, under 200 words, answering three questions: who exactly (e.g. "first-year graduates who sent 50 applications with no reply"), which moment and which annoyance (e.g. "before applying, realising the project section reads like a diary entry"), and what they do today (e.g. "open ChatGPT, ask, copy the AI's template").<br><strong>Pass criteria:</strong> if you wrote "anyone who needs efficiency," the scope is still too wide — shrink it.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 2 周：找 10 个真人聊</span><span class="en-only">Week 2: Talk to 10 real humans</span></h3>
+      <p><span class="zh-only">交付物：<strong>10 份访谈记录</strong>。去哪找？不要发问卷，问卷会得到礼貌的假答案。直接去目标人群聚集的地方：豆瓣小组、V2EX、即刻、小红书评论区、某个社群里 @ 出来问。我的做法是先免费帮 5 个人做他们要的事（免费改简历、免费整理表格），先给价值再提需求，全程录音（要征得同意），事后整理成表格。<br><strong>判断标准：</strong>10 个人里至少 5 个说"这个问题我每周都要遇到"，否则换方向，别硬做。</span><span class="en-only">Deliverable: <strong>10 interview notes</strong>. Where do you find them? Never send a survey — surveys produce polite fake answers. Go where your people already are: Douban groups, V2EX, Jike, Xiaohongshu comments, and @ people in relevant chats. What I do is help 5 of them first for free (rewrite a resume, tidy a spreadsheet), give value first, then ask questions, record with consent, and turn it all into a table.<br><strong>Pass criteria:</strong> at least 5 of 10 say "this hits me every week." If not, change direction — don't force it.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 3 周：验证付费意愿（这是最关键的一周）</span><span class="en-only">Week 3: Test willingness to pay (the decisive week)</span></h3>
+      <p><span class="zh-only">交付物：<strong>一笔真实收到的钱</strong>。有多少人愿意"说他们愿意付费"不算数，愿意转账才算。方法很土但有效：访谈结束后直接说"这个功能我下周就能做出来，你愿意现在付 ¥29 让我优先做吗？"。我的记录是 10 个人里有 2 个当场付了定金（其中一个付了 ¥50 抵 ¥100），4 个说"上线了叫我"。<strong>2 个就是通过</strong>——10% 的当场付费率说明有真实的支付意愿。<br><strong>判断标准：</strong>如果 10 个里 0 个付钱，你有两个选择：换人群，或者换问题。不要靠"再优化一下产品"来解决没人付钱的问题。</span><span class="en-only">Deliverable: <strong>one real payment received.</strong> "They said they'd pay" doesn't count; a transfer does. The method is unsophisticated and effective: at the end of the interview say "I can build this next week — would you pay ¥29 now for priority?" In my log, 2 of 10 paid a deposit on the spot (one put down ¥50 toward ¥100) and 4 said "let me know when it's live." <strong>Two is a pass</strong> — a 10% on-the-spot payment rate signals genuine willingness to pay.<br><strong>Pass criteria:</strong> if nobody pays, you have two options: a different audience or a different problem. Do not try to fix "nobody pays" by polishing the product.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 4 周：做一个"手动版"最小可用产品</span><span class="en-only">Week 4: Build a "manual" minimum viable product</span></h3>
+      <p><span class="zh-only">交付物：<strong>一个能收到请求并给出结果的页面</strong>——哪怕结果是你自己在后台用 AI 生成、手动发过去的。这个"手动版"是整个 30 天里最有价值的东西：它能让你在写一行正式代码之前，就知道用户要的输出格式到底长什么样、有没有人为它付第二笔钱。<br><strong>判断标准：</strong>有 3 个陌生人主动来要第二次结果，你就知道这个产品成立。</span><span class="en-only">Deliverable: <strong>a page that accepts a request and returns a result</strong> — even if you generate it yourself in the background and send it over by hand. This "manual version" is the most valuable thing of the whole month: it shows you the exact output format users want, and whether anyone pays a second time, before you write a line of production code.<br><strong>Pass criteria:</strong> three strangers come back for a second result — that means the product works.</span></p>
+    </div>
+  </div>
+  <div class="callout warn">
+    <strong><span class="zh-only">第一个月不要做的事</span><span class="en-only">What not to do in month one</span></strong>
+    <p><span class="zh-only">不要写代码、不要买服务器、不要注册一堆域名（我注册过 9 个域名，浪费了 ¥600 多）、不要设计 logo、不要做落地页美化、不要在 X 上发"我要做一个 XX 产品"的预告。这些都是"看起来在推进、实际上在逃避验证"的事。你在第一个月唯一的 KPI 是：<strong>拿到一笔真实的钱</strong>。</span><span class="en-only">Don't write code, don't buy servers, don't register a pile of domains (I registered nine, wasting over ¥600), don't design a logo, don't polish a landing page, don't tweet "I'm building an X product." All of these feel like progress while actually avoiding validation. Your only KPI in month one is: <strong>collect one real payment.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第 31–60 天：构建——用 AI 写代码的真实节奏</span><span class="en-only">Days 31–60: Build — The Real Cadence of AI-Assisted Coding</span></h2>
+  <p>
+    <span class="zh-only">这一个月是唯一"看起来像做产品"的一个月，但真相是：你的工作 90% 是<strong>把一件事拆小、描述清楚、验收</strong>，只有 10% 是敲键盘。AI 帮你省下的是打字时间，不是想清楚的时间。</span>
+    <span class="en-only">This is the only month that "looks like" building a product. The truth is your job is 90% <strong>splitting the work, describing it precisely, and verifying the result</strong>; typing is 10%. AI saves you typing time, not thinking time.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">第 31–38 天：先搭骨架，不搭功能</span><span class="en-only">Days 31–38: Skeleton first, features later</span></h3>
+      <p><span class="zh-only">交付物：<strong>一个能跑通"注册 → 填表 → 生成 → 看到结果"的空壳</strong>，哪怕生成结果先用假数据。这一周你会做技术选型：<strong>前端</strong>（Next.js 或 Vue，个人项目我一律 Next.js，因为部署和 API 路由一体）、<strong>数据库</strong>（Supabase，免费额度够用）、<strong>模型 API</strong>（国内用通义/豆包/DeepSeek，海外用 Claude 或 GPT）、<strong>部署</strong>（Vercel / Cloudflare Pages）。<br><strong>判断标准：</strong>在本地能跑通完整流程，一次点击能走完全程。</span><span class="en-only">Deliverable: <strong>a shell that runs "sign up → form → generate → see result"</strong>, even with fake output at first. This week you make the stack choice: <strong>frontend</strong> (Next.js or Vue — I use Next.js for every solo project because deployment and API routes come bundled), <strong>database</strong> (Supabase, free tier is plenty), <strong>model API</strong> (Qwen/Doubao/DeepSeek in China, Claude or GPT overseas), <strong>hosting</strong> (Vercel / Cloudflare Pages).<br><strong>Pass criteria:</strong> the whole flow completes locally in one click-through.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 39–52 天：接入模型，把成本测出来</span><span class="en-only">Days 39–52: Wire up the model and measure the cost</span></h3>
+      <p><span class="zh-only">交付物：<strong>主流程可用 + 每次调用都记录 token 数和成本</strong>。这一步千万别省。我见过太多产品上线后才发现单次成本是预想的 5 倍。每调用一次就往数据库写一行：用户是谁、用了哪个模型、输入输出多少 token、花了多少钱。<br>同时要处理三件被新手忽略的事：<strong>加载状态</strong>（AI 调用要 8–20 秒，界面不能白屏，要给进度提示）、<strong>失败重试</strong>（模型 API 会超时、会限流，要给用户一句人话提示而不是 500 错误）、<strong>输入长度上限</strong>（防止一次烧掉几十块钱）。<br><strong>判断标准：</strong>主流程成功率 95% 以上，且你能准确说出"一个普通用户用一次大概花多少钱"。</span><span class="en-only">Deliverable: <strong>a working core flow plus per-call logging of tokens and cost.</strong> Don't skip this. I've watched too many products discover after launch that a single call costs 5x the estimate. Write one row per call: who, which model, input/output tokens, and the money. Also handle three things beginners forget: <strong>loading states</strong> (AI calls take 8–20 seconds, so no blank screen — show progress), <strong>failure handling</strong> (APIs time out and rate-limit; say something human instead of showing a 500), and <strong>input length caps</strong> (one runaway request shouldn't cost ¥50).<br><strong>Pass criteria:</strong> core flow succeeds 95%+ of the time and you can state what one typical user call costs you.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 53–60 天：打磨到你自己愿意每天用</span><span class="en-only">Days 53–60: Polish until you use it daily yourself</span></h3>
+      <p><span class="zh-only">交付物：<strong>一个你自己每天会用一次、内部可用的 V1</strong>。这一步的验收标准很土但极其有效：<strong>连续 3 天，你自己每天主动打开它用一次，而且不觉得烦</strong>。如果你自己都懒得用，用户更不会用。顺便把移动端适配做了——超过一半的访问来自手机。<br><strong>判断标准：</strong>连续 3 天自发使用 + 手机上完整走通一遍。</span><span class="en-only">Deliverable: <strong>a V1 you use daily yourself and would be happy to share internally.</strong> The acceptance bar is unsophisticated and extremely useful: <strong>for 3 days in a row, you open it and use it once without feeling annoyed.</strong> If you can't be bothered, users won't be either. While you're at it, make it work on mobile — over half of visits come from phones.<br><strong>Pass criteria:</strong> 3 days of self-initiated use, plus one full run-through on a phone.</span></p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">顺便说说每天的节奏。我现在的安排是：<strong>早上 9:00–11:30 处理前一天没想清楚的问题</strong>（读用户反馈、看报错、写清楚要改什么，不写代码），<strong>下午 14:00–18:00 是"让 AI 写代码"的时间</strong>（一次只做一个小任务，做完自己跑一遍，再 commit），<strong>晚上 20:00–21:00 处理用户消息</strong>（这段时间的回复率比白天高 4 倍，很多海外用户是白天睡觉晚上活跃）。每天有效编码时间大概 4 小时，比我 2018 年手写代码的时候还轻松，但产出高得多。</span>
+    <span class="en-only">On daily rhythm: <strong>9:00–11:30 is for problems I couldn't solve yesterday</strong> (reading feedback, reading errors, writing down exactly what to change — no code), <strong>14:00–18:00 is "let the AI write code" time</strong> (one small task at a time, run it myself, then commit), and <strong>20:00–21:00 for user messages</strong> (reply rate in this window is 4x higher — plenty of overseas users are asleep during my day). About 4 hours of effective coding, which is less than I hand-wrote back in 2018 but produces far more.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第 61–90 天：前 10 个用户从哪来</span><span class="en-only">Days 61–90: Where the First 10 Users Come From</span></h2>
+  <p>
+    <span class="zh-only">这是 90 天里最难的一段，因为产品能跑了，但没人知道它存在。前 10 个用户不需要靠广告，需要靠"找到具体的人"。</span>
+    <span class="en-only">This is the hardest stretch: the product runs, but nobody knows it exists. The first 10 users don't come from ads — they come from naming specific people.</span>
+  </p>
+  <h3><span class="zh-only">三件事，第 61–75 天做完</span><span class="en-only">Three things to finish between days 61 and 75</span></h3>
+  <ol>
+    <li><span class="zh-only"><strong>列出 30 个具体的人名（不是"目标用户"）。</strong>这是我最推荐的一招：在文档里写出 30 个你真实认识、且符合目标画像的人的名字、他们在哪、你打算怎么联系他们。写出来之后你会立刻发现，这个产品其实没几个人需要——那本身就是重要信息。我那份名单最多的一次写了 41 个，最后只转化出 9 个用户，但这 9 个全都付费了。</span><span class="en-only"><strong>Write 30 actual names (not "target users").</strong> My top recommendation: a doc with 30 real people you know who match the profile, where they are, and how you'll reach them. Writing the list instantly tells you how many people actually need this — itself valuable information. My biggest list had 41 names; it converted 9 users, and all 9 paid.</span></li>
+    <li><span class="zh-only"><strong>把访谈里答应的人重新找出来。</strong>第 3 周付了定金的那 2 个人、第 4 周主动来要第二次结果的那 3 个人——他们是你的种子用户，优先给他们永久折扣换口碑。种子用户给一条好评，比 100 个陌生访客有用。</span><span class="en-only"><strong>Go back to the people from your interviews.</strong> The 2 who paid a deposit in week 3 and the 3 who came back for a second result are your seed users — give them a permanent discount in exchange for a testimonial. One honest word from a seed user beats 100 anonymous visitors.</span></li>
+    <li><span class="zh-only"><strong>做一页能转发的落地页。</strong>不是首页，是"这一个东西解决你那一个麻烦"的一页图 + 一句话 + 一个按钮。我用的是一张自己做的对比图（左边乱糟糟的简历，右边改完的），转化率是纯文字页面的 3 倍多。</span><span class="en-only"><strong>Build one shareable landing page.</strong> Not a homepage — a single page for "this one thing fixes that one annoyance." Mine is one before/after image plus one sentence plus one button. It converts 3x better than a pure-text page.</span></li>
+  </ol>
+  <h3><span class="zh-only">反馈怎么收：别问"你觉得怎么样"</span><span class="en-only">Collecting feedback: don't ask "what do you think?"</span></h3>
+  <p>
+    <span class="zh-only">"你觉得怎么样"只会换来"挺好的"。我问的是三个具体问题：<strong>你上次用它是哪一天、当时想干什么、有没有哪一步你差点放弃了？</strong>第三个问题最值钱——"差点放弃"的位置就是 bug 和流失点所在。我自己的产品里，最致命的一处流失点是我把"上传文件"写成了"导入文档"，用户以为要传 PDF，结果只接受图片。</span>
+    <span class="en-only">"What do you think?" only gets "it's good." I ask three concrete questions instead: <strong>When did you last use it, what were you trying to do, and was there a moment you almost gave up?</strong> The third one is worth the most — the "almost gave up" point is exactly where bugs and drop-off live. The worst drop-off in one of my products came from my own wording: I wrote "import document" when I meant "upload file," and users tried to send a PDF to an image-only uploader.</span>
+  </p>
+  <h3><span class="zh-only">第 76–90 天：定价与开源的两个决定</span><span class="en-only">Days 76–90: two decisions — price and open source</span></h3>
+  <p>
+    <span class="zh-only"><strong>定价：</strong>别在有 3 个用户的时候纠结定价，要到 10–20 个用户、有一个人付了第二笔钱之后再定。我的做法是先把价格摆在页面上（¥29/月，包含 20 次），付了第二笔的人再问一句"这个价格你觉得贵吗"——得到的答案比问卷准 10 倍。第一版定价建议：<strong>订阅制 + 明确的免费额度</strong>，因为按量计费会让人不敢用，而不敢用就永远看不到价值。</span>
+    <span class="en-only"><strong>Pricing:</strong> don't agonise over the price with 3 users; wait until you have 10–20 and at least one repeat purchase. Put a price on the page first (¥29/month, 20 uses included), then ask anyone who paid twice: "does that feel expensive?" The answer beats a survey by 10x. For v1 I'd recommend <strong>subscription with a clearly stated free allowance</strong> — usage-based pricing scares people off, and people who are scared off never see the value.</span>
+  </p>
+  <p>
+    <span class="zh-only"><strong>要不要开源：</strong>看你的目标。如果目标是赚钱，不要开源核心；如果目标是获取流量、建立个人品牌、或者这产品本来就是给别人做嫁衣（比如给你的主产品导流），那开源反而更好。我的模板包是开源的（用来引流），简历优化器是闭源的（用来赚钱），两者的月收入分别是 ¥3,140 和 ¥7,260——<strong>开源那个不是失败，它承担的是获客职能</strong>。</span>
+    <span class="en-only"><strong>Should you open-source it?</strong> Depends on the goal. If the goal is revenue, keep the core closed. If the goal is traffic, personal brand, or feeding a bigger product, open source is better. My template packs are open source (as a traffic driver); the resume optimizer is closed (as a business). Monthly revenue: ¥3,140 and ¥7,260 respectively — <strong>the open-source one isn't a failure, it's doing a marketing job.</strong></span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">12 周里程碑表：每周做什么、交付什么、怎么算通过</span><span class="en-only">The 12-Week Milestone Table: Do, Ship, Pass</span></h2>
+  <p>
+    <span class="zh-only">这张表是整篇文章最该被打印出来的一页。每周一早上花 15 分钟过一遍，任何一周没达到判断标准，就先处理那一周，别往前赶。</span>
+    <span class="en-only">This is the page of this article worth printing. Spend 15 minutes on it every Monday morning, and if a week misses its pass criteria, fix that week first — don't push forward.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">周次</span><span class="en-only">Week</span></th>
+        <th><span class="zh-only">主要做什么</span><span class="en-only">Main focus</span></th>
+        <th><span class="zh-only">交付物</span><span class="en-only">Deliverable</span></th>
+        <th><span class="zh-only">判断标准</span><span class="en-only">Pass criteria</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">第 1 周</span><span class="en-only">Week 1</span></td>
+        <td><span class="zh-only">选定人群与场景</span><span class="en-only">Pick audience and scenario</span></td>
+        <td><span class="zh-only">200 字需求说明</span><span class="en-only">200-word brief</span></td>
+        <td><span class="zh-only">能用一句话说清帮谁解决什么</span><span class="en-only">One sentence names who and what</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 2 周</span><span class="en-only">Week 2</span></td>
+        <td><span class="zh-only">访谈 10 个人</span><span class="en-only">Interview 10 people</span></td>
+        <td><span class="zh-only">10 份访谈记录</span><span class="en-only">10 interview notes</span></td>
+        <td><span class="zh-only">≥5 人说这是高频问题</span><span class="en-only">≥5 call it a frequent problem</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 3 周</span><span class="en-only">Week 3</span></td>
+        <td><span class="zh-only">验证付费意愿</span><span class="en-only">Test willingness to pay</span></td>
+        <td><span class="zh-only">至少 1 笔真实付款</span><span class="en-only">At least 1 real payment</span></td>
+        <td><span class="zh-only">10 人中 ≥2 人当场付定金</span><span class="en-only">≥2 of 10 pay a deposit</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 4 周</span><span class="en-only">Week 4</span></td>
+        <td><span class="zh-only">做手动版 MVP</span><span class="en-only">Manual MVP</span></td>
+        <td><span class="zh-only">能收请求并给结果的页面</span><span class="en-only">A page that takes a request and returns a result</span></td>
+        <td><span class="zh-only">3 个陌生人主动要第二次结果</span><span class="en-only">3 strangers request a second result</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 5 周</span><span class="en-only">Week 5</span></td>
+        <td><span class="zh-only">收口需求，只留一条主线</span><span class="en-only">Cut scope to one main line</span></td>
+        <td><span class="zh-only">≤5 个功能的清单</span><span class="en-only">A list of ≤5 features</span></td>
+        <td><span class="zh-only">3 分钟能演示完核心价值</span><span class="en-only">Core value demos in 3 minutes</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 6 周</span><span class="en-only">Week 6</span></td>
+        <td><span class="zh-only">技术选型 + 搭骨架</span><span class="en-only">Pick stack, build skeleton</span></td>
+        <td><span class="zh-only">能跑的空壳 + 数据表结构</span><span class="en-only">Runnable shell + schema</span></td>
+        <td><span class="zh-only">本地跑通"注册→出结果"</span><span class="en-only">Local run completes signup→result</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 7 周</span><span class="en-only">Week 7</span></td>
+        <td><span class="zh-only">接入模型 API</span><span class="en-only">Wire up the model API</span></td>
+        <td><span class="zh-only">V1 主流程可用</span><span class="en-only">Working v1 core flow</span></td>
+        <td><span class="zh-only">成功率 &gt; 95%，单次成本已知</span><span class="en-only">&gt;95% success, cost per call known</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 8 周</span><span class="en-only">Week 8</span></td>
+        <td><span class="zh-only">加成本埋点与日志</span><span class="en-only">Add cost tracking and logs</span></td>
+        <td><span class="zh-only">每次调用的成本记录</span><span class="en-only">Per-call cost records</span></td>
+        <td><span class="zh-only">能说出单用户月成本</span><span class="en-only">You can state monthly cost per user</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 9 周</span><span class="en-only">Week 9</span></td>
+        <td><span class="zh-only">错误处理、加载态、移动端适配</span><span class="en-only">Error handling, loading states, mobile</span></td>
+        <td><span class="zh-only">内部可用的 V1</span><span class="en-only">Internal-ready v1</span></td>
+        <td><span class="zh-only">连续 3 天自己每天主动用</span><span class="en-only">3 days of voluntary self-use</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 10 周</span><span class="en-only">Week 10</span></td>
+        <td><span class="zh-only">上线 + 定价页 + 支付</span><span class="en-only">Launch, pricing page, payments</span></td>
+        <td><span class="zh-only">线上可访问 + 能收款</span><span class="en-only">Live site that can take money</span></td>
+        <td><span class="zh-only">支付流程走通，收到第一笔钱</span><span class="en-only">Payment works, first money received</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 11 周</span><span class="en-only">Week 11</span></td>
+        <td><span class="zh-only">找前 10 个真实用户</span><span class="en-only">Get the first 10 real users</span></td>
+        <td><span class="zh-only">10 个非粉丝用户</span><span class="en-only">10 users who aren't fans</span></td>
+        <td><span class="zh-only">≥3 人在第二天又回来</span><span class="en-only">≥3 return the next day</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 12 周</span><span class="en-only">Week 12</span></td>
+        <td><span class="zh-only">收反馈、改一轮、做决定</span><span class="en-only">Collect feedback, iterate once, decide</span></td>
+        <td><span class="zh-only">决策文档（继续/转向/砍掉）</span><span class="en-only">A decision doc: continue, pivot, or kill</span></td>
+        <td><span class="zh-only">能用数据而不是感觉做决定</span><span class="en-only">The decision cites data, not vibes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">工具清单：哪些必须有，哪些可以先不用</span><span class="en-only">The Tool List: What You Need and What You Can Skip</span></h2>
+  <p>
+    <span class="zh-only">新手最爱犯的错不是工具太少，而是工具太多——收藏了 30 个教程，搭了 8 层架构，第 60 天还在选数据库。我把工具压到了最小集合：7 个必须有的，加上一堆可以先不碰的。</span>
+    <span class="en-only">The classic beginner mistake isn't too few tools — it's too many. Thirty saved tutorials, eight layers of architecture, and still choosing a database on day 60. I cut my stack to a minimum: 7 must-haves, plus a long list of things you can safely ignore.</span>
+  </p>
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">必须有的 7 个</span><span class="en-only">The 7 must-haves</span></h4>
+      <p><span class="zh-only"><strong>1. AI 编程助手</strong>（Cursor / Cline / Copilot）——写代码的杠杆。<br><strong>2. 模型 API 密钥</strong>——产品的大脑。<br><strong>3. 一个部署平台</strong>（Vercel / Cloudflare Pages）——别自己买服务器。<br><strong>4. 一个数据库</strong>（Supabase）——存用户和历史记录。<br><strong>5. 支付</strong>（Stripe / 微信支付 / Lemon Squeezy）——没有它就没有收入验证。<br><strong>6. 一个落地页 + 一个表单收集工具</strong>——早期只要一页。<br><strong>7. 一个代码仓库 + 一个错误监控</strong>（GitHub + Sentry）——仓库记决策，监控让你知道线上是不是崩了。</span><span class="en-only"><strong>1. AI coding assistant</strong> (Cursor / Cline / Copilot) — the leverage on your typing.<br><strong>2. A model API key</strong> — the brain.<br><strong>3. A hosting platform</strong> (Vercel / Cloudflare Pages) — never buy a server.<br><strong>4. A database</strong> (Supabase) — users and history.<br><strong>5. Payments</strong> (Stripe / WeChat Pay / Lemon Squeezy) — without it there's no revenue validation.<br><strong>6. A landing page + one form tool</strong> — one page is enough early on.<br><strong>7. A repo + error monitoring</strong> (GitHub + Sentry) — the repo records decisions, monitoring tells you production isn't on fire.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">可以先不用的</span><span class="en-only">Safe to skip for now</span></h4>
+      <p><span class="zh-only"><strong>Kubernetes、微服务、消息队列、Redis 集群、自建数据库、GraphQL、微前端、原生 App、向量数据库、多语言多地区、复杂 CI/CD、Serverless 架构重构、K8s 集群</strong>。<br>理由很简单：你的用户量在 90 天内大概率是两位数。10 个用户用 MySQL 和用 Postgres 没区别，用单体应用和用微服务也没区别。等你真的被这些问题卡住了再改——那时候改还来得及。</span><span class="en-only"><strong>Kubernetes, microservices, message queues, Redis clusters, self-hosted databases, GraphQL, micro-frontends, native apps, vector databases, i18n, elaborate CI/CD, serverless re-architecture.</strong><br>Simple reason: within 90 days your user count is likely two digits. Ten users don't care whether you use MySQL or Postgres, or a monolith or microservices. Adopt them when they actually block you — at that point you can still change.</span></p>
+    </div>
+  </div>
+  <div class="callout tip">
+    <strong><span class="zh-only">一条省钱经验：先用托管服务，别自己造</span><span class="en-only">One money-saving rule: rent, don't build</span></strong>
+    <p><span class="zh-only">2024 年我为了"省服务器费"自己搭了一套 Docker + Postgres + Nginx，花了整整两个周末。算下来每月省 ¥80，但这 16 个小时如果用在访谈用户上，按我现在的转化率大概能多赚 ¥1,500。<strong>在用户量还是个位数的时候，你的时间比服务器贵得多。</strong></span><span class="en-only">In 2024 I "saved on server costs" by hand-rolling Docker + Postgres + Nginx and spent two full weekends on it. Monthly saving: ¥80. Those 16 hours spent interviewing users would have earned roughly ¥1,500 at my current conversion rate. <strong>While your user count is single-digit, your time costs far more than your server.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">用 AI 写代码的真实工作流（可直接照抄）</span><span class="en-only">The Real AI-Assisted Coding Workflow (Copy This)</span></h2>
+  <p>
+    <span class="zh-only">大多数人用 AI 写代码的方式是错的：一句话让它"帮我做一个 XX 页面"，然后得到 800 行看不懂的代码，出错时也改不动。真正能用的方式是把它当成一个很聪明但需要你拆任务的同事。我现在的工作流固定成下面四步。</span>
+    <span class="en-only">Most people prompt AI the wrong way: one sentence asking for "a page that does X", then receive 800 lines of code you don't understand and can't debug. The approach that works treats the model as a brilliant colleague who needs tasks broken down. My workflow is fixed at four steps.</span>
+  </p>
+  <pre data-lang="bash"><code># ① 先写清楚要什么（5 分钟，人写，AI 不写）
+#    存成 PRD.md：目标用户、输入、输出、边界条件
+# ② 让 AI 先给计划，别让它直接写代码
+#    提示词："读 PRD.md，列出实现步骤，每步不超过 30 行改动"
+#    我再删掉不必要的那一半——通常能砍掉 30%
+
+# ③ 一次只实现一个任务，一个文件
+cat > prompt.txt &lt;&lt;'EOF'
+实现 src/lib/ai.ts 的 generateOutline()：
+- 只修改这一个文件，不要动其他文件
+- 输入 { topic: string, tone: "casual" | "formal" }
+- 返回 3 条要点组成的字符串数组
+- 调用失败时抛出带中文提示的 Error
+- 不要引入新的依赖
+EOF
+
+# ④ 自己跑一遍再提交（这一步不能省）
+npx vitest run src/lib/ai.test.ts
+git diff --stat          # 确认 AI 没偷偷改别的文件
+git add -A &amp;&amp; git commit -m "feat: outline generation"</code></pre>
+  <p>
+    <span class="zh-only">四个要点：<strong>需求文档自己写</strong>，因为只有你知道边界在哪；<strong>让 AI 先出计划再写代码</strong>，你会发现它列的步骤里有三成是多余的；<strong>一次只改一个文件</strong>，这样出错时你知道该去哪看；<strong>每次提交前看 diff</strong>，这一步专门用来抓 AI 顺手改坏别的地方。我用这个流程的那 3 个月里，代码返工率大概是之前的一半。</span>
+    <span class="en-only">Four takeaways: <strong>you write the brief yourself</strong>, because only you know the boundaries; <strong>ask for a plan before code</strong>, and you'll find roughly a third of the steps are unnecessary; <strong>one file per task</strong>, so when something breaks you know where to look; and <strong>read the diff before every commit</strong>, which exists to catch the model quietly breaking something else. During the three months I used this workflow, my rework rate was about half of what it had been.</span>
+  </p>
+  <div class="callout info">
+    <strong><span class="zh-only">什么时候可以放手让 AI 多写一点</span><span class="en-only">When you can let the AI write more</span></strong>
+    <p><span class="zh-only">纯展示层的东西（样式、布局、文案排版）、一次性脚本、以及你自己不打算长期维护的文件——这些可以让它一次生成一大片。判断标准很简单：<strong>这段代码如果坏了，你会不会半夜爬起来修？</strong>会，就一步一步来；不会，就放手。</span><span class="en-only">Pure presentation code (styling, layout, text formatting), one-off scripts, and files you don't plan to maintain long-term — let it generate those in bulk. The test is simple: <strong>if this breaks, would you get up at night to fix it?</strong> If yes, go step by step. If no, let go.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">最常见的 5 个失败原因</span><span class="en-only">The 5 Most Common Ways This Fails</span></h2>
+  <p>
+    <span class="zh-only">这 5 个我全都踩过，有的踩了两次。按出现频率排序，每个都给出可以直接执行的对策。</span>
+    <span class="en-only">I've hit all five, some of them twice. Ordered by how often they occur, each with a countermeasure you can execute today.</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>目标定成"做平台"。</strong>症状是需求清单越写越长，第 30 天还在讨论架构。对策：把目标改写成一句可验证的话——"帮 [具体人群] 在 [具体场景] 把 [某个指标] 从 A 变成 B"。如果这句话里出现了"平台""生态""多端"这三个词，回到第 1 周重新选。</span><span class="en-only"><strong>Targeting "a platform."</strong> Symptom: the feature list only grows and you're still arguing about architecture on day 30. Countermeasure: rewrite the goal as one checkable sentence — "help [specific people] in [specific situation] move [metric] from A to B." If that sentence contains "platform", "ecosystem", or "multi-platform", go back to week 1.</span></li>
+    <li><span class="zh-only"><strong>跳过验证直接开写。</strong>症状是"我先写着，等做完了自然就有人用了"。对策：写代码前必须拿到 10 份访谈记录 + 1 笔真实付款。做不到就先用手动版跑一遍，那也不叫跳过。对策的可执行版本：<strong>把"本周开始写代码"这个动作，锁死在"收到第一笔钱"之后</strong>。</span><span class="en-only"><strong>Skipping validation and coding first.</strong> Symptom: "I'll build it and people will show up when it's ready." Countermeasure: before any code, you need 10 interview notes + 1 real payment. If you can't get those, run the manual version instead — that's not skipping either. The executable version: <strong>gate "start coding this week" behind "the first payment landed."</strong></span></li>
+    <li><span class="zh-only"><strong>功能太多。</strong>症状是第 5 周时 MVP 有 11 个功能。对策：功能清单分三栏——"必须有"、"最好有"、"以后有"，只做第一栏，且第一栏不超过 3 个。理由很简单：你不是没时间做，你是没时间<strong>测</strong>。3 个功能能测得过来，11 个只能测一半。</span><span class="en-only"><strong>Too many features.</strong> Symptom: an MVP with 11 features by week 5. Countermeasure: split the list into "must have", "nice to have", "someday" and build only the first column — capped at 3. The reason isn't lack of time, it's lack of time to <strong>test</strong>. You can properly test 3 features; with 11 you can only test half.</span></li>
+    <li><span class="zh-only"><strong>用 AI 写代码但自己看不懂。</strong>症状是出错了只能整段重写，或者干脆换模型再试一次。对策：<strong>每次只让它改一个文件</strong>，改完自己跑一遍；看不懂的代码就让它加注释解释这行为什么存在；更狠一点的做法是每个核心函数自己手写一遍，AI 只写周边。对新人来说，"能改"比"能写"重要得多。</span><span class="en-only"><strong>Using AI without understanding the code.</strong> Symptom: when something breaks you rewrite the whole block, or just switch models and retry. Countermeasure: <strong>one file per prompt</strong>, and run it yourself afterwards; for code you don't understand, ask for comments explaining why the behaviour exists; and for core functions, write them by hand and let AI handle the surroundings. For a beginner, being able to <strong>modify</strong> matters far more than being able to write from scratch.</span></li>
+    <li><span class="zh-only"><strong>以为上线就结束了。</strong>症状是产品做完了，然后发一条朋友圈就等反馈。对策：上线前先列出 20 个具体的人名和联系方式，发给他们，并写清楚"你在哪个环节卡住了"。我的经验是这 20 个人里能带回 6–8 条具体反馈，前 10 个付费用户也基本从这里来。</span><span class="en-only"><strong>Thinking launch is the finish line.</strong> Symptom: the product is done, you post once, and you wait. Countermeasure: before launching, list 20 specific names with contact details, message each one, and ask exactly "where did you get stuck?" In my experience 6–8 of those 20 come back with concrete feedback, and your first 10 paying users come from this list.</span></li>
+  </ol>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一个真实的 90 天记录（细节版）</span><span class="en-only">A Real 90 Days, Detail by Detail</span></h2>
+  <p>
+    <span class="zh-only">为了让这份指南不悬在空中，放一个真实样本：2026 年 4 月到 6 月，我做了一个「小红书封面图批量生成」的小工具。不是最好的例子——它是第 11 周才拿到第一个付费用户的，但每个节点都是真实发生的。</span>
+    <span class="en-only">To keep this guide from floating in the abstract, here's a real sample: from April to June 2026 I built a small tool for batch-generating Xiaohongshu cover images. It wasn't the ideal case — it took until week 11 to get the first paying user — but every milestone below actually happened.</span>
+  </p>
+  <ul>
+    <li><span class="zh-only"><strong>第 1 周</strong>：目标定成"做小红书内容平台"（太宽），第 3 周访谈到第 8 个人时才缩成"帮刚开始做小红书的个体商家，在发布前把封面图做得像样一点"。</span><span class="en-only"><strong>Week 1:</strong> goal set as "build a Xiaohongshu content platform" (far too wide). It only narrowed around interview 8 in week 3, to "help new solo Xiaohongshu sellers make their cover images look decent before posting."</span></li>
+    <li><span class="zh-only"><strong>第 3 周</strong>：10 个人里 1 个人付了 ¥29 定金。刚好压线通过。差点因为"只有 1 个人"而否掉重来。</span><span class="en-only"><strong>Week 3:</strong> one of ten people paid a ¥29 deposit. Exactly on the line. I nearly scrapped it and started over because "only one person."</span></li>
+    <li><span class="zh-only"><strong>第 6–7 周</strong>：用 Next.js + Supabase + 通义万相，代码是 Cursor 写的，我写了大概 400 行。接模型时发现批量 10 张的成本是 ¥3.2，定价必须覆盖它。</span><span class="en-only"><strong>Weeks 6–7:</strong> Next.js + Supabase + Qwen Image. Cursor wrote most of the code; I wrote maybe 400 lines. When wiring the model I found a batch of 10 cost ¥3.2, and the price had to cover it.</span></li>
+    <li><span class="zh-only"><strong>第 10 周</strong>：上线，定价 ¥39/月含 20 张生成，支付走微信个人收款码（有点不合规，但当时没别的选择）。</span><span class="en-only"><strong>Week 10:</strong> launched at ¥39/month for 20 images, taking payment via a personal WeChat QR code (technically not compliant, but there was no alternative at the time).</span></li>
+    <li><span class="zh-only"><strong>第 11 周</strong>：第一个付费用户，是我第 3 周访谈时的第 6 个人——他当时付了定金，第 8 周来要结果时没再理我，我在第 11 周主动问了一句"要不要先用起来"，他就付了全款。<strong>种子用户是第 90 天里最可靠的一笔收入来源。</strong></span><span class="en-only"><strong>Week 11:</strong> the first paying user was interview 6 from week 3 — the person who paid the deposit, then went quiet in week 8. I followed up in week 11 asking if they wanted to start using it, and they paid in full. <strong>Seed users are the most reliable revenue you get in 90 days.</strong></span></li>
+    <li><span class="zh-only"><strong>第 12 周结束时</strong>：7 个付费用户，月收入 ¥273，模型成本 ¥96。<strong>没有赚钱</strong>——但 7 个付费用户里有 4 个是真人重复使用过两次以上，这比月入 5000 更有价值，因为下一步（涨价 + 提量 + 换分发渠道）有了真实数据支撑。</span><span class="en-only"><strong>End of week 12:</strong> 7 paying users, ¥273 monthly revenue, ¥96 in model cost. <strong>Not profitable</strong> — but 4 of the 7 were real repeat users, which is worth more than ¥5,000 a month, because the next step (raise price, push volume, change channel) now has real data behind it.</span></li>
+  </ul>
+  <div class="callout warn">
+    <strong><span class="zh-only">这个样本里我最该早点承认的错误</span><span class="en-only">The mistake I should have admitted sooner</span></strong>
+    <p><span class="zh-only">我在第 3 周只有 1 个人付钱时，应该立刻怀疑"人群选窄了"。那 9 个不愿意付钱的人不是没需求，而是需求没那么痛——他们只是在"没觉得贵"和"不会用"之间摇摆。如果当时我把目标从"小红书商家"再收窄到"每月更新 20 篇以上的日更博主"，转化率大概会高一倍。<strong>付钱的人少不代表产品不行，也可能代表你找错了那 10 个人。</strong></span><span class="en-only">When only one person paid in week 3, I should have suspected my audience was too broad. The other 9 didn't lack the need — it just wasn't sharp enough; they were stuck between "doesn't feel expensive" and "I don't know how to use it." Had I narrowed from "Xiaohongshu sellers" to "daily posters publishing 20+ times a month", conversion would likely have doubled. <strong>Few payers doesn't always mean the product is bad — sometimes it means you asked the wrong ten people.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">90 天之后该做什么</span><span class="en-only">After Day 90</span></h2>
+  <p>
+    <span class="zh-only">第 90 天不是终点，是分叉口。三个方向，选哪个取决于你在第 12 周的里程碑表上看到的数字。</span>
+    <span class="en-only">Day 90 isn't an ending — it's a fork. Which path you take depends on the numbers on your week-12 milestone sheet.</span>
+  </p>
+  <ul>
+    <li><span class="zh-only"><strong>有人愿意付第二笔钱 → 把它当正事做。</strong>接下来的 90 天做三件事：把定价提到能覆盖成本的 2.5 倍、把用户反馈里出现 3 次以上的需求做成功能、去找第二批用户（目标：30 个付费用户）。这个阶段的关键指标是<strong>次月留存</strong>，不是新增。</span><span class="en-only"><strong>Someone paid a second time → treat it as a real business.</strong> Over the next 90 days: raise the price to 2.5x your cost, build the features that came up at least three times in feedback, and go find a second cohort (target: 30 paying users). The metric that matters now is <strong>month-two retention</strong>, not new signups.</span></li>
+    <li><span class="zh-only"><strong>有人用但没人付钱 → 改收费方式，不要改产品。</strong>产品被认可，钱包没被说服。依次试：换成订阅制、加一个便宜一档的套餐、把免费额度砍一半、给年付折扣。四招都试过还不行，说明这个需求不值钱，转向。</span><span class="en-only"><strong>People use it but nobody pays → change the charging, not the product.</strong> The product is approved, the wallet isn't. Try in order: switch to subscription, add a cheaper tier, halve the free allowance, offer an annual discount. If all four fail, the need isn't worth money — pivot.</span></li>
+    <li><span class="zh-only"><strong>没人用也没人付钱 → 第 74 天就该砍，别拖到第 90 天。</strong>我砍掉过一个做了 5 个月的工具（AI 社交媒体管理），判断依据只有一条：<strong>连续 6 周没有任何一个陌生人主动回来用过</strong>。砍掉不等于失败，拖着才失败——那 5 个月里我本可以做两个已经跑通的产品。</span><span class="en-only"><strong>Nobody uses it and nobody pays → you should have killed it on day 74, not day 90.</strong> I killed one tool after 5 months (an AI social media manager) on a single criterion: <strong>six consecutive weeks with not one stranger coming back on their own.</strong> Killing it isn't failure — dragging it out is. Those five months could have funded two products that already worked.</span></li>
+  </ul>
+  <p>
+    <span class="zh-only">最后说一句可能不太时髦的话：<strong>90 天做出一个有人用的小产品，比 90 天做出一个没人用的"完整系统"价值大得多</strong>。前者会让你知道下一件事该做什么，后者只会让你在深夜反复检查部署日志。我做过的产品里，活下来的没有一个是功能最全的，全都是最早拿到真实反馈的那个。</span>
+    <span class="en-only">One last, unfashionable thought: <strong>a small product people actually use is worth far more after 90 days than a "complete system" nobody uses.</strong> The first tells you what to do next; the second just makes you check deployment logs at midnight. Not one product that survived was the most feature-complete — they were all the ones that got real feedback earliest.</span>
+  </p>
+  <p>
+    <span class="zh-only">现在就把这周的日期填进那张里程碑表，从第 1 周开始。90 天后回头看，你会有一张能划掉的清单，和一个真实的答案。</span>
+    <span class="en-only">Open the milestone table right now and put this week's date in the first row. Ninety days from now you'll have a checklist with things crossed off, and a real answer.</span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

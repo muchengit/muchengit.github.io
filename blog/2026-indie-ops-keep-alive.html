@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>一个人的 AI 小产品怎么活下去：运维、成本与备份 | Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</title><meta name="description" content="上线不是终点。这份写给一个人的运维清单，覆盖监控、成本失控、备份、数据导出和每周 30 分钟的例行检查，附 3 个真实的成本翻车案例和一份诚实的收摊标准。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-indie-ops-keep-alive-hero.jpg" alt="Keeping a small AI product running" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">独立开发</span><span class="en-only">| Indie Dev</span></div>
+    <h1 class="reveal"><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.16 — 上线之后才刚开始，以及一份每周 30 分钟的运维清单</span><span class="en-only">2026.10.16 — What happens after launch, and a 30-minute weekly ops checklist</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">上线那一刻，事情才刚开始</span><span class="en-only">The Moment You Launch, Things Begin</span></h2>
+  <p>
+    <span class="zh-only">我做过 3 个上线的小产品。第 1 个活了下来，第 2 个在第 4 个月悄悄挂了（我 11 天后才从朋友那里听说），第 3 个现在每月有 3800 个用户付费用户——不是收入，是"还在用的人"。三个产品里，我花在上线后运维的时间，<strong>超过了写代码的时间</strong>。</span>
+    <span class="en-only">I've shipped three small products. The first survived, the second went down silently in month four (I heard about it 11 days later, from a friend), and the third now has 3,800 people actively using it — not revenue, people still using it. Across all three, <strong>the time I spent on post-launch operations exceeded the time I spent writing code.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">这和大众的想象不一样。做产品的那两周是 highs：发布、发朋友圈、收到第一笔付款。运维的那几个月是 lows：账单突然翻倍、用户来骂、某个第三方 API 半夜改了行为、数据库磁盘满。<strong>而 lows 会杀死 highs。</strong></span>
+    <span class="en-only">This doesn't match the popular image. The two weeks of building are highs: launch, announcements, first payment. The months of operations are lows: a bill that doubles overnight, an angry user, a third-party API changing behavior at 3am, a full disk. <strong>And lows kill highs.</strong></span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">AI 产品的运维和普通软件有一个本质区别：<strong>你的主要成本不在服务器，在模型调用，而模型调用的账单波动比流量大得多。</strong>一个周末的自然流量高峰，配上一个没有限额设置的接口，可能一周烧掉两个月利润。所以这篇的重点不只是"别挂了"，更是"别被账单杀死"。</span><span class="en-only">AI product operations differ from ordinary software in one essential way: <strong>your main cost isn't the server, it's model calls — and model bills swing far more than traffic does.</strong>A weekend traffic spike plus an endpoint with no spending cap can burn two months of profit in a week. So this piece is as much about "don't get killed by the bill" as "don't go down."</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">上线后必须有的 7 件事</span><span class="en-only">Seven Things You Need After Launch</span></h2>
+  <p>
+    <span class="zh-only">这七件事按"不做会死"的顺序排。前四件是必须有的，后三件是有了更好。</span>
+    <span class="en-only">Ordered by how badly it hurts to skip them. The first four are mandatory; the last three are better to have.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">#</span><span class="en-only">No.</span></th>
+        <th><span class="zh-only">要做的事</span><span class="en-only">The thing</span></th>
+        <th><span class="zh-only">为什么</span><span class="en-only">Why</span></th>
+        <th><span class="zh-only">频率</span><span class="en-only">Cadence</span></th>
+        <th><span class="zh-only">不做的后果</span><span class="en-only">If you skip it</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="zh-only">成本上限与告警</span><span class="en-only">Spend caps and alerts</span></td>
+        <td><span class="zh-only">模型调用费用可以一夜之间翻十倍</span><span class="en-only">Model costs can jump 10× overnight</span></td>
+        <td><span class="zh-only">设置一次，每月核对</span><span class="en-only">Set once, review monthly</span></td>
+        <td><span class="zh-only">一个月烧光半年利润</span><span class="en-only">Burn six months of profit in one month</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="zh-only">数据备份 + 能恢复</span><span class="en-only">Backups you have actually restored</span></td>
+        <td><span class="zh-only">磁盘满、误删、数据库损坏都可能发生</span><span class="en-only">Full disks, accidental deletes, and corruption all happen</span></td>
+        <td><span class="zh-only">每天自动，每月手动恢复一次</span><span class="en-only">Automatic daily; restore once a month</span></td>
+        <td><span class="zh-only">用户数据永久丢失，产品结束</span><span class="en-only">Permanent data loss; the product is over</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="zh-only">健康检查 + 告警</span><span class="en-only">Health checks and alerts</span></td>
+        <td><span class="zh-only">服务挂了但没人知道</span><span class="en-only">The service is down and nobody knows</span></td>
+        <td><span class="zh-only">每 5 分钟探活</span><span class="en-only">Probe every 5 minutes</span></td>
+        <td><span class="zh-only">11 天后才发现（我的第 2 个产品）</span><span class="en-only">11 days of silence (my second product)</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="zh-only">成本与用量看板</span><span class="en-only">Cost and usage dashboard</span></td>
+        <td><span class="zh-only">你得知道每个用户平均花你多少钱</span><span class="en-only">You must know what each user costs you</span></td>
+        <td><span class="zh-only">每周看一次</span><span class="en-only">Once a week</span></td>
+        <td><span class="zh-only">产品做了一年才发现每用户是亏的</span><span class="en-only">A year later you find every user loses you money</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="zh-only">错误日志与告警</span><span class="en-only">Error logging and alerts</span></td>
+        <td><span class="zh-only">用户报的 bug 你得能复现</span><span class="en-only">You must be able to reproduce reported bugs</span></td>
+        <td><span class="zh-only">实时</span><span class="en-only">Real time</span></td>
+        <td><span class="zh-only">每个 bug 都变成一次无法复现的悬案</span><span class="en-only">Every bug becomes an unreproducible mystery</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="zh-only">数据导出功能</span><span class="en-only">Data export</span></td>
+        <td><span class="zh-only">用户有权带走自己的数据</span><span class="en-only">Users are entitled to their own data</span></td>
+        <td><span class="zh-only">做一次</span><span class="en-only">Build once</span></td>
+        <td><span class="zh-only">用户流失，投诉，且失去信任</span><span class="en-only">Churn, complaints, and lost trust</span></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><span class="zh-only">依赖安全更新</span><span class="en-only">Dependency security updates</span></td>
+        <td><span class="zh-only">第三方库出漏洞你不知道，出了事你担责</span><span class="en-only">You won't hear about a library's CVE, and you're liable</span></td>
+        <td><span class="zh-only">每月一次</span><span class="en-only">Monthly</span></td>
+        <td><span class="zh-only">被动挨打</span><span class="en-only">Reactive damage control</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">成本：AI 产品的账单长什么样</span><span class="en-only">What an AI Product's Bill Actually Looks Like</span></h2>
+  <p>
+    <span class="zh-only">普通软件的账单结构很简单：服务器月租 + 域名。AI 产品多了一块，而且这一块是变量。下面是我三个产品在上线后第 3 个月的真实成本结构：</span>
+    <span class="en-only">An ordinary software bill is simple: server rent plus a domain. AI products add one more line, and that line is variable. Here's the real cost structure of my three products in their third month after launch:</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">成本项</span><span class="en-only">Line item</span></th>
+        <th><span class="zh-only">产品 A（OCR 工具）</span><span class="en-only">Product A (OCR tool)</span></th>
+        <th><span class="zh-only">产品 B（写作助手）</span><span class="en-only">Product B (writing assistant)</span></th>
+        <th><span class="zh-only">产品 C（周报自动化）</span><span class="en-only">Product C (weekly report bot)</span></th>
+        <th><span class="zh-only">说明</span><span class="en-only">Note</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">服务器</span><span class="en-only">Server</span></td>
+        <td><span class="zh-only">$5</span><span class="en-only">$5</span></td>
+        <td><span class="zh-only">$5</span><span class="en-only">$5</span></td>
+        <td><span class="zh-only">$12</span><span class="en-only">$12</span></td>
+        <td><span class="zh-only">VPS 固定支出，波动很小</span><span class="en-only">Fixed VPS cost, barely moves</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">模型调用</span><span class="en-only">Model calls</span></td>
+        <td><span class="zh-only">$38</span><span class="en-only">$38</span></td>
+        <td><span class="zh-only">$164</span><span class="en-only">$164</span></td>
+        <td><span class="zh-only">$22</span><span class="en-only">$22</span></td>
+        <td><span class="zh-only"><strong>波动最大的一项</strong></span><span class="en-only"><strong>The most volatile line</strong></span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第三方 API</span><span class="en-only">Third-party APIs</span></td>
+        <td><span class="zh-only">$21</span><span class="en-only">$21</span></td>
+        <td><span class="zh-only">$0</span><span class="en-only">$0</span></td>
+        <td><span class="zh-only">$3</span><span class="en-only">$3</span></td>
+        <td><span class="zh-only">OCR、邮件发送等</span><span class="en-only">OCR, mail sending, etc.</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">存储与带宽</span><span class="en-only">Storage and bandwidth</span></td>
+        <td><span class="zh-only">$2</span><span class="en-only">$2</span></td>
+        <td><span class="zh-only">$1</span><span class="en-only">$1</span></td>
+        <td><span class="zh-only">$1</span><span class="en-only">$1</span></td>
+        <td><span class="zh-only">—</span><span class="en-only">—</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">月成本合计</span><span class="en-only">Total monthly</span></strong></td>
+        <td><strong><span class="zh-only">$66</span><span class="en-only">$66</span></strong></td>
+        <td><strong><span class="zh-only">$170</span><span class="en-only">$170</span></strong></td>
+        <td><strong><span class="zh-only">$38</span><span class="en-only">$38</span></strong></td>
+        <td><span class="zh-only">—</span><span class="en-only">—</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">活跃用户</span><span class="en-only">Active users</span></td>
+        <td><span class="zh-only">约 210</span><span class="en-only">~210</span></td>
+        <td><span class="zh-only">约 890</span><span class="en-only">~890</span></td>
+        <td><span class="zh-only">约 120</span><span class="en-only">~120</span></td>
+        <td><span class="zh-only">—</span><span class="en-only">—</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">每用户月成本</span><span class="en-only">Cost per user</span></td>
+        <td><span class="zh-only">$0.31</span><span class="en-only">$0.31</span></td>
+        <td><span class="zh-only">$0.19</span><span class="en-only">$0.19</span></td>
+        <td><span class="zh-only">$0.32</span><span class="en-only">$0.32</span></td>
+        <td><span class="zh-only">定价必须高于这个数</span><span class="en-only">Your price must exceed this</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout warn">
+    <strong><span class="zh-only">产品 B 的数字值得单独看</span><span class="en-only">Product B's Numbers Deserve Their Own Look</span></strong>
+    <p>
+      <span class="zh-only">用户最多、成本第二高，但每用户成本最低——因为它做了两件事：<strong>用小模型处理简单请求，只有复杂请求才升级到大模型</strong>；以及<strong>对同一份内容做缓存</strong>。这两个动作把它的模型成本从每用户 $0.41 压到了 $0.19，降幅 54%，一个月省了 $98。<br><br>
+      <strong>AI 产品的成本优化，第一优先永远是"别让大模型干小模型的活"。</strong></span>
+      <span class="en-only">Most users, second-highest total cost, but the lowest cost per user — because it does two things: <strong>routes simple requests to a small model and escalates only hard ones</strong>, and <strong>caches repeated content</strong>. Together they cut model cost from $0.41 to $0.19 per user — 54% — saving $98 a month.<br><br>
+      <strong>The highest-leverage cost optimization in any AI product is "don't use a big model for a small model's job."</strong></span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">成本失控的三个真实案例</span><span class="en-only">Three Real Cost Blowups</span></h2>
+  <h3><span class="zh-only">案例一：周末流量高峰，一周烧掉 $1,340</span><span class="en-only">Case 1: A Weekend Traffic Spike Cost $1,340</span></h3>
+  <p>
+    <span class="zh-only">2026 年 3 月，一个工具被 Reddit 帖子带火，周六到周日来了约 40 倍平时流量。那个周末我收到 11 封"你的服务不可用"的邮件，还有一封 Stripe 扣款 $1,340 的通知。<strong>根因：我从来没有设置过消费上限，而且没有做并发限制——每个请求都直接调了一次付费 API。</strong></span>
+    <span class="en-only">In March 2026 a tool took off from a Reddit thread and took roughly 40× normal traffic over the weekend. I got 11 "service unavailable" emails and a Stripe charge for $1,340. <strong>Root cause: I had never set a spending cap, and there was no rate limiting — every request called a paid API directly.</strong></span>
+  </p>
+  <h3><span class="zh-only">案例二：重试没有上限，一次超时花了 $46</span><span class="en-only">Case 2: Unbounded Retries Cost $46 in One Request</span></h3>
+  <p>
+    <span class="zh-only">同一个产品的另一次事故。某个第三方 API 超时了，AI 帮我写的重试逻辑<strong>没有设置最大重试次数</strong>，于是一个请求重试了 200 次，每次都计费。我是在看账单时发现的。这次损失小，因为我第二天就加了上限，但如果没有看账单，可能会再烧掉几百块。</span>
+    <span class="en-only">Another incident in the same product. A third-party API timed out, and the retry logic AI had written <strong>had no maximum retry count</strong>, so one request retried 200 times, each one billed. I found it by reading the bill. The loss was small because I added a cap the next day — but without that bill, it could have run for hundreds more.</span>
+  </p>
+  <h3><span class="zh-only">案例三：一个用户的用量吃掉了全部利润</span><span class="en-only">Case 3: One User Ate the Entire Margin</span></h3>
+  <p>
+    <span class="zh-only">产品 C 有个企业客户，把我们的周报功能接进了他们自己的流程，每天跑 800 次。一个月下来，这个客户的模型账单是 <strong>$312</strong>，而他付给我们的钱是 <strong>$29</strong>。我是在做每用户成本分析时才发现的——如果不做那张表，这个客户会一直每个月让我亏 $283。</span>
+    <span class="en-only">Product C had an enterprise client who plugged our weekly report into their own workflow and ran it 800 times a day. That client's model bill was <strong>$312</strong> for the month, against <strong>$29</strong> paid to us. I found it while building the per-user cost table — without that table, this client would have cost me $283 every month indefinitely.</span>
+  </p>
+  <div class="callout success">
+    <strong><span class="zh-only">三个案例的共同解法</span><span class="en-only">The Common Fix Across All Three</span></strong>
+    <p>
+      <span class="zh-only">它们都不是"AI 会不会出错"的问题，是<strong>失控没有上限</strong>的问题。三个解法，加起来大概 40 行代码：<br>
+      ① <strong>消费上限</strong>：在模型服务商后台设月度预算告警和硬上限<br>
+      ② <strong>重试上限</strong>：任何重试逻辑必须有 max_retries 参数，默认不超过 3<br>
+      ③ <strong>每用户配额</strong>：超过配额的请求直接拒绝，不要"先跑着看看"<br><br>
+      <strong>这三行配置，救过的钱比我一整年的订阅费都多。</strong></span>
+      <span class="en-only">None of these was about "AI being wrong" — they were about <strong>runaway processes with no ceiling</strong>. Three fixes, about 40 lines of configuration in total:<br>
+      ① <strong>Spend caps</strong>: monthly budget alerts and a hard limit in the model provider's console<br>
+      ② <strong>Retry caps</strong>: every retry path gets a max_retries parameter, defaulting to 3<br>
+      ③ <strong>Per-user quotas</strong>: requests over quota get rejected, not "let's run it and see"<br><br>
+      <strong>Those three settings have saved more money than a full year of my subscriptions.</strong></span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">备份：3-2-1 原则在个人项目怎么落地</span><span class="en-only">Backups: Making the 3-2-1 Rule Work for a One-Person Project</span></h2>
+  <p>
+    <span class="zh-only">经典的 3-2-1 原则是：<strong>3 份副本，2 种介质，1 份异地</strong>。听起来很重，但个人项目可以做到很轻。关键是理解要防的是什么：不是"服务器被砸了"这种小概率事件，而是<strong>"我自己手滑删了"和"我忘了它坏了"</strong>这两种高概率事件。</span>
+    <span class="en-only">The classic 3-2-1 rule: <strong>3 copies, 2 media types, 1 offsite.</strong>That sounds heavy, but a one-person product can do it lightly. The key is understanding what you're defending against — not "the server gets destroyed" (rare), but <strong>"I deleted it by accident" and "I forgot it was broken"</strong> (common).</span>
+  </p>
+  <pre data-lang="bash"># 每天凌晨 3 点，全量导出数据库并加密
+0 3 * * * /opt/backup/run.sh && curl -s -X POST "$ALERT_WEBHOOK" -d "备份完成"
+
+# 备份脚本的关键三步：导出、加密、送走
+set -euo pipefail
+STAMP=$(date +%Y%m%d-%H%M)
+mkdir -p /tmp/bk
+
+# 1) 导出成可读格式，而不是只做二进制快照
+pg_dump "$DATABASE_URL" | gzip > /tmp/bk/db-$STAMP.sql.gz
+
+# 2) 用独立密钥加密，密钥放在环境变量里，不进代码库
+openssl enc -aes-256-cbc -pbkdf2 -iter 100000 \
+  -in /tmp/bk/db-$STAMP.sql.gz -out /tmp/bk/db-$STAMP.sql.gz.enc \
+  -pass env:"BACKUP_KEY"
+
+# 3) 送到异地（对象存储按月几分钱）
+aws s3 cp /tmp/bk/db-$STAMP.sql.gz.enc \
+  "s3://my-backups/db-$STAMP.sql.gz.enc" --storage-class STANDARD_IA
+
+# 4) 保留最近 30 天，其余自动清理
+find /tmp/bk -type f -mtime +30 -delete</pre>
+  <div class="callout warn">
+    <strong><span class="zh-only">没恢复过的备份，不算备份</span><span class="en-only">A Backup You Have Never Restored Is Not a Backup</span></strong>
+    <p>
+      <span class="zh-only">这是运维里最反直觉的一条。备份文件存在硬盘上，不代表你能恢复它——密钥可能变了、格式可能不兼容、脚本可能从第一天起就是坏的。<strong>每个月挑一个旧备份，真的在另一台机器上恢复一次</strong>，哪怕只是导入一个空库确认能打开。<br><br>
+      我第一次做恢复测试是在上线第 5 个月，脚本少写了一个参数，直接失败了。修好之后我才知道，之前 5 个月的"备份"全是不能用的文件。<strong>你不会希望知道这件事是在用户投诉的那天。</strong></span>
+      <span class="en-only">This is the most counterintuitive rule in operations. A backup file existing on disk doesn't mean you can restore it — the key may have changed, the format may be incompatible, the script may have been broken since day one. <strong>Once a month, pick an old backup and actually restore it</strong> somewhere else, even if it's just importing into an empty database to confirm it opens.<br><br>
+      My first restore test was in month five, and the script was missing a parameter and failed immediately. Fixing it is how I learned that five months of "backups" were unusable files. <strong>You'd rather not learn that on the day a customer complains.</strong></span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">监控：怎么知道你挂了</span><span class="en-only">Monitoring: How You Find Out You're Down</span></h2>
+  <p>
+    <span class="zh-only">监控的第一原则是：<strong>告警必须来自外部，不能来自被监控的服务本身。</strong>服务挂了的时候，它自己发不出告警。</span>
+    <span class="en-only">First rule of monitoring: <strong>the alert must come from outside the thing being watched.</strong>A service that has died cannot notify you.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">要监控的</span><span class="en-only">Watch</span></th>
+        <th><span class="zh-only">怎么测</span><span class="en-only">How to test it</span></th>
+        <th><span class="zh-only">合理阈值</span><span class="en-only">Sensible threshold</span></th>
+        <th><span class="zh-only">我用的工具</span><span class="en-only">My tool</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">网站能不能打开</span><span class="en-only">Site is up</span></td>
+        <td><span class="zh-only">外部每 5 分钟请求一次首页</span><span class="en-only">External request to the homepage every 5 min</span></td>
+        <td><span class="zh-only">连续 3 次失败即告警</span><span class="en-only">Alert after 3 consecutive failures</span></td>
+        <td><span class="zh-only">UptimeRobot 免费版</span><span class="en-only">UptimeRobot free tier</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">核心功能能不能用</span><span class="en-only">Core feature works</span></td>
+        <td><span class="zh-only">定时跑一个真实的小任务（含一次模型调用）</span><span class="en-only">Run a real small task on a schedule, including one model call</span></td>
+        <td><span class="zh-only">1 小时内失败即告警</span><span class="en-only">Alert if it fails within an hour</span></td>
+        <td><span class="zh-only">GitHub Actions + 邮件</span><span class="en-only">GitHub Actions plus email</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">API 是否在报错</span><span class="en-only">API error rate</span></td>
+        <td><span class="zh-only">统计 5xx 比例</span><span class="en-only">Track the ratio of 5xx responses</span></td>
+        <td><span class="zh-only">超过 2% 持续 10 分钟</span><span class="en-only">Above 2% for 10 minutes</span></td>
+        <td><span class="zh-only">应用内埋点 + 日志</span><span class="en-only">In-app instrumentation plus logs</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">今天花了多少钱</span><span class="en-only">Today's spend</span></td>
+        <td><span class="zh-only">直接读服务商账单 API</span><span class="en-only">Read the provider's billing API directly</span></td>
+        <td><span class="zh-only">日均的 2 倍</span><span class="en-only">2× the daily average</span></td>
+        <td><span class="zh-only">定时脚本 + 邮件告警</span><span class="en-only">Scheduled script plus email alert</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">磁盘还剩多少</span><span class="en-only">Free disk</span></td>
+        <td><span class="zh-only">查文件系统剩余空间</span><span class="en-only">Check filesystem free space</span></td>
+        <td><span class="zh-only">低于 20%</span><span class="en-only">Below 20%</span></td>
+        <td><span class="zh-only">crontab + 邮件</span><span class="en-only">crontab plus email</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <pre data-lang="bash"># 最值得写的第一个脚本：每天的钱和健康一起检查
+#!/bin/bash
+SPEND=$(curl -s "$BILLING_API" | jq -r '.today_usd')
+AVG=$(curl -s "$STATS_API" | jq -r '.avg_daily_usd')
+DISK=$(df -h / | awk 'NR==2{print $5}' | tr -d '%')
+
+# 花钱超了，或者磁盘快满了，都立刻发消息
+if (( $(echo "$SPEND > $AVG * 2" | bc -l) )); then
+  send_alert "今天模型花费 $SPEND 美元，是日均的 2 倍以上，请检查"
+fi
+if (( DISK > 80 )); then
+  send_alert "磁盘已用 $DISK%，请清理日志"
+fi
+echo "ok spend=$SPEND disk=$DISK%"</pre>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">自建监控，还是用托管平台自带的</span><span class="en-only">Build Your Own Monitoring or Use What the Platform Gives You</span></h2>
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">用平台自带的（Vercel / Railway / Cloudflare）</span><span class="en-only">What the Platform Gives You</span></h4>
+      <p>
+        <span class="zh-only"><strong>适合</strong>：部署在托管平台上的应用。<br><br><strong>优势</strong>：零配置就有基础指标、日志和告警；不用自己运维监控本身；免费额度通常够小产品用。<br><strong>代价</strong>：只有平台层指标，看不到"用户能不能真正完成核心功能"；平台换了你得重配。<br><br><strong>我的用法</strong>：产品 A 和 B 用平台自带的，5 分钟就配好了。</span>
+        <span class="en-only"><strong>Good for</strong>: apps hosted on a managed platform.<br><br><strong>Upside</strong>: baseline metrics, logs, and alerts with zero setup; you don't operate the monitoring itself; free tiers usually suffice.<br><strong>Cost</strong>: platform-level metrics only — you can't see whether users can actually complete the core flow; reconfiguring if you switch platforms.<br><br><strong>My use</strong>: products A and B use the built-ins, configured in five minutes.</span>
+      </p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">自建（自己写脚本 + 第三方探活）</span><span class="en-only">Build It Yourself (Scripts + Third-Party Probes)</span></h4>
+      <p>
+        <span class="zh-only"><strong>适合</strong>：自托管在 VPS 上的服务，或者需要验证"核心流程真的能用"的产品。<br><br><strong>优势</strong>：能测真实业务逻辑，而不只是端口活不活；跨平台不迁移。<br><strong>代价</strong>：要多花 1 到 2 小时搭建；自己写的东西自己也会挂。<br><br><strong>我的用法</strong>：产品 C 用自建，因为它的核心流程必须真的跑一次模型调用才算数。</span>
+        <span class="en-only"><strong>Good for</strong>: services on your own VPS, or anything where "the core flow really works" matters.<br><br><strong>Upside</strong>: tests real business logic, not just a live port; no migration cost.<br><strong>Cost</strong>: 1–2 hours to build; the things you write can also break.<br><br><strong>My use</strong>: product C is self-built, because its core flow only counts if it really makes a model call.</span>
+      </p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">两者的关键区别是<strong>测什么</strong>：平台监控告诉你"进程还活着"，自建脚本能告诉你"用户真的能完成核心操作"。<strong>后者才是唯一能提前发现"AI 功能挂了"的方式</strong>——因为模型接口的故障往往不会让进程退出，只是让结果变空。</span>
+    <span class="en-only">The real difference is <strong>what you test</strong>. Platform monitoring tells you "the process is alive"; your own script tells you "a user can actually finish the core task." <strong>Only the latter catches "the AI feature broke" early</strong> — because a model API failure usually doesn't kill the process, it just makes the results empty.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">数据导出：用户有权带走自己的东西</span><span class="en-only">Data Export: Users Deserve to Take Their Data With Them</span></h2>
+  <p>
+    <span class="zh-only">这一条跟技术无关，跟信任有关。不管你的产品做多大，<strong>给用户一个"一键导出全部数据"的按钮，成本很低，回报很高</strong>。我 2026 年 4 月加上这个功能后，主动流失（取消订阅后不再使用）下降了 9 个百分点——虽然这不能算严谨的因果，但同期没有任何其他改动。</span>
+    <span class="en-only">This one isn't about technology, it's about trust. Whatever the size of your product, <strong>a one-click "export everything" button is cheap to build and pays back well.</strong>When I added it in April 2026, voluntary churn dropped 9 percentage points — not rigorous causation, but nothing else changed in that period.</span>
+  </p>
+  <div class="callout info">
+    <strong><span class="zh-only">顺带的一个好处</span><span class="en-only">An Unexpected Bonus</span></strong>
+    <p>
+      <span class="zh-only">有了导出功能，你就<strong>顺便有了自己数据的主副本</strong>。每季度导出一次放在本地，既是给用户的便利，也是你自己的备份。我现在的做法是：用户点导出时同时在我的备份桶里留一份——这比任何定时任务都可靠，因为它有人触发。</span>
+      <span class="en-only">The export feature gives you <strong>a primary copy of your own data</strong> as a side effect. Exporting once a quarter to local storage is both a user courtesy and your own backup. My current approach: when a user exports, I also keep a copy in my backup bucket — more reliable than any scheduled job, because a human triggers it.</span>
+    </p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">每周 30 分钟的运维清单</span><span class="en-only">The 30-Minute Weekly Ops Checklist</span></h2>
+  <p>
+    <span class="zh-only">把这五件事固定在每周同一天，比如周六上午。30 分钟，一个月 2 小时。这是我维护三个产品的全部时间投入。</span>
+    <span class="en-only">Fix these five on the same day each week — Saturday morning works. Thirty minutes, two hours a month. That's my entire time budget for running three products.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">看账单（5 分钟）</span><span class="en-only">Read the Bill (5 min)</span></h3>
+      <p><span class="zh-only">对比本周和上周的模型花费。涨超过 50% 就查一下是什么触发的；跌超过 50% 也查——可能是功能挂了没人调用。</span><span class="en-only">Compare this week's model spend to last week's. Up more than 50%, find out what drove it. Down more than 50%, find out too — the feature may be broken and nobody's calling it.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">看核心功能是否真的能用（5 分钟）</span><span class="en-only">Test That the Core Feature Works (5 min)</span></h3>
+      <p><span class="zh-only">自己用一遍主流程，不是看监控面板，是真的做一次：上传一张图、生成一段报告、发一封邮件。<strong>只有你自己走过一遍，才知道用户那边是什么感觉。</strong></span><span class="en-only">Walk the main flow yourself — not a dashboard, an actual use: upload an image, generate a report, send an email. <strong>Only walking it yourself tells you what it feels like on the user's side.</strong></span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">看错误日志（8 分钟）</span><span class="en-only">Skim the Error Logs (8 min)</span></h3>
+      <p><span class="zh-only">只看你自己埋的那类错误：模型返回空、返回格式不对、超时。重复出现的错误要么修，要么加进"已知问题"清单告诉用户。</span><span class="en-only">Only the errors you instrumented yourself: empty model responses, malformed output, timeouts. A recurring error gets fixed, or gets added to a "known issues" list you tell users about.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">恢复一次备份（7 分钟）</span><span class="en-only">Restore One Backup (7 min)</span></h3>
+      <p><span class="zh-only">每月一次，挑一个 7 天前的备份真的恢复出来。这件事很枯燥，但它是你唯一能提前知道"备份能不能用"的方式。</span><span class="en-only">Once a month, restore a backup from seven days ago. It's boring, and it's the only way to know in advance whether your backups work.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">看一眼数字（5 分钟）</span><span class="en-only">Look at the Numbers (5 min)</span></h3>
+      <p><span class="zh-only">活跃用户、每用户成本、付费转化。<strong>三个数字，一眼看出产品是在变好还是在变差。</strong>如果连续两周活跃用户在掉，先别加功能，先看是不是哪里坏了。</span><span class="en-only">Active users, cost per user, conversion. <strong>Three numbers that show at a glance whether things are improving.</strong>If active users drop two weeks running, don't add features — check whether something broke first.</span></p>
+    </div>
+  </div>
+  <div class="highlight">
+    <p><span class="zh-only">这 30 分钟的价值不在于"发现问题"，在于<strong>让你有底气判断什么时候该停</strong>。运维做得好的人，关掉一个产品时不会犹豫——因为数据摆在那里。</span>
+    <span class="en-only">The value of those 30 minutes isn't catching problems — it's <strong>being able to judge when to stop</strong>. People who run operations well can shut a product down without hesitation, because the numbers are right there.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">什么时候该关掉它</span><span class="en-only">When to Shut It Down</span></h2>
+  <p>
+    <span class="zh-only">我的第 2 个产品——那个白屏 11 天没人知道的——我在它还有 40 个活跃用户的时候关掉了。听起来可惜，但那 40 个人没有一个人为它付过钱，而它每月要花我 $23。<strong>继续做一件没人要的事，不是坚持，是惯性。</strong></span>
+    <span class="en-only">I shut down my second product — the one that was down for 11 days — while it still had 40 active users. That sounds wasteful, but not one of those 40 was paying, and it cost me $23 a month. <strong>Continuing something nobody wants isn't persistence, it's inertia.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">我的关摊标准有三条，满足两条就关：</span>
+    <span class="en-only">I have three shutdown criteria. Two out of three means shut it down:</span>
+  </p>
+  <ul>
+    <li><span class="zh-only"><strong>连续 3 个月付费用户零增长</strong>，且期间做过至少一次真正的改进（不是改文案）。</span><span class="en-only"><strong>Paid users flat for 3 consecutive months</strong>, during which you shipped at least one real improvement (not a copy tweak).</span></li>
+    <li><span class="zh-only"><strong>每个付费用户的毛利为负</strong>，或者成本超过收入的 70%。</span><span class="en-only"><strong>Gross margin per paying user is negative</strong>, or cost exceeds 70% of revenue.</span></li>
+    <li><span class="zh-only"><strong>你自己一个月内没有主动打开过它</strong>——不是因为忙，是因为不想用。</span><span class="en-only"><strong>You haven't opened it yourself in a month</strong> — not because you're busy, but because you don't want to.</span></li>
+  </ul>
+  <p>
+    <span class="zh-only">第三条最主观，也最准。它对应的其实是另一个问题：<strong>你做这个产品是因为用户需要，还是因为你舍不得已经投进去的时间？</strong>后者不叫坚持，叫沉没成本。</span>
+    <span class="en-only">The third is the most subjective and the most accurate. It maps to a different question: <strong>did you build this because users need it, or because you can't bear to waste the time already spent?</strong>The second one isn't persistence; it's sunk cost.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">写在最后</span><span class="en-only">Closing Thoughts</span></h2>
+  <p>
+    <span class="zh-only">如果这份清单只让你记住一件事，记这条：<strong>设上限</strong>。消费上限、重试上限、每用户配额、磁盘告警——四行配置，救过的钱比我做产品赚过的钱都多。</span>
+    <span class="en-only">If this checklist leaves you with one thing, make it this: <strong>set ceilings.</strong> Spend caps, retry caps, per-user quotas, disk alerts — four settings that have saved me more money than my products ever earned.</span>
+  </p>
+  <p>
+    <span class="zh-only">至于"一个人的产品要怎么活下去"这个问题，我的答案有点扫兴：<strong>大部分人应该只维护一个。</strong>三个产品听起来很勤奋，实际上意味着三个都维护不好。我现在的状态是：一个认真做、认真运维、一个半死不活地挂着、一个已经关了。听起来不体面，但数字是对的。</span>
+    <span class="en-only">As for "how does a one-person product survive," my answer is a bit deflating: <strong>most people should maintain exactly one.</strong>Three products sounds diligent; it really means three that are all half-maintained. Where I am now: one built properly and maintained properly, one limping along, one closed. It doesn't sound impressive, but the numbers are honest.</span>
+  </p>
+  <hr>
+  <p>
+    <span class="zh-only">相关阅读：<a href="2026-ai-product-pricing.html">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</a> · <a href="2026-from-demo-to-production.html">从 Demo 到上线：AI 生成代码的生产化改造清单</a> · <a href="2025-indie-dev-survival.html">2025 AI 独立开发者生存指南</a></span>
+    <span class="en-only">Related reading: <a href="2026-ai-product-pricing.html">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</a> · <a href="2026-from-demo-to-production.html">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</a> · <a href="2025-indie-dev-survival.html">The 2025 AI Indie Developer Survival Guide</a></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

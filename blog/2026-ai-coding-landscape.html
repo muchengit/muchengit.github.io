@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南 | The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</title><meta name="description" content="八款主流 AI 编程工具的定位、价格、上手难度横向对比，一条可执行的选型决策树，三档真实月成本估算，以及三类不该使用 AI 编程的场景。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+
+<header class="hero">
+  <img src="2026-landscape-hero.jpg" alt="AI coding tools comparison" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">工具评测</span> <span class="en-only">|</span> <span class="en-only">Tools</span></div>
+    <h1 class="reveal"><span class="zh-only">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</span><span class="en-only">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.08.12 — 八款工具实测对比，帮你把钱花在刀刃上</span><span class="en-only">2026.08.12 — Eight tools tested side by side, so you spend your money where it actually pays off</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">2026 年，选型比写代码更难</span><span class="en-only">In 2026, Choosing a Tool Is Harder Than Writing Code</span></h2>
+  <p>
+    <span class="zh-only">2024 年这个问题很简单：只有一个选项。到了 2026 年 8 月，我在自己电脑上装满并实际用过的 AI 编程工具有八个：Cursor、Claude Code、GitHub Copilot、Windsurf、Zed AI、v0、Lovable、Bolt.new。它们的定价从每月 0 美元到 200 美元不等，形态从"往编辑器里塞一个插件"到"在浏览器里 30 秒生成一个能部署的应用"都有。</span>
+    <span class="en-only">In 2024 the question was simple: there was only one option. By August 2026 I had installed and actually used eight AI coding tools on my own machine: Cursor, Claude Code, GitHub Copilot, Windsurf, Zed AI, v0, Lovable, and Bolt.new. Prices range from $0 to $200 per month, and they range from "a plugin inside your editor" to "a deployable app generated in 30 seconds in a browser."</span>
+  </p>
+  <p>
+    <span class="zh-only">我同时维护着三个真实项目：一个 Next.js 前端（2.4 万行）、一个 Python 数据管道（1.1 万行）、一个 Electron 桌面应用（3.6 万行）。过去半年我在这些工具上的订阅总支出是每月 95 美元。真正让我意外的不是功能差异，而是<strong>每个工具都会替你做不同的决定</strong>：Cursor 倾向于一次改很多文件，Claude Code 倾向于先把思路讲一遍，v0 倾向于用最时髦的 UI 库重写你的界面。</span>
+    <span class="en-only">I maintain three real projects at the same time: a Next.js frontend (24k lines), a Python data pipeline (11k lines), and an Electron desktop app (36k lines). Over the past six months my combined subscriptions have run $95 per month. What surprised me wasn't the feature gaps — it was that <strong>each tool makes different decisions on your behalf</strong>. Cursor tends to edit many files at once, Claude Code likes to explain its reasoning first, and v0 tends to rewrite your interface with whatever UI library is trending that month.</span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">先说结论：选错工具的代价，不是浪费 $20，而是让你养成一套坏习惯——把 AI 当成"需求不明时的救命稻草"，而不是"需求已明确时的加速器"。下面这份对比只为一个目的：帮你避开这个陷阱。</span><span class="en-only">The short version: picking the wrong tool doesn't cost you $20, it costs you a bad habit — treating AI as a rescue rope when your requirements are unclear, instead of an accelerator when they are clear. This comparison exists for one reason: to help you avoid that trap.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">先把工具分成三类，再谈型号</span><span class="en-only">Start With Three Categories, Not Eight Products</span></h2>
+  <p>
+    <span class="zh-only">很多人纠结"Cursor 还是 Claude Code"，其实一开始就问错了问题。这八个工具其实分属三个完全不同的品类，服务的是三种不同的工作状态。先分清品类，你会发现八选一变成了三选一，甚至二选一。</span>
+    <span class="en-only">Most people agonize over "Cursor or Claude Code" when the real question was never asked properly. These eight tools fall into three distinct categories serving three distinct working modes. Once you sort by category, choosing one of eight becomes choosing one of three — often one of two.</span>
+  </p>
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">A 类：编辑器与命令行里的"副驾驶"</span><span class="en-only">Category A: The Copilot in Your Editor or Terminal</span></h4>
+      <p>
+        <span class="zh-only">代表：Cursor、Claude Code、GitHub Copilot、Windsurf、Zed AI。共同点是<strong>它们假设你已经有代码了</strong>，AI 的工作是帮你读懂、修改、扩展这份代码。Cursor 和 Windsurf 是独立编辑器，Claude Code 是命令行工具，Copilot 是插件，Zed 是开源编辑器。你保留全部的版本控制、调试、部署流程，AI 只是多了一个能对话的同事。适合已有代码库、需要长期维护的项目。</span>
+        <span class="en-only">Represented by Cursor, Claude Code, GitHub Copilot, Windsurf, and Zed AI. They share one assumption: <strong>you already have code</strong>, and the AI's job is to help you read, modify, and extend it. Cursor and Windsurf are standalone editors, Claude Code is a CLI, Copilot is a plugin, Zed is an open-source editor. You keep your entire git, debugging, and deployment workflow; the AI is just a colleague you can talk to. Best for existing codebases and long-lived projects.</span>
+      </p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">C 类：一步到位的"生成式应用平台"</span><span class="en-only">Category C: Generative App Platforms</span></h4>
+      <p>
+        <span class="zh-only">代表：v0、Lovable、Bolt.new。共同点是<strong>它们假设你从零开始</strong>，输入一句自然语言描述，输出一个完整可运行的应用。速度确实惊人——我实测 Lovable 生成一个带登录、数据库和支付页面的应用用了 11 分钟。但"生成"和"维护"是两件事：这些平台生成的代码结构往往很扁平，一旦需求变复杂，迁移成本远高于一开始就用 Cursor 手写骨架。我自己的建议是：<strong>原型阶段用它们，正式项目从第一天就用 A 类</strong>。</span>
+        <span class="en-only">Represented by v0, Lovable, and Bolt.new. They share one assumption: <strong>you start from nothing</strong>. You describe it in plain language and get a complete, running app. The speed is genuinely startling — Lovable produced a working app with login, a database, and a checkout page in 11 minutes in my test. But "generating" and "maintaining" are different jobs. The code these platforms emit tends to be flat, and once requirements get complex, migration costs far exceed the time you saved. My advice: <strong>use them for prototypes, start real projects in Category A from day one</strong>.</span>
+      </p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">中间还有一类 B 类：介于两者之间的"AI 增强的通用编辑器"，比如 Windsurf 和新版的 Copilot Workspace——它们既能补全也能做多步 Agent 任务。实际使用中，B 类往往最省心，代价是你要接受它对工作方式的改造。</span>
+    <span class="en-only">In between sits Category B: AI-enhanced general editors such as Windsurf and the newer Copilot Workspace, which can both autocomplete and run multi-step agent tasks. In practice Category B is often the smoothest option, at the cost of accepting that it will reshape how you work.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">八款工具横向对比</span><span class="en-only">The Eight Tools, Side by Side</span></h2>
+  <p>
+    <span class="zh-only">下表是我在 2026 年 8 月的实际观察。价格是美元/月，按年付通常能便宜 15% 到 20%；"上手难度"是我给普通开发者（非专业前端、非专业后端）的上手体感，五颗星最简单、一颗星最难。<strong>价格和额度每几周就会变一次，购买前请以官网为准</strong>。</span>
+    <span class="en-only">The table below reflects what I observed in August 2026. Prices are USD per month, with annual billing typically 15–20% cheaper. "Learning curve" is my own rating for an ordinary developer (not a professional frontend or backend engineer): five stars is easiest, one star is hardest. <strong>Prices and quotas shift every few weeks — check the official site before buying.</strong></span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">工具</span><span class="en-only">Tool</span></th>
+        <th><span class="zh-only">定位</span><span class="en-only">Positioning</span></th>
+        <th><span class="zh-only">适合人群</span><span class="en-only">Best for</span></th>
+        <th><span class="zh-only">价格档位</span><span class="en-only">Price tier</span></th>
+        <th><span class="zh-only">上手难度</span><span class="en-only">Learning curve</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Cursor</strong></td>
+        <td><span class="zh-only">基于 VS Code 改造的独立 AI 编辑器，Agent 模式能跨多文件改动</span><span class="en-only">VS Code–based AI editor whose agent mode edits across many files</span></td>
+        <td><span class="zh-only">有存量代码库、想快速上手全功能 AI 的开发者</span><span class="en-only">Developers with an existing codebase who want full AI features fast</span></td>
+        <td><span class="zh-only">$0 试用 / Pro $20 / Pro+ $60 / Ultra $200</span><span class="en-only">$0 trial / Pro $20 / Pro+ $60 / Ultra $200</span></td>
+        <td><span class="zh-only">★★★★☆</span><span class="en-only">★★★★☆</span></td>
+      </tr>
+      <tr>
+        <td><strong>Claude Code</strong></td>
+        <td><span class="zh-only">终端里的 Agent，能读写文件、跑命令、自己改代码并验证</span><span class="en-only">A terminal agent that reads files, runs commands, edits code, and verifies results</span></td>
+        <td><span class="zh-only">愿意用命令行、重视自主执行能力的开发者</span><span class="en-only">Developers comfortable in a terminal who value autonomous execution</span></td>
+        <td><span class="zh-only">随 Claude Pro $20 / Max $100 / Max 5× $200</span><span class="en-only">Bundled with Claude Pro $20 / Max $100 / Max 5× $200</span></td>
+        <td><span class="zh-only">★★★☆☆</span><span class="en-only">★★★☆☆</span></td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Copilot</strong></td>
+        <td><span class="zh-only">覆盖 VS Code、JetBrains、Neovim 的插件生态，企业合规最好</span><span class="en-only">A plugin across VS Code, JetBrains, and Neovim with the strongest enterprise compliance</span></td>
+        <td><span class="zh-only">公司统一采购、需要合规审计、只想要补全的团队</span><span class="en-only">Teams bought centrally, needing audit compliance, or wanting autocomplete only</span></td>
+        <td><span class="zh-only">Free $0 / Pro $10 / Pro+ $39 / 每席位</span><span class="en-only">Free $0 / Pro $10 / Pro+ $39 / per seat</span></td>
+        <td><span class="zh-only">★★★★★</span><span class="en-only">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td><strong>Windsurf</strong></td>
+        <td><span class="zh-only">Cascade 多步规划编辑器，主打"跟随式"协作</span><span class="en-only">A Cascade multi-step planning editor built around follow-along collaboration</span></td>
+        <td><span class="zh-only">喜欢 GUI、不想切终端、想要 AI 一步步给方案的人</span><span class="en-only">People who want a GUI, dislike terminals, and like step-by-step proposals</span></td>
+        <td><span class="zh-only">Free $0 / Pro $15 / Teams $30 每席位</span><span class="en-only">Free $0 / Pro $15 / Teams $30 per seat</span></td>
+        <td><span class="zh-only">★★★★☆</span><span class="en-only">★★★★☆</span></td>
+      </tr>
+      <tr>
+        <td><strong>Zed AI</strong></td>
+        <td><span class="zh-only">开源高性能编辑器，本地模型优先，隐私与可控性最强</span><span class="en-only">A fast open-source editor that prefers local models, with the best privacy and control</span></td>
+        <td><span class="zh-only">注重代码不上云、自己有 GPU 或本地模型的用户</span><span class="en-only">Users who care that code never leaves their machine or who run local models</span></td>
+        <td><span class="zh-only">免费版含少量额度 / Pro $20 / 团队版</span><span class="en-only">Free tier with a small quota / Pro $20 / team plans</span></td>
+        <td><span class="zh-only">★★★☆☆</span><span class="en-only">★★★☆☆</span></td>
+      </tr>
+      <tr>
+        <td><strong>v0</strong></td>
+        <td><span class="zh-only">专精 React / Tailwind 的界面生成器，输出质量最稳定</span><span class="en-only">A UI generator specializing in React and Tailwind with the most consistent output</span></td>
+        <td><span class="zh-only">做后台管理、落地页、SaaS 界面的人</span><span class="en-only">People building admin panels, landing pages, and SaaS interfaces</span></td>
+        <td><span class="zh-only">Free $0 / Premium $20 / Teams $60 每席位</span><span class="en-only">Free $0 / Premium $20 / Teams $60 per seat</span></td>
+        <td><span class="zh-only">★★★★★</span><span class="en-only">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td><strong>Lovable</strong></td>
+        <td><span class="zh-only">对话式全栈生成，内置 Supabase 认证与数据库</span><span class="en-only">Conversational full-stack generation with built-in Supabase auth and database</span></td>
+        <td><span class="zh-only">不会写后端、想快速验证产品想法的创业者</span><span class="en-only">Founders who can't write backends and want to validate an idea fast</span></td>
+        <td><span class="zh-only">Free $0 / Pro $25 / Business $50 每席位</span><span class="en-only">Free $0 / Pro $25 / Business $50 per seat</span></td>
+        <td><span class="zh-only">★★★★★</span><span class="en-only">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td><strong>Bolt.new</strong></td>
+        <td><span class="zh-only">浏览器内全栈沙盒，浏览器里就能跑 Node 环境</span><span class="en-only">An in-browser full-stack sandbox that runs a Node environment inside the page</span></td>
+        <td><span class="zh-only">没有本地开发环境、只想先出个能点的版本</span><span class="en-only">People without a local dev setup who just want something clickable</span></td>
+        <td><span class="zh-only">Free 含 $5 额度 / Pro $20 / Teams $30 每席位</span><span class="en-only">Free with $5 credit / Pro $20 / Teams $30 per seat</span></td>
+        <td><span class="zh-only">★★★★★</span><span class="en-only">★★★★★</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <strong><span class="zh-only">一个容易被忽略的差别：额度 vs 订阅</span><span class="en-only">One difference people overlook: quota versus subscription</span></strong>
+    <p><span class="zh-only">订阅费买的是"能接入哪些模型、每月有多少额度"。同样花 $20，Cursor 的 Pro 和 Copilot 的 Pro+ 给你的模型能力完全不同。真正拉开差距的是额度上限：我在 2026 年 6 月的一个月里用 Cursor Pro 跑满了额度，被迫等了 3 天降级到小模型重做同一个任务。所以如果你打算重度使用，<strong>Pro 档通常不够，Pro+ 那一档才是真实的工作档位</strong>。</span><span class="en-only">The subscription buys "which models you can reach and how much quota you get." For the same $20, Cursor Pro and Copilot Pro+ give you very different model access. What really separates them is the quota ceiling: in June 2026 I exhausted my Cursor Pro quota within a month and had to wait three days while redoing the same task on a smaller model. If you plan to use this heavily, <strong>the Pro tier is rarely enough — Pro+ is the real working tier</strong>.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">逐个点评：每款工具的看家本领和真正的坑</span><span class="en-only">Tool by Tool: The Real Strength and the Real Trap</span></h2>
+  <p>
+    <span class="zh-only">表格只能告诉你"是什么"，这一节告诉你"用起来是什么感觉"。以下判断全部来自我自己在三个项目上的实际使用，不是官方宣传语。</span>
+    <span class="en-only">A table tells you what something is. This section tells you what it feels like to use. Every judgment below comes from my own use on three projects, not from marketing copy.</span>
+  </p>
+  <h3><span class="zh-only">Cursor：目前综合体验最好，但最容易被额度卡住</span><span class="en-only">Cursor: Best All-Round Experience, Most Often Blocked by Quota</span></h3>
+  <p>
+    <span class="zh-only">它的 Tab 补全在我用过的工具里最准，尤其是那种"你刚打了一半函数名，它就补全整个函数体"的情况。对新项目，Agent 模式配合 <code>@file</code> 和 <code>@folder</code> 非常顺手。坑有两个：一是额度消耗快，上面提过；二是它默认会比较激进地重构你现有的代码风格。我的处理方式是给它写一份 <code>.cursor/rules</code>，明确写"不要改动我现有的格式化风格"。</span>
+    <span class="en-only">Its Tab completion was the most accurate of everything I tried, especially the "you typed half a function name and it completes the whole body" case. For new projects, agent mode with <code>@file</code> and <code>@folder</code> is genuinely pleasant. Two traps: it burns quota fast, as mentioned above, and by default it will aggressively rewrite your existing code style. My fix was a <code>.cursor/rules</code> file that explicitly says "do not change my existing formatting style."</span>
+  </p>
+  <h3><span class="zh-only">Claude Code：唯一真正"自己动手"的工具</span><span class="en-only">Claude Code: The Only One That Truly "Does the Work"</span></h3>
+  <p>
+    <span class="zh-only">它和 Cursor 最大的区别不是界面，是<strong>权限模型</strong>。Cursor 的 Agent 主要是"我提要求，它改代码"；Claude Code 是"我提要求，它自己读文件、跑测试、看到报错、再改"，循环到通过为止。这个差别在重构老项目时价值巨大。代价是学习曲线更陡：你要理解权限提示、会话恢复、以及上下文窗口的消耗速度。</span>
+    <span class="en-only">Its biggest difference from Cursor isn't the interface, it's the <strong>permission model</strong>. Cursor's agent is mostly "I state a requirement, it edits code." Claude Code is "I state a requirement, it reads files, runs tests, sees the failure, and edits again," looping until green. That difference is enormous during refactors. The cost is a steeper curve: you have to understand permission prompts, session resumption, and how fast the context window drains.</span>
+  </p>
+  <pre data-lang="bash"># Claude Code 安装与最常用的三种启动方式
+npm install -g @anthropic-ai/claude-code
+
+# 在项目根目录启动（会自动读取 CLAUDE.md）
+claude
+
+# 只让它看某个目录：把范围写清楚能省下大量 token
+claude "只阅读 src/api/ 目录，不要读其他文件"
+
+# 让它自己跑测试并根据报错迭代
+claude "运行 npm test，修复所有失败的用例，每修一个跑一次测试"</pre>
+  <h3><span class="zh-only">GitHub Copilot：最不"性感"，但最省心</span><span class="en-only">GitHub Copilot: The Least Exciting, Least Worrying</span></h3>
+  <p>
+    <span class="zh-only">如果你已经在用 VS Code 和 GitHub，Copilot 的迁移成本接近零。它不会替你做复杂决策，但也不会把你的代码改乱。2026 年的 Copilot 已经有了多文件 Agent 能力，只是触发比较保守，需要你明确说"修改这几个文件"。在需要走采购流程的公司里，它依然是唯一没有合规问题的选项。</span>
+    <span class="en-only">If you already use VS Code and GitHub, switching to Copilot costs almost nothing. It won't make complex decisions for you, but it also won't scramble your code. Copilot gained multi-file agent capabilities in 2026, though they're deliberately conservative — you have to say "modify these files" explicitly. In companies that need a procurement-approved vendor, it's still the only option with no compliance question marks.</span>
+  </p>
+  <h3><span class="zh-only">Windsurf、Zed AI、v0、Lovable、Bolt.new 的各自定位</span><span class="en-only">Windsurf, Zed AI, v0, Lovable, and Bolt.new</span></h3>
+  <p>
+    <span class="zh-only"><strong>Windsurf</strong> 的 Cascade 会先列出计划再动手，适合你希望在每一步之间插话纠正的场景；它是我给"完全不想碰命令行"的同事推荐最多的工具。<strong>Zed AI</strong> 快得离谱，而且支持本地模型，如果你的代码不能出内网，它是唯一合理的选择。<strong>v0</strong> 生成的界面质量在八款里最稳，前提是你的项目本来就要用 React + Tailwind；它对非 React 栈基本没用。<strong>Lovable</strong> 把 Supabase 深度集成进去，做带登录和数据库的原型极快，但它生成的后端代码你基本一定会重写。<strong>Bolt.new</strong> 的最大价值是"零环境"——在一台没装 Node 的旧笔记本上也能改代码，但它的工作区不持久，关掉标签页就容易丢东西。</span>
+    <span class="en-only"><strong>Windsurf</strong>'s Cascade lists a plan before acting, which suits people who like to interject and correct between steps; it's what I recommend most often to colleagues who refuse to touch a terminal. <strong>Zed AI</strong> is astonishingly fast and supports local models — if your code cannot leave the intranet, it's the only sensible pick. <strong>v0</strong> produces the highest-quality interfaces of the eight, provided your project is React + Tailwind to begin with; it's near-useless for other stacks. <strong>Lovable</strong> integrates Supabase deeply, making auth-and-database prototypes extremely fast, but you will almost certainly rewrite its backend. <strong>Bolt.new</strong>'s real value is zero-setup — you can edit code on an old laptop with no Node installed — though its workspace is not durable and closing the tab tends to lose work.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">你该选哪个：一条决策树</span><span class="en-only">Which One Should You Pick: A Decision Tree</span></h2>
+  <p>
+    <span class="zh-only">从第一条开始往下走，命中即停。不要跳步，也不要同时买两个主力工具。</span>
+    <span class="en-only">Start at the top and walk down. Stop at the first match. Don't skip steps, and don't buy two primary tools at once.</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>你的代码不能出内网，或者公司有采购合规要求？</strong> → 选 <strong>GitHub Copilot</strong>（$10/月）。这是唯一不需要解释"为什么我们用 AI 写代码"的选项。如果内网隔离更严格，再看 <strong>Zed AI</strong>（$20/月）接本地模型。</span><span class="en-only"><strong>Can your code not leave the intranet, or does your company need procurement approval?</strong> → Choose <strong>GitHub Copilot</strong> ($10/mo). It's the only option where nobody has to explain "why are we using AI to write code." For strict air-gapped setups, consider <strong>Zed AI</strong> ($20/mo) with a local model.</span></li>
+    <li><span class="zh-only"><strong>你完全不想装命令行工具，也不想学 git 之外的东西？</strong> → 选 <strong>Cursor</strong>（$20/月）。它假装自己就是 VS Code，学起来几乎没有门槛，Agent 能力又比多数插件强。</span><span class="en-only"><strong>Do you refuse to touch a command line and don't want to learn anything beyond git?</strong> → Choose <strong>Cursor</strong> ($20/mo). It presents itself as VS Code, so the learning curve is nearly zero, yet its agent is stronger than most plugins.</span></li>
+    <li><span class="zh-only"><strong>你愿意用终端，换来的好处是"AI 自己跑测试、自己迭代直到通过"？</strong> → 选 <strong>Claude Code</strong>（$20/月起，配 Claude Pro 或 Max）。这是投入产出比最高的一项，但请先读完下一节。</span><span class="en-only"><strong>Are you willing to use a terminal in exchange for "the AI runs the tests and iterates until they pass"?</strong> → Choose <strong>Claude Code</strong> (from $20/mo with Claude Pro or Max). Best return on effort, but read the next section first.</span></li>
+    <li><span class="zh-only"><strong>你更想要"每一步都给我看、我要能随时打断"的协作感？</strong> → 选 <strong>Windsurf</strong>（$15/月）。这是八款里交互最温和的，也最不容易突然改坏一堆文件。</span><span class="en-only"><strong>Do you want a "show me every step, let me interrupt anytime" collaboration feel?</strong> → Choose <strong>Windsurf</strong> ($15/mo). The gentlest interaction of the eight, and the least likely to suddenly rewrite a pile of files.</span></li>
+    <li><span class="zh-only"><strong>你还没有代码，要从零做一个能上线的产品？</strong> → 先用 <strong>Lovable</strong>（$25/月）或 <strong>Bolt.new</strong>（$20/月）验证需求，验证通过后<strong>把代码导出</strong>，换到 Cursor 接手。<strong>v0</strong> 只在你确定做 React 界面时才值得单独买。</span><span class="en-only"><strong>You have no code yet and want to ship a product from scratch?</strong> → Validate the idea with <strong>Lovable</strong> ($25/mo) or <strong>Bolt.new</strong> ($20/mo), then <strong>export the code</strong> and hand it to Cursor. <strong>v0</strong> is worth buying on its own only if you know you're building a React interface.</span></li>
+    <li><span class="zh-only"><strong>你还在犹豫、预算有限、或者只是好奇？</strong> → 先用 <strong>Copilot Free</strong> 和 <strong>Windsurf Free</strong> 各试一周，把手头一个真实任务（不是玩具 demo）在两边各做一遍，再决定。零成本，零风险。</span><span class="en-only"><strong>Still undecided, on a tight budget, or just curious?</strong> → Spend a week each on <strong>Copilot Free</strong> and <strong>Windsurf Free</strong>, doing the same real task (not a toy demo) on both. Zero cost, zero risk.</span></li>
+    <li><span class="zh-only"><strong>如果上面都不匹配——</strong> 说明你的需求可能压根不是"写代码"，而是"生成一个应用"。回到 Lovable / Bolt.new 那条线。</span><span class="en-only"><strong>If nothing above matches —</strong> your need may not be "writing code" at all but "generating an app." Go back to the Lovable / Bolt.new branch.</span></li>
+  </ol>
+  <div class="callout tip">
+    <strong><span class="zh-only">决策树的正确用法</span><span class="en-only">How to use the decision tree properly</span></strong>
+    <p><span class="zh-only">不要先挑工具再找场景，那是典型的"被工具带着走"。正确顺序永远是：先想清楚你下个月要交付的那一个具体功能，再让决策树给你答案。用一个真实任务去试，比读十篇评测都准。</span><span class="en-only">Don't pick a tool and then hunt for a use case — that's letting the tool lead you. The right order is always: decide on the one concrete feature you'll ship next month, then let the tree answer. Trying a real task beats reading ten reviews.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">三档真实月成本估算</span><span class="en-only">Three Realistic Monthly Cost Tiers</span></h2>
+  <p>
+    <span class="zh-only">很多人低估 AI 编程工具的成本，因为只算了订阅费，忘了<strong>超额要加钱</strong>。下面三档是我基于 2026 年上半年实际账单整理的，均为美元，不含 API 按量计费部分。</span>
+    <span class="en-only">People underestimate AI coding costs because they only count the subscription and forget that <strong>overages cost extra</strong>. These three tiers come from my actual invoices in the first half of 2026, in USD, excluding metered API usage.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">档位</span><span class="en-only">Tier</span></th>
+        <th><span class="zh-only">谁适合</span><span class="en-only">Who it fits</span></th>
+        <th><span class="zh-only">典型组合</span><span class="en-only">Typical combo</span></th>
+        <th><span class="zh-only">月成本</span><span class="en-only">Monthly cost</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">体验档</span><span class="en-only">Trial</span></td>
+        <td><span class="zh-only">每周写代码不超过 10 小时、学习阶段</span><span class="en-only">Under 10 hours of coding per week, still learning</span></td>
+        <td><span class="zh-only">Copilot Pro $10，其余靠免费额度</span><span class="en-only">Copilot Pro $10, everything else on free quotas</span></td>
+        <td><span class="zh-only">$10 – $25</span><span class="en-only">$10 – $25</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">日常档</span><span class="en-only">Daily</span></td>
+        <td><span class="zh-only">全职开发、每天重度使用 Agent</span><span class="en-only">Full-time developers using agents heavily every day</span></td>
+        <td><span class="zh-only">Cursor Pro+ $60 + Claude Pro $20</span><span class="en-only">Cursor Pro+ $60 + Claude Pro $20</span></td>
+        <td><span class="zh-only">$80 – $120</span><span class="en-only">$80 – $120</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">团队档</span><span class="en-only">Team</span></td>
+        <td><span class="zh-only">3 人以上小团队，需要共享额度</span><span class="en-only">Teams of three or more who need shared quota</span></td>
+        <td><span class="zh-only">3 个 Pro 席位 + 1 个团队版 $60</span><span class="en-only">3 Pro seats + 1 team plan at $60</span></td>
+        <td><span class="zh-only">$180 – $400</span><span class="en-only">$180 – $400</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <span class="zh-only">我自己的账单就在日常档：Cursor Pro+ $60 + Claude Pro $20 + Windsurf $15 = <strong>$95/月</strong>。其中 Claude Code 只在需要"自己跑测试自己修"的活儿时开，平时不开。这是控制成本最有效的一条：<strong>不要同时开着三个工具的付费额度</strong>，只让真正在用的那一个消耗。</span>
+    <span class="en-only">My own bill sits in the middle tier: Cursor Pro+ $60 + Claude Pro $20 + Windsurf $15 = <strong>$95/month</strong>. I only turn on Claude Code when I need work where it runs and fixes tests itself. That's the single most effective cost control: <strong>don't keep three paid quotas running at once</strong> — only let the one you're actually using burn.</span>
+  </p>
+  <pre data-lang="bash"># 每月结算日花两分钟核对一次用量，别等账单来了才 surprise
+# 1) Cursor 用量在设置页 Usage 标签，Pro+ 档每月含约 500 次高级请求
+# 2) Claude Code 用量直接在终端查
+claude /usage
+
+# 3) 把订阅记进一个简单的账本，避免忘记取消不用的
+cat >> ~/ai-tools-subscriptions.txt <<'EOF'
+Cursor Pro+      $60   续费日: 每月 08 号
+Claude Pro       $20   续费日: 每月 12 号
+Windsurf Pro     $15   续费日: 每月 15 号
+EOF</pre>
+  <div class="callout success">
+    <strong><span class="zh-only">关于"要不要买最贵那档"</span><span class="en-only">On whether to buy the priciest tier</span></strong>
+    <p><span class="zh-only">先别买。2026 年的实际情况是：绝大多数人用不满 Pro 档的额度。先用满一个月免费额度或低价档，把用量曲线看清楚了再决定要不要升档。升档容易，降档退款麻烦。</span><span class="en-only">Don't, not yet. In 2026 most people never exhaust the Pro tier's quota. Spend a month on free or cheap tiers, watch your usage curve, and only then decide. Upgrading is easy; downgrading and getting a refund is not.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">什么时候不该用 AI 编程</span><span class="en-only">When You Should Not Use AI Coding at All</span></h2>
+  <p>
+    <span class="zh-only">这一节可能是全文最有用的一部分。AI 编程在某些场景下不仅帮不上忙，还会<strong>放大你的问题</strong>。</span>
+    <span class="en-only">This might be the most useful section in the article. In certain scenarios, AI coding doesn't merely fail to help — it <strong>amplifies whatever problem you already have</strong>.</span>
+  </p>
+  <h3><span class="zh-only">一、需求还没想清楚的时候</span><span class="en-only">1. When Your Requirements Aren't Clear Yet</span></h3>
+  <p>
+    <span class="zh-only">这是我踩过最贵的坑。让 AI 写一个"客户管理系统"，它会在 20 分钟内给你一个功能齐全、数据库表设计合理、代码风格统一的完整实现——然后你发现真正的需求是"客户经理要在手机上 3 秒内查到客户最近三次消费"，而这些东西全都不在。你没有损失 20 分钟，你损失了 20 分钟加上推翻重写的心理成本，以及那份"它做得挺好我不想改"的惯性。</span>
+    <span class="en-only">This is the most expensive mistake I've made. Ask an AI for a "customer management system" and in 20 minutes you get a complete, well-styled implementation with a sensible schema — then you discover the real requirement was "the account manager needs to find a customer's last three purchases on their phone in under three seconds," and none of that is in there. You didn't lose 20 minutes; you lost 20 minutes plus the psychological cost of rewriting, plus the inertia of "it did a good job, I don't want to touch it."</span>
+  </p>
+  <p>
+    <span class="zh-only"><strong>判断标准：</strong>如果你没法用一句话说清楚"用户打开它要完成什么动作"，就先别让 AI 写代码，先写需求文档。这一条适用于所有工具，没有例外。</span>
+    <span class="en-only"><strong>Test:</strong> if you can't finish the sentence "the user opens it to do ___", don't have the AI write code yet — write the requirements first. This applies to every tool, with no exceptions.</span>
+  </p>
+  <h3><span class="zh-only">二、强合规场景</span><span class="en-only">2. Strongly Regulated Environments</span></h3>
+  <p>
+    <span class="zh-only">涉及金融风控、医疗诊断、政务系统、涉密信息的代码，本质上要求"每一行都能解释来源"。AI 生成的代码有两个问题：一是它天然倾向生成"看起来最常见"的实现，而这些实现往往没考虑边界条件；二是出了事你没法说"这是模型写的"。2026 年合规部门的态度已经很明确：核心业务逻辑必须人工编写和评审，AI 可以写胶水代码、写测试、写脚手架，但不能写决策逻辑。</span>
+    <span class="en-only">Code touching financial risk, medical diagnosis, government systems, or classified information has to be explainable line by line. AI-generated code has two problems: it naturally gravitates toward the "most common" implementation, which usually ignores edge cases; and when something breaks, you can't say "the model wrote it." By 2026, compliance teams are clear: core business logic must be written and reviewed by humans. AI can write glue code, tests, and scaffolding — not decision logic.</span>
+  </p>
+  <h3><span class="zh-only">三、核心算法与性能瓶颈</span><span class="en-only">3. Core Algorithms and Performance Bottlenecks</span></h3>
+  <p>
+    <span class="zh-only">模型很会写"正确"的代码，但"正确"和"快"是两回事。我实测过一个图像哈希去重功能：AI 给的实现逻辑无误，但对 8000 张图片跑要 47 秒；我自己手写了一遍，用了批量哈希加 LRU 缓存，降到 3.2 秒。AI 给的版本在 95% 的场景里完全够用，但那 5% 恰恰是产品能不能活下来的地方。涉及算法选型、并发模型、内存布局的地方，AI 应当被当作"给你一个可运行的起点"，而不是"给你最终答案"。</span>
+    <span class="en-only">Models are good at writing <em>correct</em> code, but "correct" and "fast" are different claims. I tested an image-hash dedup feature: the AI's implementation was logically flawless but took 47 seconds for 8,000 images. My own version, using batch hashing plus an LRU cache, took 3.2 seconds. The AI version is perfectly adequate in 95% of cases — and that 5% is exactly where the product lives or dies. For algorithm selection, concurrency models, and memory layout, treat the AI as "a runnable starting point," not "the final answer."</span>
+  </p>
+  <div class="callout warn">
+    <strong><span class="zh-only">还有一个隐藏的禁区</span><span class="en-only">And one hidden no-go zone</span></strong>
+    <p><span class="zh-only">不要把密码、密钥、客户数据、身份证号贴进任何一款 AI 编程工具的对话框里——包括免费版和号称"本地运行"的客户端。2026 年已经出现过多个主流工具把对话内容用于训练或日志留存的问题。写代码前先把 <code>.env</code> 加进忽略列表，敏感值用占位符，让 AI 读 <code>.env.example</code> 而不是 <code>.env</code>。</span><span class="en-only">Never paste passwords, API keys, customer data, or ID numbers into any AI coding tool's chat box — including the free tiers and the clients that claim to "run locally." By 2026 there have been multiple incidents of major tools retaining conversations for training or logging. Before writing code, add <code>.env</code> to your ignore list, use placeholders for secrets, and let the AI read <code>.env.example</code>, never <code>.env</code>.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">同一个需求，两种工具，两个结局</span><span class="en-only">One Requirement, Two Tools, Two Outcomes</span></h2>
+  <p>
+    <span class="zh-only">2026 年 7 月，我给自己做了一个小工具：把纸质发票拍照上传，自动识别金额和日期，存进一个表格。需求我写得很清楚，一共 7 条，半天时间写完。</span>
+    <span class="en-only">In July 2026 I built a small tool for myself: photograph a paper invoice, auto-extract the amount and date, store both in a spreadsheet. I wrote the requirements carefully — seven items, half a morning.</span>
+  </p>
+  <p>
+    <span class="zh-only">我用 Lovable 试了一次。11 分钟后我得到了一个带登录、上传、OCR 调用的完整应用，界面还挺好看的。但它花了 40 分钟才被我改到能真正用——数据模型是错的（它假设一张发票一行，实际是一张发票多行明细），OCR 服务商选了我根本没注册的那家，而且所有金额都存成了字符串，我导出的表格没法直接求和。最后我把这个应用的 1200 行代码导出来，扔进 Cursor 里重写成了 1800 行。<strong>净收益：几乎没有。</strong></span>
+    <span class="en-only">I tried Lovable first. In 11 minutes I had a complete app with login, upload, and OCR calls, and the interface looked good. It then took 40 minutes to make it actually usable: the data model was wrong (it assumed one row per invoice, when reality is one invoice with multiple line items), it had picked an OCR vendor I never registered with, and every amount was stored as a string, so my exported spreadsheet couldn't sum anything. I finally exported its 1,200 lines and rewrote them in Cursor into 1,800 lines. <strong>Net gain: essentially zero.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">第二次我用 Cursor 写。先花 20 分钟写数据结构和接口定义，把 <code>.cursor/rules</code> 填好，然后让 AI 一次只实现一个模块。两天后能用，一周后稳定。<strong>净收益：省下大概 6 个小时。</strong></span>
+    <span class="en-only">The second time I used Cursor. I spent 20 minutes writing the data model and API definitions first, filled in <code>.cursor/rules</code>, then had the AI implement one module at a time. Usable in two days, stable in a week. <strong>Net gain: roughly six hours saved.</strong></span>
+  </p>
+  <blockquote>
+    <span class="zh-only">同一个需求，11 分钟生成和 2 天写完，听起来前者赢了。但决定结果的不是速度，是你有没有先把"数据长什么样"想清楚。</span>
+    <span class="en-only">Same requirement: 11 minutes to generate versus 2 days to build. The first sounds like the winner. But what decided the outcome wasn't speed — it was whether "what the data looks like" was settled before the code existed.</span>
+  </blockquote>
+  <p>
+    <span class="zh-only">这不是"生成式平台不行"，而是<strong>它们优化的目标和你当下的目标不一样</strong>。它们优化的是"第一次给你一个能跑的东西"，你优化的是"这个东西三个月后还归你管"。这两件事在你最需要它的时候恰好相反。</span>
+    <span class="en-only">This isn't "generative platforms are bad." It's that <strong>the thing they optimize and the thing you need are not the same</strong>. They optimize for "get you something runnable the first time"; you need "this is still yours three months later." Those two are exactly opposite at the moment you need them.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">把工具用对：四个今天就能做的改变</span><span class="en-only">Using the Tool Right: Four Changes You Can Make Today</span></h2>
+  <p>
+    <span class="zh-only">工具选对只解决一半问题。另一半是"怎么跟它相处"。下面四件事我都在用，每件都不需要换工具，花费不到一小时。</span>
+    <span class="en-only">Picking the right tool solves half the problem. The other half is how you work with it. I do all four of the following; none requires switching tools and together they take under an hour.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">先写需求，再写代码</span><span class="en-only">Write the Requirements Before the Code</span></h3>
+      <p><span class="zh-only">哪怕只是一份 10 行的 Markdown，写清楚"输入什么、输出什么、哪些情况不做"。我把它放在项目根目录 <code>REQUIREMENTS.md</code>，每次让 AI 动手前先让它读一遍。这一条把"AI 反复推翻自己"的次数从每周十几次降到两三次。</span><span class="en-only">Even a 10-line Markdown file that states "what goes in, what comes out, what we deliberately don't handle." I keep it at <code>REQUIREMENTS.md</code> in the project root and have the AI read it before every task. This alone cut our "AI contradicts itself" incidents from a dozen-plus a week down to two or three.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">每个项目固定一份规则文件</span><span class="en-only">One Rules File Per Project</span></h3>
+      <p><span class="zh-only">Cursor 用 <code>.cursor/rules</code>，Claude Code 用 <code>CLAUDE.md</code>，Windsurf 用 <code>.windsurfrules</code>，Copilot 用 <code>.github/copilot-instructions.md</code>。内容只有三类：技术栈与版本、不能违反的约定、怎么跑测试。不要超过 60 行，超了 AI 也会开始忽略。</span><span class="en-only">Cursor uses <code>.cursor/rules</code>, Claude Code uses <code>CLAUDE.md</code>, Windsurf uses <code>.windsurfrules</code>, Copilot uses <code>.github/copilot-instructions.md</code>. Three kinds of content only: stack and versions, non-negotiable conventions, and how to run the tests. Keep it under 60 lines — beyond that, the AI starts ignoring it too.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">让 AI 先写测试</span><span class="en-only">Have the AI Write Tests First</span></h3>
+      <p><span class="zh-only">同一个功能，让它先写测试再写实现，比反过来多花 5 分钟，但能挡住大约六成的低级错误（空值、越界、类型错误）。这一步在普通项目里性价比最高。</span><span class="en-only">For the same feature, having it write the test first costs about 5 extra minutes and blocks roughly 60% of low-level mistakes (nulls, out-of-range, type errors). On an ordinary project this is the single highest-leverage step.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">每周留出一次"AI 不参与"的复盘</span><span class="en-only">Carve Out One Weekly Review With No AI</span></h3>
+      <p><span class="zh-only">我每周留出 45 分钟，关掉所有 AI 工具，只读 diff 和跑测试。这 45 分钟发现的 bug，比 AI 在一整周里写出来的功能里的 bug 还多。这是我保持"代码还是我自己的"的关键。</span><span class="en-only">I set aside 45 minutes each week with every AI tool closed, reading diffs and running tests. The bugs I find in those 45 minutes outnumber the ones hiding inside a full week of AI-written features. It's how I keep the code feeling like mine.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">我的具体建议</span><span class="en-only">My Specific Recommendations</span></h2>
+  <p>
+    <span class="zh-only">如果这篇长文你只读一段，读这段。</span>
+    <span class="en-only">If you read only one part of this article, read this one.</span>
+  </p>
+  <ul>
+    <li><span class="zh-only"><strong>普通人、刚开始、非科班 → 先用 Cursor Pro（$20/月）。</strong>它是目前"能力"和"上手成本"平衡最好的一档。你不需要理解什么是 Agent，照着界面用就行。如果预算紧张，Copilot Pro（$10/月）完全够用，能力差不了太多。</span><span class="en-only"><strong>Ordinary person, just starting, non-technical → Cursor Pro ($20/mo).</strong> It's the best balance of capability and learning cost right now. You don't need to understand what an agent is. If budget is tight, Copilot Pro ($10/mo) is plenty and not that much weaker.</span></li>
+    <li><span class="zh-only"><strong>已经能熟练用命令行、想追求自动化 → Claude Code。</strong>但请先花一个下午把 <code>CLAUDE.md</code> 的写法练熟，它的价值不在模型本身，在那份文档。</span><span class="en-only"><strong>Comfortable in a terminal and chasing automation → Claude Code.</strong> But spend an afternoon getting good at writing <code>CLAUDE.md</code> first. Its value isn't the model, it's that document.</span></li>
+    <li><span class="zh-only"><strong>公司项目、有采购流程 → 只能选 GitHub Copilot。</strong>这不是技术问题。</span><span class="en-only"><strong>Company project with procurement → GitHub Copilot, no alternatives.</strong> This isn't a technical decision.</span></li>
+    <li><span class="zh-only"><strong>想做产品但不会写后端 → Lovable 或 Bolt.new 做原型，然后导出代码。</strong>但要提前想清楚数据结构，别让 AI 替你决定。</span><span class="en-only"><strong>Building a product without backend skills → Lovable or Bolt.new for the prototype, then export the code.</strong> But decide your data model first; don't let the AI decide it for you.</span></li>
+    <li><span class="zh-only"><strong>任何情况下都别做的事：同时订阅三个主力工具。</strong>这不只是浪费钱——你的注意力会被切碎，三个工具的快捷键互相冲突，最后你会不自觉地回到最弱的那个。</span><span class="en-only"><strong>Never, under any circumstances: subscribe to three primary tools at once.</strong> Beyond the cost, your attention fragments, the shortcuts collide, and you'll drift back to the weakest one.</span></li>
+  </ul>
+  <div class="highlight">
+    <p><span class="zh-only">最后一句：AI 编程工具在 2026 年已经从"能不能"变成了"怎么用"。真正拉开差距的不是你订了哪一档，而是你有没有把需求想清楚、有没有让 AI 只看它该看的部分、有没有每周花时间检查它写的东西。这三件事一分钱都不用花。</span><span class="en-only">Last thought: in 2026, AI coding has moved from "can it" to "how do I use it." What separates people isn't which tier they bought — it's whether they thought the requirements through, whether they let the AI see only what it should see, and whether they spend time each week checking what it wrote. All three are free.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">写在最后</span><span class="en-only">Closing Thoughts</span></h2>
+  <p>
+    <span class="zh-only">八款工具，我用掉了其中五款，另外三款只在测试项目上试过。这份对比里的每一个数字都可能在几周内过期，但我希望那个结论不会变：<strong>工具会一直变，把需求写清楚这件事永远不变。</strong></span>
+    <span class="en-only">I've used five of these eight for real; the other three only on throwaway test projects. Every number here may be stale within a few weeks, but I hope the conclusion isn't: <strong>the tools will keep changing; writing clear requirements never will.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">如果你正在纠结某一款具体工具，或者遇到了一个我文章里没覆盖的使用场景，欢迎在下方留言告诉我——我会在下一版里补上真实的使用数据和踩坑记录。</span>
+    <span class="en-only">If you're stuck choosing between two specific tools, or you're in a situation this article doesn't cover, leave a comment below. I'll add real usage data and the mistakes I hit to a future update.</span>
+  </p>
+  <hr>
+  <p>
+    <span class="zh-only">相关阅读：<a href="2026-vibe-coding-advanced.html">Vibe coding 进阶：当 AI 写的代码超过 10 万行之后</a> · <a href="2025-vibe-coding.html">Vibe coding 入门：先搞清楚这三个概念</a> · <a href="build-with-cursor.html">不会写代码的人，如何用 Cursor 做出人生第一个产品</a></span>
+    <span class="en-only">Related reading: <a href="2026-vibe-coding-advanced.html">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</a> · <a href="2025-vibe-coding.html">Vibe Coding 101: Three Concepts to Understand First</a> · <a href="build-with-cursor.html">How to Build Your First Product with Cursor (No Coding Experience Needed)</a></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

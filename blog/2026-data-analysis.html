@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>不会写代码的人，怎么用 AI 做数据分析 | Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</title><meta name="description" content="不会写 SQL 的人也能用 AI 做出可信的数据分析。本文讲清让 AI 写 SQL 的正确姿势、四个最容易翻车的口径坑，以及一套可以照抄的分析提示词模板和 8 条交付前自检项。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-data-analysis-hero.jpg" alt="Analytics dashboard with charts on a screen" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag">AI 编程 <span class="en-only">|</span> <span class="en-only">AI Coding</span></div>
+    <h1 class="reveal"><span class="zh-only">不会写代码的人，怎么用 AI 做数据分析</span><span class="en-only">Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.19 — 从一份 12,400 行的 CSV 到能给人看的结论，附一套可复制的做法</span><span class="en-only">2026.10.19 — From a 12,400-row CSV to a conclusion someone can act on, with a repeatable method</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">我有一堆数据，但不会写 SQL</span><span class="en-only">I Had Data, but No SQL</span></h2>
+
+  <p>
+    <span class="zh-only">2026 年 9 月，我给自己的小产品做第一次真正意义上的数据复盘。手上有一份导出的 CSV：12,400 行、23 列，记录了每一笔注册、每一次上传、每一次模型调用、每一次付费。我想要的答案也很朴素——<strong>新用户从注册到第一次成功生成合同，平均要花多久？在哪一步流失最多？</strong></span>
+    <span class="en-only">In September 2026 I did the first real data review for my own small product. I had a CSV export: 12,400 rows, 23 columns, one row per signup, upload, model call, and payment. My questions were plain: <strong>how long does a new user need to go from signup to their first successfully generated contract, and which step loses the most people?</strong></span>
+  </p>
+
+  <p>
+    <span class="zh-only">我不会写 SQL。以往我的做法是：把表格打开，拖透视表，拖到怀疑人生。两小时后，我得到了一个数字，但它跟我上周在后台看到的对不上——<strong>后台显示 312 个新用户，我的表格算出来是 841 个。</strong>那天我才明白，对于一个不会写代码的人来说，Excel 里最难的从来不是"算"，而是"算的到底是什么"。</span>
+    <span class="en-only">I cannot write SQL. What I used to do was open the spreadsheet and drag pivot tables until I doubted my own life. Two hours later I had a number — and it did not match what the dashboard had shown me the week before: <strong>the dashboard said 312 new users; my spreadsheet said 841.</strong> That was the day I understood that for someone who cannot code, the hard part of Excel was never the arithmetic. It was knowing what was actually being counted.</span>
+  </p>
+
+  <div class="highlight">
+    <p><span class="zh-only">AI 能把"不会写 SQL"这个问题彻底消掉，但它消不掉"你说清楚要什么"这个问题。<strong>本文就是关于后半句的。</strong></span><span class="en-only">AI can eliminate "I can't write SQL" completely. It cannot eliminate "say clearly what you want". <strong>This article is about the second half.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">AI 能替你做什么，不能替你做什么</span><span class="en-only">What AI Can Do For You — and What It Cannot</span></h2>
+
+  <p>
+    <span class="zh-only">用 AI 做分析三个月，我摸清了它的边界。下面这张对照表，是我每次开始之前都会先想一遍的。</span>
+    <span class="en-only">After three months of doing analysis with AI, I know where its edges are. The comparison below is what I think through before every session.</span>
+  </p>
+
+  <div class="compare">
+    <div class="col good">
+      <h4><span class="zh-only">放心交给 AI 的部分</span><span class="en-only">Hand it over to AI</span></h4>
+      <p><span class="zh-only">写 SQL 并解释每一行的意思；把结果画成图表；检查 SQL 里有没有明显的除零、漏连接、空值问题；把你的问题翻译成"该看哪几个字段"；在你看不懂报错时告诉你错误出在第几行。</span><span class="en-only">Writing the SQL and explaining every line; turning the result into a chart; spotting obvious divide-by-zero, missing joins or null handling in a query; translating your question into "which fields should I look at"; and telling you which line a cryptic error points to.</span></p>
+    </div>
+    <div class="col bad">
+      <h4><span class="zh-only">必须你自己拍板的</span><span class="en-only">You must decide yourself</span></h4>
+      <p><span class="zh-only">业务口径（"新增用户"到底算注册还是算激活）；时区；要不要去重；异常值是错误还是真实情况；这个数字能不能拿去做决策。AI 会给出一个语法正确、逻辑通顺、但口径是它瞎猜的答案——而且它不会提醒你它在猜。</span><span class="en-only">Business definitions (does "new user" mean signup or activation), time zones, whether to deduplicate, whether an outlier is an error or reality, and whether the number is good enough to act on. AI will hand you a syntactically valid, plausible-sounding answer with a definition it made up — and it will not warn you that it guessed.</span></p>
+    </div>
+  </div>
+
+  <p>
+    <span class="zh-only">记住这个比例：<strong>AI 负责 90% 的执行，你负责 100% 的口径。</strong>下面四步，我把它拆成了可以重复的动作。</span>
+    <span class="en-only">Keep this ratio in mind: <strong>AI handles 90% of the execution, you own 100% of the definitions.</strong>Here are the four steps, written as repeatable moves rather than advice.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第一步：先让 AI 看数据，别让它先写 SQL</span><span class="en-only">Step One: Let AI Look at the Data Before It Writes Any SQL</span></h2>
+
+  <p>
+    <span class="zh-only">很多人一上来就把问题甩过去："帮我统计每个渠道的新用户数。"AI 会立刻给你一段 SQL，而它必须靠猜——猜表名、猜字段名、猜"新用户"的定义。你猜错一个字段名，整段查询就变成了一张全是 NULL 的表。</span>
+    <span class="en-only">Most people open with the question: "count new users per channel." AI immediately writes SQL — and it has to guess the table name, the column names, and what "new user" means. Guess one column name wrong and the query returns a table full of NULLs.</span>
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">先看字段清单</span><span class="en-only">Start with the field list</span></h3>
+      <p><span class="zh-only">把表结构（或 CSV 表头）给 AI，让它用自己的话说一遍每个字段是干什么的。你会立刻发现有三个字段你以为是一回事，其实不是——比如 <code>created_at</code>（账号创建）、<code>first_login_at</code>（首次登录）、<code>activated_at</code>（首次生成成功）。</span><span class="en-only">Give it the schema (or the CSV header) and ask it to explain each column in its own words. You will immediately discover that three columns you assumed were the same thing are not — say <code>created_at</code> (account created), <code>first_login_at</code>, and <code>activated_at</code> (first successful generation).</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">再确认数据范围</span><span class="en-only">Then confirm the range</span></h3>
+      <p><span class="zh-only">问三个问题：最早和最晚的数据是什么时候？每个时间字段存的是当地时间还是 UTC？这张表是一行一个用户，还是一行一次事件？（我的表是事件表，所以"新用户数"必须先去重。）</span><span class="en-only">Ask three questions: what are the earliest and latest timestamps? Are the time columns local time or UTC? Is this table one row per user or one row per event? (Mine was an event table, so "new users" had to be deduplicated first.)</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">再让它写口径说明</span><span class="en-only">Then have it write the definition</span></h3>
+      <p><span class="zh-only">用一句业务话把口径固定下来："新用户 = 在自然月内注册，且 7 天内至少成功生成过 1 份合同的人；按注册时间去重。"让 AI 把这句话原样翻译成 SQL 注释，再执行。这一步是我整篇文章里最值钱的一句。</span><span class="en-only">Fix the definition in one plain sentence: "a new user is someone who registered within the calendar month and generated at least one contract within 7 days, counted once by registration time." Have AI translate that sentence into a SQL comment and then execute it. This single step is the most valuable sentence in the whole article.</span></p>
+    </div>
+
+    <div class="step reveal">
+      <h3><span class="zh-only">最后才让它出 SQL</span><span class="en-only">Only then ask for SQL</span></h3>
+      <p><span class="zh-only">前面三步做完，AI 需要的猜测就少了一大半。你会拿到一段带注释的 SQL：注释里写清了口径、时区、去重规则。这段 SQL 你看不懂也没关系，但你至少知道它在数什么。</span><span class="en-only">After the first three steps there is very little left for AI to guess. You get a commented query whose comments spell out the definition, the time zone and the deduplication rule. You do not have to understand the code — you just have to know what it counts.</span></p>
+    </div>
+  </div>
+
+  <pre data-lang="prompt"><code># 第一轮：别写 SQL，先让它读表 / Round 1: no SQL yet, let it read the schema
+我有一张 events 表（CSV 导出，12400 行，23 列）。
+表头是：user_id, event_name, channel, created_at, first_login_at,
+activated_at, plan, amount_cny, payment_status, ...
+
+请用中文逐个解释这些字段是什么意思，并指出：
+1. 哪些字段存的是 UTC 时间戳，哪些是本地时间；
+2. 这张表里有没有重复的 user_id（同一用户多个事件）；
+3. 要统计"当月新用户"的话，哪些字段能用，哪些不能用；
+4. 你不确定的地方，直接说"不确定"，不要猜。
+
+先不要写 SQL。 / Do not write SQL yet.</code></pre>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第二步：让 AI 写 SQL，然后自己读三遍</span><span class="en-only">Step Two: Let AI Write the SQL, Then Read It Three Times</span></h2>
+
+  <p>
+    <span class="zh-only">第二轮就可以要 SQL 了。我的提示词模板是这样的：</span>
+    <span class="en-only">Round two is when you ask for SQL. Here is my template:</span>
+  </p>
+
+  <pre data-lang="prompt"><code># 第二轮：要 SQL，但要求它自检 / Round 2: ask for SQL, and require self-checks
+按下面的口径写 SQL，并用中文注释说明每一步在做什么：
+
+口径：当月新用户 = 在 [起止日期] 内注册（created_at），
+且 7 天内至少成功生成过 1 份合同（activated_at 非空）的用户，按 user_id 去重。
+
+要求：
+1. 用参数化查询（占位符 + 参数数组），不要拼接字符串；
+2. 时间统一转成北京时间（UTC+8）再比较；
+3. 每段 SQL 前加一行注释说明它在干什么；
+4. 最后附一段"自检清单"，列出你用到的 3 个可能出错的点；
+5. 如果我对口径的描述有歧义，先列出你的理解再写 SQL。
+
+/ Use parameterised queries, convert to UTC+8 before comparing,
+comment every block, and end with a short list of three risk points.</code></pre>
+
+  <p>
+    <span class="zh-only">然后是最关键的一步：<strong>读三遍</strong>。我不需要读懂每一行 SQL，我只需要读懂三件事。</span>
+    <span class="en-only">Then comes the crucial step: <strong>read it three times</strong>. You do not need to understand every line of SQL — you need to understand three things.</span>
+  </p>
+
+  <ul>
+    <li><span class="zh-only"><strong>第一遍：看注释。</strong>SQL 前面那几行中文注释，就是 AI 对你口径的理解。哪里跟你说的不一样，立刻指出来。这是成本最低的一次纠错。</span><span class="en-only"><strong>Pass one: read the comments.</strong> The Chinese comments above each block are AI's understanding of your definition. Wherever they differ from what you said, say so immediately. This is the cheapest correction you will ever make.</span></li>
+    <li><span class="zh-only"><strong>第二遍：看"从哪张表来、怎么关联"。</strong>如果查询里出现了 <code>JOIN</code>，就问一句"这是 1 对 1 还是 1 对多？会不会把用户数放大？"——这正是我 841 和 312 差异的来源。</span><span class="en-only"><strong>Pass two: look at where it comes from and how it joins.</strong> If the query contains a <code>JOIN</code>, ask: "is this one-to-one or one-to-many? could it multiply the user count?" That single question was the source of my 841-versus-312 gap.</span></li>
+    <li><span class="zh-only"><strong>第三遍：看数字合不合理。</strong>把结果和一个你已知的事实对照。我的例子：后台显示 312 人，那我看到 841 的那一刻就知道 SQL 错了，而不是"数据好漂亮"。</span><span class="en-only"><strong>Pass three: sanity-check the magnitude.</strong> Compare the result against one fact you already know. In my case, the dashboard said 312 — so the moment I saw 841 I knew the query was wrong, rather than being impressed by a pretty number.</span></li>
+  </ul>
+
+  <div class="callout warn">
+    <div>
+      <strong><span class="zh-only">真实事故：我的日报连续错了 11 天</span><span class="en-only">Real Incident: My Daily Report Was Wrong for 11 Straight Days</span></strong>
+      <p><span class="zh-only">修好 JOIN 之后我又踩了一个更隐蔽的坑：库里所有时间戳存的是 UTC，而我在报表里按本地时间过滤。那 11 天里，每天的日报都把晚上 8 点到午夜的数据算到了第二天，导致每天早上看到的"新增用户"比真实值少 8% 左右。</span><span class="en-only">After fixing the join I hit a subtler trap: every timestamp in the database was UTC, while I filtered the report by local time. For 11 days, everything between 8 p.m. and midnight landed on the next day, and every morning my "new users" number was about 8% below the truth.</span></p>
+      <p><span class="zh-only">我是怎么发现的？有人抱怨"我昨晚 11 点注册，怎么今天的数据里没有我"。当天我手工查了那条记录，发现它的 <code>created_at</code> 比报表显示的日期晚了一天。我把 AI 叫来，问"如果我把所有时间戳都当成北京时间，会发生什么"，它把边界情况列了出来——晚上 8 点之后注册的用户会被算到第二天。</span><span class="en-only">How did I find it? Someone complained: "I registered at 11 p.m. last night and today's numbers don't have me." I pulled that record by hand and saw its <code>created_at</code> sat one day later than the report. I asked AI: "what happens if I treat every timestamp as local time?" and it enumerated the edge case — anyone registering after 8 p.m. gets counted the next day.</span></p>
+      <p><span class="zh-only">从那以后，我给每一条日报都加了一个固定的对照检查：<strong>当天数据 + 昨天 20:00 到 24:00 的数据，应该等于今天的数字。</strong>这一条检查帮我抓住了后面两次同类错误。</span><span class="en-only">Since then every daily report carries one fixed reconciliation check: <strong>today's count plus yesterday's 8 p.m.-to-midnight count should equal today's number.</strong>That check caught two more bugs of the same family later.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第三步：把结果变成一张能给人看的图</span><span class="en-only">Step Three: Turn the Result Into a Chart Someone Can Read</span></h2>
+
+  <p>
+    <span class="zh-only">数据拿到手之后，别急着发数字。一个数字如果没人能一眼看懂，它就不会被用。我做的第一件事，是让 AI 给我画图——而且明确指定图的类型、坐标轴和标注。</span>
+    <span class="en-only">Once you have the data, do not send numbers yet. A number nobody can read at a glance will not get used. The first thing I do is ask AI to chart it — specifying the chart type, the axes and the annotations explicitly.</span>
+  </p>
+
+  <pre data-lang="python"><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("events.csv")
+df["created_at"] = pd.to_datetime(df["created_at"], utc=True).dt.tz_convert("Asia/Shanghai")
+
+# 口径：当月注册且 7 天内生成过合同的用户，按 user_id 去重
+# Definition: users registered this month who generated a contract within 7 days, deduplicated
+df["created_at"] = df["created_at"].dt.tz_localize(None)
+month = df[df["created_at"] >= "2026-09-01"]
+new_users = month[month["activated_at"].notna()]["user_id"].unique()
+
+steps = ["注册", "首次登录", "上传合同", "生成成功"]
+counts = [len(new_users), 280, 196, 154]
+
+fig, ax = plt.subplots(figsize=(9, 4.5), facecolor="#0A0E1A")
+ax.set_facecolor("#0A0E1A")
+ax.bar(steps, counts, color="#00E5FF", width=0.55)
+for i, v in enumerate(counts):                       # 在柱子上标数字 / label each bar
+    ax.text(i, v + 4, str(v), ha="center", color="#E6E9F2", fontsize=11)
+ax.set_title("新用户漏斗（2026.09）", color="#E6E9F2", fontsize=13)
+ax.tick_params(colors="#9BA3B8")
+for s in ax.spines.values():
+    s.set_color("rgba(255,255,255,.08)")
+plt.tight_layout()
+plt.savefig("funnel.png", dpi=160, facecolor="#0A0E1A")
+print(f"本月新用户：{len(new_users)} 人")</code></pre>
+
+  <ul>
+    <li><span class="zh-only"><strong>趋势用折线，构成分解用柱状，比例用条形。</strong>别用饼图，超过 3 块就读不懂了。</span><span class="en-only"><strong>Lines for trends, stacked columns for composition, bars for ratios.</strong>Skip pie charts — past three slices nobody can read them.</span></li>
+    <li><span class="zh-only"><strong>图上直接标数字。</strong>读者不应该需要去对照坐标轴猜数值。我的图基本每个数据点都有标注。</span><span class="en-only"><strong>Label the numbers on the chart.</strong>Readers should never have to guess a value off the axis. Almost every data point in my charts carries a label.</span></li>
+    <li><span class="zh-only"><strong>一个图只说一件事。</strong>如果你要在图上加三根箭头解释三个结论，那它应该拆成三张图。</span><span class="en-only"><strong>One chart, one message.</strong>If you need three arrows to explain three findings, it should be three charts.</span></li>
+    <li><span class="zh-only"><strong>把口径写在图注里。</strong>"本月新用户 = 注册后 7 天内生成过合同的用户（去重）"——这句话贴在图下面，能省掉一半的追问。</span><span class="en-only"><strong>Put the definition in the caption.</strong>"This month's new users = users who generated a contract within 7 days of signup, deduplicated." That one line under the chart saves half the follow-up questions.</span></li>
+  </ul>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">我最常做的三张表</span><span class="en-only">The Three Tables I Build Most Often</span></h2>
+
+  <p>
+    <span class="zh-only">不管做什么产品，我固定会看三张表。它们长得都差不多，区别只在于"看哪几列"和"怎么算"。下面这张表就是我的速查表，你可以直接抄走改成自己的。</span>
+    <span class="en-only">Whatever the product, I look at the same three tables. They differ only in which columns you read and how you aggregate. Here is my cheat sheet — copy it and adapt it.</span>
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">表</span><span class="en-only">Table</span></th>
+        <th><span class="zh-only">回答什么问题</span><span class="en-only">Question it answers</span></th>
+        <th><span class="zh-only">核心字段</span><span class="en-only">Core fields</span></th>
+        <th><span class="zh-only">最常翻车的地方</span><span class="en-only">Usual trap</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">日报</span><span class="en-only">Daily report</span></td>
+        <td><span class="zh-only">今天比昨天好还是差？</span><span class="en-only">Is today better or worse than yesterday?</span></td>
+        <td>date, user_id, event_name</td>
+        <td><span class="zh-only">时区；周末效应</span><span class="en-only">Time zone; weekend effect</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">漏斗</span><span class="en-only">Funnel</span></td>
+        <td><span class="zh-only">用户卡在哪一步？</span><span class="en-only">Which step do users get stuck at?</span></td>
+        <td>user_id, step, step_time</td>
+        <td><span class="zh-only">JOIN 放大；跨天用户算哪一步</span><span class="en-only">Join multiplication; which day a cross-day user belongs to</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">留存</span><span class="en-only">Retention</span></td>
+        <td><span class="zh-only">用户一周后还回来吗？</span><span class="en-only">Do users come back a week later?</span></td>
+        <td>user_id, signup_date, active_date</td>
+        <td><span class="zh-only">分母是注册数还是活跃数</span><span class="en-only">Is the denominator signups or actives</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">收入</span><span class="en-only">Revenue</span></td>
+        <td><span class="zh-only">钱从哪来，谁在付钱？</span><span class="en-only">Where does the money come from?</span></td>
+        <td>order_id, amount, plan, paid_at</td>
+        <td><span class="zh-only">退款与重复回调</span><span class="en-only">Refunds and duplicate webhooks</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <span class="zh-only">拿我这周的数据举例：日活 187 人，7 日留存 31%（我这周做了一次新手引导改动，改之前是 24%），付费转化 2.7%（37 单 / 1,370 次注册），人均模型成本 ¥0.41。<strong>注意最后这个数字</strong>——它是"成本"，不是"收入"，两个数不能放在同一个句子里说"盈利"。</span>
+    <span class="en-only">Using this week's data: 187 daily actives, 31% seven-day retention (up from 24% before this week's onboarding change), 2.7% paid conversion (37 orders from 1,370 signups), and ¥0.41 average model cost per user. <strong>Look closely at that last number</strong> — it is a cost, not revenue, and the two must never sit in the same sentence claiming profitability.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一份可以照抄的分析提示词</span><span class="en-only">A Prompt Template You Can Copy Verbatim</span></h2>
+
+  <p>
+    <span class="zh-only">这是我实际在用的完整模板，存成了一个文本文件，换个产品改几行就能用。里面刻意写了"不确定就说不确定"和"先别写 SQL"，这两句能挡掉大部分麻烦。</span>
+    <span class="en-only">This is the template I actually use, kept in a text file and reused by editing a few lines per product. The lines "say so if you are unsure" and "do not write SQL yet" are deliberate — they prevent most of the trouble.</span>
+  </p>
+
+  <pre data-lang="prompt"><code>【背景】/ Context
+产品：合同条款风险扫描（上传合同 → AI 标出风险条款）
+数据：events 表，一行一次用户事件，时间戳为 UTC
+本次目标：找出新用户从注册到首次生成成功的流失点
+
+【口径】/ Definition
+新用户 = 在 2026-09-01 至 2026-09-30 之间注册（created_at），
+        且 7 天内至少成功生成 1 份合同（activated_at 非空），按 user_id 去重
+时间统一按北京时间（UTC+8）
+「流失」= 完成上一步但未完成下一步，且距离现在超过 24 小时
+
+【要求】/ Instructions
+1. 先复述你的口径理解，等我确认后再继续；
+2. 不确定的地方直接说"不确定"，不要用默认值糊过去；
+3. 给出的 SQL 必须参数化、带中文注释，并附 3 条风险提示；
+4. 结果出来后，给我一句不超过 30 字的结论 + 一个我该采取的动作；
+5. 如果结论依赖某个假设，请把这个假设单独列出来。
+
+【我已知的参照】/ Known reference points
+后台显示本月新用户 312 人（口径：注册且完成首次登录）
+上周同一漏斗的最后一步转化率是 28%</code></pre>
+
+  <div class="callout tip">
+    <div>
+      <strong><span class="zh-only">「我已知的参照」这一段最值钱</span><span class="en-only">The "Known Reference Points" Block Is the Most Valuable Part</span></strong>
+      <p><span class="zh-only">给 AI 一个你确定没错的数字，它就能立刻判断自己的结果对不对。我不给参照的时候，AI 会写出一段看起来无懈可击的 SQL，返回 841，我还会觉得"哦这么多用户，不错啊"。给了参照之后，它第一次就自己发现了 JOIN 的问题。</span><span class="en-only">Give AI one number you are certain is correct and it can immediately judge its own output. Without a reference, AI produced a flawless-looking query returning 841, and I thought "wow, lots of users, that sounds plausible." With a reference, it spotted the join problem on the first attempt.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">做完之后，这 8 条对一遍</span><span class="en-only">Eight Checks Before You Share the Result</span></h2>
+
+  <p>
+    <span class="zh-only">分析做完、图做完、发给别人之前，我固定走一遍这个清单。每次大概两分钟，但它拦下过的错误，比所有 SQL 加起来都多。</span>
+    <span class="en-only">Before sharing anything, I walk through this checklist. It takes about two minutes and has caught more mistakes than every SQL query I have ever written, combined.</span>
+  </p>
+
+  <ol>
+    <li><span class="zh-only">☐ 口径写下来了，而且是我自己写的，不是 AI 复述给我的。</span><span class="en-only">☐ The definition is written down in my own words, not paraphrased by AI.</span></li>
+    <li><span class="zh-only">☐ 时区在 SQL 里统一过了（而且我知道统一成的是哪个时区）。</span><span class="en-only">☐ The time zone is normalised in the query, and I know which one.</span></li>
+    <li><span class="zh-only">☐ 去重规则明确：按哪个字段去重，有没有漏掉重复行。</span><span class="en-only">☐ Deduplication is explicit: which field, and no duplicate rows slipped through.</span></li>
+    <li><span class="zh-only">☐ 结果和至少一个已知数字对得上（后台显示值、手工抽查值、上周同期值）。</span><span class="en-only">☐ The result reconciles with at least one number I already trust (dashboard, manual spot-check, or last week's figure).</span></li>
+    <li><span class="zh-only">☐ JOIN 的基数关系我确认过了，不会把行数放大。</span><span class="en-only">☐ I checked the cardinality of every join, so rows are not multiplied.</span></li>
+    <li><span class="zh-only">☐ 空值和异常值单独看过，没有被静默过滤掉。</span><span class="en-only">☐ Nulls and outliers were looked at, not silently filtered away.</span></li>
+    <li><span class="zh-only">☐ 图上的口径说明写了，读者不用来问我。</span><span class="en-only">☐ The caption states the definition, so readers do not have to ask me.</span></li>
+    <li><span class="zh-only">☐ 结论里写了它依赖哪个假设，以及假设不成立时会怎样。</span><span class="en-only">☐ The conclusion names the assumption it depends on, and what happens if that assumption is wrong.</span></li>
+  </ol>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">先问对问题，再问 AI</span><span class="en-only">Ask the Right Question First, Then Ask AI</span></h2>
+
+  <blockquote>
+    <span class="zh-only">「AI 不会让你的分析变正确，它只会让你的分析变快。快而错的分析，比慢而对的分析危险得多。」</span>
+    <span class="en-only">"AI will not make your analysis correct. It will only make it faster. A fast wrong analysis is far more dangerous than a slow right one."</span>
+  </blockquote>
+
+  <p>
+    <span class="zh-only">三个月里我最大的收获，不是学会了怎么让 AI 写 SQL，而是学会了<strong>在提问之前先想清楚我要数的是什么</strong>。以前我以为分析难在工具，现在我知道分析难在定义。</span>
+    <span class="en-only">The biggest thing I learned in three months was not how to make AI write SQL. It was learning to <strong>work out what I am counting before I ask the question</strong>. I used to think analysis was hard because of the tools. Now I know analysis is hard because of the definitions.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">顺便说个实际变化：我的日报从"每周花 40 分钟手搓透视表"变成"每周花 8 分钟问 AI，然后花 10 分钟检查口径"。更重要的是，我终于敢在周会上说"这周注册量涨了 12%"——因为我知道了这个数字是怎么来的，而不是拍脑袋。</span>
+    <span class="en-only">A practical side effect: my weekly report went from "40 minutes of hand-built pivot tables" to "8 minutes asking AI, then 10 minutes checking the definitions." More importantly, I finally dare to say in the weekly meeting "signups are up 12% this week" — because I know exactly how that number was produced, instead of guessing.</span>
+  </p>
+
+  <p>
+    <span class="zh-only">如果你也在用 AI 做事，欢迎在评论区告诉我你被哪个口径坑过。我猜我们踩的是同一批坑——因为这些坑不是技术问题，是人和数字打交道时的老问题，AI 只是让它们来得更快了。</span>
+    <span class="en-only">If you are using AI to do real work, tell me in the comments which definition bit you. I suspect we hit the same ones — because these are not technical problems, they are the old human-and-numbers problems, and AI just makes them arrive faster.</span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

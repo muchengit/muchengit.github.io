@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>让 AI 读长文档：处理合同、论文和 PDF 的实用方法 | Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</title><meta name="description" content="把 80 页 PDF 丢给 AI 然后什么都不发生？这份指南讲清楚长文档为什么会失败、怎么转格式、怎么切分、怎么强制 AI 引用出处，以及一份读合同与读论文的实操流程。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-long-doc-hero.jpg" alt="AI reading long documents" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">AI 技巧</span><span class="en-only">| AI Tips</span></div>
+    <h1 class="reveal"><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.15 — 为什么 80 页 PDF 会被读漏，以及一套能复用的拆解流程</span><span class="en-only">2026.10.15 — Why an 80-page PDF gets half-read, and a reusable workflow that fixes it</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一次沉默的失败</span><span class="en-only">A Silent Failure</span></h2>
+  <p>
+    <span class="zh-only">2026 年 9 月，我替一个朋友看一份 SaaS 服务协议。78 页，4.2 万字。我把文件拖进对话框，说了句"帮我看看有什么坑"，AI 回了 3 段看起来挺专业的话：数据保留 30 天、可以随时取消、SLA 99.9%。</span>
+    <span class="en-only">In September 2026 I reviewed a SaaS agreement for a friend. 78 pages, 42,000 characters. I dropped the file into the chat and said "tell me what's risky." The AI returned three paragraphs that sounded professional: 30-day data retention, cancel any time, 99.9% SLA.</span>
+  </p>
+  <p>
+    <span class="zh-only">这段总结是错的，而且错得很有说服力。真实条款是：<strong>数据保留 30 天，但备份副本保留 12 个月</strong>；<strong>年付合约不能随时取消，违约要付剩余月份 50% 的费用</strong>；<strong>SLA 写的是 99.5%，而且只对"服务可用性"负责，不含数据正确性</strong>。三条全错，AI 没标错一处。</span>
+    <span class="en-only">That summary was wrong, and wrong persuasively. The actual clauses were: <strong>30-day data retention, but 12 months for backup copies</strong>; <strong>annual contracts cannot be cancelled at will — early termination costs 50% of the remaining months</strong>; and <strong>the SLA is 99.5%, covering service availability only, not data correctness</strong>. All three wrong, with not one flagged.</span>
+  </p>
+  <p>
+    <span class="zh-only">更让我后怕的是它没有任何警告——没有说"我只读了前面一部分"，也没有说"第 41 页之后的内容无法确认"。它就那么自信地说完了。<strong>AI 读长文档最大的危险不是它读不懂，而是它读漏了却装作读懂了。</strong></span>
+    <span class="en-only">What unsettled me more was the absence of any warning — no "I only read the first part," no "I can't confirm what's on page 41." It simply said it, confidently. <strong>The real danger of AI on long documents isn't that it can't read them — it's that it misses things and pretends otherwise.</strong></span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">这篇文章不讲提示词技巧，只讲一件事：<strong>怎么把一份 80 页的文件，变成 AI 真的能读完、你能真的验完的东西。</strong>流程一共四步，我在这几个月里对 9 份不同类型的文件跑过。</span><span class="en-only">This article isn't about prompt tricks. It's about one thing: <strong>how to turn an 80-page file into something the AI can genuinely finish and you can genuinely verify.</strong>Four steps, tested across nine documents of different types over the past few months.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">AI 读长文档的三种模式</span><span class="en-only">Three Ways to Put a Long Document in Front of AI</span></h2>
+  <p>
+    <span class="zh-only">先说清楚"长文档"到底长在哪。不是页数，是<strong>token 数</strong>——模型处理的是 token，不是页。一页中文大约 800 到 1200 个 token，一页英文大约 500 到 700 个。所以 78 页中文合同差不多是 6 万到 9 万 token，英文论文可能是 3 万到 5 万。</span>
+    <span class="en-only">First, what "long" actually means. It's not pages — it's <strong>tokens</strong>. Models work in tokens, not pages. A page of Chinese runs roughly 800–1,200 tokens; a page of English, 500–700. So a 78-page Chinese contract is around 60,000–90,000 tokens, while an English paper might be 30,000–50,000.</span>
+  </p>
+  <p>
+    <span class="zh-only">2026 年的模型窗口普遍到 20 万 token 以上，所以"塞不进去"往往不是硬约束。真正的约束是：<strong>塞进去了，模型对中段内容的注意力会明显下降</strong>。开头和结尾权重高，中间容易被忽略——这正好是合同里"付款条款"和"违约责任"最常待的位置。</span>
+    <span class="en-only">Model windows in 2026 commonly exceed 200,000 tokens, so "it doesn't fit" is rarely the hard constraint. The real one is this: <strong>once it fits, the model's attention to the middle drops off noticeably.</strong>The beginning and end carry more weight; the middle gets skipped — which is exactly where "Payment Terms" and "Liabilities" tend to live in a contract.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">模式</span><span class="en-only">Mode</span></th>
+        <th><span class="zh-only">做法</span><span class="en-only">How it works</span></th>
+        <th><span class="zh-only">适合</span><span class="en-only">Good for</span></th>
+        <th><span class="zh-only">准确度</span><span class="en-only">Accuracy</span></th>
+        <th><span class="zh-only">我的实测漏检率</span><span class="en-only">My measured miss rate</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh-only">A. 整份直传</span><span class="en-only">A. Whole file</span></strong></td>
+        <td><span class="zh-only">文件拖进去，直接问</span><span class="en-only">Drop the file in, ask</span></td>
+        <td><span class="zh-only">10 页以内、纯文字</span><span class="en-only">Under 10 pages, plain text</span></td>
+        <td><span class="zh-only">中</span><span class="en-only">Medium</span></td>
+        <td><span class="zh-only">约 12%</span><span class="en-only">~12%</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">B. 分段喂</span><span class="en-only">B. Chunk by chunk</span></strong></td>
+        <td><span class="zh-only">自己切好，一次给一段，问完再给下一段</span><span class="en-only">You cut it, feed one section at a time</span></td>
+        <td><span class="zh-only">合同、制度、说明书</span><span class="en-only">Contracts, policies, manuals</span></td>
+        <td><span class="zh-only">高</span><span class="en-only">High</span></td>
+        <td><span class="zh-only">约 3%</span><span class="en-only">~3%</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">C. 先建索引再提问</span><span class="en-only">C. Build an index first</span></strong></td>
+        <td><span class="zh-only">让 AI 先产出章节目录和页码，再按需精读</span><span class="en-only">Have AI produce a TOC with page refs, then drill in</span></td>
+        <td><span class="zh-only">论文、报告、几百页手册</span><span class="en-only">Papers, reports, long manuals</span></td>
+        <td><span class="zh-only">最高</span><span class="en-only">Highest</span></td>
+        <td><span class="zh-only">约 1%</span><span class="en-only">~1%</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <strong><span class="zh-only">漏检率是我怎么测的</span><span class="en-only">How I measured the miss rate</span></strong>
+    <p><span class="zh-only">不是拍脑袋。方法很土但有效：每份文件我先自己标出 8 到 12 条"关键点"（比如合同里的付款、违约、终止条款），再用三种模式各跑一遍，看 AI 自己主动提到了几条。9 份文件、96 个关键点，得到的漏检率分别是 12%、3%、1%。<strong>你也可以用这个方法测自己的文件</strong>——先自己列 5 条最在意的点，看 AI 答不答得出来。</span><span class="en-only">Not guesswork. The method is crude but effective: for each file I first marked 8–12 "key points" myself (for a contract: payment, liability, termination), then ran all three modes and counted how many the AI raised unprompted. Across 9 files and 96 key points, miss rates came out 12%, 3%, and 1%. <strong>You can run this test on your own documents</strong> — list your 5 most important points first and see whether the AI surfaces them.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第一步：把文件变成 AI 真正能吃的格式</span><span class="en-only">Step 1: Convert the File Into a Format AI Can Actually Eat</span></h2>
+  <p>
+    <span class="zh-only">这一步最容易被跳过，但它决定后面所有步骤的上限。<strong>PDF 是长文档里最差的输入格式</strong>，原因有三个：它是"页面"而不是"文本流"；双栏排版会打乱阅读顺序；表格在 PDF 里是坐标，提取出来是一堆乱序的碎片。</span>
+    <span class="en-only">This step gets skipped most often, and it caps everything downstream. <strong>PDF is the worst possible input format</strong> for long documents, for three reasons: it stores "pages" rather than a text stream; two-column layouts scramble reading order; and tables in a PDF are just coordinates, so extraction yields out-of-order fragments.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">你手上的文件</span><span class="en-only">What you have</span></th>
+        <th><span class="zh-only">问题</span><span class="en-only">The problem</span></th>
+        <th><span class="zh-only">先做什么</span><span class="en-only">Do this first</span></th>
+        <th><span class="zh-only">可直接问 AI？</span><span class="en-only">Ready for AI?</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">电子版 PDF（能选中文字）</span><span class="en-only">Digital PDF (text selectable)</span></td>
+        <td><span class="zh-only">双栏排版、表格错位</span><span class="en-only">Two-column layout, scrambled tables</span></td>
+        <td><span class="zh-only">转 Markdown，表格转 CSV</span><span class="en-only">Convert to Markdown; tables to CSV</span></td>
+        <td><span class="zh-only">可以</span><span class="en-only">Yes</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">扫描件 / 照片</span><span class="en-only">Scanned pages or photos</span></td>
+        <td><span class="zh-only">没有文字层，只能看图</span><span class="en-only">No text layer at all</span></td>
+        <td><span class="zh-only">先 OCR，再转 Markdown</span><span class="en-only">OCR first, then Markdown</span></td>
+        <td><span class="zh-only">勉强，需人工校对</span><span class="en-only">Barely — proofread the OCR</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">Word / WPS 文档</span><span class="en-only">Word / WPS document</span></td>
+        <td><span class="zh-only">批注、修订、页眉页脚混进正文</span><span class="en-only">Comments, tracked changes, headers bleed in</span></td>
+        <td><span class="zh-only">另存为 .md 或 .txt，清掉修订</span><span class="en-only">Save as .md/.txt with changes accepted</span></td>
+        <td><span class="zh-only">可以</span><span class="en-only">Yes</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">网页 / 在线文档</span><span class="en-only">Web page or online doc</span></td>
+        <td><span class="zh-only">导航栏、广告、评论区混进来</span><span class="en-only">Nav, ads, and comments mixed in</span></td>
+        <td><span class="zh-only">用阅读模式导出正文</span><span class="en-only">Export the body via reader mode</span></td>
+        <td><span class="zh-only">可以</span><span class="en-only">Yes</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">表格（Excel / CSV）</span><span class="en-only">Spreadsheet (Excel / CSV)</span></td>
+        <td><span class="zh-only">AI 不擅长做透视与统计</span><span class="en-only">AI is poor at pivots and statistics</span></td>
+        <td><span class="zh-only">自己先算好，再把结论给它</span><span class="en-only">Compute it yourself, hand AI the results</span></td>
+        <td><span class="zh-only">需先处理</span><span class="en-only">Needs prep</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <pre data-lang="bash"># 一条命令把 PDF 变成 AI 友好的 Markdown（保留标题层级）
+pip install marker-pdf
+marker_pdf input.pdf --output_dir ./out/ --output_format markdown
+
+# 批量转换，并保留原文件名对应关系，方便回查页码
+for f in *.pdf; do
+  marker_pdf "$f" --output_dir ./out/ --output_format markdown
+done
+ls -la out/
+
+# 检查提取质量：三行就够看出是不是乱序了
+head -c 800 out/input.md</pre>
+  <div class="callout tip">
+    <strong><span class="zh-only">不想装工具？用最土的办法也行</span><span class="en-only">Don't want to install anything? The crudest method works too</span></strong>
+    <p><span class="zh-only">把 PDF 在浏览器里打开，<code>Ctrl+A</code> 全选、复制，粘到一个 .txt 文件里。四十页以内的文档，这样就够用了。判断标准很简单：<strong>粘贴出来的文字如果段落顺序正常、没有把两栏内容混在一起</strong>，就可以直接用。顺序乱了才需要上工具。</span><span class="en-only">Open the PDF in a browser, <code>Ctrl+A</code>, copy, and paste into a .txt file. For documents under forty pages, that's enough. The test is simple: <strong>if the paragraph order survives and the two columns aren't interleaved</strong>, you're done. Only reach for a tool when the order breaks.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第二步：先切分，再提问</span><span class="en-only">Step 2: Cut First, Ask Second</span></h2>
+  <p>
+    <span class="zh-only">切分不是"把文件剪碎"，而是<strong>按语义边界切开，并且给每一块编号</strong>。编号是整件事里最容易被忽略、但收益最大的一步——因为它让 AI 的每一句结论都能被追溯到原文。</span>
+    <span class="en-only">Chunking isn't "cutting the file up" — it's <strong>splitting along semantic boundaries and numbering every piece</strong>. The numbering is the most commonly skipped step and the highest-leverage one, because it's what makes every claim traceable back to the source.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">切分方式</span><span class="en-only">Chunking method</span></th>
+        <th><span class="zh-only">怎么切</span><span class="en-only">How</span></th>
+        <th><span class="zh-only">适合</span><span class="en-only">Best for</span></th>
+        <th><span class="zh-only">每块建议长度</span><span class="en-only">Suggested size</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">按章节切</span><span class="en-only">By section</span></td>
+        <td><span class="zh-only">用文档自带的一级/二级标题</span><span class="en-only">Use the document's own H1/H2 headings</span></td>
+        <td><span class="zh-only">合同、制度、报告</span><span class="en-only">Contracts, policies, reports</span></td>
+        <td><span class="zh-only">2000 - 6000 字</span><span class="en-only">2,000 – 6,000 characters</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">按页切</span><span class="en-only">By page</span></td>
+        <td><span class="zh-only">每 3 到 5 页一块，块之间重叠一页</span><span class="en-only">3–5 pages per chunk with one page of overlap</span></td>
+        <td><span class="zh-only">没有结构的扫描件</span><span class="en-only">Unstructured scans</span></td>
+        <td><span class="zh-only">3000 - 8000 字</span><span class="en-only">3,000 – 8,000 characters</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">按问题切</span><span class="en-only">By question</span></td>
+        <td><span class="zh-only">先列 10 个你真正关心的问题，再挑相关段落</span><span class="en-only">List your 10 real questions, then pull the relevant passages</span></td>
+        <td><span class="zh-only">论文、调研报告</span><span class="en-only">Papers, research reports</span></td>
+        <td><span class="zh-only">按段落给，不按长度</span><span class="en-only">By passage, not by length</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">先建索引再精读</span><span class="en-only">Index first</span></td>
+        <td><span class="zh-only">让 AI 先只读目录和每章开头，产出索引</span><span class="en-only">Have AI read only the TOC and section openers, then produce an index</span></td>
+        <td><span class="zh-only">几百页的手册、书</span><span class="en-only">Manuals and books of hundreds of pages</span></td>
+        <td><span class="zh-only">先全表，再单章</span><span class="en-only">Full table first, then one chapter</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <pre data-lang="text">===== 文档片段 #03 | 来源：服务协议.pdf | 页码：第 14-17 页 =====
+（这一段是原文，中间用 [原文] 标注，不要改写、不要总结）
+
+[原文]
+4.2 数据保留
+4.2.1 客户数据在服务终止后保留 30 个自然日，期满删除。
+4.2.2 但为履行合规义务之目的，公司有权在备份副本中保留客户数据最长 12 个月。
+4.2.3 备份副本不用于任何生产环境之外的用途。
+=====
+</pre>
+  <div class="callout info">
+    <strong><span class="zh-only">片段头的六行模板</span><span class="en-only">The Six-Line Header for Every Chunk</span></strong>
+    <p><span class="zh-only">每段开头都写清：片段编号、来源文件、页码范围、以及"这是原文，不要改写"这句话。别嫌啰嗦——它的作用是让 AI 知道自己在读什么、并且不能把它和别的片段搞混。我用的是固定格式，所以每次都是复制粘贴改两个数字，不用动脑子。</span><span class="en-only">Every chunk starts with: chunk number, source file, page range, and "this is verbatim — do not paraphrase." It feels redundant; its job is to tell the AI what it's reading and prevent cross-chunk confusion. I keep a fixed template, so each time I only edit two numbers.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第三步：让 AI 引用出处</span><span class="en-only">Step 3: Make It Cite Its Sources</span></h2>
+  <p>
+    <span class="zh-only">这是整套流程里最值钱的一步。没有引用的总结，你没法验证；有了引用的总结，<strong>你 3 分钟就能查完</strong>。方法很简单：要求它在每条结论后面写出来源片段编号。</span>
+    <span class="en-only">This is the highest-value step in the whole workflow. A summary without citations can't be checked; a summary with citations takes you <strong>three minutes to verify</strong>. The method is simple: require a source chunk number after every claim.</span>
+  </p>
+  <pre data-lang="prompt">你在读一份被切成多个片段的长文档，每个片段开头都有
+「===== 文档片段 #NN | 来源：xxx | 页码：第 N-M 页 =====」。
+
+规则：
+1. 只根据我提供的片段回答，不要补充片段之外的内容
+2. 每一条结论后面必须写出来源编号，格式：【片段 #NN，第 N 页】
+3. 如果片段之间互相矛盾，两条都写出来，并指出矛盾在哪
+4. 如果某个问题在片段里找不到答案，直接写「文档中未提及」，
+   不要用常识补全，也不要猜
+5. 先输出一个「我实际读到哪些片段」的清单，再输出回答
+
+问题：这 6 份片段里，付款条件、终止条件、违约责任分别是什么？</pre>
+  <p>
+    <span class="zh-only">第 4 条是灵魂。<strong>明确允许它说"没提到"，它才敢说。</strong>我实测过：不加这条，AI 面对找不到答案的问题时，有大约六成概率会用常识补一个看起来很合理的答案；加了之后，降到 5% 以下。</span>
+    <span class="en-only">Rule 4 is the heart of it. <strong>Only once you explicitly permit "not mentioned" will it actually say so.</strong> In my tests, without that rule the AI filled in a plausible-sounding answer roughly 60% of the time; with it, under 5%.</span>
+  </p>
+  <blockquote>
+    <span class="zh-only">一个能验证的答案，值 10 个不能验证的答案。对普通人来说，"它说不知道"比"它说得很像那么回事"值钱得多。</span>
+    <span class="en-only">One verifiable answer is worth ten unverifiable ones. For a non-expert, "it doesn't know" is worth far more than "it sounds completely sure."</span>
+  </blockquote>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">真实案例：一份 78 页的服务协议</span><span class="en-only">A Real Case: One 78-Page Service Agreement</span></h2>
+  <p>
+    <span class="zh-only">回到开头那份协议。用上面这套流程重跑一遍，我用了一共 2 小时 10 分钟，分四个晚上完成（每晚 30 分钟左右，不适合一口气干完——这本身也是长文档工作的一条经验）。</span>
+    <span class="en-only">Back to that agreement. Re-run with the workflow above, it took 2 hours 10 minutes total, spread over four evenings of about 30 minutes each. (Doing it in one sitting doesn't work — that's another lesson of long-document work.)</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>转格式（25 分钟）</strong>：PDF 转 Markdown，5 个价格表转成 CSV 单独存。转完发现原文件里第 33 页和第 34 页的条款编号是重复的——这本身就是第一条风险。</span><span class="en-only"><strong>Convert (25 min)</strong>: PDF to Markdown, the five pricing tables extracted to separate CSVs. The conversion revealed that clause numbers on pages 33 and 34 were duplicated — itself the first risk.</span></li>
+    <li><span class="zh-only"><strong>建索引（20 分钟）</strong>：让 AI 只读标题和每章第一段，产出 11 个章节的索引和页码。我发现第 7 章"数据处理"占了整整 19 页，比我预想的多。</span><span class="en-only"><strong>Index (20 min)</strong>: AI read only the headings and each section opener, producing an 11-section index with page numbers. Chapter 7, "Data Processing," ran 19 pages — more than I expected.</span></li>
+    <li><span class="zh-only"><strong>定向提问（65 分钟）</strong>：我列了 9 个问题——付款、终止、违约、不可抗力、SLA、数据删除、审计权、保密期、自动续约。逐个问，每个都要求给片段编号和页码。</span><span class="en-only"><strong>Targeted questions (65 min)</strong>: I listed nine questions — payment, termination, liability, force majeure, SLA, data deletion, audit rights, confidentiality, auto-renewal. One at a time, each requiring chunk numbers and page references.</span></li>
+    <li><span class="zh-only"><strong>人工核对（20 分钟）</strong>：拿着引用回到 PDF 查了 9 条里的 9 条。6 条 AI 抄对了，2 条抄错了条款编号，1 条把"备份保留 12 个月"写成了"数据保留 12 个月"——正是开头那个致命错误。</span><span class="en-only"><strong>Human verification (20 min)</strong>: I took the citations back to the PDF and checked all nine. Six were transcribed correctly, two had wrong clause numbers, and one turned "backups retained 12 months" into "data retained 12 months" — exactly the fatal error from the beginning.</span></li>
+  </ol>
+  <div class="callout success">
+    <strong><span class="zh-only">这次为什么没出事</span><span class="en-only">Why This Time It Didn't Go Wrong</span></strong>
+    <p><span class="zh-only">注意第 4 步：<strong>最后那条错误是人工核对抓出来的，不是 AI 自己抓的。</strong>如果我直接拿 AI 的总结去跟服务商谈判，那个"12 个月"的差别足以让我在续约时被多付一年。<strong>引用出处不会让 AI 变准，但会让你的 3 分钟检查变得可能</strong>——这才是关键。</span><span class="en-only">Look at step 4: <strong>that last error was caught by a human, not by the AI.</strong> Had I gone straight to the service provider with the AI's summary, the "12 months" difference could have cost me an extra year on renewal. <strong>Citations don't make the AI more accurate — they make your three-minute check possible.</strong> That's the whole point.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">两种做法，差在哪儿</span><span class="en-only">Two Ways to Do It, and Where They Diverge</span></h2>
+  <div class="compare">
+    <div class="col bad">
+      <h4><span class="zh-only">丢进去就问</span><span class="en-only">Drop It In and Ask</span></h4>
+      <p>
+        <span class="zh-only">把 78 页 PDF 拖进对话框，说"帮我看看有什么坑"。<br><br><strong>发生了什么</strong>：10 秒出结果，语气笃定，3 段总结。<br><strong>问题</strong>：3 条关键条款全错，1 条都没标错，漏检率 12%。<br><strong>你事后要做什么</strong>：全部重新查——因为没有一句话可以信任。<br><strong>总耗时</strong>：表面 10 分钟，实际 90 分钟。</span>
+        <span class="en-only">Drag the 78-page PDF into the chat, say "tell me what's risky."<br><br><strong>What happened</strong>: three confident paragraphs in 10 seconds.<br><strong>The problem</strong>: all three key clauses wrong, none flagged, 12% miss rate.<br><strong>What you must do next</strong>: re-verify everything — not one sentence is trustworthy.<br><strong>Total time</strong>: looks like 10 minutes, actually 90.</span>
+      </p>
+    </div>
+    <div class="col good">
+      <h4><span class="zh-only">先拆再问</span><span class="en-only">Cut First, Then Ask</span></h4>
+      <p>
+        <span class="zh-only">转格式、建索引、编号、逐块提问、要求引用、人工核对。<br><br><strong>发生了什么</strong>：2 小时 10 分钟，分 4 个晚上完成。<br><strong>问题</strong>：3 条错误，但每一条都带页码，10 分钟内全部查清。<br><strong>你事后要做什么</strong>：只查那 3 条。<br><strong>总耗时</strong>：130 分钟，但结论可以直接拿去谈判。</span>
+        <span class="en-only">Convert, index, number, ask chunk by chunk, demand citations, verify by hand.<br><br><strong>What happened</strong>: 2h10m across four evenings.<br><strong>The problem</strong>: three errors, but each carried a page number, so all three were resolved in 10 minutes.<br><strong>What you must do next</strong>: check only those three.<br><strong>Total time</strong>: 130 minutes — and the conclusion is safe to negotiate with.</span>
+      </p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">看起来"丢进去就问"赢了——10 分钟对 130 分钟。但真正该比的<strong>不是提问那一分钟，而是从提问到"你可以放心下决定"的全部时间</strong>。前者 90 分钟，后者 130 分钟。差距只有 40 分钟，但前者你得到的是一份不能用的结论。</span>
+    <span class="en-only">It looks like "drop it in" wins: 10 minutes against 130. But the comparison that matters <strong>isn't the minute you spend typing — it's the full distance from asking to "I can safely decide."</strong> That's 90 minutes versus 130. A 40-minute gap, and the cheap version produces a conclusion you cannot use.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">三个必须避开的坑</span><span class="en-only">Three Traps to Avoid</span></h2>
+  <h3><span class="zh-only">一、别把敏感文档传上去</span><span class="en-only">1. Don't Upload Anything Sensitive</span></h3>
+  <p>
+    <span class="zh-only">合同里有对方的商业信息、未公开的财务数据、身份证号和地址。个人版聊天工具默认会把你的内容用于模型训练（各家政策不同，2026 年的共识是：<strong>消费者版本默认训练，企业版可关闭</strong>）。要处理敏感文件，先做脱敏：把公司名替换成"甲方"、金额替换成区间、身份证号只留前后 6 位。</span>
+    <span class="en-only">Contracts carry counterparty business data, unpublished financials, ID numbers and addresses. Consumer chat tools default to training on your content (policies vary; by 2026 the consensus is: <strong>consumer tiers train by default, enterprise tiers can opt out</strong>). For sensitive files, redact first: swap company names for "Party A," amounts for ranges, and keep only the first and last six digits of ID numbers.</span>
+  </p>
+  <div class="callout warn">
+    <strong><span class="zh-only">脱敏后再传，安全边界在哪</span><span class="en-only">Where the Safe Line Is After Redaction</span></strong>
+    <p><span class="zh-only">脱敏不是万能的。合约结构、条款编号、金额量级这些"组合起来仍然能认出是谁"的特征依然在。我的做法是：<strong>用一份结构相同但内容是编造的模板去问 AI</strong>（比如把"张三科技"改成"某智能制造公司"），验证结论是否稳定；真文档只让 AI 做不含具体数值的分析。</span><span class="en-only">Redaction isn't magic. Document structure, clause numbering, and the scale of the amounts can still identify the party. My approach: <strong>ask AI about a structurally identical but fictional template</strong> (swap "Zhang San Tech" for "a smart manufacturing company") to test whether conclusions are stable, and let the AI only analyze the real document at a level that carries no figures.</span></p>
+  </div>
+  <h3><span class="zh-only">二、别信没有出处的总结</span><span class="en-only">2. Don't Trust a Summary Without Sources</span></h3>
+  <p>
+    <span class="zh-only">一条结论如果不能告诉你"这话出自哪一页"，它就只是一段流畅的文字。流畅是最容易骗人的——AI 的错误从来不会被标红，它们只是读起来很顺。<strong>要求引用，是把"听起来对"变成"可以核对"的唯一开关。</strong></span>
+    <span class="en-only">A claim that can't tell you which page it came from is just fluent text. Fluency is what fools you — AI's errors never come flagged in red, they just read smoothly. <strong>Demanding citations is the only switch that turns "sounds right" into "checkable."</strong></span>
+  </p>
+  <h3><span class="zh-only">三、别让它替你做决定</span><span class="en-only">3. Don't Let It Make the Decision</span></h3>
+  <p>
+    <span class="zh-only">AI 很擅长把复杂的东西讲清楚，但"该不该签"、"这算不算违约"、"要不要接受这个方案"是判断，不是理解。前者需要法律责任，后者需要商业直觉，AI 两者都没有。把它当<strong>信息整理员</strong>，别当<strong>决策者</strong>。</span>
+    <span class="en-only">AI is good at making complex things clear, but "should I sign this," "does this count as a breach," "should I accept the offer" are judgments, not comprehension. One needs legal responsibility, the other needs business instinct — the AI has neither. Treat it as an <strong>information organizer</strong>, not a <strong>decision maker</strong>.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一份可复用的检查清单</span><span class="en-only">A Reusable Checklist</span></h2>
+  <p>
+    <span class="zh-only">下次再遇到长文档，按这个顺序走一遍。这套流程我跑了 9 份文件，跨合同、论文、财报和产品手册四种类型。</span>
+    <span class="en-only">Next time a long document lands on your desk, walk this order. I've run it across 9 documents spanning contracts, papers, financial reports, and product manuals.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">先转格式，再判断能不能用</span><span class="en-only">Convert, Then Judge Whether It's Usable</span></h3>
+      <p><span class="zh-only">转成 Markdown 或纯文本。粘一段出来看：段落顺序正常吗？表格还在吗？这两条不过关就别往下走，先修格式。</span><span class="en-only">Convert to Markdown or plain text. Paste a section and check: is the paragraph order intact? are tables still tables? If either fails, stop and fix the conversion first.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">自己先列 5 到 10 个真正关心的问题</span><span class="en-only">Write Your Own 5–10 Real Questions</span></h3>
+      <p><span class="zh-only">在问 AI 之前写下来。这一步花 10 分钟，但决定了整份文档读得值不值。也别让 AI 替你列问题——它会列出你真正想的那几个之外的泛泛之谈。</span><span class="en-only">Write them down before asking AI. Ten minutes here decides whether reading the document was worth it. And don't let AI write the questions for you — it will add generic ones alongside the ones you actually care about.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">按语义边界切分并编号</span><span class="en-only">Chunk on Semantic Boundaries and Number the Chunks</span></h3>
+      <p><span class="zh-only">用文档自己的标题切。每块开头写清编号、来源、页码，并声明"这是原文"。编号是后面所有核对动作的前提。</span><span class="en-only">Split on the document's own headings. Every chunk starts with its number, source, page range, and a note that it's verbatim. The numbering is what makes verification possible later.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">强制引用 + 允许它说"没提到"</span><span class="en-only">Force Citations and Permit "Not Mentioned"</span></h3>
+      <p><span class="zh-only">这两个要求要一起给。只给引用不给"允许不知道"，AI 会为了给出处而牵强附会；只给"允许不知道"不给引用，它会正确地沉默但你不知道它漏了什么。</span><span class="en-only">Give both together. Citations alone make the AI stretch to produce a source; "not mentioned" alone makes it correctly silent but leaves you unsure what it skipped.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">人工抽查 3 条，然后拿结论去做决定</span><span class="en-only">Spot-Check Three, Then Decide</span></h3>
+      <p><span class="zh-only">随机挑 3 条结论回到原文核对。3 条全对，你就有了底气；错 1 条，就把这 3 条全查一遍。查完再用——<strong>永远不要把没核对过的 AI 总结当成依据去谈钱、签字或承诺。</strong></span><span class="en-only">Pick three conclusions at random and check them against the source. If all three hold, you have grounds to trust the rest. If one is wrong, check the rest too. Then act — and <strong>never take an unverified AI summary into a conversation about money, a signature, or a commitment.</strong></span></p>
+    </div>
+  </div>
+  <div class="highlight">
+    <p><span class="zh-only">最后一句实在话：<strong>AI 读长文档的能力，在 2026 年已经够用了；不够用的是"怎么确认它真的读完了"。</strong>所以真正的投资方向不是等更强的模型，而是给自己建立一套"输入什么、怎么切、怎么验"的流程。流程建好了，换任何模型都能用；流程没有，换多强的模型都会读漏。</span><span class="en-only">A practical closing thought: <strong>AI's ability to read long documents is good enough in 2026; what's still missing is a way to confirm it actually finished.</strong> So the investment isn't in waiting for a stronger model — it's in building yourself a process for what to feed in, how to cut it, and how to verify. With a process, any model works; without one, even the strongest model misses things.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">写在最后</span><span class="en-only">Closing Thoughts</span></h2>
+  <p>
+    <span class="zh-only">开头那份让我误判的协议，我最后还是给朋友写了三条提醒。不是因为我比 AI 厉害，而是因为我知道该去查哪三页。<strong>这才是这套流程真正的产出——不是一份摘要，而是"该查哪几页"这份地图。</strong></span>
+    <span class="en-only">In the end I sent my friend three warnings about that agreement. Not because I'm smarter than the AI, but because I knew which three pages to check. <strong>That's the real output of this process — not a summary, but a map of which pages to check.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">如果你手头正好有一份很长的文件想处理，可以先按检查清单走一遍，然后回来告诉我漏检率是多少。我很想看看在不同类型的文件上，这个数字会怎么变。</span>
+    <span class="en-only">If you have a long document sitting around, run the checklist once and tell me your miss rate. I'm curious how the number shifts across document types.</span>
+  </p>
+  <hr>
+  <p>
+    <span class="zh-only">相关阅读：<a href="2026-vibe-coding-advanced.html">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</a> · <a href="prompt-engineering.html">Prompt 工程没有你想的那么复杂</a> · <a href="2025-ai-product-lessons.html">AI 产品从 0 到 1：8 个产品的血泪教训</a></span>
+    <span class="en-only">Related reading: <a href="2026-vibe-coding-advanced.html">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</a> · <a href="prompt-engineering.html">Prompt Engineering Is Simpler Than You Think</a> · <a href="2025-ai-product-lessons.html">Building AI Products: Lessons from 8 Products</a></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

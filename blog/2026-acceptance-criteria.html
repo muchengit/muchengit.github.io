@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>让 AI 一次做对：把需求写成验收清单 | Getting It Right the First Time: Writing Requirements as Acceptance Criteria</title><meta name="description" content="AI 写代码最大的坑不是模型笨，而是你没告诉它「什么叫做对了」。这篇文章教你把一句模糊需求写成可逐条判定的验收清单，让 AI 一次做对，并附上一次返工 3 次的真实复盘。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-acceptance-hero.jpg" alt="Checklist and code blocks" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">AI 技巧</span><span class="en-only">| Tips</span></div>
+    <h1 class="reveal"><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.08 — 一份验收清单长什么样，以及它怎么帮我省下三次返工</span><span class="en-only">2026.10.08 — What an acceptance checklist looks like, and how it saved me three rounds of rework</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">问题不在模型笨，而在你没给它判卷标准</span><span class="en-only">The Problem Isn't a Dumb Model — It's That You Never Gave It a Grading Standard</span></h2>
+  <p>
+    <span class="zh-only">大多数人跟 AI 说话的方式是："帮我做一个登录页。"AI 会给你一个能跑、但没有输入校验、没有错误提示、没有移动端适配的登录页。你说"不是这个意思"，它再来一版。如此四五轮，谁都会烦。</span>
+    <span class="en-only">Most people talk to AI like this: "build me a login page." You get a page that runs but has no validation, no error messages, and no mobile layout. You say "that's not what I meant", and it tries again. After four or five rounds, everybody is frustrated.</span>
+  </p>
+  <p>
+    <span class="zh-only">2026 年 8 月我统计过自己的一次开发：<strong>23 次 AI 返工里，有 17 次（74%）不是 AI 写错了，而是需求本身没写清楚</strong>——我没说密码最少 8 位，没说错误提示要写"手机号已注册"而不是"注册失败"，没说按钮在 iPhone 上要能点得准。换更强的模型解决不了这个问题，因为再强的模型也不知道你脑子里那个画面。</span>
+    <span class="en-only">In August 2026 I audited one of my builds: <strong>of 23 rounds of AI rework, 17 (74%) weren't the model writing bad code — they were requirements I never wrote down.</strong> I never said the password needed 8 characters, that the error should read "phone already registered" rather than "registration failed", or that the button has to be tappable on an iPhone. A stronger model can't fix that, because even a strong model can't see the picture in your head.</span>
+  </p>
+  <p>
+    <span class="zh-only">解法不是换模型，是换一个写法：<strong>把需求写成验收清单</strong>。每一条都要能回答"做完之后我怎么知道它做对了"。这条听起来像流程管理的套话，但落到 AI 编程上，它是你能拿到的最高杠杆的一次投入——写 20 分钟清单，省下 3 次返工的 2 小时。</span>
+    <span class="en-only">The fix isn't a different model; it's a different way of writing: <strong>turn the requirement into an acceptance checklist</strong> where every line answers "how will I know it's right when it's done?" It sounds like process-committee boilerplate, but with AI coding it is the highest-leverage ten minutes of your day: twenty minutes writing the list saves two hours of rework.</span>
+  </p>
+  <blockquote>
+    <span class="zh-only">AI 读不懂你的脑子，但读得懂清单。你给它的不是愿望，是判卷标准。</span>
+    <span class="en-only">AI can't read your mind. It can read a checklist. What you give it isn't a wish — it's the grading rubric.</span>
+  </blockquote>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">验收清单和"普通需求"差在哪</span><span class="en-only">How an Acceptance Checklist Differs from an Ordinary Requirement</span></h2>
+  <p>
+    <span class="zh-only">一句话区分：<strong>普通需求描述"我想要什么"，验收清单描述"怎么判定它做到了"</strong>。前者可以靠脑补补全，后者不行——脑补的地方就是 AI 自由发挥的地方。</span>
+    <span class="en-only">One line: <strong>an ordinary requirement describes what you want; an acceptance checklist describes how you'd judge that it happened.</strong> The first can be completed by guesswork, the second can't — and wherever guesswork is possible, the model will guess.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">场景</span><span class="en-only">Scenario</span></th>
+        <th><span class="zh-only">模糊的需求（AI 只能猜）</span><span class="en-only">Vague requirement (the model must guess)</span></th>
+        <th><span class="zh-only">可验收的标准（AI 照做）</span><span class="en-only">Acceptable criterion (the model complies)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">登录</span><span class="en-only">Login</span></td>
+        <td><span class="zh-only">"登录页要好用"</span><span class="en-only">"the login page should be easy to use"</span></td>
+        <td><span class="zh-only">密码错误时显示"手机号或密码错误"，不告诉用户是哪一项错</span><span class="en-only">Wrong password shows "phone or password incorrect" — never reveal which one</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">搜索</span><span class="en-only">Search</span></td>
+        <td><span class="zh-only">"搜索要快"</span><span class="en-only">"search should be fast"</span></td>
+        <td><span class="zh-only">1 万条数据下，输入第 2 个字符后 300ms 内出结果</span><span class="en-only">With 10k rows, results appear within 300ms of the 2nd keystroke</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">导出</span><span class="en-only">Export</span></td>
+        <td><span class="zh-only">"导出要支持"</span><span class="en-only">"export should be supported"</span></td>
+        <td><span class="zh-only">支持 CSV 与 Excel；超过 5 万行给进度条，完成后给下载链接</span><span class="en-only">CSV and Excel; over 50k rows shows a progress bar, then a download link</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">样式</span><span class="en-only">Styling</span></td>
+        <td><span class="zh-only">"页面要好看"</span><span class="en-only">"the page should look good"</span></td>
+        <td><span class="zh-only">主色 #0A0E1A，按钮圆角 8px，375px 宽屏幕不出现横向滚动条</span><span class="en-only">Primary colour #0A0E1A, 8px button radius, no horizontal scroll at 375px wide</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <span class="zh-only">注意最后一行。"好看"这种词看着无害，但它是把方向盘交出去的一句话：AI 只能按自己的审美来。所以要么写死可测的数字，要么<strong>明确说"这块我自己改"</strong>，把它标成不在本次验收范围内。</span>
+    <span class="en-only">Look at the last row. Words like "good-looking" feel harmless but they hand over the steering wheel: the model can only apply its own taste. So either write measurable numbers, or explicitly say <strong>"I'm styling this part myself"</strong> and mark it out of scope for this round.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一份能直接抄的验收清单模板</span><span class="en-only">A Checklist Template You Can Copy Directly</span></h2>
+  <p>
+    <span class="zh-only">我现在每个功能开工前都写一份，存成 <code>ac.md</code> 放在项目里。四块结构，少一块就容易出问题：</span>
+    <span class="en-only">Before starting any feature I now write one and keep it as <code>ac.md</code> in the repo. Four blocks, and dropping any one of them causes a specific kind of trouble:</span>
+  </p>
+  <pre data-lang="markdown"><code># 功能：邮箱验证码登录
+## 目标（用户视角一句话）
+"用户输入邮箱，点发送，10 秒内收到 6 位验证码，用它登录。"
+
+## 必须满足的条件
+1. 邮箱格式错误 → 输入框下方红字"邮箱格式不对"，不发请求
+2. 同一邮箱 60 秒内只能点一次发送，按钮显示倒计时
+3. 验证码是 6 位数字，10 分钟内有效
+4. 连续输错 5 次 → 锁定 15 分钟，并明确提示剩余时间
+5. 375px 宽的屏幕上，验证码输入框 6 个格子排成一行不换行
+
+## 不做什么
+- 不做第三方登录（微信、Google）
+- 不做图形验证码
+- 不做邮箱找回密码（本期不做）
+
+## 怎么算通过
+- 上面 5 条逐条手动点一遍，每条截一张图存档
+- 在 iPhone SE 和 iPad 上各跑一遍第 5 条</code></pre>
+  <p>
+    <span class="zh-only">"不做什么"和"怎么算通过"这两段最容易被跳过，但价值最高。前者专治 AI 的自我发挥——你不说，它默认给你加"高级模式"、多语言切换、主题设置，都是你根本不需要的代码。后者专治"看着好像对了"：AI 交付时最常说的一句话就是"完成了"，但完成的标准是你定的，不是它定的。</span>
+    <span class="en-only">The "not doing" and "how we know it passed" blocks get skipped most often and are worth the most. The first one cures the model's creative streak: unless you say otherwise, it adds "advanced mode", language switching, and theme settings you never wanted. The second cures "it looks right": the model's favourite closing line is "done", but the definition of done is yours, not its.</span>
+  </p>
+  <div class="callout tip">
+    <strong><span class="zh-only">技巧：让 AI 先把清单变成测试用例</span><span class="en-only">Tip: have the model turn the checklist into test cases first</span></strong>
+    <p><span class="zh-only">写完清单后，加一句："先不要写功能代码，把上面 5 条翻译成 5 个测试用例（用最简单的方式，能跑就行），然后逐条跑给我看。"这样你能在写业务逻辑之前，就知道这 5 条里有没有本身写不清楚的条目——我经常在这一步就发现自己想当然的地方。</span><span class="en-only">After writing the list, add: "Don't write the feature yet. Turn those 5 items into 5 test cases (simplest possible form), then run each one and show me." This lets you find the items that were unclear to <em>you</em> before a line of business logic exists — and I find one on nearly every project.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">5 类必须写清楚的验收条目</span><span class="en-only">Five Kinds of Criteria You Always Write</span></h2>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">1. 正常路径：一句话讲完</span><span class="en-only">1. The happy path: one sentence</span></h3>
+      <p><span class="zh-only">"输入手机号和密码，点登录，1 秒内进入工作台，工作台顶部显示用户昵称。"就这一句，不写"体验流畅""布局合理"。你要的是<strong>可观察的事实</strong>，不是形容词。</span><span class="en-only">"Enter phone and password, click login, land on the dashboard within 1 second, with the user's nickname in the header." That's the whole line — no "smooth UX", no "clean layout". You want <strong>observable facts</strong>, not adjectives.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">2. 异常路径：失败时用户看到什么</span><span class="en-only">2. The unhappy path: what the user sees on failure</span></h3>
+      <p><span class="zh-only">这一类最常被漏，也最容易造成"能跑但不敢用"。至少写三条：输入不合法、请求失败（网络/接口超时）、权限不足。明确到文案级别：超时显示"网络有点慢，请重试"并带一个重试按钮，而不是浏览器默认的 500 页面。</span><span class="en-only">This is the most-missed category and the one behind "it runs but I don't trust it". Write at least three: invalid input, request failure (network or API timeout), and insufficient permission. Get it down to copy level: a timeout says "network is slow, try again" with a retry button, not the browser's default 500 page.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">3. 边界值：最多、最少、最长</span><span class="en-only">3. Boundaries: maximum, minimum, longest</span></h3>
+      <p><span class="zh-only">上传文件最大 10MB？标题最多 50 字？最多加 20 个标签？列表一屏显示 20 条？这些数字不写，AI 会按它自己的默认值来，而默认值常常正好卡在你想做的那件事上（比如默认限制 5MB）。</span><span class="en-only">Max upload 10MB? Title max 50 characters? Up to 20 tags? 20 rows per list view? Leave these out and the model picks its own defaults — and its defaults often land exactly on the thing you needed to change (a default 5MB upload limit is a classic).</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">4. 小屏表现：写具体的宽度</span><span class="en-only">4. Small screens: name the width</span></h3>
+      <p><span class="zh-only">写"移动端要兼容"等于没写。写"375px 宽（iPhone SE）下不出现横向滚动条，按钮最小点击区域不小于 44×44px，输入框不小于 16px 字号否则 iOS 会自动放大页面"。</span><span class="en-only">"Works on mobile" is the same as writing nothing. Write: "at 375px (iPhone SE) there is no horizontal scrolling, tap targets are at least 44×44px, and inputs are 16px or larger so iOS doesn't zoom the page."</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">5. 不做什么：明确划出边界</span><span class="en-only">5. Not doing: draw the boundary</span></h3>
+      <p><span class="zh-only">每个功能至少写 2–3 条"本期不做"。这既省时间（AI 不会顺手加一堆功能），也省代码量（少写的功能就是少要维护的代码）。我的清单里最常见的三条是：不做第三方登录、不做管理员后台、不做数据导出。</span><span class="en-only">Write two or three "not this round" lines per feature. It saves time (the model won't bolt on extras) and it saves code (features you don't write are code you don't maintain). My three most common entries are: no third-party login, no admin console, no data export.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">别把清单整段丢给 AI 然后说"照着做"</span><span class="en-only">Don't Paste the Checklist and Say "Just Do It"</span></h2>
+  <p>
+    <span class="zh-only">写完清单不等于写完。这是我见过最常见的第二个坑：把 <code>ac.md</code> 整段贴进对话框，说"按这个实现"。AI 会一口气生成 600 行代码，混合了 5 个功能，你既看不懂也没法逐条验收——于是又回到了"看着好像对了"。</span>
+    <span class="en-only">Writing the checklist isn't the end. This is the second most common mistake I see: paste the whole <code>ac.md</code> and say "implement this." The model generates 600 lines mixing five features, you can neither read it nor verify it item by item — and you're right back to "it looks about right".</span>
+  </p>
+  <p>
+    <span class="zh-only">我现在的固定说法是三句话，每次开工都照着说：</span>
+    <span class="en-only">My fixed three-sentence opening, used on every feature now:</span>
+  </p>
+  <ol>
+    <li><span class="zh-only"><strong>"先读 ac.md，列出实现步骤，每一步的改动控制在 30 行以内，先不要写代码。"</strong>这一步你会发现它列的步骤里有三成是多余的，直接删掉。</span><span class="en-only"><strong>"Read ac.md and list the implementation steps, each under 30 changed lines. Don't write code yet."</strong> This is where you find that a third of the proposed steps are unnecessary — delete them.</span></li>
+    <li><span class="zh-only"><strong>"一次只做第 1 步，只改一个文件，做完停下来。"</strong>文件级隔离是重点，出错时你知道该看哪儿，也不会出现"改 A 顺手动了 B"。</span><span class="en-only"><strong>"Do step 1 only, touch one file, then stop."</strong> File-level isolation is the point: when something breaks you know where to look, and you avoid "edited A, quietly broke B".</span></li>
+    <li><span class="zh-only"><strong>"做完告诉我怎么手动验证 ac.md 的第 N 条。"</strong>这句是验收的抓手——它会把抽象条件翻译成你一个非技术的人也能点出来的操作。</span><span class="en-only"><strong>"When it's done, tell me how to manually verify item N of ac.md."</strong> This is your verification handle — it translates abstract criteria into steps a non-technical person can actually click through.</span></li>
+  </ol>
+  <div class="callout info">
+    <strong><span class="zh-only">为什么第 3 句这么重要</span><span class="en-only">Why the third sentence matters so much</span></strong>
+    <p><span class="zh-only">AI 有一种很典型的失败方式：它会写"已实现错误处理"然后给出一段逻辑，但那段逻辑漏了一个状态。我现在的做法是永远让它<strong>用"你该怎么点"的方式回答</strong>——"把手机号填成 13800000000，密码填 abc，然后告诉我屏幕上出现什么字"。这一步把代码正确性变成了可见事实，也顺手把我的验收标准又校准了一遍。</span><span class="en-only">There's a classic failure mode: the model says "error handling implemented" and shows logic that misses one state. So I always ask for the answer as <strong>click instructions</strong> — "enter 13800000000 as the phone and abc as the password, then tell me exactly what text appears on screen". That turns code correctness into a visible fact and re-calibrates my acceptance criteria at the same time.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">同一个需求，两种写法，两种结果</span><span class="en-only">Same Requirement, Two Wordings, Two Outcomes</span></h2>
+  <p>
+    <span class="zh-only">这是我真实做过的一个功能：给已有的 AI 配音工具加一个"批量导出"按钮。</span>
+    <span class="en-only">Here is a real feature I built: adding a "batch export" button to an existing AI voice-over tool.</span>
+  </p>
+  <div class="compare">
+    <div class="col bad">
+      <h4><span class="zh-only">愿望式写法</span><span class="en-only">Wish-style</span></h4>
+      <p><span class="zh-only">"给我的配音页面加一个批量导出功能，用户可以一次导出多个音频。"<br><br>AI 产出：加了个按钮，点击后串行请求 10 个任务，没有进度提示、没有失败重试、没有并发上限、没有导出上限。跑第 3 个任务时页面转了 20 秒，用户以为卡死。<br><br><strong>结果：</strong>返工 4 次才达到能用的状态，累计多花 3.5 小时。</span><span class="en-only">"Add a batch export button to my voice page so users can export several audio files at once."<br><br>What the model produced: a button that fires ten requests serially, with no progress indicator, no retry on failure, no concurrency cap, and no export limit. On the third task the page spun for 20 seconds and users assumed it had hung.<br><br><strong>Outcome:</strong> four rounds of rework to reach something usable, costing an extra 3.5 hours.</span></p>
+    </div>
+    <div class="col good">
+      <h4><span class="zh-only">验收清单式写法</span><span class="en-only">Checklist-style</span></h4>
+      <p><span class="zh-only">"一次最多导出 20 个；按钮点击后立刻变成进度条，显示'3/20'；每 2 个并发请求，不要更多；某个失败不中断整体，失败的排在最后单独重试按钮；全部完成后给一个 zip 下载链接；单次超过 10 分钟未完成则提示'导出量过大，请减少数量'。"<br><br><strong>结果：</strong>一次通过。我自己手动按清单点了一遍，花了 12 分钟；AI 第一版就对了 4 条，第 5 条（超时提示）我自己补了一句让它改。</span><span class="en-only">"At most 20 files per export; the button turns into a progress bar showing '3/20'; 2 concurrent requests, no more; one failure must not abort the batch — failed items go last with their own retry button; when all finish, give a zip download link; if a run exceeds 10 minutes, show 'too many files, please reduce the number'."<br><br><strong>Outcome:</strong> passed on the first try. I clicked through the checklist myself in 12 minutes; the first version hit four criteria, and I only had to ask for one change on the fifth (the timeout message).</span></p>
+    </div>
+  </div>
+  <p>
+    <span class="zh-only">两次都是同一个 AI、同一段对话历史、同样的模型。差别只在于我有没有提前把"什么叫做对了"写下来。</span>
+    <span class="en-only">Same AI, same conversation history, same model both times. The only difference was whether I had written down what "done" meant before starting.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">真实复盘：我的"周报生成"功能返工了 3 次</span><span class="en-only">An Honest Post-Mortem: Three Rounds of Rework on My Weekly-Report Feature</span></h2>
+  <p>
+    <span class="zh-only">2026 年 6 月，我给一个内部工具加了"自动生成周报"。这个功能后来成了我教别人写验收清单时最常举的例子，因为它把三种典型的翻车方式凑齐了。</span>
+    <span class="en-only">In June 2026 I added "auto-generate a weekly report" to an internal tool. It has since become the example I reach for most when teaching acceptance checklists, because it happens to contain all three classic ways to go wrong.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">轮次</span><span class="en-only">Round</span></th>
+        <th><span class="zh-only">我写了什么需求</span><span class="en-only">What I actually specified</span></th>
+        <th><span class="zh-only">返工次数</span><span class="en-only">Rework rounds</span></th>
+        <th><span class="zh-only">结果</span><span class="en-only">Outcome</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">第 1 次</span><span class="en-only">Round 1</span></td>
+        <td><span class="zh-only">"帮我把周报自动生成出来"</span><span class="en-only">"help me auto-generate the weekly report"</span></td>
+        <td>4</td>
+        <td><span class="zh-only">输出全是"本周完成了 A、B 两项工作"这种废话</span><span class="en-only">Output was filler like "completed work A and B this week"</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 2 次</span><span class="en-only">Round 2</span></td>
+        <td><span class="zh-only">补了内容要求（要包含数据、结论、下周计划）</span><span class="en-only">Added content rules (data, conclusions, next week's plan)</span></td>
+        <td>2</td>
+        <td><span class="zh-only">内容和格式都对不上公司模板，导出来还得手改</span><span class="en-only">Content right, formatting wrong — the export still needed manual fixing</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">第 3 次</span><span class="en-only">Round 3</span></td>
+        <td><span class="zh-only">完整验收清单 6 条 + 2 条"不做什么"</span><span class="en-only">A full 6-item checklist plus 2 "not doing" lines</span></td>
+        <td>0</td>
+        <td><span class="zh-only">一次通过，自己手动验了 15 分钟</span><span class="en-only">Passed first time; 15 minutes of manual verification</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout success">
+    <strong><span class="zh-only">关键数字</span><span class="en-only">The number that matters</span></strong>
+    <p><span class="zh-only">第 3 次写清单花了 <strong>28 分钟</strong>，换来 6 次返工的消失（那 6 次加起来约 4 小时）。更值钱的是后两周：同一个功能，我给 AI 的要求从 3 句话变成一份清单，那 3 周里其他 4 个功能<strong>全部一次通过</strong>。所以清单的真实成本是 28 分钟，真实收益是"以后每个功能少花 1 小时"。</span><span class="en-only">Round 3 took <strong>28 minutes</strong> to write and eliminated six rounds of rework (about four hours). The bigger payoff came two weeks later: for the same feature my instructions went from three sentences to a checklist, and over the next three weeks all four other features <strong>passed on the first try</strong>. So the list really cost 28 minutes and really saved about an hour on every future feature.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">5 个最常见的反模式</span><span class="en-only">Five Anti-Patterns to Avoid</span></h2>
+  <ol>
+    <li><span class="zh-only"><strong>把清单写成功能清单。</strong>"要有搜索框""要有筛选"——这是功能，不是验收。对策：每一条都补一句"怎么算做对了"。</span><span class="en-only"><strong>Writing a feature list instead of an acceptance list.</strong> "It needs a search box", "it needs filters" — those are features, not acceptance. Countermeasure: append "how would I know it's right" to every line.</span></li>
+    <li><span class="zh-only"><strong>只写正常路径。</strong>只写顺利的情况，等于把异常处理交给了 AI 的临场发挥。对策：强制自己写满三条异常路径，写不出来就说明这个功能还没想清楚。</span><span class="en-only"><strong>Writing only the happy path.</strong> Leaving error handling to the model's improvisation. Countermeasure: force yourself to write three failure paths — if you can't, the feature isn't thought through yet.</span></li>
+    <li><span class="zh-only"><strong>写了清单却没逐条对。</strong>清单变成了贴在墙上的装饰。对策：交付时要求 AI 逐条列出"哪一条已满足、哪一条还没做"，一次没对齐就不算完成。</span><span class="en-only"><strong>Writing a checklist but never matching item to item.</strong> It becomes wallpaper. Countermeasure: at hand-off, require the model to state "which items are satisfied, which are not" — anything unmatched means it isn't done.</span></li>
+    <li><span class="zh-only"><strong>清单太长。</strong>超过 20 条，AI 会开始漏。对策：一批 5–8 条，分批确认；把"本期"和"下期"分开写。</span><span class="en-only"><strong>The list gets too long.</strong> Past 20 items the model starts dropping them. Countermeasure: work in batches of 5–8 and keep "this round" separate from "next round".</span></li>
+    <li><span class="zh-only"><strong>清单写完就归档。</strong>功能改了、需求变了，清单还是老的。对策：改代码和改清单必须是同一个动作，我把它写进 commit message 里。</span><span class="en-only"><strong>The list is written once and filed away.</strong> The feature changes, the requirement changes, the list doesn't. Countermeasure: changing code and changing the list are one action — I put it in the commit message.</span></li>
+  </ol>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">结论：花 20 分钟，换回三小时的确定性</span><span class="en-only">Conclusion: Twenty Minutes for Three Hours of Certainty</span></h2>
+  <p>
+    <span class="zh-only">这件事的收益不在"让 AI 变聪明"，而在<strong>让协作变得可预测</strong>。清单把"我以为的"和"它做的"之间的缝隙堵上，让每次交付的返工率下降。它还有一个副作用经常被忽略：<strong>你被迫想清楚自己要什么</strong>。写不出验收标准的那一刻，通常就是你还没想清楚的那一刻——这时候停下来，比写 500 行之后再推翻便宜得多。</span>
+    <span class="en-only">The payoff isn't "a smarter model" — it's <strong>predictable collaboration</strong>. The checklist closes the gap between what you assumed and what it built, and it drops your rework rate on every hand-off. There's a side effect people miss: <strong>the checklist forces you to work out what you actually want</strong>. The moment you can't write a criterion is usually the moment you haven't decided yet — and stopping there is far cheaper than writing 500 lines and throwing them away.</span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">明天的第一件事：打开你正在做的项目，为当前那个功能写一份 5 条以内的验收清单，然后让 AI 读完它、列出实现步骤。不要写代码。</span><span class="en-only">Tomorrow's first task: open the project you're working on, write an acceptance checklist of five lines or fewer for the feature in front of you, then let the AI read it and list the implementation steps. Don't write code yet.</span></p>
+  </div>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

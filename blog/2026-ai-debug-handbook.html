@@ -1,0 +1,363 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AI 写的代码跑不起来怎么办：普通人的排查手册 | When AI-Generated Code Won't Run: A Debugging Handbook for Non-Developers</title><meta name="description" content="报错看不懂、问 AI 越问越乱？这份排查手册教你分辨语法错、运行时错和逻辑错，读懂常见报错，用正确的姿势把错误喂回给 AI，并判断什么时候该放弃重写。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-ai-debug-handbook-hero.jpg" alt="Debugging broken AI-generated code" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">AI 编程</span><span class="en-only">| AI Coding</span></div>
+    <h1 class="reveal"><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won't Run: A Debugging Handbook for Non-Developers</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.22 — 从"它又坏了"到 20 分钟定位问题，一套能照着做的流程</span><span class="en-only">2026.10.22 — From "it's broken again" to a 20-minute diagnosis, a process you can actually follow</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">先说一个反直觉的结论</span><span class="en-only">An Uncomfortable Conclusion First</span></h2>
+  <p>
+    <span class="zh-only">我统计过自己 2026 年上半年用 AI 写代码的记录：所有"跑不起来"的时刻里，<strong>真正需要理解代码才能解决的占 18%，剩下 82% 都是"信息没给够"或者"指令没说清"</strong>——也就是说，大部分时候你不需要会写代码，只需要知道怎么把情况描述清楚。</span>
+    <span class="en-only">I went back through my own AI coding sessions from the first half of 2026. Of every "it won't run" moment, <strong>only 18% actually required understanding the code. The other 82% were "I didn't give it enough information" or "my instruction was ambiguous"</strong> — which means you mostly don't need to write code, you need to know how to describe the situation precisely.</span>
+  </p>
+  <p>
+    <span class="zh-only">但普通人的真实体验是：报错信息像天书，问 AI 它又改出新问题，改了三轮更糟了。这个循环我见过太多次——包括我自己。所以这篇不讲"怎么成为程序员"，只讲一件事：<strong>怎么在 20 分钟内把一个报错的 AI 代码，变成一个能跑的。</strong></span>
+    <span class="en-only">But the typical experience is: the error message looks like gibberish, you ask AI, it introduces a new problem, and after three rounds it's worse than before. I've seen that loop too many times — including running it myself. So this isn't about becoming a programmer. It's about one thing: <strong>getting a broken AI-written feature running within 20 minutes.</strong></span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">本文的核心方法只有一句：<strong>不要描述"它坏了"，要描述"我做了什么、期望什么、实际发生了什么"。</strong>前者是抱怨，后者是任务描述——AI 只会认真对待后者。</span><span class="en-only">The method behind this article is one sentence: <strong>don't describe "it's broken" — describe "what I did, what I expected, what actually happened."</strong> The first is a complaint; the second is a task description. AI only takes the second seriously.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第一步：给报错分类</span><span class="en-only">Step 1: Sort the Error Into a Bucket</span></h2>
+  <p>
+    <span class="zh-only">所有报错看起来都差不多，但处理方式完全不同。分类错了，后面全是白费。只需要问三个问题就能分清：</span>
+    <span class="en-only">All errors look alike, but they're handled completely differently. Get the bucket wrong and everything after it is wasted. Three questions sort it out:</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">类型</span><span class="en-only">Type</span></th>
+        <th><span class="zh-only">什么时候出现</span><span class="en-only">When it appears</span></th>
+        <th><span class="zh-only">典型信号</span><span class="en-only">Typical signal</span></th>
+        <th><span class="zh-only">该做什么</span><span class="en-only">What to do</span></th>
+        <th><span class="zh-only">占我遇到的比例</span><span class="en-only">Share of my cases</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><span class="zh-only">A. 语法错</span><span class="en-only">A. Syntax</span></strong></td>
+        <td><span class="zh-only">代码根本没跑起来</span><span class="en-only">The code never starts</span></td>
+        <td><span class="zh-only">括号没闭合、引号用了中文标点、少了逗号</span><span class="en-only">Unclosed bracket, full-width punctuation, a missing comma</span></td>
+        <td><span class="zh-only">把完整报错贴给 AI，它 30 秒能修</span><span class="en-only">Paste the full error; it fixes it in 30 seconds</span></td>
+        <td><span class="zh-only">31%</span><span class="en-only">31%</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">B. 运行时错</span><span class="en-only">B. Runtime</span></strong></td>
+        <td><span class="zh-only">跑起来了，中途崩了</span><span class="en-only">Starts, then dies</span></td>
+        <td><span class="zh-only">"Cannot read property of undefined"、404、500、超时</span><span class="en-only">"Cannot read property of undefined", 404, 500, timeouts</span></td>
+        <td><span class="zh-only">先查数据和环境，再贴报错</span><span class="en-only">Check data and environment first, then paste the error</span></td>
+        <td><span class="zh-only">44%</span><span class="en-only">44%</span></td>
+      </tr>
+      <tr>
+        <td><strong><span class="zh-only">C. 逻辑错</span><span class="en-only">C. Logic</span></strong></td>
+        <td><span class="zh-only">能跑，但结果不对</span><span class="en-only">Runs, wrong result</span></td>
+        <td><span class="zh-only">不报错，就是数字不对、顺序不对、少了一条</span><span class="en-only">No error, but the numbers, the order, or the count are wrong</span></td>
+        <td><span class="zh-only">自己造一个能复现的最小例子</span><span class="en-only">Build a minimal reproducing example</span></td>
+        <td><span class="zh-only">25%</span><span class="en-only">25%</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <strong><span class="zh-only">为什么逻辑错最值得警惕</span><span class="en-only">Why Logic Errors Deserve the Most Caution</span></strong>
+    <p><span class="zh-only">语法错和运行时错都会大声报错，你立刻知道出事了。逻辑错是<strong>沉默的</strong>——界面正常显示、流程走完，只是数字不对。我见过最贵的一次：AI 写的对账逻辑在测试数据上正确，在真实数据上因为一条脏数据少算了一笔，客户两个月后才发现。</span><span class="en-only">Syntax and runtime errors are loud — you know immediately. Logic errors are <strong>silent</strong>: the UI renders, the flow completes, the numbers are just wrong. The most expensive one I've seen was a reconciliation routine that was correct on test data and missed a transaction on real data because of one dirty record. The customer found it two months later.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第二步：读懂那条报错</span><span class="en-only">Step 2: Learn to Read the Error Message</span></h2>
+  <p>
+    <span class="zh-only">报错信息其实高度模板化。同一类错误，99% 的情况是同一行关键字在起作用。<strong>你不需要读懂整段英文，你只需要认出那一个关键字。</strong></span>
+    <span class="en-only">Error messages are highly templated. For the same class of error, one keyword does the work 99% of the time. <strong>You don't need to understand the whole English line — you need to recognize that one word.</strong></span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">看到这些词</span><span class="en-only">When you see</span></th>
+        <th><span class="zh-only">它的意思是</span><span class="en-only">It means</span></th>
+        <th><span class="zh-only">第一件该做的事</span><span class="en-only">First move</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>SyntaxError</code> <code>Unexpected token</code></td>
+        <td><span class="zh-only">语法不对，括号/引号/逗号有问题</span><span class="en-only">Syntax is wrong — a bracket, quote, or comma</span></td>
+        <td><span class="zh-only">检查报错行号附近 3 行，从那行往前找未闭合的括号</span><span class="en-only">Check the 3 lines around the reported line, then look backwards for an unclosed bracket</span></td>
+      </tr>
+      <tr>
+        <td><code>Module not found</code> <code>Cannot find module</code></td>
+        <td><span class="zh-only">依赖没装，或者路径写错</span><span class="en-only">A dependency isn't installed, or the path is wrong</span></td>
+        <td><span class="zh-only">先装依赖，再怀疑路径</span><span class="en-only">Install the dependency first, doubt the path second</span></td>
+      </tr>
+      <tr>
+        <td><code>Cannot read property of undefined</code></td>
+        <td><span class="zh-only">有个变量是空的，代码却直接用它了</span><span class="en-only">A value is empty and the code used it anyway</span></td>
+        <td><span class="zh-only">打印出那个变量在报错前是什么</span><span class="en-only">Print what that value actually is right before the failure</span></td>
+      </tr>
+      <tr>
+        <td><code>ENOENT</code> <code>404</code> <code>EACCES</code></td>
+        <td><span class="zh-only">文件/路径不存在，或者权限不够</span><span class="en-only">File or route not found, or no permission</span></td>
+        <td><span class="zh-only">核对路径拼写和运行目录</span><span class="en-only">Check the path spelling and the working directory</span></td>
+      </tr>
+      <tr>
+        <td><code>CORS</code> <code>blocked by policy</code></td>
+        <td><span class="zh-only">浏览器不让前端直接调后端</span><span class="en-only">The browser won't let the frontend call the backend</span></td>
+        <td><span class="zh-only">别改代码，先确认后端是否真的开着</span><span class="en-only">Don't change code — check whether the backend is even running</span></td>
+      </tr>
+      <tr>
+        <td><code>API key</code> <code>401</code> <code>403</code> <code>quota</code></td>
+        <td><span class="zh-only">密钥没配、过期，或者额度用完</span><span class="en-only">Key missing, expired, or out of quota</span></td>
+        <td><span class="zh-only">查 <code>.env</code> 和账单页，这两个问题经常同时出现</span><span class="en-only">Check <code>.env</code> and the billing page — these two often come together</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout tip">
+    <strong><span class="zh-only">只截取有用的那一段</span><span class="en-only">Paste Only the Useful Part</span></strong>
+    <p><span class="zh-only">整段终端输出经常有几百行，全贴给 AI 反而稀释重点。你要的是三样东西：<strong>第一行报错类型、最后一行说在哪失败、中间那行红色的代码片段</strong>。把别的删掉。</span><span class="en-only">A full terminal dump is often hundreds of lines, and pasting all of it dilutes the signal. You want three things: <strong>the first line naming the error type, the last line saying where it failed, and the highlighted code line in between.</strong>Delete the rest.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">第三步：把情况描述清楚</span><span class="en-only">Step 3: Describe the Situation Clearly</span></h2>
+  <p>
+    <span class="zh-only">这是整篇文章最重要的一节。AI 看不到你的屏幕，也看不到你的文件——它只能看到你打的字。你给的信息越少，它只能猜；它猜错之后还得改，于是你越问越乱。</span>
+    <span class="en-only">This is the most important section of the article. AI can't see your screen or your files — only what you type. The less you give it, the more it guesses; and when it guesses wrong it has to change something, which is how the loop spirals.</span>
+  </p>
+  <div class="compare">
+    <div class="col bad">
+      <h4><span class="zh-only">会越问越乱的问法</span><span class="en-only">The request that spirals</span></h4>
+      <p>
+        <span class="zh-only">"这个功能又坏了，你帮我看看。"<br><br>AI 只能反问你，或者凭猜测改代码。改完你再测，还是坏，再问，它再改。<strong>三轮之后你手里有 4 个版本的代码，没有一个能跑，而且你也说不清现在是哪个版本在跑。</strong><br><br>根因：它不知道你的运行环境、不知道你期望什么、不知道你已经试过什么。</span>
+        <span class="en-only">"This feature is broken again, take a look."<br><br>AI can only ask you questions or guess at edits. You test, it's still broken, you ask again, it edits again. <strong>Three rounds later you have four versions of the code, none of which runs, and you can no longer say which one you're running.</strong><br><br>Root cause: it doesn't know your environment, your expectation, or what you've already tried.</span>
+      </p>
+    </div>
+    <div class="col good">
+      <h4><span class="zh-only">一次就能收敛的问法</span><span class="en-only">The request that converges</span></h4>
+      <p>
+        <span class="zh-only">"运行 <code>npm run dev</code> 后访问 <code>/invoice</code> 页面，浏览器控制台报 <code>TypeError: Cannot read properties of undefined (reading 'total')</code>，位置在 <code>src/features/invoice/summary.tsx</code> 第 42 行。我期望显示发票总额 1280 元，页面显示空白。后端 <code>/api/invoice/123</code> 返回正常。<strong>请先只做一件事：告诉我第 42 行那个值为什么是 undefined，不要修改任何文件。</strong>"<br><br>根因：四要素齐全——环境、期望、实际、边界。</span>
+        <span class="en-only">"After <code>npm run dev</code>, opening <code>/invoice</code> gives <code>TypeError: Cannot read properties of undefined (reading 'total')</code> in the console, at <code>src/features/invoice/summary.tsx</code> line 42. I expect a total of 1280; the page is blank. The backend <code>/api/invoice/123</code> responds fine. <strong>Do one thing only: tell me why the value at line 42 is undefined. Don't change any files.</strong>"<br><br>Root cause: all four elements present — environment, expectation, actual, constraint.</span>
+      </p>
+    </div>
+  </div>
+  <pre data-lang="prompt">【环境】Next.js 14.2 + TypeScript 5.4，本地 npm run dev，Node 20.11
+【我在做什么】访问 /invoice 页面，显示发票汇总卡片
+【期望】卡片显示总额 1280 元，列表显示 3 条明细
+【实际】页面空白，控制台报错
+【报错原文】
+TypeError: Cannot read properties of undefined (reading 'total')
+    at InvoiceSummary (src/features/invoice/summary.tsx:42:18)
+【已经排除】
+- 后端 /api/invoice/123 用 curl 查过，返回 200 且有 total 字段
+- 浏览器 Network 面板里该请求也是 200，不是 CORS
+【请你】
+1. 先只做分析：第 42 行那个值可能为什么是 undefined？列出 3 个最可能的原因
+2. 不要修改任何文件，等我确认原因后再动手
+3. 如果 3 个原因你无法区分，告诉我需要我提供什么信息</pre>
+  <div class="callout success">
+    <strong><span class="zh-only">这个模板为什么有效</span><span class="en-only">Why This Template Works</span></strong>
+    <p><span class="zh-only">五个区块各干一件事：<strong>环境</strong>让 AI 不用猜版本，<strong>动作</strong>让它知道你在哪一步，<strong>期望 vs 实际</strong>把"坏了"变成可描述的差异，<strong>报错原文</strong>避免二次转述失真，<strong>已排除项</strong>防止它在同一个地方绕圈。最后那句"先只做分析，不要改文件"，把"诊断"和"修复"分成两轮——这一句能把改坏代码的概率降低一半以上。</span><span class="en-only">Each block does one job: <strong>environment</strong> stops it guessing versions; <strong>action</strong> says where you are; <strong>expected vs actual</strong> turns "broken" into a describable gap; <strong>raw error</strong> avoids distortion through retyping; <strong>already ruled out</strong> stops it circling the same spot. And "analyse only, don't touch files" splits diagnosis from repair into two rounds — that one line more than halves the chance of breaking working code.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">五类最常见的报错，和对应的提示词</span><span class="en-only">Five Common Errors and the Prompt for Each</span></h2>
+  <p>
+    <span class="zh-only">下面这五类覆盖了我遇到的所有"跑不起来"。每一类我都写好了可以直接复制的提示词，你只需要把尖括号里的内容替换掉。</span>
+    <span class="en-only">These five cover every "it won't run" I've hit. For each one there's a prompt you can copy — just replace what's in the angle brackets.</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">报错类别</span><span class="en-only">Error class</span></th>
+        <th><span class="zh-only">提示词要点</span><span class="en-only">Prompt key</span></th>
+        <th><span class="zh-only">要补的信息</span><span class="en-only">Info you must supply</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">依赖装不上 / 版本冲突</span><span class="en-only">Install or version conflict</span></td>
+        <td><span class="zh-only">"不要升级依赖版本，只调整配置"</span><span class="en-only">"Don't upgrade dependencies, adjust configuration only"</span></td>
+        <td><span class="zh-only">报错全文、<code>package.json</code> 内容、Node 版本</span><span class="en-only">Full error, <code>package.json</code>, Node version</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">接口调不通（404 / 500 / CORS）</span><span class="en-only">API won't connect</span></td>
+        <td><span class="zh-only">"先列出前端请求的 URL 和后端实际路由，对比差异"</span><span class="en-only">"List the frontend URL and the actual backend route, then diff them"</span></td>
+        <td><span class="zh-only">前端请求代码、后端路由代码、浏览器 Network 面板的请求 URL</span><span class="en-only">Frontend call, backend route, the URL from the Network panel</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">空值 / undefined</span><span class="en-only">Null or undefined</span></td>
+        <td><span class="zh-only">"在报错行之前加一条日志，打印这个变量的实际值，先别改逻辑"</span><span class="en-only">"Add one log before the failing line to print the actual value; don't change logic yet"</span></td>
+        <td><span class="zh-only">报错行前后的 10 行代码、数据来自哪个接口</span><span class="en-only">10 lines around the failure, which API the data comes from</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">结果算错了</span><span class="en-only">Wrong result</span></td>
+        <td><span class="zh-only">"给我一组输入输出对照表，先写测试再改实现"</span><span class="en-only">"Give me an input/output table, then write the test before changing the implementation"</span></td>
+        <td><span class="zh-only">一组具体的输入、期望值、实际值</span><span class="en-only">One concrete input, the expected value, the actual value</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">本地能跑，部署后不行</span><span class="en-only">Works locally, fails deployed</span></td>
+        <td><span class="zh-only">"列出本地和生产的 5 项差异，逐项排查，不要一次改多处"</span><span class="en-only">"List 5 differences between local and production, check one at a time, don't change several at once"</span></td>
+        <td><span class="zh-only">部署平台、环境变量清单、线上完整报错</span><span class="en-only">Platform, env var list, the full production error</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <pre data-lang="prompt">线上环境排查，部署在 <你的平台>，Node 20.11。
+
+现象：本地 npm run dev 一切正常，部署后访问首页 500。
+
+请按这个顺序做，一次只做一步，做完让我确认再继续：
+1. 对比本地与线上环境的差异，列出最可能的 5 项
+   （我已知：线上环境变量只有 3 个，本地有 7 个）
+2. 从最可能的一项开始，给出具体的检查命令或操作步骤
+3. 我执行后把结果发给你，你再判断下一步
+4. 在我确认之前，不要修改任何代码
+
+不要一次性给出 5 个修改方案。我一次只能改一个东西。</pre>
+  <div class="callout warn">
+    <strong><span class="zh-only">一次只改一个地方</span><span class="en-only">Change One Thing at a Time</span></strong>
+    <p><span class="zh-only">AI 最爱一次给你 5 个修改建议，然后你全改了，5 个都可能是对的，也有可能第 3 个和第 5 个互相冲突，你根本不知道是谁把什么弄坏的。<strong>要求它"一次一步，我确认后再继续"，会让整个过程慢 10 分钟，但让你始终知道当前状态。</strong></span><span class="en-only">AI loves handing you five changes at once. You apply them all; some are right, but #3 and #5 might conflict and you have no idea which one broke what. <strong>Asking for "one step at a time, I confirm before you continue" costs about ten extra minutes and keeps you in a state where you always know what's true.</strong></span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一次真实的排障记录</span><span class="en-only">A Real Debugging Session</span></h2>
+  <p>
+    <span class="zh-only">2026 年 8 月，我的一个小工具（把 CSV 转成报销单）在部署后连续三天白屏。记录一下，因为这大概是普通人最典型的一次翻车。</span>
+    <span class="en-only">In August 2026 one of my small tools — a CSV-to-expense-sheet converter — showed a blank screen for three days after deployment. Worth recording, because it's the most typical non-developer's outage I can think of.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">第 1 天：我怀疑环境（猜错了）</span><span class="en-only">Day 1: I Suspected the Environment (Wrongly)</span></h3>
+      <p><span class="zh-only">我贴了报错，让 AI 改代码。它改了 4 个文件，加了一堆 try/catch 和日志。部署，还是白屏，而且报错更长了。<strong>损失：1 小时，代码变脏了 4 个文件。</strong></span><span class="en-only">I pasted the error and let AI change the code. It touched 4 files, adding try/catch blocks and logging. Deployed: still blank, and the error got longer. <strong>Cost: 1 hour and 4 dirtier files.</strong></span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 2 天：我用对了模板（找到方向）</span><span class="en-only">Day 2: I Used the Template Properly (Found the Direction)</span></h3>
+      <p><span class="zh-only">这次我按五要素写：环境、动作、期望、实际、报错原文。AI 看完第一句话就说：<strong>"你报的是前端报错，但这个错误在服务端日志里。给我服务端日志。"</strong>我贴了服务端日志，里面写着 <code>Cannot find module './config'</code>——服务器上少了一个配置文件。改完就好了。</span><span class="en-only">This time I used all five elements. AI's first sentence was: <strong>"You're showing me a frontend error, but this error lives in the server log. Give me the server log."</strong>I pasted it: <code>Cannot find module './config'</code> — a config file was missing on the server. Fixed, done.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">第 3 天：我把流程固化了</span><span class="en-only">Day 3: I Made It a Process</span></h3>
+      <p><span class="zh-only">我在项目里放了一个 <code>BUG_REPORT.md</code> 模板，以后每次报错先填这个模板再问 AI。同时写了一条部署检查清单：配置文件、环境变量、目录结构。<strong>从那以后，同类问题平均 12 分钟解决。</strong></span><span class="en-only">I added a <code>BUG_REPORT.md</code> template to the project and fill it in before asking AI anything. I also wrote a deployment checklist: config files, env vars, directory structure. <strong>Since then, the same class of problem averages 12 minutes.</strong></span></p>
+    </div>
+  </div>
+  <blockquote>
+    <span class="zh-only">三天里我真正学到的不是"怎么修这个 bug"，而是"我第一天缺了什么信息"。第一天我以为 AI 应该猜得到服务器上缺文件——它猜不到，因为它看不到我的服务器。</span>
+    <span class="en-only">What I learned in those three days wasn't "how to fix this bug" — it was "what information did I withhold on day one." I expected AI to guess that a file was missing on my server. It couldn't; it can't see my server.</span>
+  </blockquote>
+  <div class="callout tip">
+    <strong><span class="zh-only">顺手做的一件事</span><span class="en-only">The One Thing Worth Copying</span></strong>
+    <p><span class="zh-only">在项目根目录放一个 <code>BUG_REPORT.md</code>，里面写好五个小标题：环境、我在做什么、期望、实际、报错原文。<strong>每次报错你只需要往里填，不用重新组织语言。</strong>这个文件我到现在每个项目都有。</span><span class="en-only">Put a <code>BUG_REPORT.md</code> in the project root with five subheadings: Environment, What I'm doing, Expected, Actual, Raw error. <strong>Each failure just means filling it in, not re-organizing your words.</strong>I still have this file in every project.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">让 AI 自己验证的三招</span><span class="en-only">Three Ways to Make AI Verify Its Own Work</span></h2>
+  <p>
+    <span class="zh-only">最好的修 bug 方式，是让 AI 修完之后自己证明它修好了。下面三招按有效性排序。</span>
+    <span class="en-only">The best way to fix a bug is to make AI prove it fixed it. Here are three techniques, best first.</span>
+  </p>
+  <h3><span class="zh-only">第一招：让它自己跑</span><span class="en-only">1. Make It Run the Code</span></h3>
+  <p>
+    <span class="zh-only">如果你的项目有测试（哪怕只有一个），直接说"改完运行 <code>npm test</code>，把失败的用例贴给我"。这招最有效，因为它把"我改好了"变成"测试证明了它改好了"。<strong>这是我推荐所有人做的第一件事——哪怕只写一个测试。</strong></span>
+    <span class="en-only">If your project has any tests at all, say "after changing it, run <code>npm test</code> and paste the failures." This is the most effective technique, because it turns "I fixed it" into "the test proves it." <strong>This is the first thing I'd tell anyone to set up — even a single test.</strong></span>
+  </p>
+  <h3><span class="zh-only">第二招：让它自己复现</span><span class="en-only">2. Make It Reproduce</span></h3>
+  <p>
+    <span class="zh-only">"先写一个能稳定复现这个 bug 的脚本或测试用例，让它跑出失败，然后再修。"这一招的价值在于：如果它写不出复现脚本，说明<strong>它自己也没搞清楚问题是什么</strong>——这时候就该停下来重新描述，而不是让它继续改。</span>
+    <span class="en-only">"First write a script or test that reliably reproduces this bug, run it and show it failing, then fix it." The value: if it can't write a reproduction, <strong>it doesn't understand the problem either</strong> — and that's your signal to stop and describe the situation again, not to keep editing.</span>
+  </p>
+  <h3><span class="zh-only">第三招：让它列出所有改动</span><span class="en-only">3. Make It List Every Change</span></h3>
+  <p>
+    <span class="zh-only">"改完之后给我一个清单：改了哪些文件、每个文件改了什么、为什么。"这一招防的是"顺手优化"——AI 经常在修 bug 的同时改掉别的东西，而你不看 diff 就发现不了。<strong>改完先看清单，再看 diff，最后再合并。</strong></span>
+    <span class="en-only">"After you're done, give me a list: which files changed, what changed in each, and why." This guards against drive-by "improvements" — AI often edits unrelated things while fixing, and you won't notice without looking at the diff. <strong>Read the list, then the diff, then merge.</strong></span>
+  </p>
+  <pre data-lang="prompt">修复完成后，请依次做这三件事，每件做完停下等我确认：
+
+1. 运行 npm test，把结果原样贴给我（包括通过数量）
+2. 给我一个改动清单：文件名 / 改了什么 / 为什么改
+3. 指出这次修改可能引入的 2 个新问题，以及怎么验证它们
+
+不要改动本次修复无关的文件。
+如果测试仍然失败，直接告诉我失败，不要继续尝试新的修改。</pre>
+  <div class="callout info">
+    <strong><span class="zh-only">一个反直觉的结论</span><span class="en-only">A Counterintuitive Conclusion</span></strong>
+    <p><span class="zh-only">"让 AI 自己跑"这一招，会让<strong>它修得更慢，但错得更少</strong>。我统计过：要求"改完自己跑测试"之后，同一类 bug 的平均修复轮次从 2.4 轮降到 1.6 轮。慢了一点，但一轮就对的概率高得多。</span><span class="en-only">"Make AI run it" makes it <strong>slower but less wrong</strong>. In my logs, adding "run the tests after you change it" dropped average fix rounds for the same bug class from 2.4 to 1.6. A little slower, far more often right on the first go.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">什么时候该放弃重写</span><span class="en-only">When to Stop Rewriting and Start Over</span></h2>
+  <p>
+    <span class="zh-only">有一种失败模式比修不好更糟：<strong>你和 AI 反复重写同一个功能，永远差一点。</strong>这种情况下继续修是浪费。判断标准有三个，命中任意一个就该停下来。</span>
+    <span class="en-only">There's a failure mode worse than not fixing it: <strong>you and AI rewrite the same feature forever, always a little short.</strong>At that point, continuing is waste. Three signals mean stop.</span>
+  </p>
+  <ul>
+    <li><span class="zh-only"><strong>改到第 5 轮还在原地打转</strong>：第 5 轮的报错和第 3 轮几乎一样，说明你们的理解始终没对齐，问题不在代码，在描述。继续改只会越改越乱。</span><span class="en-only"><strong>Round 5 looks like round 3</strong> — if the error barely changed, your two descriptions never aligned. The problem isn't the code, it's the description. More edits only make it messier.</span></li>
+    <li><span class="zh-only"><strong>AI 开始"顺手优化"不相关的地方</strong>：这是它在用改代码代替思考。正确做法是回滚这一步，把问题拆成更小的一块再问。</span><span class="en-only"><strong>AI starts "improving" unrelated code</strong> — it's editing instead of thinking. Roll that step back, split the problem smaller, and ask again.</span></li>
+    <li><span class="zh-only"><strong>你说不清"它到底应该做什么"</strong>：最常见也最致命。如果你只能用"就是不对"来描述，那 AI 收到的就是"就是不对"，它只能瞎猜。<strong>这时候该回去写需求，不是回去修代码。</strong></span><span class="en-only"><strong>You can't say what it should do</strong> — the most common and the most fatal. If all you have is "it's just wrong," that's all AI gets. <strong>Go back to requirements, not to code.</strong></span></li>
+  </ul>
+  <div class="callout warn">
+    <strong><span class="zh-only">最坏的一种循环</span><span class="en-only">The Worst Loop of All</span></strong>
+    <p><span class="zh-only">你描述不清楚 → AI 猜 → 改坏 → 你更混乱 → 描述更不清楚。<strong>打破点永远是回到起点：把"我想要什么"用一句人话写出来</strong>，而不是继续往对话里塞报错。实在写不出来，就先别用 AI，自己用笔写五分钟。</span><span class="en-only">You describe badly → AI guesses → breaks more → you're more confused → you describe worse. <strong>The way out is always to go back to the start: write what you want in one plain sentence</strong> instead of feeding more stack traces into the chat. If you truly can't, stop using AI for five minutes and write it by hand first.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">一份排查清单</span><span class="en-only">A Debugging Checklist</span></h2>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">保留现场</span><span class="en-only">Preserve the Scene</span></h3>
+      <p><span class="zh-only">报错时别急着关终端。<strong>先截图或复制完整输出</strong>，包括前后各 20 行。很多时候重跑一遍就看不到那段了。</span><span class="en-only">Don't close the terminal. <strong>Screenshot or copy the full output</strong> including 20 lines either side. Sometimes it's gone on the next run.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">先分类，再动手</span><span class="en-only">Classify Before You Touch Anything</span></h3>
+      <p><span class="zh-only">语法错、运行时错、逻辑错，三条路完全不同。先用 30 秒判断属于哪一类，能省掉一小时。</span><span class="en-only">Syntax, runtime, or logic — three different roads. Thirty seconds of classification saves an hour.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">先排除，再提问</span><span class="en-only">Rule Out First, Then Ask</span></h3>
+      <p><span class="zh-only">把"我已经确认没问题的部分"列出来（后端通吗？依赖装了吗？环境变量配了吗？），再问 AI。带着排除清单提问，答案质量差别很大。</span><span class="en-only">List what you've already ruled out (backend up? dependencies installed? env vars set?), then ask. The difference in answer quality is large.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">一次改一处</span><span class="en-only">One Change at a Time</span></h3>
+      <p><span class="zh-only">每改一处就测一次。AI 一次给五个建议时，坚持让它按顺序来，你确认一个它做一个。</span><span class="en-only">Test after each change. When AI offers five suggestions at once, insist it go in order, one at a time, with your confirmation between.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">看 diff 再合并</span><span class="en-only">Read the Diff Before You Merge</span></h3>
+      <p><span class="zh-only">最后一步，也是最容易被跳过的一步。<strong>AI 改完不读 diff 就合并，等于没看过自己项目的代码。</strong>养成习惯：这行 diff 你读不懂，就别合。</span><span class="en-only">The last step, and the most-skipped. <strong>Merging without reading the diff means you never saw your own code.</strong>Make it a rule: if you can't read the line, don't merge it.</span></p>
+    </div>
+  </div>
+  <div class="highlight">
+    <p><span class="zh-only">最后一句：<strong>会修 bug 不是 AI 编程的核心技能，"会描述问题"才是。</strong>前者需要读代码，后者只需要你真的知道自己要什么——而后者恰恰是 AI 帮不了你的部分。所以每次报错，别急着贴终端，先花一分钟想清楚"我到底要它做什么"。</span><span class="en-only">Closing thought: <strong>the core skill isn't fixing bugs, it's describing them.</strong>Fixing needs you to read code; describing needs only clarity about what you want — and that's precisely the part AI can't do for you. So before you paste the terminal output, spend a minute deciding what you actually want it to do.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">写在最后</span><span class="en-only">Closing Thoughts</span></h2>
+  <p>
+    <span class="zh-only">那份白屏了三天的报销单工具，最后只改了一行：一个文件名的大小写。<strong>而找到它花了我两天，因为第一天我一直在让 AI 改代码，而不是在告诉它我的服务器上少了什么。</strong></span>
+    <span class="en-only">The expense-sheet converter that stayed blank for three days turned out to be one character: a filename's case. <strong>Finding it took two days, because on day one I kept asking AI to change code instead of telling it what my server was missing.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">如果你正在跟一个跑不起来的 AI 代码较劲，先停一下，问自己一句：<strong>我是不是还没告诉它"我做了什么、期望什么、实际发生了什么"？</strong>大概率答案是"还没"。那这三行字就是你现在最该做的事。</span>
+    <span class="en-only">If you're currently fighting code that won't run, stop and ask yourself: <strong>have I actually told it "what I did, what I expected, what happened"?</strong>The answer is almost certainly "no." Those three lines are what you should do right now.</span>
+  </p>
+  <hr>
+  <p>
+    <span class="zh-only">相关阅读：<a href="2026-vibe-coding-advanced.html">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</a> · <a href="2026-from-demo-to-production.html">从 Demo 到上线：AI 生成代码的生产化改造清单</a> · <a href="2026-ai-coding-landscape.html">2026 AI 编程工具全景：选型指南</a></span>
+    <span class="en-only">Related reading: <a href="2026-vibe-coding-advanced.html">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</a> · <a href="2026-from-demo-to-production.html">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</a> · <a href="2026-ai-coding-landscape.html">The 2026 AI Coding Landscape: A Selection Guide</a></span>
+  </p>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>可以直接抄的 10 个 AI 小产品：普通人怎么选 | 10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</title><meta name="description" content="10 个已经被验证过的小型 AI 产品：谁会用、用什么技术、真实开发时长、定价和最大的坑。最后给一套 4 问筛选法，帮你从 10 个里挑出最适合你动手的那一个。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<article>
+<header class="hero">
+  <img src="2026-small-products-hero.jpg" alt="Grid of small product tiles" loading="eager">
+  <div class="hero-overlay">
+    <div class="tag"><span class="zh-only">产品</span><span class="en-only">| Product</span></div>
+    <h1 class="reveal"><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></h1>
+    <p class="hero-sub reveal"><span class="zh-only">2026.10.12 — 每个都写清了开发时长、定价和最大的坑，附一套 4 问筛选法</span><span class="en-only">2026.10.12 — Build time, price, and the biggest trap for each, plus a 4-question filter</span></p>
+  </div>
+</header>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">为什么我不建议你从"自己的想法"开始</span><span class="en-only">Why I Don't Recommend Starting From "My Own Idea"</span></h2>
+  <p>
+    <span class="zh-only">"我想做个 XX"是所有产品失败故事的起点。2025 年我记录过自己 6 个"从零想出来"的产品，结果是：3 个没人用，2 个有人用但不付钱，1 个做到月入 ¥400 就停了。而我后来做的那个月入 ¥7,260 的简历优化器，<strong>根本不是我想出来的，是客户用钱包投出来的</strong>。</span>
+    <span class="en-only">"I want to build an X" is where every failed product begins. In 2025 I tracked six products I invented from scratch: three nobody used, two were used but not paid for, and one plateaued at ¥400 a month. The résumé optimizer that now earns ¥7,260 a month <strong>wasn't my idea at all — customers elected it with their wallets.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">所以这篇文章不讲"怎么产生一个酷想法"，而是直接给 10 个<strong>已经被验证过</strong>的小产品：每个都写清楚谁会用、用什么技术、我或别人实际花了多久做完、能收多少钱、以及最大的坑是什么。你要做的是<strong>挑一个抄</strong>，而不是从空白页开始。</span>
+    <span class="en-only">So this article isn't about generating a clever idea. It gives you ten <strong>already-validated</strong> micro-products: who uses them, what tech they need, how long it actually took, what they can charge, and the biggest trap in each. Your job is to <strong>pick one and copy it</strong>, not to start from a blank page.</span>
+  </p>
+  <div class="highlight">
+    <p><span class="zh-only">下面这 10 个都满足同三个条件：<strong>一个人 2 周内能做出来</strong>、<strong>解决的问题足够具体</strong>（有人现在就在用 Excel 或微信手工做）、<strong>结果可以被一眼验收</strong>（对完就完事，不用解释）。</span><span class="en-only">All ten share three properties: <strong>one person can build it in under two weeks</strong>, <strong>the problem is specific enough</strong> (people are doing it by hand in Excel or WeChat right now), and <strong>the result is checkable at a glance</strong> — done is done, nothing to explain.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">先搞清楚：什么叫"够小"</span><span class="en-only">First: What "Small Enough" Actually Means</span></h2>
+  <p>
+    <span class="zh-only">"小"不是功能少，而是<strong>只有一个人能同时搞定的复杂度</strong>。我用三条判断，任何一条不满足，这个产品对新手就太大了：</span>
+    <span class="en-only">"Small" doesn't mean few features. It means <strong>a complexity one person can hold in their head at once</strong>. I use three tests; fail any one and the product is too big for a beginner:</span>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">判断</span><span class="en-only">Test</span></th>
+        <th><span class="zh-only">合格的样子</span><span class="en-only">Passing</span></th>
+        <th><span class="zh-only">不合格的样子</span><span class="en-only">Failing</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">① 输入是什么</span><span class="en-only">1. What's the input?</span></td>
+        <td><span class="zh-only">一份文件 / 一段文字 / 一个表格</span><span class="en-only">A file, a block of text, a spreadsheet</span></td>
+        <td><span class="zh-only">一堆要连起来的数据源</span><span class="en-only">Several data sources to join</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">② 输出是什么</span><span class="en-only">2. What's the output?</span></td>
+        <td><span class="zh-only">一页表格 / 一段带标记的文本 / 一张图</span><span class="en-only">One table, one annotated text, one image</span></td>
+        <td><span class="zh-only">一个要长期维护的系统</span><span class="en-only">A system you must maintain forever</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">③ 怎么算做对了</span><span class="en-only">3. How do you know it's right?</span></td>
+        <td><span class="zh-only">一眼能看出来</span><span class="en-only">Visible at a glance</span></td>
+        <td><span class="zh-only">要懂业务才能判断</span><span class="en-only">Needs domain expertise to judge</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <span class="zh-only">第三条最容易被忽略，也最致命。<strong>如果你自己都不能一眼看出结果对不对，客户也看不出</strong>——他就不敢付第二次钱。我的定价页因此都会写一句"不满意可退款"，因为我知道有些东西我判断不了，只能靠客户来判。</span>
+    <span class="en-only">The third test gets skipped most and is the most dangerous. <strong>If you can't tell at a glance whether the output is right, the client can't either</strong> — and won't pay a second time. That's why my pricing pages all say "refund if you're not satisfied": some things I can't judge, so the client has to.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">10 个产品总览</span><span class="en-only">The 10 at a Glance</span></h2>
+  <table>
+    <thead>
+      <tr>
+        <th><span class="zh-only">产品</span><span class="en-only">Product</span></th>
+        <th><span class="zh-only">谁会用</span><span class="en-only">Who uses it</span></th>
+        <th><span class="zh-only">核心技术</span><span class="en-only">Core tech</span></th>
+        <th><span class="zh-only">实际耗时</span><span class="en-only">Real time</span></th>
+        <th><span class="zh-only">能收多少</span><span class="en-only">Price</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="zh-only">1. 合同关键条款提取</span><span class="en-only">1. Contract clause extractor</span></td>
+        <td><span class="zh-only">小公司老板、HR、采购</span><span class="en-only">Small business owners, HR, buyers</span></td>
+        <td><span class="zh-only">长文档切分 + 结构化输出</span><span class="en-only">Long-doc chunking + structured output</span></td>
+        <td><span class="zh-only">5 天</span><span class="en-only">5 days</span></td>
+        <td><span class="zh-only">¥299 / 份</span><span class="en-only">¥299 per contract</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">2. 电商图批量改尺寸</span><span class="en-only">2. Bulk product-image resizing</span></td>
+        <td><span class="zh-only">淘宝/拼多多小卖家</span><span class="en-only">Taobao/Pinduoduo sellers</span></td>
+        <td><span class="zh-only">图片处理 + 命名规则</span><span class="en-only">Image processing + naming rules</span></td>
+        <td><span class="zh-only">3 天</span><span class="en-only">3 days</span></td>
+        <td><span class="zh-only">¥99 / 月</span><span class="en-only">¥99/month</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">3. 岗位匹配度打分</span><span class="en-only">3. Job-match scorecard</span></td>
+        <td><span class="zh-only">求职者</span><span class="en-only">Job seekers</span></td>
+        <td><span class="zh-only">提示词 + 对比报告</span><span class="en-only">Prompting + comparison report</span></td>
+        <td><span class="zh-only">4 天</span><span class="en-only">4 days</span></td>
+        <td><span class="zh-only">¥19 / 次</span><span class="en-only">¥19 per run</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">4. 会议录音转待办</span><span class="en-only">4. Meeting audio to to-dos</span></td>
+        <td><span class="zh-only">10 人以下团队</span><span class="en-only">Teams under 10</span></td>
+        <td><span class="zh-only">语音转写 + 行动项抽取</span><span class="en-only">Transcription + action-item extraction</span></td>
+        <td><span class="zh-only">4 天</span><span class="en-only">4 days</span></td>
+        <td><span class="zh-only">¥199 / 月</span><span class="en-only">¥199/month</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">5. 差旅报销单整理</span><span class="en-only">5. Expense report cleanup</span></td>
+        <td><span class="zh-only">常出差的销售、行政</span><span class="en-only">Travelling sales, admin</span></td>
+        <td><span class="zh-only">OCR + 表格清洗</span><span class="en-only">OCR + spreadsheet cleaning</span></td>
+        <td><span class="zh-only">6 天</span><span class="en-only">6 days</span></td>
+        <td><span class="zh-only">¥399 / 单</span><span class="en-only">¥399 per batch</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">6. 竞品价格监控提醒</span><span class="en-only">6. Competitor price watcher</span></td>
+        <td><span class="zh-only">淘宝店主、独立站卖家</span><span class="en-only">Shop owners, DTC sellers</span></td>
+        <td><span class="zh-only">定时抓取 + 变化推送</span><span class="en-only">Scheduled scraping + change alerts</span></td>
+        <td><span class="zh-only">7 天</span><span class="en-only">7 days</span></td>
+        <td><span class="zh-only">¥59 / 月</span><span class="en-only">¥59/month</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">7. 客服 FAQ 机器人</span><span class="en-only">7. Support FAQ bot</span></td>
+        <td><span class="zh-only">有客服的网店、小公司</span><span class="en-only">Shops and small firms with support</span></td>
+        <td><span class="zh-only">知识库检索 + 生成</span><span class="en-only">Knowledge retrieval + generation</span></td>
+        <td><span class="zh-only">8 天</span><span class="en-only">8 days</span></td>
+        <td><span class="zh-only">¥1,500 搭建 + ¥299 / 月</span><span class="en-only">¥1,500 setup + ¥299/month</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">8. 商品描述批量生成</span><span class="en-only">8. Bulk product descriptions</span></td>
+        <td><span class="zh-only">多平台卖家</span><span class="en-only">Multi-platform sellers</span></td>
+        <td><span class="zh-only">表格 + 模板 + 批量生成</span><span class="en-only">Sheet + template + batch generation</span></td>
+        <td><span class="zh-only">2 天</span><span class="en-only">2 days</span></td>
+        <td><span class="zh-only">¥0.5 / 条</span><span class="en-only">¥0.5 per listing</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">9. 视频自动加字幕</span><span class="en-only">9. Auto subtitles for video</span></td>
+        <td><span class="zh-only">做短视频的个人博主</span><span class="en-only">Solo short-video creators</span></td>
+        <td><span class="zh-only">语音识别 + 时间轴对齐</span><span class="en-only">ASR + timeline alignment</span></td>
+        <td><span class="zh-only">9 天</span><span class="en-only">9 days</span></td>
+        <td><span class="zh-only">¥15 / 条</span><span class="en-only">¥15 per video</span></td>
+      </tr>
+      <tr>
+        <td><span class="zh-only">10. 周报/月报自动汇总</span><span class="en-only">10. Weekly report digest</span></td>
+        <td><span class="zh-only">10 人以上团队</span><span class="en-only">Teams over 10</span></td>
+        <td><span class="zh-only">数据聚合 + 定时任务</span><span class="en-only">Data aggregation + scheduled jobs</span></td>
+        <td><span class="zh-only">5 天</span><span class="en-only">5 days</span></td>
+        <td><span class="zh-only">¥299 / 月</span><span class="en-only">¥299/month</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <span class="zh-only">"实际耗时"这一列是我踩过坑之后的数字，不是理想值。它包含了返工：合同条款提取我第一次做只花了 2 天，但那份原型只能处理 5 页以内，上线后被客户拿 40 页的合同砸了，又花了 3 天重做切分策略。<strong>宁可按表里的数字估，不要按你第一次的速度估。</strong></span>
+    <span class="en-only">The "real time" column reflects what actually happened, including rework. My first contract extractor took two days — but handled only five pages, and a client threw a 40-page contract at it, so I spent three more days redoing the chunking. <strong>Budget against this column, never against your first attempt's speed.</strong></span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">抄法示范 1：合同关键条款提取</span><span class="en-only">Copy Example 1: Contract Clause Extractor</span></h2>
+  <p>
+    <span class="zh-only">需求来自一个做外贸的朋友：他每次签合同要人工找违约金、付款节奏、知识产权归属、管辖法院这 4 项，翻 30 页 PDF 要 40 分钟，还经常漏。他一年签 200 多份，<strong>这就是一个真实存在、且有人愿意花钱的 40 分钟</strong>。</span>
+    <span class="en-only">The request came from a friend in foreign trade: for every contract he manually located the penalty clause, payment schedule, IP ownership, and jurisdiction — forty minutes of scrolling through 30-page PDFs, and he often missed one. He signs over 200 contracts a year, so that's <strong>a real forty minutes that someone will pay to get back</strong>.</span>
+  </p>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">输出长什么样（先定这个）</span><span class="en-only">Define the output first</span></h3>
+      <p><span class="zh-only">固定 4 行，每行 3 段：条款原文（引用）、风险等级（高/中/低）、建议动作。<strong>输出格式固定，用户才有习惯</strong>。不要做成"AI 帮你分析合同"——那是聊天，做不成产品。</span><span class="en-only">Always four rows, three fields each: the clause quoted verbatim, a risk level (high/medium/low), and a suggested action. <strong>A fixed output shape is what creates a habit.</strong> Don't ship "AI analyses your contract" — that's a chat feature, not a product.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">技术上的关键一步：切分</span><span class="en-only">The one technical crux: chunking</span></h3>
+      <p><span class="zh-only">整份合同直接丢给模型会漏（长文档被读漏是普遍现象）。正确做法是<strong>先按章节切成块，再每块问 4 个问题，最后合并</strong>。切分用"章节标题 + 段落开头"做锚点，比按固定字数切靠谱得多——按字数切会把一个条款劈成两半。</span><span class="en-only">Feeding the whole contract to the model loses content — long-document truncation is universal. The fix: <strong>split into sections first, ask the four questions per section, then merge.</strong> Anchor chunks on headings and paragraph openings rather than fixed character counts, which slice a single clause in half.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">定价与交付</span><span class="en-only">Price and deliver</span></h3>
+      <p><span class="zh-only">我给他做的是 <strong>¥299/份，当天出结果</strong>，每份附一个"我人工核对了这 4 项"的声明。他第一个月用了 9 份，之后改成了 ¥2,999/年的包月。这个产品最后变成了我「AI 接单」里最稳定的一类收入。</span><span class="en-only">I charged <strong>¥299 per contract, same-day delivery</strong>, each with a note saying "I verified these four items by hand". He used nine in the first month and then moved to ¥2,999/year. It became the steadiest line in my service business.</span></p>
+    </div>
+  </div>
+  <div class="callout warn">
+    <strong><span class="zh-only">这个产品最大的坑</span><span class="en-only">The biggest trap in this one</span></strong>
+    <p><span class="zh-only">法律责任。合同分析结果如果出了错，谁负责？<strong>我的做法是明写免责：工具做初筛和提示，最终判断由使用者负责</strong>，并在输出里标注"引用自第 X 页，可回原文核对"。这一条让我的客户放心，也让这件事从"AI 瞎说"变成"AI 帮你快速定位"。</span><span class="en-only">Liability. If the analysis is wrong, who is responsible? <strong>My answer: an explicit disclaimer that the tool pre-screens and flags, and the human decides</strong>, plus every quote labelled "from page X — go verify". That single line reassures clients and turns "AI made something up" into "AI found it fast".</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">抄法示范 2：电商图批量改尺寸与命名</span><span class="en-only">Copy Example 2: Bulk Product-Image Resizing</span></h2>
+  <p>
+    <span class="zh-only">这个的逻辑最简单，但需求最密集：一个淘宝卖家每周上新 40 件商品，每件要出 5 个尺寸（主图、详情图、缩略图……）并按平台规则重命名。<strong>他每周花 3 小时在拖鼠标。</strong></span>
+    <span class="en-only">The logic here is the simplest, but the pain is the most repetitive: a Taobao seller lists 40 products a week, each needing five sizes (hero, detail, thumbnail…) renamed to platform rules. <strong>He spends three hours a week dragging the mouse.</strong></span>
+  </p>
+  <p>
+    <span class="zh-only">这个产品的技术含量最低，但有三个细节决定它是"能用"还是"没人用"：<strong>第一，命名规则要能自己配</strong>（不同平台不一样）；<strong>第二，压缩后画质不能糊</strong>；<strong>第三，要给一张对照表让他确认</strong>，别直接覆盖原图。</span>
+    <span class="en-only">The technical depth is the lowest, but three details separate "usable" from "ignored": <strong>naming rules must be configurable</strong> (every platform differs), <strong>compression must not blur the image</strong>, and <strong>you must show a before/after table</strong> rather than overwriting originals.</span>
+  </p>
+  <p>
+    <span class="zh-only">定价我做的是 <strong>¥99/月不限量</strong>，因为处理成本几乎为零（一次上传，几分钟跑完）。真正贵的是"帮你把第一次的规则配好"，那部分是一次性 <strong>¥300 的设置费</strong>。这个结构后来被我的其他工具照抄：<strong>按月收低固定费，把一次性设置和规则定制单独收费</strong>。</span>
+    <span class="en-only">I charged <strong>¥99/month unlimited</strong>, because processing costs almost nothing. The expensive part is configuring the rules correctly the first time, so that's a one-off <strong>¥300 setup fee</strong>. I've reused that structure ever since: <strong>a low flat monthly fee, with setup and custom rules priced separately</strong>.</span>
+  </p>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">抄法示范 3：岗位匹配度打分</span><span class="en-only">Copy Example 3: Job-Match Scorecard</span></h2>
+  <p>
+    <span class="zh-only">求职者投完简历不知道差在哪。这个产品做两件事：把简历和岗位描述逐条对比，输出 <strong>5 个匹配项 + 3 个差距项 + 3 条具体改写建议</strong>。难点在于"差距项"要具体到句子。</span>
+    <span class="en-only">Job seekers send résumés and never learn why they were ignored. This one compares a résumé against a job description line by line and outputs <strong>5 matches, 3 gaps, and 3 concrete rewrite suggestions</strong>. The hard part is making each gap specific to a sentence.</span>
+  </p>
+  <p>
+    <span class="zh-only">我的做法是把岗位描述先拆成"硬性要求 / 加分项 / 关键词"三栏，再逐条去简历里找证据，<strong>找不到就是差距，找到就引用原文</strong>。输出里必须带原文引用，因为求职者要拿这个去改简历，他需要知道"我漏了哪句"。</span>
+    <span class="en-only">My method: split the job description into "required / nice-to-have / keywords", then hunt for evidence for each line in the résumé — <strong>no evidence means a gap; found evidence means quote it</strong>. The output must quote the original, because the candidate needs to know which sentence to rewrite.</span>
+  </p>
+  <p>
+    <span class="zh-only">定价 <strong>¥19/次</strong>，比订阅低很多，因为这是"一次性焦虑"而不是"日常需求"。<strong>低单价高频次</strong>是这个模式的特点：我的用户里 34% 一个月用了 3 次以上。</span>
+    <span class="en-only">Priced at <strong>¥19 per run</strong>, well below a subscription, because this is one-off anxiety rather than a daily need. <strong>Low price, high frequency</strong> is the signature of this model: 34% of my users ran it more than three times in a month.</span>
+  </p>
+  <div class="callout tip">
+    <strong><span class="zh-only">顺带一个观察</span><span class="en-only">A side observation</span></strong>
+    <p><span class="zh-only">第 3 个和第 10 个产品，本质上是我前两篇文章里讲过的同一个套路的两个版本：<strong>先用手工版接单，攒够样本之后再产品化</strong>。如果你也想做这类小产品，最省钱的顺序永远是：先人工服务 20 个人，再动手写代码。</span><span class="en-only">Products 3 and 10 are two versions of the same lesson from my earlier articles: <strong>run the manual version first, accumulate twenty samples, then productise</strong>. If you want to build something like these, the cheapest order is always: serve twenty people by hand, then write code.</span></p>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">用 4 个问题挑出你的那一个</span><span class="en-only">Pick Your One With Four Questions</span></h2>
+  <div class="steps">
+    <div class="step reveal">
+      <h3><span class="zh-only">① 你有 3 个月没跟人说过话的领域吗？</span><span class="en-only">1. Is there a field you could talk about for 3 hours straight?</span></h3>
+      <p><span class="zh-only">有，就选那个领域的产品。合同提取对应外贸和 HR，图片处理对应电商，打分对应招聘。<strong>你对领域的理解，比你对技术的理解更值钱</strong>——技术是通用能力，领域知识才是别人抄不走的。</span><span class="en-only">If yes, pick from that field. Clause extraction maps to trade and HR, image tooling to e-commerce, scorecards to recruitment. <strong>Your domain knowledge is worth more than your technical knowledge</strong> — technical skill is generic; knowing a field is what nobody can copy.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">② 你身边有人正在手工做这件事吗？</span><span class="en-only">2. Does someone you know do this by hand right now?</span></h3>
+      <p><span class="zh-only">这是最重要的一个问题。手工做意味着：痛是真实的、频率是可算的、验收标准是现成的（看他现在怎么做）。<strong>找不到这样的人，就别做这个产品</strong>——那说明痛点还没被验证过，你只是看别人抱怨而已。</span><span class="en-only">This is the most important question. Doing it by hand means the pain is real, the frequency is countable, and the acceptance criteria already exist — watch how they do it today. <strong>If you can't find that person, don't build it</strong>: the pain is unvalidated and all you have is other people's complaints.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">③ 你能不能在 7 天内做出一个"能给人看"的版本？</span><span class="en-only">3. Can you have a demonstrable version in 7 days?</span></h3>
+      <p><span class="zh-only">"能给人看"的意思是：一个真实的人，把真实的东西丢进去，拿到一个能用的结果。页面丑一点没关系，<strong>能跑通输入输出闭环</strong>就行。做不到，说明技术选错了，不是你不行。</span><span class="en-only">"Demonstrable" means: a real person puts a real thing in and gets a usable result out. Ugly pages are fine — <strong>the input-output loop just has to close</strong>. If you can't, the stack choice is wrong, not you.</span></p>
+    </div>
+    <div class="step reveal">
+      <h3><span class="zh-only">④ 你能接受它可能一辈子只赚 ¥3,000 吗？</span><span class="en-only">4. Can you accept it might never earn more than ¥3,000 a month?</span></h3>
+      <p><span class="zh-only">大部分小产品的天花板就是月入几千块。我自己的模板包每月稳定在 ¥3,100，我会用它交房租，但它从没让我发财。<strong>接受这件事，你才能做出好东西；不接受，你会不停换项目，然后什么都没做完。</strong></span><span class="en-only">Most micro-products cap out in the low thousands per month. My own template pack sits steadily at ¥3,100 — it pays rent but never made me rich. <strong>Accept that and you can build something good; refuse it and you'll keep switching projects and finish nothing.</strong></span></p>
+    </div>
+  </div>
+</section>
+
+<section class="prose reveal">
+  <h2><span class="zh-only">抄之前，先确认这 3 件事</span><span class="en-only">Before You Copy: Confirm These Three Things</span></h2>
+  <ol>
+    <li><span class="zh-only"><strong>你的第一个客户不能是陌生人。</strong>从你那个"手工做这件事"的人开始。第一个客户来自陌生人时，你大概率会做出他不要的东西，然后归咎于市场。</span><span class="en-only"><strong>Your first client can't be a stranger.</strong> Start with the person who does it by hand. When your first client is a stranger, you will probably build what they don't want and blame the market.</span></li>
+    <li><span class="zh-only"><strong>先手工交付 5 单，再写代码。</strong>这 5 单会告诉你：输入长什么样、输出到什么程度算够、愿意付多少钱。你会发现真正该做的功能，跟你以为的根本不是一回事。</span><span class="en-only"><strong>Deliver five jobs by hand before you write code.</strong> Those five tell you what the inputs really look like, what "good enough" means, and what people will pay. The real feature list usually isn't the one you imagined.</span></li>
+    <li><span class="zh-only"><strong>确认它不依赖某个会收费或改规则的第三方。</strong>抓取类、平台 API 类产品最容易踩坑：平台一改规则或者一封号，你的收入当场归零。抄之前先查一遍依赖。</span><span class="en-only"><strong>Check it doesn't depend on a third party that can charge you or change the rules.</strong> Scraping and platform-API products are the most fragile: when the rules change or the account gets banned, your revenue is zero that day. Check dependencies before you copy.</span></li>
+  </ol>
+  <blockquote>
+    <span class="zh-only">抄作业不丢人。丢人的是花三个月做出一个没人要的东西，然后归咎于"AI 不行"。</span>
+    <span class="en-only">Copying isn't shameful. Spending three months building something nobody wanted — and blaming AI — is.</span>
+  </blockquote>
+  <div class="callout success">
+    <strong><span class="zh-only">最后的建议</span><span class="en-only">Final advice</span></strong>
+    <p><span class="zh-only">如果只能选一个，我推荐<strong>第 4 个（会议录音转待办）</strong>——不是因为它最赚钱，而是因为它<strong>你自己就是用户</strong>。做自己的产品时，每个决定都不用在脑子里演"客户会想要吗"，因为你就是客户。我做这个产品时，第一版只有 40 分钟，因为我自己每天都在用。做 3 周之后我才知道，真正被用得最多的是"只提取有明确负责人和截止日期的待办"这一条——这件事没有任何用户告诉过我，是我自己用了 3 周发现的。</span><span class="en-only">If you can only pick one, take <strong>#4 (meeting audio to to-dos)</strong> — not because it earns most, but because <strong>you are the user</strong>. Building for yourself means you never have to imagine "would a client want this?", because you are the client. My first version took 40 minutes. After three weeks of daily use I learned that the feature people actually used was "only extract action items with a named owner and a due date" — something no user ever told me. Three weeks of using it myself found that.</span></p>
+  </div>
+</section>
+
+</article>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script></body></html>
