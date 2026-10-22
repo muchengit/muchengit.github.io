@@ -16,6 +16,10 @@ class P(html.parser.HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.stack, self.errs = [], []
+    def handle_startendtag(self, t, a):
+        # 自闭合写法 <x/>：HTMLParser 默认会回调 start+end，这里直接忽略，
+        # 否则 VOID 中的 SVG 元素（path/circle/...）会出现「孤立 </path>」误报
+        pass
     def handle_starttag(self, t, a):
         if t not in VOID:
             self.stack.append((t, self.getpos()))

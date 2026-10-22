@@ -123,6 +123,27 @@
         chip.style.display = 'none';
       }
     }
+
+    /* 分类筛选 chip */
+    var catChip = document.getElementById('catChip');
+    if (catChip) {
+      if (state.cat) {
+        catChip.style.display = '';
+        var cLbl = catChip.querySelector('.zh-only');
+        var cLblEn = catChip.querySelector('.en-only');
+        if (cLbl) cLbl.textContent = '分类：' + state.cat;
+        if (cLblEn) cLblEn.textContent = 'Category: ' + state.cat;
+      } else {
+        catChip.style.display = 'none';
+      }
+    }
+
+    /* 有任意筛选生效时，隐藏引导提示，只留 chip */
+    var hint = document.querySelector('.f-active .f-hint');
+    if (hint) {
+      var active = !!(state.year || state.cat || state.tag || state.q);
+      hint.style.display = active ? 'none' : '';
+    }
   }
 
   /* ---------- 4. URL 同步（?cat=入门&tag=AI 调试&q=prompt #2026） ---------- */
@@ -215,6 +236,11 @@
   var tagClear = document.getElementById('tagClear');
   if (tagClear) tagClear.addEventListener('click', function () {
     setState({ year: state.year, cat: state.cat, tag: '', q: state.q });
+  });
+
+  var catClear = document.getElementById('catClear');
+  if (catClear) catClear.addEventListener('click', function () {
+    setState({ year: state.year, cat: '', tag: state.tag, q: state.q });
   });
 
   window.addEventListener('hashchange', function () {

@@ -44,76 +44,172 @@
   font-size:clamp(28px,4.2vw,46px);line-height:1.16;
   letter-spacing:-.02em;margin:20px 0 14px;
 }
-.idx-hero .sub{color:var(--text-2);font-size:15px;font-family:var(--font-m);letter-spacing:.01em}
+.idx-hero .sub{color:var(--text-2);font-size:15px;font-family:var(--font-m);letter-spacing:.01em;line-height:1.75}
 .idx-hero .art-meta{margin-top:26px}
+
+/* ---- 顶部统计条：数字突出，单位弱化 ---- */
+.idx-hero .art-meta{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;
+  padding:16px 22px;border:1px solid var(--border);border-radius:14px;
+  background:var(--surface);backdrop-filter:blur(10px);
+}
+.idx-hero .art-meta .m{
+  display:inline-flex;align-items:baseline;gap:8px;
+  font-family:var(--font-m);font-size:11px;letter-spacing:.06em;color:var(--text-3);
+}
+.idx-hero .art-meta .m b{
+  font-family:var(--font-m);font-size:19px;font-weight:600;line-height:1.15;
+  color:var(--text);letter-spacing:-.02em;
+}
+.idx-hero .art-meta .sep{width:1px;height:16px;background:var(--border-2);align-self:center}
 
 /* ---- 筛选栏 ---- */
 .filters{
-  margin:26px 0 0;padding:20px 22px;
-  border:1px solid var(--border);border-radius:16px;
-  background:var(--surface);backdrop-filter:blur(10px);
+  margin:26px 0 0;padding:22px 24px 20px;
+  border:1px solid var(--border);border-radius:18px;
+  background:var(--surface);backdrop-filter:blur(12px);
+  box-shadow:0 20px 50px -38px rgba(0,0,0,.9);
 }
-.f-row{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
-.f-row+.f-row{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+/* 标题 + 数量 */
+.f-head{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:0 2px 16px;margin-bottom:20px;border-bottom:1px solid var(--border);
+}
+.f-title{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-h);font-weight:600;font-size:15px;letter-spacing:.01em;color:var(--text);
+}
+.f-title::before{
+  content:"";width:3px;height:17px;border-radius:2px;flex:0 0 3px;
+  background:linear-gradient(180deg,var(--cyan),var(--violet));
+}
+.f-count{
+  font-family:var(--font-m);font-size:11.5px;color:var(--text-3);letter-spacing:.05em;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+}
+.f-count b{color:var(--cyan);font-weight:500;font-size:13px}
+/* 行 */
+.f-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px 20px;align-items:start}
+.f-row+.f-row{margin-top:18px;padding-top:18px;border-top:1px solid var(--border)}
+.f-row.is-stack{grid-template-columns:minmax(0,1fr);gap:11px}
 .f-label{
-  font-family:var(--font-m);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--text-3);flex:0 0 92px;width:92px;padding-top:8px;
+  display:flex;align-items:center;gap:8px;padding-top:8px;
+  font-family:var(--font-m);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-3);
 }
-.pills{display:flex;flex-wrap:wrap;gap:8px;flex:1 1 auto;min-width:0}
+.f-label::before{
+  content:"";width:5px;height:5px;border-radius:50%;flex:0 0 5px;
+  background:var(--border-2);transition:background .22s ease,box-shadow .22s ease;
+}
+.f-row:hover .f-label::before{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.f-row.is-stack .f-label{padding-top:0}
+/* 胶囊按钮 */
+.pills{display:flex;flex-wrap:wrap;gap:10px;align-items:center;min-width:0}
 .pill{
-  font-family:var(--font-m);font-size:12px;line-height:1.6;
-  padding:6px 14px;border-radius:999px;cursor:pointer;
-  background:transparent;border:1px solid var(--border);color:var(--text-2);
-  transition:all .22s ease;white-space:nowrap;
+  position:relative;display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--font-m);font-size:12px;line-height:1;
+  padding:9px 15px;border-radius:999px;cursor:pointer;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);
+  transition:color .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease,transform .22s cubic-bezier(.2,.7,.2,1);
+  white-space:nowrap;-webkit-appearance:none;appearance:none;
 }
-.pill:hover{color:var(--cyan);border-color:var(--cyan-soft);background:var(--cyan-soft)}
-.pill.active{color:var(--cyan);border-color:rgba(0,229,255,.45);background:var(--cyan-soft)}
-.f-search{display:flex;align-items:center;gap:12px;flex:1 1 auto;flex-wrap:wrap;min-width:0}
+.pill::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.pill:hover{
+  color:var(--text);border-color:var(--border-2);background:var(--surface-2);
+  transform:translateY(-1px);
+}
+.pill.active{
+  color:var(--cyan);border-color:var(--cyan);
+  background:linear-gradient(135deg,var(--cyan-soft),var(--violet-soft));
+  box-shadow:0 0 0 3px var(--cyan-soft),0 12px 26px -16px var(--cyan);
+}
+.pill.active::before{
+  content:"";width:5px;height:5px;border-radius:50%;flex:0 0 5px;
+  background:var(--cyan);box-shadow:0 0 8px var(--cyan);
+}
+.pill:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+/* 搜索框 */
+.f-search{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0}
+.f-field{position:relative;display:flex;align-items:center;flex:1 1 260px;min-width:0}
+.f-field-ic{
+  position:absolute;left:15px;width:17px;height:17px;pointer-events:none;
+  color:var(--text-3);transition:color .22s ease;
+}
+.f-field:focus-within .f-field-ic{color:var(--cyan)}
 #q{
-  flex:1 1 220px;min-width:0;
-  background:var(--bg-2);border:1px solid var(--border);border-radius:10px;
-  padding:10px 14px;color:var(--text);
+  width:100%;min-width:0;
+  background:var(--bg-2);border:1px solid var(--border);border-radius:12px;
+  padding:12px 16px 12px 43px;color:var(--text);
   font-family:var(--font-b);font-size:14.5px;line-height:1.6;
-  transition:border-color .2s ease,box-shadow .2s ease;
+  transition:border-color .22s ease,box-shadow .22s ease,background .22s ease;
+  -webkit-appearance:none;appearance:none;
 }
-#q::placeholder{color:var(--text-3)}
-#q:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.12)}
-.count{font-family:var(--font-m);font-size:12px;color:var(--text-3);letter-spacing:.04em;white-space:nowrap}
-.count b{color:var(--cyan);font-weight:500}
+#q::-webkit-search-cancel-button{-webkit-appearance:none;height:15px;width:15px;cursor:pointer;opacity:.45}
+#q::-webkit-search-cancel-button:hover{opacity:.85}
+#q::placeholder{color:var(--text-3);opacity:.92}
+#q:focus{
+  outline:none;border-color:var(--cyan);background:var(--bg-2);
+  box-shadow:0 0 0 3px var(--cyan-soft),0 0 26px -8px var(--cyan);
+}
 .btn-clear{
-  font-family:var(--font-m);font-size:12px;padding:8px 16px;border-radius:999px;cursor:pointer;
+  font-family:var(--font-m);font-size:12px;line-height:1;
+  padding:11px 17px;border-radius:999px;cursor:pointer;
   background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-2);
-  transition:all .22s ease;white-space:nowrap;
+  transition:color .22s ease,border-color .22s ease,background .22s ease,transform .22s cubic-bezier(.2,.7,.2,1);
+  white-space:nowrap;
 }
-.btn-clear:hover{color:var(--cyan);border-color:var(--cyan);background:var(--cyan-soft)}
+.btn-clear:hover{color:var(--cyan);border-color:var(--cyan);background:var(--cyan-soft);transform:translateY(-1px)}
+.btn-clear:active{transform:translateY(0) scale(.98)}
+.btn-clear:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
 /* ---- 文章列表 ---- */
-.post-list{margin:30px 0 0}
+.post-list{margin:32px 0 0}
 .ygroup{margin:0}
-.ygroup+.ygroup{margin-top:34px}
+.ygroup+.ygroup{margin-top:42px}
 .yhead{
-  display:flex;align-items:center;gap:14px;margin:0 0 14px;
+  display:flex;align-items:center;gap:14px;margin:0 0 16px;
   font-family:var(--font-h);font-weight:600;font-size:20px;letter-spacing:-.01em;color:var(--text);
 }
+.yhead::before{
+  content:"";width:9px;height:9px;border-radius:50%;flex:0 0 9px;
+  background:var(--cyan);box-shadow:0 0 0 4px var(--cyan-soft),0 0 14px -2px var(--cyan);
+}
 .yhead::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border-2),transparent)}
-.yhead .yyear{font-family:var(--font-m);font-size:15px;color:var(--cyan);letter-spacing:.06em}
-.yhead .yn{font-family:var(--font-m);font-size:11px;font-weight:400;color:var(--text-3);letter-spacing:.05em}
+.yhead .yyear{
+  font-family:var(--font-m);font-size:25px;font-weight:600;line-height:1;
+  color:var(--text);letter-spacing:.04em;
+}
+.yhead .yn{font-family:var(--font-m);font-size:11.5px;font-weight:400;color:var(--text-3);letter-spacing:.05em}
+.yhead .yn b{color:var(--cyan);font-weight:500}
 .posts{display:flex;flex-direction:column;gap:12px}
 .post{
+  position:relative;overflow:hidden;
   display:grid;grid-template-columns:118px minmax(0,1fr) 26px;
   column-gap:20px;row-gap:8px;align-items:start;
   padding:20px 22px;border:1px solid var(--border);border-radius:14px;
   background:var(--surface);
   transition:transform .28s cubic-bezier(.2,.7,.2,1),border-color .28s ease,background .28s ease,box-shadow .28s ease;
 }
-.post:hover{
-  border-color:var(--cyan);background:var(--cyan-soft);transform:translateX(4px);
-  box-shadow:0 14px 34px -18px rgba(0,229,255,.45);
+.post::before{
+  content:"";position:absolute;left:0;top:12%;bottom:12%;width:2px;border-radius:0 2px 2px 0;
+  background:linear-gradient(180deg,var(--cyan),var(--violet));
+  opacity:0;transform:translateY(8px) scaleY(.5);
+  transition:opacity .28s ease,transform .28s cubic-bezier(.2,.7,.2,1);
 }
+.post:hover{
+  border-color:var(--border-2);background:var(--surface-2);transform:translateX(4px);
+  box-shadow:0 16px 36px -22px rgba(0,229,255,.45);
+}
+.post:hover::before{opacity:1;transform:translateY(0) scaleY(1)}
 .post-date{
   grid-column:1;grid-row:1;align-self:start;
-  font-family:var(--font-m);font-size:12.5px;color:var(--text-3);letter-spacing:.04em;padding-top:4px;
+  font-family:var(--font-m);font-size:12px;color:var(--text-3);letter-spacing:.05em;
+  padding-top:5px;opacity:.85;transition:color .25s ease,opacity .25s ease;
 }
+.post:hover .post-date{color:var(--text-2);opacity:1}
 .post-title{
   grid-column:2;grid-row:1;
   font-family:var(--font-h);font-weight:600;font-size:17.5px;line-height:1.45;
@@ -122,31 +218,76 @@
 .post:hover .post-title{color:var(--cyan)}
 .post-cat{
   grid-column:1;grid-row:2;align-self:start;justify-self:start;
-  font-family:var(--font-m);font-size:10.5px;letter-spacing:.06em;white-space:nowrap;
-  color:var(--violet);background:var(--violet-soft);border:1px solid rgba(168,85,247,.24);
-  padding:3px 10px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-m);font-size:10.5px;font-weight:500;letter-spacing:.07em;white-space:nowrap;
+  color:var(--violet);background:var(--violet-soft);border:1px solid var(--border-2);
+  padding:4px 10px;border-radius:999px;
+  transition:border-color .22s ease,background .22s ease,color .22s ease;
 }
+.post-cat::before{
+  content:"";width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.75;flex:0 0 4px;
+}
+.post:hover .post-cat{border-color:var(--violet)}
 .post-desc{
   grid-column:2;grid-row:2;
-  color:var(--text-3);font-size:13.5px;line-height:1.65;font-family:var(--font-b);
-  overflow-wrap:anywhere;
+  color:var(--text-3);font-size:13.5px;line-height:1.68;font-family:var(--font-b);
+  overflow-wrap:anywhere;transition:color .25s ease;
 }
+.post:hover .post-desc{color:var(--text-2)}
 .post-arrow{
   grid-column:3;grid-row:1/span 2;align-self:center;justify-self:end;
   color:var(--text-3);font-size:15px;transition:transform .25s ease,color .25s ease;
 }
-.post:hover .post-arrow{color:var(--cyan);transform:translateX(3px)}
+.post:hover .post-arrow{color:var(--cyan);transform:translateX(5px)}
 .post.hidden,.ygroup.hidden{display:none}
 
 /* ---- 空状态 ---- */
 .empty{
-  display:none;text-align:center;margin:30px 0 0;padding:56px 24px;
-  border:1px dashed var(--border-2);border-radius:16px;background:var(--surface);
+  display:none;text-align:center;margin:32px 0 0;padding:62px 24px 54px;
+  border:1px dashed var(--border-2);border-radius:18px;background:var(--surface);
 }
 .empty.show{display:block}
-.empty .icon{font-size:30px;line-height:1}
-.empty h3{font-family:var(--font-h);font-weight:600;font-size:19px;margin:14px 0 8px;color:var(--text)}
-.empty p{color:var(--text-2);font-size:14.5px;line-height:1.8;margin-bottom:20px}
+.empty .icon{
+  width:64px;height:64px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;color:var(--cyan);
+  border:1px solid var(--border-2);
+  background:radial-gradient(circle at 50% 22%,var(--cyan-soft),transparent 72%);
+}
+.empty .icon svg{width:29px;height:29px;display:block}
+.empty h3{
+  font-family:var(--font-h);font-weight:600;font-size:20px;line-height:1.4;
+  margin:22px 0 10px;color:var(--text);letter-spacing:-.01em;
+}
+.empty p{
+  color:var(--text-2);font-size:14.5px;line-height:1.9;margin:0 auto 26px;max-width:46ch;
+}
+#emptyClear{
+  color:var(--cyan);border-color:var(--cyan);
+  background:linear-gradient(135deg,var(--cyan-soft),var(--violet-soft));
+  padding:12px 22px;font-size:12.5px;
+}
+#emptyClear:hover{color:var(--text);background:linear-gradient(135deg,var(--cyan),var(--violet));border-color:transparent}
+
+/* ==========================================================================
+   浅色皮肤
+   ========================================================================== */
+html[data-tone="light"] .idx-hero .tag{
+  background:var(--cyan-soft);border-color:var(--border-2);color:var(--cyan);
+}
+html[data-tone="light"] .filters{background:rgba(255,255,255,.72);border-color:var(--border-2)}
+html[data-tone="light"] .f-row+.f-row{border-top-color:var(--border)}
+html[data-tone="light"] .pill{background:rgba(255,255,255,.85)}
+html[data-tone="light"] .pill:hover{background:#fff}
+html[data-tone="light"] .pill.active{background:linear-gradient(135deg,var(--cyan-soft),var(--violet-soft))}
+html[data-tone="light"] #q{background:#fff}
+html[data-tone="light"] .btn-clear{background:rgba(255,255,255,.85)}
+html[data-tone="light"] .post{background:rgba(255,255,255,.72)}
+html[data-tone="light"] .post:hover{background:#fff;box-shadow:0 16px 36px -24px rgba(11,127,168,.32)}
+html[data-tone="light"] .empty{background:rgba(255,255,255,.72)}
+html[data-tone="light"] .empty .icon{background:radial-gradient(circle at 50% 22%,var(--cyan-soft),transparent 72%)}
+html[data-tone="light"] .idx-hero .art-meta{background:rgba(255,255,255,.62)}
+html[data-tone="light"] #emptyClear:hover{color:#fff}
 
 /* ==========================================================================
    响应式
@@ -157,13 +298,16 @@
   .idx-hero h1{font-size:clamp(22px,6vw,32px)}
   .idx-hero .sub{font-size:13px}
   .filters{padding:18px 16px}
-  .f-row{flex-direction:column;gap:10px}
-  .f-label{flex:none;width:auto;padding-top:0}
-  .f-search{width:100%}
+  .f-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .f-row{grid-template-columns:minmax(0,1fr);gap:10px}
+  .f-label{padding-top:0}
+  .f-search{flex-direction:column;align-items:stretch;gap:12px}
+  .f-field{flex:0 0 auto;width:100%}
+  .btn-clear{align-self:flex-start}
   .post{display:flex;flex-direction:column;gap:10px;padding:18px}
   .post-date{order:1;padding-top:0}
   .post-title{order:2;font-size:16.5px}
-  .post-cat{order:3}
+  .post-cat{order:3;align-self:flex-start}
   .post-desc{order:4;font-size:13px}
   .post-arrow{display:none}
 }
@@ -172,12 +316,27 @@
   .idx-hero{margin-top:100px;padding:30px 18px 24px}
   .idx-hero h1{font-size:clamp(19px,6vw,26px)}
   .idx-hero .sub{font-size:12px}
+  .idx-hero .art-meta{padding:14px 15px;gap:8px 14px}
+  .idx-hero .art-meta .m b{font-size:17px}
   .filters{padding:16px 14px}
-  .pill{font-size:11.5px;padding:5px 12px}
+  .pill{font-size:11.5px;padding:8px 13px}
   .post{padding:16px}
   .post-title{font-size:15.5px}
-  .empty{padding:40px 18px}
+  .yhead .yyear{font-size:21px}
+  .empty{padding:44px 18px}
 }
+
+/* ==========================================================================
+   降低动效
+   ========================================================================== */
+@media(prefers-reduced-motion:reduce){
+  .filters *,.post,.post::before,.post-title,.post-desc,.post-date,.post-cat,.post-arrow,
+  .yhead,.yhead::before,.pill,.btn-clear,.empty *{
+    transition:none !important;animation:none !important;
+  }
+  .post:hover{transform:none}
+}
+
 </style>
 <link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#0A0E1A">
@@ -225,6 +384,13 @@
 
   <!-- ==================== 筛选栏 ==================== -->
   <section class="filters" aria-label="Article filters">
+    <div class="f-head">
+      <span class="f-title"><span class="zh-only">筛选文章</span><span class="en-only">Filter articles</span></span>
+      <span class="count f-count" id="count">
+        <span class="zh-only">显示 <b id="cnt">38</b> / <b id="tot">38</b> 篇</span>
+        <span class="en-only">Showing <b id="cnt-en">38</b> / <b id="tot-en">38</b></span>
+      </span>
+    </div>
     <div class="f-row">
       <span class="f-label"><span class="zh-only">年份</span><span class="en-only">Year</span></span>
       <div class="pills" id="yearPills">
@@ -234,7 +400,7 @@
         <button type="button" class="pill" data-year="2024">2024</button>
       </div>
     </div>
-    <div class="f-row">
+    <div class="f-row is-stack">
       <span class="f-label"><span class="zh-only">分类</span><span class="en-only">Category</span></span>
       <div class="pills" id="catPills">
         <button type="button" class="pill active" data-cat=""><span class="zh-only">全部</span><span class="en-only">All</span></button>
@@ -259,18 +425,18 @@
     <div class="f-row">
       <span class="f-label"><span class="zh-only">搜索</span><span class="en-only">Search</span></span>
       <div class="f-search">
-        <input id="q" type="search" autocomplete="off" aria-label="Search articles / 搜索文章"
-               data-ph-zh="搜索标题或分类…" data-ph-en="Search titles or categories…" placeholder="搜索标题或分类…">
-        <span class="count" id="count">
-          <span class="zh-only">显示 <b id="cnt">38</b> / <b id="tot">38</b> 篇</span>
-          <span class="en-only">Showing <b id="cnt-en">38</b> / <b id="tot-en">38</b></span>
-        </span>
+        <div class="f-field">
+          <svg class="f-field-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M18.5 18.5 14.6 14.6"/></svg>
+          <input id="q" type="search" autocomplete="off" aria-label="Search articles / 搜索文章"
+                 data-ph-zh="搜索标题或分类…" data-ph-en="Search titles or categories…" placeholder="搜索标题或分类…">
+        </div>
         <button type="button" class="btn-clear" id="clearBtn"><span class="zh-only">清除筛选</span><span class="en-only">Clear filters</span></button>
       </div>
     </div>
     <div class="f-row">
       <span class="f-label"><span class="zh-only">当前</span><span class="en-only">Active</span></span>
       <div class="f-active">
+        <span class="chip" id="catChip" style="display:none"><span class="zh-only">分类：</span><span class="en-only">Category: </span><button type="button" id="catClear" aria-label="清除分类筛选">×</button></span>
         <span class="chip" id="tagChip" style="display:none"><span class="zh-only">标签：</span><span class="en-only">Tag: </span><button type="button" id="tagClear" aria-label="清除标签筛选">×</button></span>
         <span class="f-hint"><span class="zh-only">分类页与标签页会带着筛选条件跳到这里</span><span class="en-only">Category and tag pages link straight into a filtered view</span></span>
       </div>
@@ -279,7 +445,7 @@
 
   <!-- ==================== 空状态 ==================== -->
   <div class="empty" id="empty">
-    <div class="icon" aria-hidden="true">🔍</div>
+    <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="10" cy="10" r="6.5"/><path d="M18.5 18.5 14.6 14.6"/></svg></div>
     <h3><span class="zh-only">没有匹配的文章，换个关键词试试</span><span class="en-only">No matching articles — try a different keyword</span></h3>
     <p><span class="zh-only">可以清除全部筛选条件，或者换个分类、年份再看看。</span><span class="en-only">You can clear all filters, or try another category or year.</span></p>
     <button type="button" class="btn-clear" id="emptyClear"><span class="zh-only">一键清除筛选</span><span class="en-only">Clear all filters</span></button>

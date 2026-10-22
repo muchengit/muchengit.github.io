@@ -8,7 +8,8 @@
       "featured": [
         "getting-started-with-ai.html",
         "2026-zero-to-first-product.html"
-      ]
+      ],
+      "iconName": "rocket"
     },
     "产品": {
       "en": "Product",
@@ -19,7 +20,8 @@
         "2026-small-products.html",
         "2025-ai-product-lessons.html",
         "2026-ai-product-pricing.html"
-      ]
+      ],
+      "iconName": "cube"
     },
     "实战": {
       "en": "Case Study",
@@ -30,7 +32,8 @@
         "ship-without-code.html",
         "2026-from-demo-to-production.html",
         "2026-privacy-red-lines.html"
-      ]
+      ],
+      "iconName": "terminal"
     },
     "AI 编程": {
       "en": "AI Coding",
@@ -41,7 +44,8 @@
         "build-with-cursor.html",
         "2025-vibe-coding.html",
         "2026-vibe-coding-advanced.html"
-      ]
+      ],
+      "iconName": "code"
     },
     "工具评测": {
       "en": "Tools",
@@ -52,7 +56,8 @@
         "2026-ai-coding-landscape.html",
         "2024-chinese-ai-tools.html",
         "2025-ai-coding-tools-2025.html"
-      ]
+      ],
+      "iconName": "search-deep"
     },
     "AI 技巧": {
       "en": "Tips",
@@ -63,7 +68,8 @@
         "prompt-engineering.html",
         "2024-chatgpt-tips.html",
         "2026-long-doc-ai.html"
-      ]
+      ],
+      "iconName": "wand"
     },
     "Agent": {
       "en": "Agent",
@@ -73,7 +79,8 @@
       "featured": [
         "2025-ai-agent-guide.html",
         "2025-multi-agent.html"
-      ]
+      ],
+      "iconName": "bot"
     },
     "独立开发": {
       "en": "Indie Dev",
@@ -83,7 +90,8 @@
       "featured": [
         "2025-indie-dev-survival.html",
         "2026-indie-ops-keep-alive.html"
-      ]
+      ],
+      "iconName": "pen"
     },
     "出海": {
       "en": "Global",
@@ -92,7 +100,8 @@
       "descEn": "Selling to English-speaking users: finding a niche on Reddit, handling language with AI, pricing in USD.",
       "featured": [
         "2025-ai-overseas.html"
-      ]
+      ],
+      "iconName": "globe"
     },
     "副业": {
       "en": "Side Hustle",
@@ -103,7 +112,8 @@
         "2026-ai-services.html",
         "2025-ai-side-hustle-12.html",
         "2024-ai-side-hustle.html"
-      ]
+      ],
+      "iconName": "wallet"
     },
     "趋势": {
       "en": "Trends",
@@ -112,7 +122,8 @@
       "descEn": "How AI itself is changing: from instant generation to models that reason first, and how to adapt.",
       "featured": [
         "2025-reasoning-models.html"
-      ]
+      ],
+      "iconName": "trending"
     },
     "深度解析": {
       "en": "Deep Dive",
@@ -121,7 +132,8 @@
       "descEn": "Inside one landmark release: why reinforcement learning let an open model match closed ones.",
       "featured": [
         "2025-deepseek-r1.html"
-      ]
+      ],
+      "iconName": "brain"
     },
     "年度总结": {
       "en": "Year in Review",
@@ -130,7 +142,8 @@
       "descEn": "Where AI actually landed this year: six milestones on a timeline and what they changed for you.",
       "featured": [
         "2024-ai-year-review.html"
-      ]
+      ],
+      "iconName": "calendar"
     },
     "视频生成": {
       "en": "Video AI",
@@ -139,7 +152,8 @@
       "descEn": "How video generation became a real tool: Sora, Kling, Runway, and what changes for creators.",
       "featured": [
         "2024-ai-video-revolution.html"
-      ]
+      ],
+      "iconName": "film"
     },
     "AI 绘画": {
       "en": "AI Art",
@@ -148,7 +162,8 @@
       "descEn": "Choosing between Midjourney, Stable Diffusion, and Flux on quality, ease, price, and commercial rights.",
       "featured": [
         "2024-ai-art-guide.html"
-      ]
+      ],
+      "iconName": "palette"
     },
     "工具栈": {
       "en": "Toolkit",
@@ -157,7 +172,8 @@
       "descEn": "The five tool sets a solo builder needs: validation, design, coding, launch, and operations.",
       "featured": [
         "2024-indie-dev-toolkit.html"
-      ]
+      ],
+      "iconName": "toolbox"
     }
   },
   "paths": [

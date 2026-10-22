@@ -266,10 +266,23 @@ def build_archive_groups(arts):
 # ==========================================================================
 # 分类总览页
 # ==========================================================================
+def load_icon_set():
+    """读取 tools/icons.json，返回 {name: svg_string}；缺失或损坏时返回空字典。"""
+    p = os.path.join(ROOT, "tools", "icons.json")
+    try:
+        with open(p, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return {}
+    icons = data.get("icons") if isinstance(data, dict) else None
+    return icons if isinstance(icons, dict) else {}
+
+
 def build_categories_html(arts, curated):
     cats = curated.get("categories", {}) if isinstance(curated, dict) else {}
     groups = group_by_cat(arts)
     by_file = {a["file"]: a for a in arts}
+    icon_set = load_icon_set()
     cards = []
 
     for idx, (cat, items) in enumerate(groups):
@@ -277,6 +290,19 @@ def build_categories_html(arts, curated):
         desc_zh = info.get("descZh") or f"{cat}方向的文章，共 {len(items)} 篇。"
         desc_en = info.get("descEn") or info.get("en") or f"Articles in {cat}: {len(items)}."
         icon = info.get("icon") or "📄"
+        # 优先使用统一 SVG 图标集（tools/icons.json），缺失时回退到 emoji
+        svg = icon_set.get(info.get("iconName") or "")
+        if svg and svg.lstrip().startswith("<svg"):
+            # icons.json 中存的是完整 <svg> 元素，直接内联并补上 class / aria
+            icon_markup = svg.lstrip().replace(
+                "<svg ", '<svg class="cat-ic-svg" aria-hidden="true" ', 1)
+        elif svg:
+            icon_markup = (
+                '<svg class="cat-ic-svg" aria-hidden="true" viewBox="0 0 24 24" fill="none" '
+                'stroke="currentColor" stroke-width="1.6" stroke-linecap="round" '
+                'stroke-linejoin="round">%s</svg>' % svg)
+        else:
+            icon_markup = '<span class="cat-ic-emoji">%s</span>' % icon
         words = sum(a["words"] for a in items)
         minutes = max(1, round(words / 400))
 
@@ -308,7 +334,7 @@ def build_categories_html(arts, curated):
             '<span class="zh-only">查看该分类全部文章 →</span>'
             '<span class="en-only">See all %s articles →</span></a>\n'
             '    </div>'
-            % (idx + 1, icon, esc_html(cat), esc_html(info.get("en") or CAT_EN.get(cat, cat)),
+            % (idx + 1, icon_markup, esc_html(cat), esc_html(info.get("en") or CAT_EN.get(cat, cat)),
                len(items), esc_html(desc_zh), esc_html(desc_en),
                "{:,}".format(words), "{:,}".format(words), minutes, minutes,
                "\n".join(li),

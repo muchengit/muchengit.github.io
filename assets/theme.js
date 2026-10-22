@@ -92,7 +92,12 @@
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', '皮肤 / Skin');
     btn.title = '皮肤 / Skin';
-    btn.innerHTML = '<span aria-hidden="true">🎨</span>';
+    btn.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="17" height="17">' +
+      '<path d="M12 21a9 9 0 1 1 9-9c0 1.7-1.3 3-3 3h-1.5a2 2 0 0 0-1.4 3.4c.3.3.4.7.4 1.1 0 .8-.7 1.5-1.5 1.5H12Z"/>' +
+      '<circle cx="7.5" cy="12.5" r="1.1"/><circle cx="9.8" cy="8.2" r="1.1"/><circle cx="14.5" cy="7.8" r="1.1"/>' +
+      '</svg>';
 
     panel = document.createElement('div');
     panel.className = 'skin-panel';

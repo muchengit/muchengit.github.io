@@ -21,20 +21,26 @@
    -------------------------------------------------------------------------- */
 .f-active{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .chip{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;gap:9px;
   font-family:var(--font-m);font-size:12px;letter-spacing:.02em;
   color:var(--violet);background:var(--violet-soft);
-  border:1px solid rgba(168,85,247,.32);border-radius:999px;
-  padding:6px 8px 6px 14px;
+  border:1px solid var(--border-2);border-radius:999px;
+  padding:6px 7px 6px 14px;
+  transition:border-color .22s ease,background .22s ease,box-shadow .22s ease;
 }
+.chip:hover{border-color:var(--violet);box-shadow:0 0 0 3px var(--violet-soft)}
 .chip button{
-  font-family:var(--font-m);font-size:14px;line-height:1;
-  color:var(--violet);background:rgba(168,85,247,.16);
-  border:none;border-radius:50%;width:19px;height:19px;
+  font-family:var(--font-m);font-size:13px;line-height:1;
+  color:var(--violet);background:transparent;
+  border:1px solid transparent;border-radius:50%;width:20px;height:20px;
   cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
-  transition:background .2s,color .2s;padding:0;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .24s cubic-bezier(.2,.7,.2,1);
+  padding:0;
 }
-.chip button:hover{background:var(--violet);color:#0A0E1A}
+.chip button:hover{
+  background:var(--violet);color:var(--bg);border-color:var(--violet);
+  transform:rotate(90deg);
+}
 .chip button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 .f-hint{font-size:12.5px;color:var(--text-3);line-height:1.6}
 
@@ -43,37 +49,86 @@
    -------------------------------------------------------------------------- */
 .blog-foot{
   position:relative;z-index:2;
-  margin-top:72px;padding:36px 0 44px;
-  border-top:1px solid var(--border);
+  margin-top:76px;padding:40px 0 46px;
   background:linear-gradient(180deg,transparent,rgba(10,14,26,.55));
+}
+/* 顶部渐变分隔线 */
+.blog-foot::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan) 16%,var(--violet) 50%,var(--cyan) 84%,transparent);
+  opacity:.5;
 }
 .blog-foot .bf-in{
   max-width:var(--maxw);margin:0 auto;padding:0 48px;
-  display:flex;flex-wrap:wrap;gap:20px 32px;
-  align-items:center;justify-content:space-between;
+  display:flex;flex-direction:column;align-items:stretch;gap:20px;
 }
+/* 底部导航 */
 .blog-foot .bf-links{
-  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+  display:flex;flex-wrap:wrap;gap:6px 26px;align-items:center;
 }
 .blog-foot .bf-links a{
-  font-family:var(--font-m);font-size:12.5px;letter-spacing:.03em;
-  color:var(--text-2);transition:color .2s;
-  display:inline-flex;align-items:center;gap:6px;
+  position:relative;
+  font-family:var(--font-m);font-size:12.5px;letter-spacing:.04em;
+  color:var(--text-2);transition:color .22s ease;
+  display:inline-flex;align-items:center;gap:8px;padding:5px 2px;
+}
+.blog-foot .bf-links a::before{
+  content:"";width:4px;height:4px;border-radius:50%;flex:0 0 4px;
+  background:var(--cyan);opacity:.45;
+  transition:opacity .22s ease,transform .22s ease;
+}
+/* hover 下划线动画 */
+.blog-foot .bf-links a::after{
+  content:"";position:absolute;left:14px;right:0;bottom:0;height:1px;
+  background:currentColor;opacity:.75;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .26s cubic-bezier(.2,.7,.2,1);
 }
 .blog-foot .bf-links a:hover{color:var(--cyan)}
-.blog-foot .bf-links a::before{
-  content:"";width:4px;height:4px;border-radius:50%;
-  background:var(--cyan);opacity:.5;transition:opacity .2s,transform .2s;
-}
 .blog-foot .bf-links a:hover::before{opacity:1;transform:scale(1.4)}
+.blog-foot .bf-links a:hover::after{transform:scaleX(1)}
+/* 版权行：左对齐，右侧回到顶部 */
 .blog-foot .bf-copy{
+  margin:0;padding-top:18px;border-top:1px solid var(--border);position:relative;
   font-family:var(--font-m);font-size:11.5px;color:var(--text-3);letter-spacing:.03em;
 }
+.blog-foot .bf-copy::after{
+  content:"↑ 回到顶部";
+  position:absolute;right:0;top:18px;
+  font-family:var(--font-m);font-size:11.5px;letter-spacing:.05em;
+  color:var(--text-3);white-space:nowrap;pointer-events:none;
+}
+body[data-lang="en"] .blog-foot .bf-copy::after{content:"↑ Back to top"}
+
+/* --------------------------------------------------------------------------
+   浅色皮肤
+   -------------------------------------------------------------------------- */
+html[data-tone="light"] .blog-foot{
+  background:linear-gradient(180deg,transparent,rgba(226,232,244,.5));
+}
+html[data-tone="light"] .blog-foot::before{opacity:.45}
+html[data-tone="light"] .chip{background:var(--violet-soft);border-color:var(--border-2)}
+html[data-tone="light"] .chip:hover{border-color:var(--violet);box-shadow:0 0 0 3px var(--violet-soft)}
+html[data-tone="light"] .chip button:hover{color:#fff}
 
 @media(max-width:900px){
-  .blog-foot .bf-in{padding:0 24px;flex-direction:column;align-items:flex-start;gap:16px}
+  .blog-foot .bf-in{padding:0 24px;gap:16px}
+  .blog-foot .bf-links{gap:4px 18px}
 }
 @media(max-width:500px){
   .blog-foot .bf-in{padding:0 16px}
-  .blog-foot .bf-links{gap:8px 16px}
+  .blog-foot .bf-links{gap:4px 14px}
+  .blog-foot .bf-links a{font-size:12px;gap:6px}
+  .blog-foot .bf-copy{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .blog-foot .bf-copy::after{position:static}
+}
+
+/* --------------------------------------------------------------------------
+   降低动效
+   -------------------------------------------------------------------------- */
+@media(prefers-reduced-motion:reduce){
+  .chip,.chip button,.blog-foot .bf-links a,.blog-foot .bf-links a::before,
+  .blog-foot .bf-links a::after,.blog-foot .bf-copy::after{
+    transition:none !important;animation:none !important;
+  }
 }

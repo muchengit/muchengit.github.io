@@ -2,6 +2,23 @@
    blog.js — 文章页增强：阅读进度 / 目录 / 元信息条 / 代码复制 / 上下篇 / 回到顶部
    与页面内联脚本不冲突：这里不注册语言切换按钮事件。
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ART_ICONS — 内联 SVG 图标（规格：viewBox 0 0 24 24 / fill none /
+   stroke currentColor / stroke-width 1.6 / round cap+join）
+   来源：tools/icons.json。内联为字符串而非 <img> 或 <use>，
+   保证 file:// 直接打开也不会被 CORS 拦掉；描边继承 currentColor。
+   -------------------------------------------------------------------------- */
+window.ART_ICONS = {
+  'speaker':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 9.5h3L12 5.5v13L7.5 14.5h-3z"/><path d="M15 9.8a3.6 3.6 0 0 1 0 4.4"/><path d="M17.7 7.2a7 7 0 0 1 0 9.6"/></svg>',
+  'link':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7.1-7.1L11.7 5.1"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7.1 7.1l1.7-1.7"/></svg>',
+  'quote':    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.8" cy="9.2" r="2.7"/><path d="M7.8 11.9c0 2.9-1.1 4.9-3.3 6.2"/><circle cx="16.2" cy="9.2" r="2.7"/><path d="M16.2 11.9c0 2.9-1.1 4.9-3.3 6.2"/></svg>',
+  'dice':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8" cy="8" r="1.2"/><circle cx="16" cy="8" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="8" cy="16" r="1.2"/><circle cx="16" cy="16" r="1.2"/></svg>',
+  'list':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="3" height="3" rx="0.8"/><rect x="3.5" y="10.5" width="3" height="3" rx="0.8"/><rect x="3.5" y="16" width="3" height="3" rx="0.8"/><path d="M9.5 6.5h11M9.5 12h11M9.5 17.5h11"/></svg>',
+  'arrow-up': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5V4.5"/><path d="M5.5 11 12 4.5 18.5 11"/></svg>',
+  'sliders':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5v17M16 3.5v17"/><path d="M5 8.5h6M13 15.5h6"/></svg>'
+};
+
 (function () {
   'use strict';
 
@@ -39,7 +56,7 @@
   toTop.className = 'to-top';
   toTop.type = 'button';
   toTop.setAttribute('aria-label', 'Back to top');
-  toTop.innerHTML = '&uarr;';
+  toTop.innerHTML = (window.ART_ICONS && window.ART_ICONS['arrow-up']) || '&uarr;';
   document.body.appendChild(toTop);
 
   /* ======================================================================
@@ -634,12 +651,12 @@
      9.5 右侧浮动工具栏
      ====================================================================== */
   var TOOLS = [
-    { key: 'listen', icon: '🔊', zh: '朗读', en: 'Listen' },
-    { key: 'copy',   icon: '🔗', zh: '复制链接', en: 'Copy link' },
-    { key: 'quote',  icon: '❝', zh: '引用', en: 'Quote' },
-    { key: 'random', icon: '🎲', zh: '随机一篇', en: 'Random' },
-    { key: 'toc',    icon: '📑', zh: '目录', en: 'Contents' },
-    { key: 'top',    icon: '↑', zh: '回到顶部', en: 'Top' }
+    { key: 'listen', icon: 'speaker',  zh: '朗读', en: 'Listen' },
+    { key: 'copy',   icon: 'link',     zh: '复制链接', en: 'Copy link' },
+    { key: 'quote',  icon: 'quote',    zh: '引用', en: 'Quote' },
+    { key: 'random', icon: 'dice',     zh: '随机一篇', en: 'Random' },
+    { key: 'toc',    icon: 'list',     zh: '目录', en: 'Contents' },
+    { key: 'top',    icon: 'arrow-up', zh: '回到顶部', en: 'Top' }
   ];
 
   var rail = document.createElement('div');
@@ -656,7 +673,8 @@
     b.setAttribute('title', t.zh + ' / ' + t.en);
     b.setAttribute('aria-label', t.zh + ' / ' + t.en);
     b.innerHTML =
-      '<span class="art-tool-ico" aria-hidden="true">' + t.icon + '</span>' +
+      '<span class="art-tool-ico" aria-hidden="true">' + (window.ART_ICONS[t.icon] || '') + '</span>' +
+      '<span class="art-tool-badge" aria-hidden="true"></span>' +
       '<span class="art-tool-tip"><span class="zh-only">' + t.zh + '</span><span class="en-only">' + t.en + '</span></span>';
     rail.appendChild(b);
     toolButtons[t.key] = b;
@@ -672,7 +690,7 @@
   fab.setAttribute('aria-label', '工具 / Tools');
   fab.setAttribute('aria-expanded', 'false');
   fab.innerHTML =
-    '<span class="art-tool-ico" aria-hidden="true">⚙</span>' +
+    '<span class="art-tool-ico" aria-hidden="true">' + (window.ART_ICONS['sliders'] || '') + '</span>' +
     '<span class="art-tool-tip"><span class="zh-only">工具</span><span class="en-only">Tools</span></span>';
   document.body.appendChild(fab);
   fab.addEventListener('click', function () {
@@ -680,15 +698,18 @@
     fab.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
+  /* 成功 / 失败反馈：图标本身保持 SVG 不动，用角标 + 按钮态class 提示 */
   function flash(btn, glyph, cls) {
     var ico = btn.querySelector('.art-tool-ico');
+    var badge = btn.querySelector('.art-tool-badge');
     if (!ico) return;
-    var old = ico.textContent;
-    ico.textContent = glyph;
-    btn.classList.add(cls);
+    var state = (glyph === '✕') ? 'is-err' : cls;
+    if (badge) badge.textContent = glyph;
+    btn.classList.add(state);
+    if (badge) badge.classList.add('on');
     setTimeout(function () {
-      ico.textContent = old;
-      btn.classList.remove(cls);
+      if (badge) { badge.textContent = ''; badge.classList.remove('on'); }
+      btn.classList.remove(state);
     }, 1600);
   }
 
@@ -770,4 +791,56 @@
   window.addEventListener('pagehide', function () { stop(true); });
 
   refresh();
+})();
+
+/* ==========================================================================
+   10. 宽表横向滚动容器（新增）
+   --------------------------------------------------------------------------
+   正文里的表格在窄屏会被压成“每列几像素”的细条，或者把整页撑宽。
+   这里在运行时给每张表套一层滚动容器：表格保持自然列宽，超出部分
+   在容器内横向滚动，并用左右渐隐提示还有内容。
+   只在运行时包裹，不改动任何文章 HTML。
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  function sync(wrap) {
+    var sc = wrap.querySelector('.art-table-scroll');
+    if (!sc) return;
+    var over = sc.scrollWidth - sc.clientWidth;
+    wrap.classList.toggle('is-scroll', over > 2);
+    wrap.classList.toggle('at-start', sc.scrollLeft <= 2);
+    wrap.classList.toggle('at-end', over <= 2 || sc.scrollLeft >= over - 2);
+  }
+
+  function wrapAll() {
+    var tables = document.querySelectorAll('.prose table');
+    Array.prototype.forEach.call(tables, function (table) {
+      var host = table.parentNode;
+      if (!host || host.classList.contains('art-table-wrap')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'art-table-wrap';
+      var sc = document.createElement('div');
+      sc.className = 'art-table-scroll';
+      table.classList.add('art-table');
+      host.insertBefore(wrap, table);
+      wrap.appendChild(sc);
+      sc.appendChild(table);
+      sc.addEventListener('scroll', function () { sync(wrap); }, { passive: true });
+      sync(wrap);
+    });
+  }
+
+  function syncAll() {
+    Array.prototype.forEach.call(document.querySelectorAll('.art-table-wrap'), sync);
+  }
+
+  wrapAll();
+
+  window.addEventListener('resize', syncAll);
+  window.addEventListener('orientationchange', syncAll);
+  if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+    document.fonts.ready.then(syncAll);
+  }
+  window.addEventListener('load', syncAll);
 })();

@@ -19,7 +19,7 @@
  * 纯 Worker 实现，不依赖 DOM，也不使用任何外部脚本。
  */
 
-const CACHE = 'muchengit-v2-20261022';
+const CACHE = 'muchengit-v3-20261022';
 
 const HOME_URL = '/';
 const OFFLINE_URL = '/offline.html';
