@@ -505,6 +505,7 @@ BLOG_FOOTER = """<footer class="blog-foot">
 THEME_LINK = '<link rel="stylesheet" href="{base}assets/theme.css">'
 MANIFEST_LINK = '<link rel="manifest" href="{base}manifest.json">'
 APPLE_ICON = '<link rel="apple-touch-icon" href="{base}assets/apple-touch-icon.png">'
+THEME_COLOR_META = '<meta name="theme-color" content="#0A0E1A">'
 SW_REG = ("<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){"
           "navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>")
 THEME_JS = '<script src="{base}assets/theme.js"></script>'
@@ -543,6 +544,8 @@ def ensure_asset_links(path, base, page):
         s = s.replace("</head>", MANIFEST_LINK.format(base=base) + "\n</head>", 1)
     if "apple-touch-icon" not in s:
         s = s.replace("</head>", APPLE_ICON.format(base=base) + "\n</head>", 1)
+    if 'name="theme-color"' not in s:
+        s = s.replace("</head>", THEME_COLOR_META + "\n</head>", 1)
     if "assets/theme.js" not in s:
         s = s.replace("</body>", THEME_JS.format(base=base) + "\n" + SW_REG + "\n</body>", 1)
 

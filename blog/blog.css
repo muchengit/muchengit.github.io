@@ -13,6 +13,13 @@
   --pink:#F472B6;--green:#34D399;--red:#EF4444;
   --maxw:1366px;
   --readw:760px;
+  /* —— 皮肤变量：assets/theme.css 里按 data-skin 覆盖 —— */
+  --grid-line:rgba(0,229,255,.05);
+  --glow-1:rgba(0,229,255,.10);
+  --glow-2:rgba(168,85,247,.10);
+  --glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(0,229,255,.28);
+  --sel-fg:#ffffff;
   --font-h:"Space Grotesk","Noto Sans SC",system-ui,sans-serif;
   --font-b:"Inter","Noto Sans SC",system-ui,sans-serif;
   --font-m:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -24,7 +31,7 @@ html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;scroll-padding-to
 body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:17px;line-height:1.85;min-height:100vh;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block;border-radius:12px}
-::selection{background:rgba(0,229,255,.28);color:#fff}
+::selection{background:var(--sel-bg);color:var(--sel-fg)}
 
 /* focus ring — keyboard accessibility */
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
@@ -35,7 +42,7 @@ img{max-width:100%;display:block;border-radius:12px}
 .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .bg-wrap .grid-bg{
   position:absolute;inset:0;
-  background-image:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
   background-size:60px 60px;
   mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
   -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);

@@ -1,43 +1,173 @@
 /* ==========================================================================
-   theme.css — 全站浅色 / 深色双主题
-   必须在 site.css / blog.css 之后加载。
-   深色为默认（品牌基色 #0A0E1A），浅色通过 <html data-theme="light"> 切换。
-   覆盖策略：优先改 CSS 变量（site.css / blog.css 里 95% 的颜色都走变量），
-             少量硬编码阴影 / 高光用下面的补丁规则单独处理。
+   theme.css — 全站皮肤系统
+   在 site.css / blog.css 之后加载。
+   皮肤由 <html data-skin="..."> 决定，浅色系皮肤额外带 data-tone="light"。
+   深色系皮肤额外带 data-tone="dark"（用于结构性补丁）。
+   默认（:root）= 深空 Midnight。
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   浅色主题变量
-   -------------------------------------------------------------------------- */
-html[data-theme="light"]{
-  --bg:#F3F6FC;
-  --bg-2:#FFFFFF;
-  --surface:rgba(16,24,40,.035);
-  --surface-2:rgba(16,24,40,.065);
-  --border:rgba(16,24,40,.10);
-  --border-2:rgba(16,24,40,.18);
-  --text:#0F172A;
-  --text-2:#4A5568;
-  --text-3:#8A94A8;
+/* ==========================================================================
+   1. 皮肤调色板
+   ========================================================================== */
 
-  /* 品牌色在浅底上需要压暗才够对比度 */
-  --cyan:#0B7FA8;
-  --cyan-soft:rgba(11,127,168,.12);
-  --violet:#7C3AED;
-  --violet-soft:rgba(124,58,237,.12);
-  --amber:#B45309;
-  --amber-soft:rgba(180,83,9,.12);
-  --pink:#DB2777;
-  --green:#047857;
-  --red:#DC2626;
+/* ---------- 深空 Midnight（默认） ---------- */
+html[data-skin="midnight"]{
+  --bg:#0A0E1A;--bg-2:#0F1524;
+  --surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.08);--border-2:rgba(255,255,255,.14);
+  --text:#E6E9F2;--text-2:#9BA3B8;--text-3:#5F6980;
+  --cyan:#00E5FF;--cyan-soft:rgba(0,229,255,.15);
+  --violet:#A855F7;--violet-soft:rgba(168,85,247,.15);
+  --amber:#F59E0B;--amber-soft:rgba(245,158,11,.15);
+  --pink:#F472B6;--green:#34D399;--red:#EF4444;
+  --grid-line:rgba(0,229,255,.05);
+  --glow-1:rgba(0,229,255,.10);--glow-2:rgba(168,85,247,.10);--glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(0,229,255,.28);--sel-fg:#ffffff;
+  --shadow:rgba(0,0,0,.75);
 }
 
-/* --------------------------------------------------------------------------
-   主题切换按钮（由 theme.js 注入到 .nav-right）
-   -------------------------------------------------------------------------- */
-.theme-btn{
+/* ---------- 暮紫 Twilight ---------- */
+html[data-skin="twilight"]{
+  --bg:#120A1E;--bg-2:#1B1030;
+  --surface:rgba(255,255,255,.045);--surface-2:rgba(255,255,255,.08);
+  --border:rgba(210,180,255,.10);--border-2:rgba(210,180,255,.18);
+  --text:#EDE7F8;--text-2:#A79BC0;--text-3:#6F6488;
+  --cyan:#C084FC;--cyan-soft:rgba(192,132,252,.16);
+  --violet:#F472B6;--violet-soft:rgba(244,114,182,.16);
+  --amber:#FBBF24;--amber-soft:rgba(251,191,36,.16);
+  --pink:#FB7185;--green:#4ADE80;--red:#F87171;
+  --grid-line:rgba(192,132,252,.055);
+  --glow-1:rgba(192,132,252,.12);--glow-2:rgba(244,114,182,.12);--glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(192,132,252,.30);--sel-fg:#ffffff;
+  --shadow:rgba(4,0,12,.75);
+}
+
+/* ---------- 墨绿 Forest ---------- */
+html[data-skin="forest"]{
+  --bg:#06120E;--bg-2:#0C2019;
+  --surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.07);
+  --border:rgba(160,240,200,.10);--border-2:rgba(160,240,200,.18);
+  --text:#E3F2EA;--text-2:#96B3A6;--text-3:#5E7A6D;
+  --cyan:#34D399;--cyan-soft:rgba(52,211,153,.15);
+  --violet:#2DD4BF;--violet-soft:rgba(45,212,191,.15);
+  --amber:#FBBF24;--amber-soft:rgba(251,191,36,.15);
+  --pink:#F9A8D4;--green:#86EFAC;--red:#F87171;
+  --grid-line:rgba(52,211,153,.055);
+  --glow-1:rgba(52,211,153,.12);--glow-2:rgba(45,212,191,.12);--glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(52,211,153,.28);--sel-fg:#06211A;
+  --shadow:rgba(0,12,8,.75);
+}
+
+/* ---------- 暖阳 Sunset ---------- */
+html[data-skin="sunset"]{
+  --bg:#150C0A;--bg-2:#241410;
+  --surface:rgba(255,255,255,.045);--surface-2:rgba(255,255,255,.08);
+  --border:rgba(255,220,180,.11);--border-2:rgba(255,220,180,.19);
+  --text:#F5E9E2;--text-2:#B9A093;--text-3:#7C6A60;
+  --cyan:#FDBA74;--cyan-soft:rgba(253,186,116,.16);
+  --violet:#F472B6;--violet-soft:rgba(244,114,182,.16);
+  --amber:#FBBF24;--amber-soft:rgba(251,191,36,.16);
+  --pink:#FB7185;--green:#86EFAC;--red:#F87171;
+  --grid-line:rgba(251,191,36,.055);
+  --glow-1:rgba(253,186,116,.13);--glow-2:rgba(244,114,182,.12);--glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(253,186,116,.30);--sel-fg:#2A1409;
+  --shadow:rgba(14,5,2,.75);
+}
+
+/* ---------- 纸白 Paper（浅色） ---------- */
+html[data-skin="paper"]{
+  --bg:#F3F6FC;--bg-2:#FFFFFF;
+  --surface:rgba(16,24,40,.035);--surface-2:rgba(16,24,40,.065);
+  --border:rgba(16,24,40,.10);--border-2:rgba(16,24,40,.18);
+  --text:#0F172A;--text-2:#4A5568;--text-3:#8A94A8;
+  --cyan:#0B7FA8;--cyan-soft:rgba(11,127,168,.12);
+  --violet:#7C3AED;--violet-soft:rgba(124,58,237,.12);
+  --amber:#B45309;--amber-soft:rgba(180,83,9,.12);
+  --pink:#DB2777;--green:#047857;--red:#DC2626;
+  --grid-line:rgba(11,127,168,.06);
+  --glow-1:rgba(11,127,168,.10);--glow-2:rgba(124,58,237,.10);--glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(11,127,168,.20);--sel-fg:#0F172A;
+  --shadow:rgba(15,23,42,.30);
+}
+
+/* ---------- 晨曦 Dawn（浅色·暖） ---------- */
+html[data-skin="dawn"]{
+  --bg:#FBF6EF;--bg-2:#FFFFFF;
+  --surface:rgba(41,32,20,.035);--surface-2:rgba(41,32,20,.065);
+  --border:rgba(41,32,20,.11);--border-2:rgba(41,32,20,.19);
+  --text:#1C1408;--text-2:#5A4A38;--text-3:#92816C;
+  --cyan:#B45309;--cyan-soft:rgba(180,83,9,.12);
+  --violet:#9333EA;--violet-soft:rgba(147,51,234,.12);
+  --amber:#C2410C;--amber-soft:rgba(194,65,12,.12);
+  --pink:#BE185D;--green:#15803D;--red:#DC2626;
+  --grid-line:rgba(180,83,9,.06);
+  --glow-1:rgba(251,191,36,.14);--glow-2:rgba(194,65,12,.10);--glow-3:rgba(255,255,255,.02);
+  --sel-bg:rgba(180,83,9,.18);--sel-fg:#1C1408;
+  --shadow:rgba(41,32,20,.28);
+}
+
+/* ==========================================================================
+   2. 浅色皮肤的结构性补丁
+   （浮层、导航、玻璃拟态这些用了写死深底的地方）
+   ========================================================================== */
+html[data-tone="light"] .bg-wrap .orb{opacity:.16}
+html[data-tone="light"] .bg-wrap .orb.c3{opacity:.12}
+html[data-tone="light"] .noise{opacity:.02}
+
+html[data-tone="light"] .nav-in{
+  background:rgba(255,255,255,.72);
+  box-shadow:0 8px 32px -14px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-tone="light"] .nav-in.scrolled{
+  box-shadow:0 12px 40px -14px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.85);
+}
+html[data-tone="light"] .nav-links.open{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 18px 44px -20px rgba(15,23,42,.28);
+}
+html[data-tone="light"] .to-top{
+  background:rgba(255,255,255,.92);
+  box-shadow:0 14px 34px -16px rgba(15,23,42,.30);
+}
+html[data-tone="light"] .art-tool{
+  background:rgba(255,255,255,.78);
+  box-shadow:0 18px 46px -24px rgba(15,23,42,.28),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-tone="light"] .art-tool-fab{
+  background:rgba(255,255,255,.94);
+  box-shadow:0 14px 34px -16px rgba(15,23,42,.28);
+}
+html[data-tone="light"] .art-tool-tip{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 10px 26px -14px rgba(15,23,42,.30);
+}
+html[data-tone="light"] .tts-panel{
+  background:rgba(255,255,255,.94);
+  box-shadow:0 26px 64px -28px rgba(15,23,42,.30),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-tone="light"] .tts-bar{background:rgba(16,24,40,.08)}
+html[data-tone="light"] .tg .tg-n{background:rgba(16,24,40,.06);color:var(--text-2)}
+html[data-tone="light"] .blog-foot{
+  background:linear-gradient(180deg,transparent,rgba(226,232,244,.5));
+}
+html[data-tone="light"] .tx-hero,
+html[data-tone="light"] .idx-hero{
+  box-shadow:0 24px 60px -34px rgba(15,23,42,.28);
+}
+html[data-tone="light"] .cat-card:hover{
+  box-shadow:0 18px 44px -22px rgba(11,127,168,.26);
+}
+html[data-tone="light"] .index-strip .ix-card:hover{
+  box-shadow:0 16px 38px -24px rgba(11,127,168,.28);
+}
+html[data-tone="light"] .code-copy{background:rgba(16,24,40,.72)}
+
+/* ==========================================================================
+   3. 皮肤切换器 UI
+   ========================================================================== */
+.skin-btn{
   font-family:var(--font-m);
-  font-size:13px;line-height:1;
+  font-size:14px;line-height:1;
   width:38px;height:34px;
   display:inline-flex;align-items:center;justify-content:center;
   color:var(--text-2);
@@ -47,105 +177,118 @@ html[data-theme="light"]{
   cursor:pointer;
   transition:color .2s,border-color .2s,background .2s,transform .2s;
 }
-.theme-btn:hover{color:var(--cyan);border-color:var(--cyan-soft);background:var(--cyan-soft)}
-.theme-btn:active{transform:scale(.94)}
-.theme-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
-.theme-btn .ic{display:none;font-size:14px}
-html[data-theme="light"] .theme-btn .ic-light{display:inline}
-html:not([data-theme="light"]) .theme-btn .ic-dark{display:inline}
+.skin-btn:hover{color:var(--cyan);border-color:var(--cyan-soft);background:var(--cyan-soft)}
+.skin-btn:active{transform:scale(.94)}
+.skin-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.skin-btn[aria-expanded="true"]{color:var(--cyan);border-color:var(--cyan-soft);background:var(--cyan-soft)}
 
-/* --------------------------------------------------------------------------
-   浅色模式下的细节补丁
-   -------------------------------------------------------------------------- */
+.skin-panel{
+  position:fixed;z-index:120;
+  top:78px;right:24px;width:330px;
+  padding:16px;border-radius:18px;
+  background:var(--bg-2);
+  border:1px solid var(--border-2);
+  box-shadow:0 28px 70px -26px var(--shadow),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);
+  transform-origin:top right;
+  transition:opacity .2s ease,transform .2s cubic-bezier(.2,.7,.2,1),visibility .2s;
+}
+.skin-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.skin-panel h3{
+  font-family:var(--font-h);font-size:14px;font-weight:600;
+  margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.skin-panel h3 .skin-current{
+  display:inline-flex;align-items:baseline;gap:6px;
+  font-family:var(--font-m);font-size:11px;font-weight:400;color:var(--text-3);
+}
+.skin-panel h3 .skin-name-zh{color:var(--cyan)}
+.skin-panel h3 .skin-name-en{opacity:.7}
+.skin-panel .sp-sub{
+  font-family:var(--font-m);font-size:10.5px;color:var(--text-3);
+  margin-bottom:14px;line-height:1.6;
+}
+.skin-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:9px;
+}
+.skin-card{
+  position:relative;cursor:pointer;
+  border:1px solid var(--border);border-radius:13px;
+  background:var(--surface);
+  padding:9px 9px 10px;
+  display:flex;flex-direction:column;gap:8px;align-items:stretch;
+  transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;
+}
+.skin-card:hover{
+  transform:translateY(-2px);border-color:var(--border-2);background:var(--surface-2);
+  box-shadow:0 10px 24px -16px var(--shadow);
+}
+.skin-card:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.skin-card.active{
+  border-color:var(--cyan);
+  box-shadow:0 0 0 1px var(--cyan-soft),0 10px 26px -16px var(--shadow);
+}
+.skin-sw{
+  height:40px;border-radius:8px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(120px 60px at 18% 0%,var(--s-glow) 0%,transparent 70%),
+    linear-gradient(135deg,var(--s-bg) 0%,var(--s-bg2) 100%);
+  border:1px solid rgba(255,255,255,.10);
+}
+.skin-sw::after{
+  content:"";position:absolute;left:7px;right:7px;bottom:7px;height:4px;border-radius:99px;
+  background:linear-gradient(90deg,var(--s-accent) 0%,var(--s-accent2) 100%);
+  opacity:.9;
+}
+.skin-name{
+  font-size:11.5px;line-height:1.35;color:var(--text-2);text-align:center;
+}
+.skin-card.active .skin-name{color:var(--text);font-weight:600}
+.skin-check{
+  position:absolute;top:6px;right:6px;
+  width:17px;height:17px;border-radius:50%;
+  background:var(--cyan);color:var(--bg);
+  font-size:10px;line-height:17px;text-align:center;font-weight:700;
+  display:none;
+}
+.skin-card.active .skin-check{display:block}
+.skin-auto{
+  margin-top:14px;padding-top:13px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.skin-auto .sa-t{font-size:12.5px;color:var(--text-2);line-height:1.5}
+.skin-auto .sa-t b{display:block;color:var(--text);font-weight:600;font-size:13px}
+.skin-switch{
+  position:relative;width:42px;height:23px;border-radius:99px;flex:0 0 42px;
+  background:var(--surface-2);border:1px solid var(--border);cursor:pointer;padding:0;
+  transition:background .2s,border-color .2s;
+}
+.skin-switch::after{
+  content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;
+  background:var(--text-3);transition:transform .22s cubic-bezier(.2,.7,.2,1),background .22s;
+}
+.skin-switch[aria-checked="true"]{background:var(--cyan-soft);border-color:var(--cyan)}
+.skin-switch[aria-checked="true"]::after{transform:translateX(19px);background:var(--cyan)}
+.skin-switch:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
-/* 背景光晕与网格：浅底上要收敛，否则整页发灰 */
-html[data-theme="light"] .bg-wrap .orb{opacity:.16}
-html[data-theme="light"] .bg-wrap .orb.c3{opacity:.12}
-html[data-theme="light"] .bg-wrap .grid-bg{
-  background-image:
-    linear-gradient(rgba(11,127,168,.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,127,168,.06) 1px,transparent 1px);
-}
-html[data-theme="light"] .noise{opacity:.02}
-
-/* 玻璃拟态卡片的顶部高光：深底靠白，浅底靠白也更亮 */
-html[data-theme="light"] .nav-in.scrolled{
-  box-shadow:0 12px 40px -14px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.75);
-}
-html[data-theme="light"] .card,
-html[data-theme="light"] .post,
-html[data-theme="light"] .idx-hero,
-html[data-theme="light"] .filters{
-  box-shadow:0 10px 34px -20px rgba(15,23,42,.30),inset 0 1px 0 rgba(255,255,255,.72);
+/* 移动端：面板铺满 */
+@media(max-width:560px){
+  .skin-panel{right:12px;left:12px;width:auto;top:72px}
+  .skin-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .skin-name{font-size:11px}
 }
 
-/* 选中态 */
-html[data-theme="light"] ::selection{background:rgba(11,127,168,.20);color:#0F172A}
-
-/* 焦点环 */
-html[data-theme="light"] :focus-visible{outline-color:var(--cyan)}
-
-/* --------------------------------------------------------------------------
-   浅色模式：浮层 / 固定元素（这些组件用了写死的深色底，需要单独覆盖）
-   -------------------------------------------------------------------------- */
-html[data-theme="light"] .nav-in{
-  background:rgba(255,255,255,.72);
-  box-shadow:0 8px 32px -14px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.9);
-}
-html[data-theme="light"] .nav-links.open{
-  background:rgba(255,255,255,.97);
-  box-shadow:0 18px 44px -20px rgba(15,23,42,.28);
-}
-html[data-theme="light"] .to-top{
-  background:rgba(255,255,255,.92);
-  box-shadow:0 14px 34px -16px rgba(15,23,42,.30);
-}
-html[data-theme="light"] .art-tool{
-  background:rgba(255,255,255,.78);
-  box-shadow:0 18px 46px -24px rgba(15,23,42,.28),inset 0 1px 0 rgba(255,255,255,.9);
-}
-html[data-theme="light"] .art-tool-fab{
-  background:rgba(255,255,255,.94);
-  box-shadow:0 14px 34px -16px rgba(15,23,42,.28);
-}
-html[data-theme="light"] .art-tool-tip{
-  background:rgba(255,255,255,.97);
-  box-shadow:0 10px 26px -14px rgba(15,23,42,.30);
-}
-html[data-theme="light"] .tts-panel{
-  background:rgba(255,255,255,.94);
-  box-shadow:0 26px 64px -28px rgba(15,23,42,.30),inset 0 1px 0 rgba(255,255,255,.9);
-}
-html[data-theme="light"] .tts-bar{background:rgba(16,24,40,.08)}
-html[data-theme="light"] .tg .tg-n{background:rgba(16,24,40,.06)}
-html[data-theme="light"] .tg .tg-n{color:var(--text-2)}
-html[data-theme="light"] .blog-foot{
-  background:linear-gradient(180deg,transparent,rgba(226,232,244,.55));
-}
-html[data-theme="light"] .tx-hero,
-html[data-theme="light"] .idx-hero{
-  box-shadow:0 24px 60px -34px rgba(15,23,42,.30);
-}
-html[data-theme="light"] .cat-card:hover{
-  box-shadow:0 18px 44px -22px rgba(11,127,168,.28);
-}
-html[data-theme="light"] .index-strip .ix-card:hover{
-  box-shadow:0 16px 38px -24px rgba(11,127,168,.30);
-}
-html[data-theme="light"] .code-copy{
-  background:rgba(16,24,40,.72);
-}
-
-/* --------------------------------------------------------------------------
-   主题切换过渡（只在切换瞬间启用，避免影响首屏性能）
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   4. 切换过渡
+   ========================================================================== */
 html.theme-anim,
 html.theme-anim *,
 html.theme-anim *::before,
 html.theme-anim *::after{
   transition:background-color .28s ease,color .28s ease,border-color .28s ease,box-shadow .28s ease !important;
 }
-
 @media (prefers-reduced-motion:reduce){
   html.theme-anim,html.theme-anim *{transition:none !important}
 }

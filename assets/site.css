@@ -18,6 +18,13 @@
     --pink:#F472B6;
     --green:#34D399;
     --maxw:1366px;
+    /* —— 皮肤变量：assets/theme.css 里按 data-skin 覆盖 —— */
+    --grid-line:rgba(0,229,255,.05);
+    --glow-1:rgba(0,229,255,.10);
+    --glow-2:rgba(168,85,247,.10);
+    --glow-3:rgba(255,255,255,.02);
+    --sel-bg:rgba(0,229,255,.28);
+    --sel-fg:#ffffff;
     --font-h:"Space Grotesk","Noto Sans SC",system-ui,sans-serif;
     --font-b:"Inter","Noto Sans SC",system-ui,sans-serif;
     --font-m:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -39,8 +46,8 @@
   .bg-wrap .grid-bg{
     position:absolute;inset:0;
     background-image:
-      linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
+      linear-gradient(var(--grid-line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
     background-size:60px 60px;
     mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
     -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%);
@@ -66,7 +73,7 @@
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;position:relative;z-index:2}
   :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-  ::selection{background:rgba(0,229,255,.28);color:#fff}
+  ::selection{background:var(--sel-bg);color:var(--sel-fg)}
 
   /* ===== Skip link ===== */
   .skip{
@@ -528,7 +535,7 @@
   /* connect */
   .connect{
     position:relative;
-    background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(168,85,247,.08));
+    background:linear-gradient(135deg,var(--glow-1),var(--glow-2));
     border:1px solid var(--border-2);
     border-radius:24px;
     padding:60px 50px;
@@ -538,7 +545,7 @@
   }
   .connect::before{
     content:"";position:absolute;inset:0;
-    background:radial-gradient(circle at 50% 0%,rgba(0,229,255,.15),transparent 60%);
+    background:radial-gradient(circle at 50% 0%,var(--glow-1),transparent 60%);
     pointer-events:none;
   }
   .connect h2{

@@ -14,13 +14,13 @@
 .tx-hero{
   position:relative;overflow:hidden;margin:132px 0 0;
   padding:52px 48px 40px;border:1px solid var(--border);border-radius:20px;
-  background:linear-gradient(135deg,rgba(0,229,255,.10) 0%,rgba(168,85,247,.10) 52%,rgba(255,255,255,.02) 100%);
+  background:linear-gradient(135deg,var(--glow-1) 0%,var(--glow-2) 52%,var(--glow-3) 100%);
   box-shadow:0 30px 80px -30px rgba(0,0,0,.75);
 }
 .tx-hero::before{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
   background-size:60px 60px;
   -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 78%);
   mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 78%);
