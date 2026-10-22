@@ -1,0 +1,79 @@
+/* ==========================================================================
+   blog-shell.css — 博客页（文章页 / 归档页 / 分类页 / 标签页 / 精选页）通用外壳
+   在 blog.css 之后加载。放的是「所有博客页都要有」的东西：导航高亮、页脚。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   导航高亮
+   -------------------------------------------------------------------------- */
+.nav-links a.active{
+  color:var(--cyan);
+  background:var(--cyan-soft);
+}
+.nav-links a[data-nav]{position:relative}
+.nav-links a[data-nav].active::after{
+  content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);
+  width:18px;height:2px;border-radius:2px;background:var(--cyan);
+}
+
+/* --------------------------------------------------------------------------
+   归档页筛选栏：当前筛选提示
+   -------------------------------------------------------------------------- */
+.f-active{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-m);font-size:12px;letter-spacing:.02em;
+  color:var(--violet);background:var(--violet-soft);
+  border:1px solid rgba(168,85,247,.32);border-radius:999px;
+  padding:6px 8px 6px 14px;
+}
+.chip button{
+  font-family:var(--font-m);font-size:14px;line-height:1;
+  color:var(--violet);background:rgba(168,85,247,.16);
+  border:none;border-radius:50%;width:19px;height:19px;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s;padding:0;
+}
+.chip button:hover{background:var(--violet);color:#0A0E1A}
+.chip button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.f-hint{font-size:12.5px;color:var(--text-3);line-height:1.6}
+
+/* --------------------------------------------------------------------------
+   博客页脚
+   -------------------------------------------------------------------------- */
+.blog-foot{
+  position:relative;z-index:2;
+  margin-top:72px;padding:36px 0 44px;
+  border-top:1px solid var(--border);
+  background:linear-gradient(180deg,transparent,rgba(10,14,26,.55));
+}
+.blog-foot .bf-in{
+  max-width:var(--maxw);margin:0 auto;padding:0 48px;
+  display:flex;flex-wrap:wrap;gap:20px 32px;
+  align-items:center;justify-content:space-between;
+}
+.blog-foot .bf-links{
+  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+}
+.blog-foot .bf-links a{
+  font-family:var(--font-m);font-size:12.5px;letter-spacing:.03em;
+  color:var(--text-2);transition:color .2s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.blog-foot .bf-links a:hover{color:var(--cyan)}
+.blog-foot .bf-links a::before{
+  content:"";width:4px;height:4px;border-radius:50%;
+  background:var(--cyan);opacity:.5;transition:opacity .2s,transform .2s;
+}
+.blog-foot .bf-links a:hover::before{opacity:1;transform:scale(1.4)}
+.blog-foot .bf-copy{
+  font-family:var(--font-m);font-size:11.5px;color:var(--text-3);letter-spacing:.03em;
+}
+
+@media(max-width:900px){
+  .blog-foot .bf-in{padding:0 24px;flex-direction:column;align-items:flex-start;gap:16px}
+}
+@media(max-width:500px){
+  .blog-foot .bf-in{padding:0 16px}
+  .blog-foot .bf-links{gap:8px 16px}
+}

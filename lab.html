@@ -20,6 +20,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/theme.css">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 <body data-lang="zh">
 
@@ -41,6 +44,9 @@
     <div class="nav-links" id="navlinks">
       <a href="index.html#works" data-i18n="nav_works">作品</a>
       <a href="index.html#writing" data-i18n="nav_writing">文章</a>
+      <a href="blog/categories.html" data-nav="categories"><span class="zh-only">分类</span><span class="en-only">Categories</span></a>
+      <a href="blog/tags.html" data-nav="tags"><span class="zh-only">标签</span><span class="en-only">Tags</span></a>
+      <a href="blog/popular.html" data-nav="popular"><span class="zh-only">精选</span><span class="en-only">Featured</span></a>
       <a href="index.html#lab" class="active" data-i18n="nav_lab">实验室</a>
       <a href="index.html#about" data-i18n="nav_about">关于</a>
       <a href="index.html#connect" data-i18n="nav_connect">联系</a>
@@ -296,5 +302,7 @@
     setLang(cur==='zh'?'en':'zh');
   });
 </script>
+<script src="assets/theme.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
 </body>
 </html>

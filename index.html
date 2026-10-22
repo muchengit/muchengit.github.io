@@ -26,7 +26,6 @@
 <meta name="twitter:image" content="https://muchengit.github.io/og.png">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="favicon.svg">
 <link rel="alternate" type="application/rss+xml" title="木尘的文章" href="feed.xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,6 +52,9 @@
 </script>
 
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/theme.css">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 </head>
 <body data-lang="zh">
 
@@ -74,6 +76,9 @@
     <div class="nav-links" id="navlinks">
       <a href="#works" data-i18n="nav_works">作品</a>
       <a href="#writing" data-i18n="nav_writing">文章</a>
+      <a href="blog/categories.html" data-nav="categories"><span class="zh-only">分类</span><span class="en-only">Categories</span></a>
+      <a href="blog/tags.html" data-nav="tags"><span class="zh-only">标签</span><span class="en-only">Tags</span></a>
+      <a href="blog/popular.html" data-nav="popular"><span class="zh-only">精选</span><span class="en-only">Featured</span></a>
       <a href="#path" data-i18n="nav_path"><span class="zh-only">路线</span><span class="en-only">Path</span></a>
       <a href="#lab" data-i18n="nav_lab">实验室</a>
       <a href="#about" data-i18n="nav_about">关于</a>
@@ -484,31 +489,56 @@
       </span>
     </div>
 
+    <!-- SYNC:INDEX-STRIP -->
+  <div class="index-strip">
+    <a href="blog/" class="ix-card reveal">
+      <span class="ix-k">ARCHIVE</span>
+      <span class="ix-t"><span class="zh-only">全部文章</span><span class="en-only">All articles</span></span>
+      <span class="ix-n">38</span>
+    </a>
+    <a href="blog/categories.html" class="ix-card reveal">
+      <span class="ix-k">CATEGORIES</span>
+      <span class="ix-t"><span class="zh-only">分类浏览</span><span class="en-only">Browse by category</span></span>
+      <span class="ix-n">16</span>
+    </a>
+    <a href="blog/tags.html" class="ix-card reveal">
+      <span class="ix-k">TAGS</span>
+      <span class="ix-t"><span class="zh-only">标签检索</span><span class="en-only">Search by tag</span></span>
+      <span class="ix-n">54</span>
+    </a>
+    <a href="blog/popular.html" class="ix-card reveal">
+      <span class="ix-k">FEATURED</span>
+      <span class="ix-t"><span class="zh-only">精选与路线</span><span class="en-only">Featured & paths</span></span>
+      <span class="ix-n">10</span>
+    </a>
+  </div>
+<!-- /SYNC:INDEX-STRIP -->
+
     <div class="post-group reveal">
       <div class="post-year">2026</div>
       <div class="posts">
 
-        <a href="blog/2026-ai-debug-handbook.html" class="post reveal"><span class="date">2026.10.22</span><div class="info"><h3><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won't Run: A Debugging Handbook for Non-Developers</span></h3><p><span class="zh-only">我统计过自己 2026 年上半年用 AI 写代码的记录：所有"跑不起来"的时刻里，真正需要理解代码才能解决的占 18%，剩下 82% 都是"信息…</span><span class="en-only">I went back through my own AI coding sessions from the first half of 2026. Of every "it won't run" moment, onl…</span></p></div><span class="cat"><span class="zh-only">AI 编程</span><span class="en-only">AI Coding</span></span></a>
+        <a href="blog/2026-ai-debug-handbook.html" class="post reveal"><span class="date">2026.10.22</span><div class="info"><h3><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won&#x27;t Run: A Debugging Handbook for Non-Developers</span></h3><p><span class="zh-only">我统计过自己 2026 年上半年用 AI 写代码的记录：所有&quot;跑不起来&quot;的时刻里，真正需要理解代码才能解决的占 18%，剩下 82% 都是&quot;信息…</span><span class="en-only">I went back through my own AI coding sessions from the first half of 2026. Of every &quot;it won&#x27;t run&quot; moment, onl…</span></p></div><span class="cat"><span class="zh-only">AI 编程</span><span class="en-only">AI Coding</span></span></a>
 
-        <a href="blog/2026-ai-services.html" class="post reveal"><span class="date">2026.10.21</span><div class="info"><h3><span class="zh-only">不卖软件卖服务：用 AI 接单赚钱的 4 种活法</span><span class="en-only">Don't Sell Software, Sell Services: 4 Ways to Earn with AI</span></h3><p><span class="zh-only">"做一个产品，然后靠订阅赚钱"是媒体最爱讲的路径，但它对个人其实极不友好：产品要开发、要推广、要维护，周期 3–6 个月，而且大部分会死在第 6…</span><span class="en-only">"Build a product, earn from subscriptions" is the path the media loves, and it's brutal for individuals: you m…</span></p></div><span class="cat"><span class="zh-only">副业</span><span class="en-only">Side Hustle</span></span></a>
+        <a href="blog/2026-ai-services.html" class="post reveal"><span class="date">2026.10.21</span><div class="info"><h3><span class="zh-only">不卖软件卖服务：用 AI 接单赚钱的 4 种活法</span><span class="en-only">Don&#x27;t Sell Software, Sell Services: 4 Ways to Earn with AI</span></h3><p><span class="zh-only">&quot;做一个产品，然后靠订阅赚钱&quot;是媒体最爱讲的路径，但它对个人其实极不友好：产品要开发、要推广、要维护，周期 3–6 个月，而且大部分会死在第 6…</span><span class="en-only">&quot;Build a product, earn from subscriptions&quot; is the path the media loves, and it&#x27;s brutal for individuals: you m…</span></p></div><span class="cat"><span class="zh-only">副业</span><span class="en-only">Side Hustle</span></span></a>
 
         <a href="blog/2026-privacy-red-lines.html" class="post reveal"><span class="date">2026.10.20</span><div class="info"><h3><span class="zh-only">把用户数据交给模型之前：AI 应用的隐私红线</span><span class="en-only">Before You Hand User Data to a Model: Privacy Rules for AI Apps</span></h3><p><span class="zh-only">这件事本身没错——用户上传合同，让 AI 标出风险条款，产品不这么干就没有意义。问题出在我没想清楚一件事：合同离开我的服务器之后，还会经过哪些地…</span><span class="en-only">Sending the contract was not the mistake in itself — users upload a contract and AI flags the risky clauses; t…</span></p></div><span class="cat"><span class="zh-only">实战</span><span class="en-only">Case Study</span></span></a>
 
         <a href="blog/2026-data-analysis.html" class="post reveal"><span class="date">2026.10.19</span><div class="info"><h3><span class="zh-only">不会写代码的人，怎么用 AI 做数据分析</span><span class="en-only">Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</span></h3><p><span class="zh-only">2026 年 9 月，我给自己的小产品做第一次真正意义上的数据复盘。手上有一份导出的 CSV：12,400 行、23 列，记录了每一笔注册、每一…</span><span class="en-only">In September 2026 I did the first real data review for my own small product. I had a CSV export: 12,400 rows…</span></p></div><span class="cat"><span class="zh-only">AI 编程</span><span class="en-only">AI Coding</span></span></a>
 
-        <a href="blog/2026-zero-to-first-product.html" class="post reveal"><span class="date">2026.10.18</span><div class="info"><h3><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></h3><p><span class="zh-only">先给结论：90 天足够做出一个真的有人用、有人愿意付钱的小型 AI 产品。过去两年我用这套节奏跑过 5 个产品，其中 3 个在 90 天内拿到了…</span><span class="en-only">The short answer: 90 days is enough to build a small AI product that real people use and pay for. I've run thi…</span></p></div><span class="cat"><span class="zh-only">入门</span><span class="en-only">Getting Started</span></span></a>
+        <a href="blog/2026-zero-to-first-product.html" class="post reveal"><span class="date">2026.10.18</span><div class="info"><h3><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></h3><p><span class="zh-only">先给结论：90 天足够做出一个真的有人用、有人愿意付钱的小型 AI 产品。过去两年我用这套节奏跑过 5 个产品，其中 3 个在 90 天内拿到了…</span><span class="en-only">The short answer: 90 days is enough to build a small AI product that real people use and pay for. I&#x27;ve run thi…</span></p></div><span class="cat"><span class="zh-only">入门</span><span class="en-only">Getting Started</span></span></a>
 
-        <a href="blog/2026-ai-daily-automation.html" class="post reveal"><span class="date">2026.10.17</span><div class="info"><h3><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></h3><p><span class="zh-only">2026 年 5 月，我做了一件不太酷但很值的事：连续 14 天记录自己每天花在"复制粘贴、整理表格、回邮件"上的时间。结果是 平均每天 2 小…</span><span class="en-only">In May 2026 I did something unfashionable but worthwhile: for 14 days straight I logged how long I spent on co…</span></p></div><span class="cat"><span class="zh-only">实战</span><span class="en-only">Case Study</span></span></a>
+        <a href="blog/2026-ai-daily-automation.html" class="post reveal"><span class="date">2026.10.17</span><div class="info"><h3><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></h3><p><span class="zh-only">2026 年 5 月，我做了一件不太酷但很值的事：连续 14 天记录自己每天花在&quot;复制粘贴、整理表格、回邮件&quot;上的时间。结果是 平均每天 2 小…</span><span class="en-only">In May 2026 I did something unfashionable but worthwhile: for 14 days straight I logged how long I spent on co…</span></p></div><span class="cat"><span class="zh-only">实战</span><span class="en-only">Case Study</span></span></a>
 
-        <a href="blog/2026-indie-ops-keep-alive.html" class="post reveal"><span class="date">2026.10.16</span><div class="info"><h3><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></h3><p><span class="zh-only">我做过 3 个上线的小产品。第 1 个活了下来，第 2 个在第 4 个月悄悄挂了（我 11 天后才从朋友那里听说），第 3 个现在每月有 380…</span><span class="en-only">I've shipped three small products. The first survived, the second went down silently in month four (I heard ab…</span></p></div><span class="cat"><span class="zh-only">独立开发</span><span class="en-only">Indie Dev</span></span></a>
+        <a href="blog/2026-indie-ops-keep-alive.html" class="post reveal"><span class="date">2026.10.16</span><div class="info"><h3><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></h3><p><span class="zh-only">我做过 3 个上线的小产品。第 1 个活了下来，第 2 个在第 4 个月悄悄挂了（我 11 天后才从朋友那里听说），第 3 个现在每月有 380…</span><span class="en-only">I&#x27;ve shipped three small products. The first survived, the second went down silently in month four (I heard ab…</span></p></div><span class="cat"><span class="zh-only">独立开发</span><span class="en-only">Indie Dev</span></span></a>
 
-        <a href="blog/2026-long-doc-ai.html" class="post reveal"><span class="date">2026.10.15</span><div class="info"><h3><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></h3><p><span class="zh-only">2026 年 9 月，我替一个朋友看一份 SaaS 服务协议。78 页，4.2 万字。我把文件拖进对话框，说了句"帮我看看有什么坑"，AI 回了…</span><span class="en-only">In September 2026 I reviewed a SaaS agreement for a friend. 78 pages, 42,000 characters. I dropped the file in…</span></p></div><span class="cat"><span class="zh-only">AI 技巧</span><span class="en-only">Tips</span></span></a>
+        <a href="blog/2026-long-doc-ai.html" class="post reveal"><span class="date">2026.10.15</span><div class="info"><h3><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></h3><p><span class="zh-only">2026 年 9 月，我替一个朋友看一份 SaaS 服务协议。78 页，4.2 万字。我把文件拖进对话框，说了句&quot;帮我看看有什么坑&quot;，AI 回了…</span><span class="en-only">In September 2026 I reviewed a SaaS agreement for a friend. 78 pages, 42,000 characters. I dropped the file in…</span></p></div><span class="cat"><span class="zh-only">AI 技巧</span><span class="en-only">Tips</span></span></a>
 
-        <a href="blog/2026-small-products.html" class="post reveal"><span class="date">2026.10.12</span><div class="info"><h3><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></h3><p><span class="zh-only">"我想做个 XX"是所有产品失败故事的起点。2025 年我记录过自己 6 个"从零想出来"的产品，结果是：3 个没人用，2 个有人用但不付钱，1…</span><span class="en-only">"I want to build an X" is where every failed product begins. In 2025 I tracked six products I invented from sc…</span></p></div><span class="cat"><span class="zh-only">产品</span><span class="en-only">Product</span></span></a>
+        <a href="blog/2026-small-products.html" class="post reveal"><span class="date">2026.10.12</span><div class="info"><h3><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></h3><p><span class="zh-only">&quot;我想做个 XX&quot;是所有产品失败故事的起点。2025 年我记录过自己 6 个&quot;从零想出来&quot;的产品，结果是：3 个没人用，2 个有人用但不付钱，1…</span><span class="en-only">&quot;I want to build an X&quot; is where every failed product begins. In 2025 I tracked six products I invented from sc…</span></p></div><span class="cat"><span class="zh-only">产品</span><span class="en-only">Product</span></span></a>
 
-        <a href="blog/2026-acceptance-criteria.html" class="post reveal"><span class="date">2026.10.08</span><div class="info"><h3><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></h3><p><span class="zh-only">大多数人跟 AI 说话的方式是："帮我做一个登录页。"AI 会给你一个能跑、但没有输入校验、没有错误提示、没有移动端适配的登录页。你说"不是这个…</span><span class="en-only">Most people talk to AI like this: "build me a login page." You get a page that runs but has no validation, no…</span></p></div><span class="cat"><span class="zh-only">AI 技巧</span><span class="en-only">Tips</span></span></a>
+        <a href="blog/2026-acceptance-criteria.html" class="post reveal"><span class="date">2026.10.08</span><div class="info"><h3><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></h3><p><span class="zh-only">大多数人跟 AI 说话的方式是：&quot;帮我做一个登录页。&quot;AI 会给你一个能跑、但没有输入校验、没有错误提示、没有移动端适配的登录页。你说&quot;不是这个…</span><span class="en-only">Most people talk to AI like this: &quot;build me a login page.&quot; You get a page that runs but has no validation, no…</span></p></div><span class="cat"><span class="zh-only">AI 技巧</span><span class="en-only">Tips</span></span></a>
 
-        <a href="blog/2026-ai-product-pricing.html" class="post reveal"><span class="date">2026.10.06</span><div class="info"><h3><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></h3><p><span class="zh-only">大部分独立开发者做 AI 产品时的顺序是反的：先想"我该卖多少钱"，做了三个月才发现成本比想象中高好几倍，于是要么赔本硬撑，要么默默把服务关掉。…</span><span class="en-only">Most indie developers price in the wrong order: decide what to charge first, then discover three months later…</span></p></div><span class="cat"><span class="zh-only">产品</span><span class="en-only">Product</span></span></a>
+        <a href="blog/2026-ai-product-pricing.html" class="post reveal"><span class="date">2026.10.06</span><div class="info"><h3><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></h3><p><span class="zh-only">大部分独立开发者做 AI 产品时的顺序是反的：先想&quot;我该卖多少钱&quot;，做了三个月才发现成本比想象中高好几倍，于是要么赔本硬撑，要么默默把服务关掉。…</span><span class="en-only">Most indie developers price in the wrong order: decide what to charge first, then discover three months later…</span></p></div><span class="cat"><span class="zh-only">产品</span><span class="en-only">Product</span></span></a>
 
         <a href="blog/2026-from-demo-to-production.html" class="post reveal"><span class="date">2026.09.15</span><div class="info"><h3><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></h3><p><span class="zh-only">2026 年 5 月，我用 AI 做了一个小工具：上传一份合同，AI 帮你标出可能踩坑的条款——付款周期太长、违约金对不上、无限责任、没写验收标…</span><span class="en-only">In May 2026 I used AI to build a small tool: upload a contract and the AI flags the clauses that are likely to…</span></p></div><span class="cat"><span class="zh-only">实战</span><span class="en-only">Case Study</span></span></a>
 
@@ -523,7 +553,7 @@
 
         <a href="blog/2025-multi-agent.html" class="post reveal"><span class="date">2025.09.22</span><div class="info"><h3><span class="zh-only">多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</span><span class="en-only">Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</span></h3><p><span class="zh-only">单个 AI Agent 能做很多事情，但它有一个根本限制：它只能扮演一个角色。如果你需要一篇文章先由研究员搜集资料，再由写作者撰写初稿，再由编辑…</span><span class="en-only">A single AI Agent can do many things, but it has a fundamental limitation: it can only play one role. If you n…</span></p></div><span class="cat"><span class="zh-only">Agent</span><span class="en-only">Agent</span></span></a>
 
-        <a href="blog/2025-indie-dev-survival.html" class="post reveal"><span class="date">2025.08.15</span><div class="info"><h3><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&L)</span></h3><p><span class="zh-only">2025 年的独立开发圈有两个极端的声音。一边是"AI 让人人都能做产品"的乐观叙事，另一边是"独立开发已死"的悲观论调。真相在中间：AI 确实…</span><span class="en-only">The indie dev community in 2025 has two extreme narratives. One is the optimistic "AI lets everyone build prod…</span></p></div><span class="cat"><span class="zh-only">独立开发</span><span class="en-only">Indie Dev</span></span></a>
+        <a href="blog/2025-indie-dev-survival.html" class="post reveal"><span class="date">2025.08.15</span><div class="info"><h3><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&amp;L)</span></h3><p><span class="zh-only">2025 年的独立开发圈有两个极端的声音。一边是&quot;AI 让人人都能做产品&quot;的乐观叙事，另一边是&quot;独立开发已死&quot;的悲观论调。真相在中间：AI 确实…</span><span class="en-only">The indie dev community in 2025 has two extreme narratives. One is the optimistic &quot;AI lets everyone build prod…</span></p></div><span class="cat"><span class="zh-only">独立开发</span><span class="en-only">Indie Dev</span></span></a>
 
       </div>
     </div>
@@ -532,7 +562,7 @@
       <div class="post-year">2024</div>
       <div class="posts">
 
-        <a href="blog/2024-ai-year-review.html" class="post reveal"><span class="date">2024.12.28</span><div class="info"><h3><span class="zh-only">2024 AI 年度总结：从百模大战到落地为王</span><span class="en-only">2024 AI Year in Review: From Model Wars to Real-World Impact</span></h3><p><span class="zh-only">如果用一句话概括 2024 年的 AI 行业，那就是：从"能不能"到"好不好"的转变。2023 年是 AI 的"元年"——ChatGPT 横空出…</span><span class="en-only">If there's one sentence to sum up the AI industry in 2024, it's this: the shift from "can it?" to "is it good…</span></p></div><span class="cat"><span class="zh-only">年度总结</span><span class="en-only">Year in Review</span></span></a>
+        <a href="blog/2024-ai-year-review.html" class="post reveal"><span class="date">2024.12.28</span><div class="info"><h3><span class="zh-only">2024 AI 年度总结：从百模大战到落地为王</span><span class="en-only">2024 AI Year in Review: From Model Wars to Real-World Impact</span></h3><p><span class="zh-only">如果用一句话概括 2024 年的 AI 行业，那就是：从&quot;能不能&quot;到&quot;好不好&quot;的转变。2023 年是 AI 的&quot;元年&quot;——ChatGPT 横空出…</span><span class="en-only">If there&#x27;s one sentence to sum up the AI industry in 2024, it&#x27;s this: the shift from &quot;can it?&quot; to &quot;is it good…</span></p></div><span class="cat"><span class="zh-only">年度总结</span><span class="en-only">Year in Review</span></span></a>
 
         <a href="blog/2024-chinese-ai-tools.html" class="post reveal"><span class="date">2024.11.15</span><div class="info"><h3><span class="zh-only">2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你</span><span class="en-only">2024 Chinese AI Tools: Which One is Right for You</span></h3><p><span class="zh-only">2024 年，国产 AI 工具迎来了爆发式增长。通义千问、豆包、Kimi、文心一言、智谱清言……每个名字背后都是一家科技巨头。你可能已经装了其中…</span><span class="en-only">In 2024, Chinese AI tools experienced explosive growth. Tongyi Qianwen, Doubao, Kimi, ERNIE Bot, Zhipu ChatGLM…</span></p></div><span class="cat"><span class="zh-only">工具评测</span><span class="en-only">Tools</span></span></a>
 
@@ -835,6 +865,18 @@
         <span class="zh-only">文章归档</span>
         <span class="en-only">Archive</span>
       </a>
+      <a href="blog/categories.html">
+        <span class="zh-only">分类</span>
+        <span class="en-only">Categories</span>
+      </a>
+      <a href="blog/tags.html">
+        <span class="zh-only">标签</span>
+        <span class="en-only">Tags</span>
+      </a>
+      <a href="blog/popular.html">
+        <span class="zh-only">精选</span>
+        <span class="en-only">Featured</span>
+      </a>
       <a href="lab.html">
         <span class="zh-only">实验室</span>
         <span class="en-only">Lab</span>
@@ -920,5 +962,7 @@
     setLang(cur==='zh'?'en':'zh');
   });
 </script>
+<script src="assets/theme.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
 </body>
 </html>

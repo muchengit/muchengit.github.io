@@ -1,6 +1,17 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>从 Demo 到上线：AI 生成代码的生产化改造清单 | From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</title><meta name="description" content="用 AI 五天做出的 Demo，上线后被硬编码的密钥、缺失的错误处理和失控的模型调用成本接连打脸。本文用真实数字拆解「能跑」与「能上线」之间的 6 个差距，并给出一份 12 项的上线检查清单。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css"></head><body data-lang="zh">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>从 Demo 到上线：AI 生成代码的生产化改造清单 | From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</title><meta name="description" content="用 AI 五天做出的 Demo，上线后被硬编码的密钥、缺失的错误处理和失控的模型调用成本接连打脸。本文用真实数字拆解「能跑」与「能上线」之间的 6 个差距，并给出一份 12 项的上线检查清单。"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="blog.css">
+<link rel="stylesheet" href="blog-shell.css">
+<link rel="stylesheet" href="../assets/theme.css"><link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+</head><body data-lang="zh">
 <div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
-<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks"><a href="../#works" data-i18n="nav_works">作品</a><a href="../#writing" data-i18n="nav_writing">文章</a><a href="../#lab" data-i18n="nav_lab">实验室</a><a href="../#about" data-i18n="nav_about">关于</a><a href="../#connect" data-i18n="nav_connect">联系</a></div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
+<nav id="nav"><div class="nav-in"><a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a><div class="nav-links" id="navlinks">
+      <a href="index.html" data-nav="archive"><span class="zh-only">归档</span><span class="en-only">Archive</span></a>
+      <a href="categories.html" data-nav="categories"><span class="zh-only">分类</span><span class="en-only">Categories</span></a>
+      <a href="tags.html" data-nav="tags"><span class="zh-only">标签</span><span class="en-only">Tags</span></a>
+      <a href="popular.html" data-nav="popular"><span class="zh-only">精选</span><span class="en-only">Featured</span></a>
+      <a href="../lab.html" data-nav="lab"><span class="zh-only">实验室</span><span class="en-only">Lab</span></a>
+      <a href="../#about" data-nav="about"><span class="zh-only">关于</span><span class="en-only">About</span></a>
+    </div><div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div></div></nav>
 <article>
 <header class="hero">
   <img src="2026-production-hero.jpg" alt="Deployment checklist on screen" loading="eager">
@@ -487,5 +498,21 @@ log('payment.webhook', { orderId: 'A20260915', amount: 39, ok: false });</code><
 
 <div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
 
+<footer class="blog-foot">
+  <div class="bf-in">
+    <nav class="bf-links" aria-label="Blog index / 文章索引">
+      <a href="index.html"><span class="zh-only">文章归档</span><span class="en-only">Archive</span></a>
+      <a href="categories.html"><span class="zh-only">分类</span><span class="en-only">Categories</span></a>
+      <a href="tags.html"><span class="zh-only">标签</span><span class="en-only">Tags</span></a>
+      <a href="popular.html"><span class="zh-only">精选</span><span class="en-only">Featured</span></a>
+      <a href="../lab.html"><span class="zh-only">实验室</span><span class="en-only">Lab</span></a>
+      <a href="../feed.xml">RSS</a>
+    </nav>
+    <p class="bf-copy">© 2026 Mu Chen · <span class="zh-only">木尘 · AI 编程实践者</span><span class="en-only">AI Coding Practitioner</span></p>
+  </div>
+</footer>
+
 <script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
-<script src="articles.js"></script><script src="blog.js"></script></body></html>
+<script src="articles.js"></script><script src="blog.js"></script><script src="../assets/theme.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
+</body></html>

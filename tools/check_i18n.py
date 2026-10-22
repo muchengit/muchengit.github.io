@@ -84,7 +84,8 @@ print("英文模式残留中文检查（模拟移除 zh-only 后，可见文本�
 print("=" * 76)
 
 files = ["index.html", "lab.html", "blog/index.html"] + sorted(
-    os.path.basename(f) for f in glob.glob(os.path.join(ROOT, "blog/*.html"))
+    os.path.relpath(f, ROOT).replace(os.sep, "/")
+    for f in glob.glob(os.path.join(ROOT, "blog/*.html"))
     if not f.endswith("/index.html")
 )
 

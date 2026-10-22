@@ -1,0 +1,151 @@
+/* ==========================================================================
+   theme.css — 全站浅色 / 深色双主题
+   必须在 site.css / blog.css 之后加载。
+   深色为默认（品牌基色 #0A0E1A），浅色通过 <html data-theme="light"> 切换。
+   覆盖策略：优先改 CSS 变量（site.css / blog.css 里 95% 的颜色都走变量），
+             少量硬编码阴影 / 高光用下面的补丁规则单独处理。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   浅色主题变量
+   -------------------------------------------------------------------------- */
+html[data-theme="light"]{
+  --bg:#F3F6FC;
+  --bg-2:#FFFFFF;
+  --surface:rgba(16,24,40,.035);
+  --surface-2:rgba(16,24,40,.065);
+  --border:rgba(16,24,40,.10);
+  --border-2:rgba(16,24,40,.18);
+  --text:#0F172A;
+  --text-2:#4A5568;
+  --text-3:#8A94A8;
+
+  /* 品牌色在浅底上需要压暗才够对比度 */
+  --cyan:#0B7FA8;
+  --cyan-soft:rgba(11,127,168,.12);
+  --violet:#7C3AED;
+  --violet-soft:rgba(124,58,237,.12);
+  --amber:#B45309;
+  --amber-soft:rgba(180,83,9,.12);
+  --pink:#DB2777;
+  --green:#047857;
+  --red:#DC2626;
+}
+
+/* --------------------------------------------------------------------------
+   主题切换按钮（由 theme.js 注入到 .nav-right）
+   -------------------------------------------------------------------------- */
+.theme-btn{
+  font-family:var(--font-m);
+  font-size:13px;line-height:1;
+  width:38px;height:34px;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--text-2);
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  transition:color .2s,border-color .2s,background .2s,transform .2s;
+}
+.theme-btn:hover{color:var(--cyan);border-color:var(--cyan-soft);background:var(--cyan-soft)}
+.theme-btn:active{transform:scale(.94)}
+.theme-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.theme-btn .ic{display:none;font-size:14px}
+html[data-theme="light"] .theme-btn .ic-light{display:inline}
+html:not([data-theme="light"]) .theme-btn .ic-dark{display:inline}
+
+/* --------------------------------------------------------------------------
+   浅色模式下的细节补丁
+   -------------------------------------------------------------------------- */
+
+/* 背景光晕与网格：浅底上要收敛，否则整页发灰 */
+html[data-theme="light"] .bg-wrap .orb{opacity:.16}
+html[data-theme="light"] .bg-wrap .orb.c3{opacity:.12}
+html[data-theme="light"] .bg-wrap .grid-bg{
+  background-image:
+    linear-gradient(rgba(11,127,168,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,127,168,.06) 1px,transparent 1px);
+}
+html[data-theme="light"] .noise{opacity:.02}
+
+/* 玻璃拟态卡片的顶部高光：深底靠白，浅底靠白也更亮 */
+html[data-theme="light"] .nav-in.scrolled{
+  box-shadow:0 12px 40px -14px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.75);
+}
+html[data-theme="light"] .card,
+html[data-theme="light"] .post,
+html[data-theme="light"] .idx-hero,
+html[data-theme="light"] .filters{
+  box-shadow:0 10px 34px -20px rgba(15,23,42,.30),inset 0 1px 0 rgba(255,255,255,.72);
+}
+
+/* 选中态 */
+html[data-theme="light"] ::selection{background:rgba(11,127,168,.20);color:#0F172A}
+
+/* 焦点环 */
+html[data-theme="light"] :focus-visible{outline-color:var(--cyan)}
+
+/* --------------------------------------------------------------------------
+   浅色模式：浮层 / 固定元素（这些组件用了写死的深色底，需要单独覆盖）
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .nav-in{
+  background:rgba(255,255,255,.72);
+  box-shadow:0 8px 32px -14px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-theme="light"] .nav-links.open{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 18px 44px -20px rgba(15,23,42,.28);
+}
+html[data-theme="light"] .to-top{
+  background:rgba(255,255,255,.92);
+  box-shadow:0 14px 34px -16px rgba(15,23,42,.30);
+}
+html[data-theme="light"] .art-tool{
+  background:rgba(255,255,255,.78);
+  box-shadow:0 18px 46px -24px rgba(15,23,42,.28),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-theme="light"] .art-tool-fab{
+  background:rgba(255,255,255,.94);
+  box-shadow:0 14px 34px -16px rgba(15,23,42,.28);
+}
+html[data-theme="light"] .art-tool-tip{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 10px 26px -14px rgba(15,23,42,.30);
+}
+html[data-theme="light"] .tts-panel{
+  background:rgba(255,255,255,.94);
+  box-shadow:0 26px 64px -28px rgba(15,23,42,.30),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html[data-theme="light"] .tts-bar{background:rgba(16,24,40,.08)}
+html[data-theme="light"] .tg .tg-n{background:rgba(16,24,40,.06)}
+html[data-theme="light"] .tg .tg-n{color:var(--text-2)}
+html[data-theme="light"] .blog-foot{
+  background:linear-gradient(180deg,transparent,rgba(226,232,244,.55));
+}
+html[data-theme="light"] .tx-hero,
+html[data-theme="light"] .idx-hero{
+  box-shadow:0 24px 60px -34px rgba(15,23,42,.30);
+}
+html[data-theme="light"] .cat-card:hover{
+  box-shadow:0 18px 44px -22px rgba(11,127,168,.28);
+}
+html[data-theme="light"] .index-strip .ix-card:hover{
+  box-shadow:0 16px 38px -24px rgba(11,127,168,.30);
+}
+html[data-theme="light"] .code-copy{
+  background:rgba(16,24,40,.72);
+}
+
+/* --------------------------------------------------------------------------
+   主题切换过渡（只在切换瞬间启用，避免影响首屏性能）
+   -------------------------------------------------------------------------- */
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after{
+  transition:background-color .28s ease,color .28s ease,border-color .28s ease,box-shadow .28s ease !important;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html.theme-anim,html.theme-anim *{transition:none !important}
+}

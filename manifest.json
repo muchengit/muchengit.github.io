@@ -1,0 +1,91 @@
+{
+  "name": "木尘 · AI 编程实践者",
+  "short_name": "木尘",
+  "description": "木尘 · AI 编程实践者 —— 记录 AI 编程、Agent 开发与独立产品落地的中文实践笔记。",
+  "name_en": "Mu Chen — AI Coding Practitioner",
+  "description_en": "Mu Chen — AI Coding Practitioner. Notes on AI coding, agent development and shipping indie products.",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0E1A",
+  "theme_color": "#0A0E1A",
+  "categories": [
+    "blog",
+    "technology",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "文章归档",
+      "short_name": "归档",
+      "description": "全部文章列表",
+      "url": "/blog/",
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "分类总览",
+      "short_name": "分类",
+      "description": "按分类浏览文章",
+      "url": "/blog/categories.html",
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "标签速览",
+      "short_name": "标签",
+      "description": "按标签浏览文章",
+      "url": "/blog/tags.html",
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/blog/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

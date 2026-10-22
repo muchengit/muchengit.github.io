@@ -544,3 +544,139 @@ article{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:
   .reveal{opacity:1;transform:none}
   html{scroll-behavior:auto}
 }
+
+/* ==========================================================================
+   Article action rail (injected by blog.js) — 右侧浮动工具栏
+   ========================================================================== */
+.art-tool{
+  position:fixed;right:6px;top:50%;transform:translateY(-50%);
+  width:46px;padding:5px;border-radius:15px;z-index:95;
+  display:flex;flex-direction:column;gap:4px;
+  background:var(--surface);border:1px solid var(--border);
+  backdrop-filter:blur(10px) saturate(160%);-webkit-backdrop-filter:blur(10px) saturate(160%);
+  box-shadow:0 18px 46px -24px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.art-tool-btn{
+  position:relative;width:34px;height:34px;margin:0 auto;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid transparent;color:var(--text-2);
+  cursor:pointer;padding:0;
+  transition:color .2s,background .2s,border-color .2s,transform .2s;
+}
+.art-tool-btn:hover{transform:translateX(-2px)}
+.art-tool-btn:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.art-tool-btn .art-tool-ico{font-size:15px;line-height:1}
+.art-tool-btn.is-ok{color:var(--green);border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.12)}
+.art-tool-btn.is-active{color:var(--violet);background:var(--violet-soft);border-color:rgba(168,85,247,.35)}
+.art-tool-btn[data-tool="listen"]:hover{color:var(--cyan);background:var(--cyan-soft);border-color:rgba(0,229,255,.3)}
+.art-tool-btn[data-tool="copy"]:hover{color:var(--violet);background:var(--violet-soft);border-color:rgba(168,85,247,.32)}
+.art-tool-btn[data-tool="quote"]:hover{color:var(--amber);background:var(--amber-soft);border-color:rgba(245,158,11,.32)}
+.art-tool-btn[data-tool="random"]:hover{color:var(--pink);background:rgba(244,114,182,.14);border-color:rgba(244,114,182,.32)}
+.art-tool-btn[data-tool="toc"]:hover{color:var(--green);background:rgba(52,211,153,.14);border-color:rgba(52,211,153,.32)}
+.art-tool-btn[data-tool="top"]:hover{color:var(--cyan);background:var(--cyan-soft);border-color:rgba(0,229,255,.3)}
+
+/* hover 标签（中英成对） */
+.art-tool-tip{
+  position:absolute;right:calc(100% + 10px);top:50%;
+  transform:translateY(-50%) translateX(6px);
+  white-space:nowrap;pointer-events:none;opacity:0;
+  padding:5px 10px;border-radius:8px;
+  font-family:var(--font-m);font-size:11px;letter-spacing:.04em;color:var(--text);
+  background:rgba(10,14,26,.92);border:1px solid var(--border-2);
+  box-shadow:0 10px 26px -14px rgba(0,0,0,.9);
+  transition:opacity .18s,transform .18s;
+}
+.art-tool-btn:hover .art-tool-tip,
+.art-tool-btn:focus-visible .art-tool-tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* 移动端折叠按钮 */
+.art-tool-fab{
+  display:none;position:fixed;right:14px;bottom:62px;z-index:95;
+  width:44px;height:44px;border-radius:50%;padding:0;
+  align-items:center;justify-content:center;
+  background:rgba(10,14,26,.88);border:1px solid var(--border-2);color:var(--text-2);
+  cursor:pointer;font-size:16px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 14px 34px -16px rgba(0,0,0,.9);
+  transition:color .2s,border-color .2s;
+}
+.art-tool-fab:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* ==========================================================================
+   TTS panel — 全文朗读面板
+   ========================================================================== */
+.tts-panel{
+  position:fixed;right:62px;top:50%;transform:translateY(-50%) scale(.97);
+  width:300px;z-index:96;padding:16px;border-radius:16px;
+  background:rgba(10,14,26,.88);border:1px solid var(--border-2);
+  backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:0 26px 64px -28px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.07);
+  opacity:0;pointer-events:none;
+  transition:opacity .22s,transform .22s cubic-bezier(.2,.7,.2,1);
+}
+.tts-panel.open{opacity:1;pointer-events:auto;transform:translateY(-50%) scale(1)}
+.tts-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.tts-title{font-family:var(--font-h);font-size:14px;font-weight:600;color:var(--text)}
+.tts-close{
+  width:26px;height:26px;border-radius:8px;border:1px solid var(--border);
+  background:transparent;color:var(--text-3);cursor:pointer;font-size:12px;line-height:1;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.tts-close:hover{color:var(--pink);border-color:var(--pink);background:rgba(244,114,182,.12)}
+.tts-status{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;
+  font-family:var(--font-m);font-size:11.5px;color:var(--text-3);
+}
+.tts-state{color:var(--cyan)}
+.tts-bar{height:3px;border-radius:999px;background:var(--surface-2);overflow:hidden;margin-bottom:14px}
+.tts-bar i{
+  display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  transition:width .3s;
+}
+.tts-ctrls{display:flex;gap:8px;margin-bottom:14px}
+.tts-btn{
+  flex:1;height:38px;border-radius:10px;border:1px solid var(--border-2);
+  background:var(--surface);color:var(--text-2);cursor:pointer;font-size:13px;line-height:1;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.tts-btn:hover:not(:disabled){color:var(--cyan);border-color:var(--cyan);background:var(--cyan-soft)}
+.tts-btn:disabled{opacity:.35;cursor:not-allowed}
+.tts-play:hover:not(:disabled){color:var(--green);border-color:var(--green);background:rgba(52,211,153,.12)}
+.tts-stop:hover:not(:disabled){color:var(--pink);border-color:var(--pink);background:rgba(244,114,182,.12)}
+.tts-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:12px;color:var(--text-2)}
+.tts-row.off{display:none}
+.tts-k{flex:0 0 auto;min-width:42px;font-family:var(--font-m);font-size:11px;letter-spacing:.06em;color:var(--text-3)}
+.tts-rate{flex:1;min-width:0;height:16px;accent-color:var(--cyan)}
+.tts-val{flex:0 0 auto;min-width:38px;text-align:right;font-family:var(--font-m);font-size:11px;color:var(--cyan)}
+.tts-voice{
+  flex:1;min-width:0;padding:6px 8px;border-radius:8px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);font-size:11.5px;
+}
+.tts-note{margin:0;font-size:11px;line-height:1.7;color:var(--text-3)}
+
+/* 正在朗读的段落高亮 */
+.tts-current{
+  background:rgba(0,229,255,.08);
+  box-shadow:inset 3px 0 0 var(--cyan);
+  border-radius:6px;
+  transition:background .25s,box-shadow .25s;
+}
+
+/* ==========================================================================
+   Responsive — 工具栏 / 朗读面板
+   ========================================================================== */
+@media(max-width:860px){
+  .art-tool{
+    right:14px;bottom:118px;top:auto;transform:translateY(10px) scale(.96);
+    opacity:0;pointer-events:none;
+    transition:opacity .24s cubic-bezier(.2,.7,.2,1),transform .24s cubic-bezier(.2,.7,.2,1);
+  }
+  .art-tool.open{opacity:1;pointer-events:auto;transform:none}
+  .art-tool-fab{display:flex}
+  .tts-panel{left:12px;right:12px;bottom:118px;top:auto;width:auto;transform:translateY(10px)}
+  .tts-panel.open{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .art-tool,.art-tool-btn,.art-tool-tip,.tts-panel,.tts-bar i,.tts-current{transition:none!important}
+}

@@ -1,0 +1,332 @@
+{
+  "categories": {
+    "入门": {
+      "en": "Getting Started",
+      "icon": "🚀",
+      "descZh": "给完全没写过代码的人：先认清 AI 能做什么、不能做什么，再照一条从想法到上线的路线动手。",
+      "descEn": "For total beginners: what AI can actually do, then a route from idea to a live product.",
+      "featured": [
+        "getting-started-with-ai.html",
+        "2026-zero-to-first-product.html"
+      ]
+    },
+    "产品": {
+      "en": "Product",
+      "icon": "💡",
+      "descZh": "把一个想法做成有人付钱的东西：需求验证、定价获客，每一步都配真实收入数字和亏损复盘。",
+      "descEn": "Turning an idea into something people pay for: validation, pricing, and acquisition with real numbers.",
+      "featured": [
+        "2026-small-products.html",
+        "2025-ai-product-lessons.html",
+        "2026-ai-product-pricing.html"
+      ]
+    },
+    "实战": {
+      "en": "Case Study",
+      "icon": "🛠️",
+      "descZh": "完整走一遍真实项目：零代码做出产品、Demo 改到能上线、用户数据出事后的补救复盘。",
+      "descEn": "Real projects walked end to end: zero-code build, demo-to-production, and a privacy leak post-mortem.",
+      "featured": [
+        "ship-without-code.html",
+        "2026-from-demo-to-production.html",
+        "2026-privacy-red-lines.html"
+      ]
+    },
+    "AI 编程": {
+      "en": "AI Coding",
+      "icon": "⌨️",
+      "descZh": "用 AI 写代码的全流程：从第一次打开编辑器，到十万行项目的上下文管理和重构。",
+      "descEn": "AI coding end to end: first steps in the editor to managing a 100,000-line project's context.",
+      "featured": [
+        "build-with-cursor.html",
+        "2025-vibe-coding.html",
+        "2026-vibe-coding-advanced.html"
+      ]
+    },
+    "工具评测": {
+      "en": "Tools",
+      "icon": "🔍",
+      "descZh": "同一批题目横向实测各家工具，从国产大模型到八款 AI 编程工具，帮你按预算选到合适的那一个。",
+      "descEn": "Hands-on comparisons of AI tools, from Chinese models to eight coding assistants, priced and rated.",
+      "featured": [
+        "2026-ai-coding-landscape.html",
+        "2024-chinese-ai-tools.html",
+        "2025-ai-coding-tools-2025.html"
+      ]
+    },
+    "AI 技巧": {
+      "en": "Tips",
+      "icon": "💬",
+      "descZh": "怎么把话说清楚让 AI 真听懂：提示词三原则、需求验收清单，以及长文档的正确处理流程。",
+      "descEn": "Getting AI to actually understand you: prompting rules, acceptance criteria, and long-document workflows.",
+      "featured": [
+        "prompt-engineering.html",
+        "2024-chatgpt-tips.html",
+        "2026-long-doc-ai.html"
+      ]
+    },
+    "Agent": {
+      "en": "Agent",
+      "icon": "🤖",
+      "descZh": "从一问一答到让 AI 自己动手：Agent 的四个组件、主流框架怎么选、多角色协作流水线怎么搭。",
+      "descEn": "From one-shot answers to agents acting on their own: core parts, framework choices, multi-role pipelines.",
+      "featured": [
+        "2025-ai-agent-guide.html",
+        "2025-multi-agent.html"
+      ]
+    },
+    "独立开发": {
+      "en": "Indie Dev",
+      "icon": "🧰",
+      "descZh": "一个人做产品的真实账本：8 个项目的盈亏数据、上线后的运维清单、模型账单怎么才不翻车。",
+      "descEn": "The real ledger of solo building: P&L across eight projects, ops checklists, and runaway model bills.",
+      "featured": [
+        "2025-indie-dev-survival.html",
+        "2026-indie-ops-keep-alive.html"
+      ]
+    },
+    "出海": {
+      "en": "Global",
+      "icon": "🌏",
+      "descZh": "把产品卖给英文用户：怎么用 Reddit 找细分市场、怎么用 AI 处理语言、怎么定美元价格。",
+      "descEn": "Selling to English-speaking users: finding a niche on Reddit, handling language with AI, pricing in USD.",
+      "featured": [
+        "2025-ai-overseas.html"
+      ]
+    },
+    "副业": {
+      "en": "Side Hustle",
+      "icon": "💰",
+      "descZh": "用 AI 赚到第一笔钱的十几条路：每条都写清做什么、用什么工具、多久能赚到多少。",
+      "descEn": "A dozen ways to earn with AI, each with the work, the tools, and how long it takes to earn.",
+      "featured": [
+        "2026-ai-services.html",
+        "2025-ai-side-hustle-12.html",
+        "2024-ai-side-hustle.html"
+      ]
+    },
+    "趋势": {
+      "en": "Trends",
+      "icon": "📈",
+      "descZh": "AI 本身在变：从脱口而出的生成模型到想好了再说的推理模型，普通人用法也要跟着换。",
+      "descEn": "How AI itself is changing: from instant generation to models that reason first, and how to adapt.",
+      "featured": [
+        "2025-reasoning-models.html"
+      ]
+    },
+    "深度解析": {
+      "en": "Deep Dive",
+      "icon": "🔬",
+      "descZh": "拆开一次关键发布的技术内幕：强化学习训练为什么让开源模型追平闭源，以及它改变了什么。",
+      "descEn": "Inside one landmark release: why reinforcement learning let an open model match closed ones.",
+      "featured": [
+        "2025-deepseek-r1.html"
+      ]
+    },
+    "年度总结": {
+      "en": "Year in Review",
+      "icon": "📅",
+      "descZh": "一年里 AI 真正走到了哪一步：六件大事的时间线，以及普通人从这一变化里拿到什么。",
+      "descEn": "Where AI actually landed this year: six milestones on a timeline and what they changed for you.",
+      "featured": [
+        "2024-ai-year-review.html"
+      ]
+    },
+    "视频生成": {
+      "en": "Video AI",
+      "icon": "🎬",
+      "descZh": "视频生成怎么从演示变成生产力工具：Sora、可灵等关键节点和对创作者的影响。",
+      "descEn": "How video generation became a real tool: Sora, Kling, Runway, and what changes for creators.",
+      "featured": [
+        "2024-ai-video-revolution.html"
+      ]
+    },
+    "AI 绘画": {
+      "en": "AI Art",
+      "icon": "🎨",
+      "descZh": "Midjourney、SD、Flux 怎么选：画质、难度、价格和商用版权问题。",
+      "descEn": "Choosing between Midjourney, Stable Diffusion, and Flux on quality, ease, price, and commercial rights.",
+      "featured": [
+        "2024-ai-art-guide.html"
+      ]
+    },
+    "工具栈": {
+      "en": "Toolkit",
+      "icon": "🧩",
+      "descZh": "一个人做产品要配齐的五套工具：想法验证、设计、编码、上线和运营各该用什么。",
+      "descEn": "The five tool sets a solo builder needs: validation, design, coding, launch, and operations.",
+      "featured": [
+        "2024-indie-dev-toolkit.html"
+      ]
+    }
+  },
+  "paths": [
+    {
+      "id": "beginner",
+      "level": "零基础 · Beginner",
+      "titleZh": "从「AI 到底能干什么」到自己动手做出第一个小工具",
+      "titleEn": "From \"what can AI actually do\" to shipping your first small tool",
+      "descZh": "这条路线为完全没写过代码的人设计，大约 90 分钟读完，走完你会做出一个能用的东西。",
+      "descEn": "A route for people who have never written code. About 90 minutes; you will finish with something that actually works.",
+      "steps": [
+        {
+          "file": "getting-started-with-ai.html",
+          "noteZh": "先建立整体认知，知道 AI 能做什么、不能做什么",
+          "noteEn": "Build the mental model of what AI can and cannot do"
+        },
+        {
+          "file": "prompt-engineering.html",
+          "noteZh": "学会把想做的事说清楚，输出质量立刻不一样",
+          "noteEn": "Say what you want precisely; output quality jumps"
+        },
+        {
+          "file": "2026-zero-to-first-product.html",
+          "noteZh": "拿到 12 周里程碑表，先验证再动手写代码",
+          "noteEn": "Get the 12-week plan: validate before writing code"
+        },
+        {
+          "file": "build-with-cursor.html",
+          "noteZh": "跟着完整做一次从安装到上线的小程序",
+          "noteEn": "Ship a small app yourself, from install to deploy"
+        },
+        {
+          "file": "2026-ai-debug-handbook.html",
+          "noteZh": "代码报错时能自己分类定位，不再反复问 AI",
+          "noteEn": "Classify errors yourself instead of guessing at AI"
+        }
+      ]
+    },
+    {
+      "id": "ship-product",
+      "level": "有想法 · Ship a Product",
+      "titleZh": "从一个具体想法到真正上线的产品，中间该踩的坑",
+      "titleEn": "From a specific idea to a product that is actually live",
+      "descZh": "适合脑子里已经有具体功能的人。重点不是学工具，而是把需求写清楚、把 Demo 改成能上线的东西。",
+      "descEn": "For people who already have a specific feature in mind. Less about tools, more about clear specs and a safe launch.",
+      "steps": [
+        {
+          "file": "2026-small-products.html",
+          "noteZh": "从 10 个已验证的小产品里挑一个照着做",
+          "noteEn": "Pick one of ten proven micro-products to copy"
+        },
+        {
+          "file": "2024-no-code-ai-build.html",
+          "noteZh": "分阶段选工具：v0 出界面，Bolt.new 搭全栈",
+          "noteEn": "Match tool to stage: v0 for UI, Bolt.new for full stack, Cursor for detail"
+        },
+        {
+          "file": "2026-acceptance-criteria.html",
+          "noteZh": "把模糊需求写成能逐条打勾的验收清单",
+          "noteEn": "Turn a vague request into checkable criteria"
+        },
+        {
+          "file": "2025-vibe-coding.html",
+          "noteZh": "掌握和 AI 对话做出产品的几条核心心法",
+          "noteEn": "Learn the working rules of building by chatting with AI"
+        },
+        {
+          "file": "2026-from-demo-to-production.html",
+          "noteZh": "用 12 项清单补齐密钥、错误处理和调用成本",
+          "noteEn": "Close the gaps: keys, error handling, and call costs"
+        },
+        {
+          "file": "2026-indie-ops-keep-alive.html",
+          "noteZh": "知道上线后每周该查什么、模型账单怎么控",
+          "noteEn": "Know what to check weekly and how to cap model bills"
+        }
+      ]
+    },
+    {
+      "id": "monetize",
+      "level": "想赚钱 · Earn with AI",
+      "titleZh": "用 AI 赚到第一笔钱：选路径、报价、定价和找客户",
+      "titleEn": "Earning your first money with AI: paths, rates, pricing, clients",
+      "descZh": "面向想靠 AI 副业或接单的人。先看清哪些活真能赚到钱，再学怎么报价、怎么定价、怎么找到客户。",
+      "descEn": "For people who want side income or paid work with AI: what to sell, how to price it, where clients find you.",
+      "steps": [
+        {
+          "file": "2024-ai-side-hustle.html",
+          "noteZh": "先看 7 条副业路径，判断哪条离你最近",
+          "noteEn": "Scan seven side-hustle paths and find the closest fit"
+        },
+        {
+          "file": "2026-ai-services.html",
+          "noteZh": "掌握卖服务 4 种模式、报价和真实毛利",
+          "noteEn": "Learn four service models, their rates, and margins"
+        },
+        {
+          "file": "2026-data-analysis.html",
+          "noteZh": "最容易接到的一单：客户给一份表格，你要给出一个结论",
+          "noteEn": "An easy first gig: turn a client's spreadsheet into one clear answer"
+        },
+        {
+          "file": "2025-ai-side-hustle-12.html",
+          "noteZh": "12 条路径配齐工具、起步方式和收入区间",
+          "noteEn": "Twelve paths with tools, first steps, and pay ranges"
+        },
+        {
+          "file": "2026-ai-product-pricing.html",
+          "noteZh": "如果做成产品，先算成本再定价格的公式",
+          "noteEn": "If you build a product: cost first, then a pricing formula"
+        },
+        {
+          "file": "2025-ai-overseas.html",
+          "noteZh": "找到细分市场，把产品卖给付费意愿更高的人",
+          "noteEn": "Find a niche and sell where willingness to pay is higher"
+        }
+      ]
+    }
+  ],
+  "featured": [
+    {
+      "file": "getting-started-with-ai.html",
+      "reasonZh": "一张写给非技术人的 AI 工具地图，选好路线 24 小时内就能上线第一个东西",
+      "reasonEn": "A tool map for non-technical readers; ship your first thing within a day"
+    },
+    {
+      "file": "prompt-engineering.html",
+      "reasonZh": "提示词只要三个原则，写清楚需求就能拿到能直接用的结果",
+      "reasonEn": "Three prompting rules are enough to get results you can actually use"
+    },
+    {
+      "file": "2026-small-products.html",
+      "reasonZh": "10 个已被市场验证的小产品，附真实开发时长和各自最大的坑",
+      "reasonEn": "Ten proven micro-products with build times and their biggest pitfalls"
+    },
+    {
+      "file": "2026-zero-to-first-product.html",
+      "reasonZh": "把 90 天拆成 12 周，每周做什么、什么算通过都写好了",
+      "reasonEn": "Ninety days as twelve weeks, each with deliverables and pass criteria"
+    },
+    {
+      "file": "2026-ai-debug-handbook.html",
+      "reasonZh": "报错看不懂也能定位：分清三类错误，再把情况描述给 AI",
+      "reasonEn": "Classify any error, then describe the situation to AI correctly"
+    },
+    {
+      "file": "2026-acceptance-criteria.html",
+      "reasonZh": "23 次返工里有 17 次是需求没说清，这份验收清单能直接抄",
+      "reasonEn": "Most rework came from vague specs; this criteria checklist fixes it"
+    },
+    {
+      "file": "2026-ai-services.html",
+      "reasonZh": "做不出产品也能接单赚钱：4 种模式、报价和真实毛利都摊开写",
+      "reasonEn": "Four service models with real rates, margins, and how to land a client"
+    },
+    {
+      "file": "2026-ai-product-pricing.html",
+      "reasonZh": "从模型成本到定价获客全流程，外加一个真亏了钱的项目复盘",
+      "reasonEn": "Model costs to pricing and channels, with an honest losing project"
+    },
+    {
+      "file": "2026-ai-coding-landscape.html",
+      "reasonZh": "八款工具按定位和价格摊开对比，还给了一条可直接走的选型决策树",
+      "reasonEn": "Eight tools compared by role and price, plus a decision tree to follow"
+    },
+    {
+      "file": "2026-ai-daily-automation.html",
+      "reasonZh": "实测每天两小时重复劳动去哪了：哪些活能交出去、哪些坚决不能",
+      "reasonEn": "Two hours a day of busywork measured: what to automate and what to keep"
+    }
+  ]
+}

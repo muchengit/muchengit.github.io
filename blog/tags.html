@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>标签索引 / Tags · 木尘的 AI 编程博客</title>
+<meta name="description" content="木尘博客的标签索引：按工具、方法、场景、人群找到相关文章——Cursor、Claude、提示词、报错处理、副业、隐私、小产品，一次点开一个话题。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="标签索引 / Tags · 木尘的 AI 编程博客">
+<meta property="og:description" content="按工具、方法、场景找到你想读的那篇文章。">
+<meta property="og:url" content="https://muchengit.github.io/blog/tags.html">
+<meta property="og:image" content="https://muchengit.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="blog-shell.css">
+<link rel="stylesheet" href="taxonomy.css">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+</head>
+<body data-lang="zh">
+<div class="bg-wrap"><div class="grid-bg"></div><div class="orb c1"></div><div class="orb c2"></div><div class="orb c3"></div></div><div class="noise"></div>
+
+<nav id="nav"><div class="nav-in">
+  <a href="../" class="logo"><i class="dot"></i>木尘（不服输的老码农）</a>
+  <div class="nav-links" id="navlinks">
+      <a href="index.html" data-nav="archive"><span class="zh-only">归档</span><span class="en-only">Archive</span></a>
+      <a href="categories.html" data-nav="categories"><span class="zh-only">分类</span><span class="en-only">Categories</span></a>
+      <a href="tags.html" data-nav="tags" class="active"><span class="zh-only">标签</span><span class="en-only">Tags</span></a>
+      <a href="popular.html" data-nav="popular"><span class="zh-only">精选</span><span class="en-only">Featured</span></a>
+      <a href="../lab.html" data-nav="lab"><span class="zh-only">实验室</span><span class="en-only">Lab</span></a>
+      <a href="../#about" data-nav="about"><span class="zh-only">关于</span><span class="en-only">About</span></a>
+    </div>
+  <div class="nav-right"><button class="lang-btn" id="langBtn">EN / 中</button><button class="menu-btn" id="menubtn" aria-label="菜单">≡</button></div>
+</div></nav>
+
+<main class="taxo">
+
+  <header class="tx-hero">
+    <span class="tx-kicker">TAGS</span>
+    <h1><span class="zh-only">标签索引</span><span class="en-only">Tags</span></h1>
+    <p class="sub"><span class="zh-only">分类是「这篇文章属于哪一科」，标签是「这篇具体在讲什么」。同一篇 AI 编程的文章，可能同时挂着 Cursor、报错处理和普通人三个标签——想找具体话题，从这里进。</span><span class="en-only">Categories tell you which shelf an article lives on; tags tell you what it actually covers. One AI-coding article can carry Cursor, debugging and non-developer tags at once. Come here when you know the topic, not the shelf.</span></p>
+    <div class="art-meta">
+      <span class="m"><span class="zh-only">标签</span><span class="en-only">Tags</span> <b id="statTags">54</b></span>
+      <span class="sep"></span>
+      <span class="m"><span class="zh-only">已标注文章</span><span class="en-only">Tagged</span> <b id="statTagged">38</b></span>
+      <span class="sep"></span>
+      <span class="m"><span class="zh-only">提示</span><span class="en-only">Tip</span> <span class="zh-only">点标签展开</span><span class="en-only">click a tag to expand</span></span>
+    </div>
+  </header>
+
+  <!-- SYNC:TAGS -->
+  <div class="tag-cloud" id="tagCloud">
+      <a class="tg reveal" href="#tag-1" style="--tg-scale:1.32"><span class="tg-name">工具选型</span><span class="tg-n">13</span></a>
+      <a class="tg reveal" href="#tag-2" style="--tg-scale:1.24"><span class="tg-name">非技术开发者</span><span class="tg-n">11</span></a>
+      <a class="tg reveal" href="#tag-3" style="--tg-scale:1.15"><span class="tg-name">成本控制</span><span class="tg-n">9</span></a>
+      <a class="tg reveal" href="#tag-4" style="--tg-scale:1.11"><span class="tg-name">一人创业</span><span class="tg-n">8</span></a>
+      <a class="tg reveal" href="#tag-5" style="--tg-scale:1.11"><span class="tg-name">新手路线</span><span class="tg-n">8</span></a>
+      <a class="tg reveal" href="#tag-6" style="--tg-scale:1.03"><span class="tg-name">提示词技巧</span><span class="tg-n">6</span></a>
+      <a class="tg reveal" href="#tag-7" style="--tg-scale:1.03"><span class="tg-name">需求验证</span><span class="tg-n">6</span></a>
+      <a class="tg reveal" href="#tag-8" style="--tg-scale:0.99"><span class="tg-name">Cursor</span><span class="tg-n">5</span></a>
+      <a class="tg reveal" href="#tag-9" style="--tg-scale:0.99"><span class="tg-name">上线部署</span><span class="tg-n">5</span></a>
+      <a class="tg reveal" href="#tag-10" style="--tg-scale:0.99"><span class="tg-name">内容创作</span><span class="tg-n">5</span></a>
+      <a class="tg reveal" href="#tag-11" style="--tg-scale:0.99"><span class="tg-name">变现路径</span><span class="tg-n">5</span></a>
+      <a class="tg reveal" href="#tag-12" style="--tg-scale:0.99"><span class="tg-name">需求描述</span><span class="tg-n">5</span></a>
+      <a class="tg reveal" href="#tag-13" style="--tg-scale:0.94"><span class="tg-name">个人开发者</span><span class="tg-n">4</span></a>
+      <a class="tg reveal" href="#tag-14" style="--tg-scale:0.94"><span class="tg-name">产品复盘</span><span class="tg-n">4</span></a>
+      <a class="tg reveal" href="#tag-15" style="--tg-scale:0.94"><span class="tg-name">从零到一</span><span class="tg-n">4</span></a>
+      <a class="tg reveal" href="#tag-16" style="--tg-scale:0.94"><span class="tg-name">安全合规</span><span class="tg-n">4</span></a>
+      <a class="tg reveal" href="#tag-17" style="--tg-scale:0.90"><span class="tg-name">AI 入门</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-18" style="--tg-scale:0.90"><span class="tg-name">v0</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-19" style="--tg-scale:0.90"><span class="tg-name">定价策略</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-20" style="--tg-scale:0.90"><span class="tg-name">提示词模板</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-21" style="--tg-scale:0.90"><span class="tg-name">模型趋势</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-22" style="--tg-scale:0.90"><span class="tg-name">盈亏复盘</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-23" style="--tg-scale:0.90"><span class="tg-name">结果核验</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-24" style="--tg-scale:0.90"><span class="tg-name">获客渠道</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-25" style="--tg-scale:0.90"><span class="tg-name">行业观察</span><span class="tg-n">3</span></a>
+      <a class="tg reveal" href="#tag-26" style="--tg-scale:0.86"><span class="tg-name">Agent 框架</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-27" style="--tg-scale:0.86"><span class="tg-name">国产大模型</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-28" style="--tg-scale:0.86"><span class="tg-name">小产品</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-29" style="--tg-scale:0.86"><span class="tg-name">技术债</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-30" style="--tg-scale:0.86"><span class="tg-name">氛围编程</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-31" style="--tg-scale:0.86"><span class="tg-name">职场效率</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-32" style="--tg-scale:0.86"><span class="tg-name">落地路线</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-33" style="--tg-scale:0.86"><span class="tg-name">运维监控</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-34" style="--tg-scale:0.86"><span class="tg-name">长文档处理</span><span class="tg-n">2</span></a>
+      <a class="tg reveal" href="#tag-35" style="--tg-scale:0.82"><span class="tg-name">AI 视频</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-36" style="--tg-scale:0.82"><span class="tg-name">ChatGPT</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-37" style="--tg-scale:0.82"><span class="tg-name">Claude</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-38" style="--tg-scale:0.82"><span class="tg-name">Copilot</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-39" style="--tg-scale:0.82"><span class="tg-name">DeepSeek</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-40" style="--tg-scale:0.82"><span class="tg-name">Windsurf</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-41" style="--tg-scale:0.82"><span class="tg-name">上下文管理</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-42" style="--tg-scale:0.82"><span class="tg-name">多智能体协作</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-43" style="--tg-scale:0.82"><span class="tg-name">工作流自动化</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-44" style="--tg-scale:0.82"><span class="tg-name">工具链搭建</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-45" style="--tg-scale:0.82"><span class="tg-name">开源生态</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-46" style="--tg-scale:0.82"><span class="tg-name">报错排查</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-47" style="--tg-scale:0.82"><span class="tg-name">数据分析</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-48" style="--tg-scale:0.82"><span class="tg-name">文档拆解</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-49" style="--tg-scale:0.82"><span class="tg-name">海外产品</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-50" style="--tg-scale:0.82"><span class="tg-name">版权商用</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-51" style="--tg-scale:0.82"><span class="tg-name">绘画工具</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-52" style="--tg-scale:0.82"><span class="tg-name">进阶实践</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-53" style="--tg-scale:0.82"><span class="tg-name">隐私合规</span><span class="tg-n">1</span></a>
+      <a class="tg reveal" href="#tag-54" style="--tg-scale:0.82"><span class="tg-name">验收标准</span><span class="tg-n">1</span></a>
+  </div>
+
+  <div class="tag-blocks">
+    <details class="tag-block reveal" id="tag-1">
+      <summary><span class="tb-name">工具选型</span><span class="tb-n"><span class="zh-only">13 篇</span><span class="en-only">13 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-coding-landscape.html"><span class="zh-only">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</span><span class="en-only">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</span></a><span class="d">2026.08.12</span><span class="c">工具评测</span></li>
+          <li><a href="getting-started-with-ai.html"><span class="zh-only">写给想用 AI 做东西但不知道从何开始的人</span><span class="en-only">For Those Who Want to Build with AI But Don&#x27;t Know Where to Start</span></a><span class="d">2026.02.09</span><span class="c">入门</span></li>
+          <li><a href="2025-multi-agent.html"><span class="zh-only">多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</span><span class="en-only">Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</span></a><span class="d">2025.09.22</span><span class="c">Agent</span></li>
+          <li><a href="2025-ai-side-hustle-12.html"><span class="zh-only">AI 副业变现 12 条路：普通人可复制的收入路径</span><span class="en-only">12 AI Side Hustle Paths Anyone Can Replicate</span></a><span class="d">2025.06.10</span><span class="c">副业</span></li>
+          <li><a href="2025-reasoning-models.html"><span class="zh-only">推理模型时代来了：从生成到思考的范式转变</span><span class="en-only">The Era of Reasoning Models: From Generation to Thinking</span></a><span class="d">2025.05.20</span><span class="c">趋势</span></li>
+          <li><a href="2025-ai-agent-guide.html"><span class="zh-only">AI Agent 入门：从概念到工程化落地</span><span class="en-only">AI Agent 101: From Concept to Production</span></a><span class="d">2025.03.08</span><span class="c">Agent</span></li>
+          <li><a href="2025-ai-coding-tools-2025.html"><span class="zh-only">AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</span><span class="en-only">The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</span></a><span class="d">2025.02.15</span><span class="c">工具评测</span></li>
+          <li><a href="2024-ai-year-review.html"><span class="zh-only">2024 AI 年度总结：从百模大战到落地为王</span><span class="en-only">2024 AI Year in Review: From Model Wars to Real-World Impact</span></a><span class="d">2024.12.28</span><span class="c">年度总结</span></li>
+          <li><a href="2024-chinese-ai-tools.html"><span class="zh-only">2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你</span><span class="en-only">2024 Chinese AI Tools: Which One is Right for You</span></a><span class="d">2024.11.15</span><span class="c">工具评测</span></li>
+          <li><a href="2024-cursor-guide.html"><span class="zh-only">Cursor 入门到精通：2024 最强 AI 编程工具实战</span><span class="en-only">The Complete Cursor Guide: Mastering AI Coding in 2024</span></a><span class="d">2024.10.20</span><span class="c">AI 编程</span></li>
+          <li><a href="2024-ai-video-revolution.html"><span class="zh-only">AI 视频生成革命：从 Sora 到可灵的视觉新纪元</span><span class="en-only">The AI Video Revolution: From Sora to Kling</span></a><span class="d">2024.07.22</span><span class="c">视频生成</span></li>
+          <li><a href="2024-ai-art-guide.html"><span class="zh-only">AI 绘画工具全攻略：Midjourney / Stable Diffusion / Flux 怎么选</span><span class="en-only">The Complete AI Art Guide: Midjourney vs SD vs Flux</span></a><span class="d">2024.06.15</span><span class="c">AI 绘画</span></li>
+          <li><a href="2024-no-code-ai-build.html"><span class="zh-only">不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</span><span class="en-only">Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</span></a><span class="d">2024.05.10</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-2">
+      <summary><span class="tb-name">非技术开发者</span><span class="tb-n"><span class="zh-only">11 篇</span><span class="en-only">11 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-debug-handbook.html"><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won&#x27;t Run: A Debugging Handbook for Non-Developers</span></a><span class="d">2026.10.22</span><span class="c">AI 编程</span></li>
+          <li><a href="2026-zero-to-first-product.html"><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></a><span class="d">2026.10.18</span><span class="c">入门</span></li>
+          <li><a href="2026-ai-daily-automation.html"><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></a><span class="d">2026.10.17</span><span class="c">实战</span></li>
+          <li><a href="2026-acceptance-criteria.html"><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></a><span class="d">2026.10.08</span><span class="c">AI 技巧</span></li>
+          <li><a href="2026-ai-coding-landscape.html"><span class="zh-only">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</span><span class="en-only">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</span></a><span class="d">2026.08.12</span><span class="c">工具评测</span></li>
+          <li><a href="build-with-cursor.html"><span class="zh-only">不会写代码的人，如何用 Cursor 做出人生第一个产品</span><span class="en-only">How to Build Your First Product with Cursor (No Coding Experience Needed)</span></a><span class="d">2026.07.14</span><span class="c">AI 编程</span></li>
+          <li><a href="ship-without-code.html"><span class="zh-only">我用 AI 做了一款产品，全程没写一行代码</span><span class="en-only">I Shipped a Product Without Writing a Single Line of Code</span></a><span class="d">2026.06.02</span><span class="c">实战</span></li>
+          <li><a href="getting-started-with-ai.html"><span class="zh-only">写给想用 AI 做东西但不知道从何开始的人</span><span class="en-only">For Those Who Want to Build with AI But Don&#x27;t Know Where to Start</span></a><span class="d">2026.02.09</span><span class="c">入门</span></li>
+          <li><a href="2025-ai-overseas.html"><span class="zh-only">AI 出海掘金：一个人做 Niche Product 赚美金</span><span class="en-only">Building a Niche Product with AI and Earning in USD</span></a><span class="d">2025.07.05</span><span class="c">出海</span></li>
+          <li><a href="2025-vibe-coding.html"><span class="zh-only">一个人 + AI = 产品：Vibe Coding 实战手册</span><span class="en-only">One Person + AI = Product: The Vibe Coding Playbook</span></a><span class="d">2025.04.12</span><span class="c">AI 编程</span></li>
+          <li><a href="2024-no-code-ai-build.html"><span class="zh-only">不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</span><span class="en-only">Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</span></a><span class="d">2024.05.10</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-3">
+      <summary><span class="tb-name">成本控制</span><span class="tb-n"><span class="zh-only">9 篇</span><span class="en-only">9 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-daily-automation.html"><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></a><span class="d">2026.10.17</span><span class="c">实战</span></li>
+          <li><a href="2026-indie-ops-keep-alive.html"><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></a><span class="d">2026.10.16</span><span class="c">独立开发</span></li>
+          <li><a href="2026-ai-product-pricing.html"><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></a><span class="d">2026.10.06</span><span class="c">产品</span></li>
+          <li><a href="2026-from-demo-to-production.html"><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></a><span class="d">2026.09.15</span><span class="c">实战</span></li>
+          <li><a href="2026-ai-coding-landscape.html"><span class="zh-only">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</span><span class="en-only">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</span></a><span class="d">2026.08.12</span><span class="c">工具评测</span></li>
+          <li><a href="2025-ai-coding-tools-2025.html"><span class="zh-only">AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</span><span class="en-only">The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</span></a><span class="d">2025.02.15</span><span class="c">工具评测</span></li>
+          <li><a href="2025-deepseek-r1.html"><span class="zh-only">DeepSeek-R1 深度解读：开源如何震动全球 AI 圈</span><span class="en-only">DeepSeek-R1: How Open Source Shocked the Global AI Community</span></a><span class="d">2025.01.28</span><span class="c">深度解析</span></li>
+          <li><a href="2024-chinese-ai-tools.html"><span class="zh-only">2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你</span><span class="en-only">2024 Chinese AI Tools: Which One is Right for You</span></a><span class="d">2024.11.15</span><span class="c">工具评测</span></li>
+          <li><a href="2024-ai-art-guide.html"><span class="zh-only">AI 绘画工具全攻略：Midjourney / Stable Diffusion / Flux 怎么选</span><span class="en-only">The Complete AI Art Guide: Midjourney vs SD vs Flux</span></a><span class="d">2024.06.15</span><span class="c">AI 绘画</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-4">
+      <summary><span class="tb-name">一人创业</span><span class="tb-n"><span class="zh-only">8 篇</span><span class="en-only">8 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-services.html"><span class="zh-only">不卖软件卖服务：用 AI 接单赚钱的 4 种活法</span><span class="en-only">Don&#x27;t Sell Software, Sell Services: 4 Ways to Earn with AI</span></a><span class="d">2026.10.21</span><span class="c">副业</span></li>
+          <li><a href="2026-privacy-red-lines.html"><span class="zh-only">把用户数据交给模型之前：AI 应用的隐私红线</span><span class="en-only">Before You Hand User Data to a Model: Privacy Rules for AI Apps</span></a><span class="d">2026.10.20</span><span class="c">实战</span></li>
+          <li><a href="2026-indie-ops-keep-alive.html"><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></a><span class="d">2026.10.16</span><span class="c">独立开发</span></li>
+          <li><a href="2026-small-products.html"><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></a><span class="d">2026.10.12</span><span class="c">产品</span></li>
+          <li><a href="2026-vibe-coding-advanced.html"><span class="zh-only">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</span><span class="en-only">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</span></a><span class="d">2026.08.28</span><span class="c">AI 编程</span></li>
+          <li><a href="2025-ai-product-lessons.html"><span class="zh-only">AI 产品从 0 到 1：8 个产品的血泪教训</span><span class="en-only">Building AI Products from Scratch: Lessons from 8 Products</span></a><span class="d">2025.10.30</span><span class="c">产品</span></li>
+          <li><a href="2025-indie-dev-survival.html"><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&amp;L)</span></a><span class="d">2025.08.15</span><span class="c">独立开发</span></li>
+          <li><a href="2024-indie-dev-toolkit.html"><span class="zh-only">独立开发者 AI 工具栈搭建指南（2024 版）</span><span class="en-only">The Indie Developer AI Toolkit Guide (2024 Edition)</span></a><span class="d">2024.02.18</span><span class="c">工具栈</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-5">
+      <summary><span class="tb-name">新手路线</span><span class="tb-n"><span class="zh-only">8 篇</span><span class="en-only">8 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="build-with-cursor.html"><span class="zh-only">不会写代码的人，如何用 Cursor 做出人生第一个产品</span><span class="en-only">How to Build Your First Product with Cursor (No Coding Experience Needed)</span></a><span class="d">2026.07.14</span><span class="c">AI 编程</span></li>
+          <li><a href="prompt-engineering.html"><span class="zh-only">Prompt 工程没有你想的那么复杂</span><span class="en-only">Prompt Engineering Is Simpler Than You Think</span></a><span class="d">2026.04.18</span><span class="c">AI 技巧</span></li>
+          <li><a href="getting-started-with-ai.html"><span class="zh-only">写给想用 AI 做东西但不知道从何开始的人</span><span class="en-only">For Those Who Want to Build with AI But Don&#x27;t Know Where to Start</span></a><span class="d">2026.02.09</span><span class="c">入门</span></li>
+          <li><a href="2025-ai-side-hustle-12.html"><span class="zh-only">AI 副业变现 12 条路：普通人可复制的收入路径</span><span class="en-only">12 AI Side Hustle Paths Anyone Can Replicate</span></a><span class="d">2025.06.10</span><span class="c">副业</span></li>
+          <li><a href="2025-vibe-coding.html"><span class="zh-only">一个人 + AI = 产品：Vibe Coding 实战手册</span><span class="en-only">One Person + AI = Product: The Vibe Coding Playbook</span></a><span class="d">2025.04.12</span><span class="c">AI 编程</span></li>
+          <li><a href="2024-cursor-guide.html"><span class="zh-only">Cursor 入门到精通：2024 最强 AI 编程工具实战</span><span class="en-only">The Complete Cursor Guide: Mastering AI Coding in 2024</span></a><span class="d">2024.10.20</span><span class="c">AI 编程</span></li>
+          <li><a href="2024-chatgpt-tips.html"><span class="zh-only">ChatGPT 使用秘籍：10 个让输出质量翻倍的实战技巧</span><span class="en-only">10 ChatGPT Tips to Double Your Output Quality</span></a><span class="d">2024.09.08</span><span class="c">AI 技巧</span></li>
+          <li><a href="2024-ai-side-hustle.html"><span class="zh-only">AI 做副业的 N 种可能：2024 年普通人实操路径</span><span class="en-only">AI Side Hustles: Practical Paths for Ordinary People in 2024</span></a><span class="d">2024.08.12</span><span class="c">副业</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-6">
+      <summary><span class="tb-name">提示词技巧</span><span class="tb-n"><span class="zh-only">6 篇</span><span class="en-only">6 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-data-analysis.html"><span class="zh-only">不会写代码的人，怎么用 AI 做数据分析</span><span class="en-only">Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</span></a><span class="d">2026.10.19</span><span class="c">AI 编程</span></li>
+          <li><a href="2026-long-doc-ai.html"><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></a><span class="d">2026.10.15</span><span class="c">AI 技巧</span></li>
+          <li><a href="2026-acceptance-criteria.html"><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></a><span class="d">2026.10.08</span><span class="c">AI 技巧</span></li>
+          <li><a href="prompt-engineering.html"><span class="zh-only">Prompt 工程没有你想的那么复杂</span><span class="en-only">Prompt Engineering Is Simpler Than You Think</span></a><span class="d">2026.04.18</span><span class="c">AI 技巧</span></li>
+          <li><a href="2024-chatgpt-tips.html"><span class="zh-only">ChatGPT 使用秘籍：10 个让输出质量翻倍的实战技巧</span><span class="en-only">10 ChatGPT Tips to Double Your Output Quality</span></a><span class="d">2024.09.08</span><span class="c">AI 技巧</span></li>
+          <li><a href="2024-claude-guide.html"><span class="zh-only">Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程</span><span class="en-only">The Deep Claude Guide: Why It Beats ChatGPT for Writing &amp; Coding</span></a><span class="d">2024.04.03</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-7">
+      <summary><span class="tb-name">需求验证</span><span class="tb-n"><span class="zh-only">6 篇</span><span class="en-only">6 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-services.html"><span class="zh-only">不卖软件卖服务：用 AI 接单赚钱的 4 种活法</span><span class="en-only">Don&#x27;t Sell Software, Sell Services: 4 Ways to Earn with AI</span></a><span class="d">2026.10.21</span><span class="c">副业</span></li>
+          <li><a href="2026-zero-to-first-product.html"><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></a><span class="d">2026.10.18</span><span class="c">入门</span></li>
+          <li><a href="2026-small-products.html"><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></a><span class="d">2026.10.12</span><span class="c">产品</span></li>
+          <li><a href="2025-ai-product-lessons.html"><span class="zh-only">AI 产品从 0 到 1：8 个产品的血泪教训</span><span class="en-only">Building AI Products from Scratch: Lessons from 8 Products</span></a><span class="d">2025.10.30</span><span class="c">产品</span></li>
+          <li><a href="2025-indie-dev-survival.html"><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&amp;L)</span></a><span class="d">2025.08.15</span><span class="c">独立开发</span></li>
+          <li><a href="2025-ai-overseas.html"><span class="zh-only">AI 出海掘金：一个人做 Niche Product 赚美金</span><span class="en-only">Building a Niche Product with AI and Earning in USD</span></a><span class="d">2025.07.05</span><span class="c">出海</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-8">
+      <summary><span class="tb-name">Cursor</span><span class="tb-n"><span class="zh-only">5 篇</span><span class="en-only">5 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-coding-landscape.html"><span class="zh-only">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</span><span class="en-only">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</span></a><span class="d">2026.08.12</span><span class="c">工具评测</span></li>
+          <li><a href="build-with-cursor.html"><span class="zh-only">不会写代码的人，如何用 Cursor 做出人生第一个产品</span><span class="en-only">How to Build Your First Product with Cursor (No Coding Experience Needed)</span></a><span class="d">2026.07.14</span><span class="c">AI 编程</span></li>
+          <li><a href="2025-ai-coding-tools-2025.html"><span class="zh-only">AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</span><span class="en-only">The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</span></a><span class="d">2025.02.15</span><span class="c">工具评测</span></li>
+          <li><a href="2024-cursor-guide.html"><span class="zh-only">Cursor 入门到精通：2024 最强 AI 编程工具实战</span><span class="en-only">The Complete Cursor Guide: Mastering AI Coding in 2024</span></a><span class="d">2024.10.20</span><span class="c">AI 编程</span></li>
+          <li><a href="2024-no-code-ai-build.html"><span class="zh-only">不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</span><span class="en-only">Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</span></a><span class="d">2024.05.10</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-9">
+      <summary><span class="tb-name">上线部署</span><span class="tb-n"><span class="zh-only">5 篇</span><span class="en-only">5 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-privacy-red-lines.html"><span class="zh-only">把用户数据交给模型之前：AI 应用的隐私红线</span><span class="en-only">Before You Hand User Data to a Model: Privacy Rules for AI Apps</span></a><span class="d">2026.10.20</span><span class="c">实战</span></li>
+          <li><a href="2026-from-demo-to-production.html"><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></a><span class="d">2026.09.15</span><span class="c">实战</span></li>
+          <li><a href="build-with-cursor.html"><span class="zh-only">不会写代码的人，如何用 Cursor 做出人生第一个产品</span><span class="en-only">How to Build Your First Product with Cursor (No Coding Experience Needed)</span></a><span class="d">2026.07.14</span><span class="c">AI 编程</span></li>
+          <li><a href="ship-without-code.html"><span class="zh-only">我用 AI 做了一款产品，全程没写一行代码</span><span class="en-only">I Shipped a Product Without Writing a Single Line of Code</span></a><span class="d">2026.06.02</span><span class="c">实战</span></li>
+          <li><a href="2024-no-code-ai-build.html"><span class="zh-only">不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</span><span class="en-only">Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</span></a><span class="d">2024.05.10</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-10">
+      <summary><span class="tb-name">内容创作</span><span class="tb-n"><span class="zh-only">5 篇</span><span class="en-only">5 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-multi-agent.html"><span class="zh-only">多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</span><span class="en-only">Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</span></a><span class="d">2025.09.22</span><span class="c">Agent</span></li>
+          <li><a href="2025-ai-side-hustle-12.html"><span class="zh-only">AI 副业变现 12 条路：普通人可复制的收入路径</span><span class="en-only">12 AI Side Hustle Paths Anyone Can Replicate</span></a><span class="d">2025.06.10</span><span class="c">副业</span></li>
+          <li><a href="2024-chinese-ai-tools.html"><span class="zh-only">2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你</span><span class="en-only">2024 Chinese AI Tools: Which One is Right for You</span></a><span class="d">2024.11.15</span><span class="c">工具评测</span></li>
+          <li><a href="2024-ai-side-hustle.html"><span class="zh-only">AI 做副业的 N 种可能：2024 年普通人实操路径</span><span class="en-only">AI Side Hustles: Practical Paths for Ordinary People in 2024</span></a><span class="d">2024.08.12</span><span class="c">副业</span></li>
+          <li><a href="2024-ai-video-revolution.html"><span class="zh-only">AI 视频生成革命：从 Sora 到可灵的视觉新纪元</span><span class="en-only">The AI Video Revolution: From Sora to Kling</span></a><span class="d">2024.07.22</span><span class="c">视频生成</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-11">
+      <summary><span class="tb-name">变现路径</span><span class="tb-n"><span class="zh-only">5 篇</span><span class="en-only">5 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-services.html"><span class="zh-only">不卖软件卖服务：用 AI 接单赚钱的 4 种活法</span><span class="en-only">Don&#x27;t Sell Software, Sell Services: 4 Ways to Earn with AI</span></a><span class="d">2026.10.21</span><span class="c">副业</span></li>
+          <li><a href="2025-ai-overseas.html"><span class="zh-only">AI 出海掘金：一个人做 Niche Product 赚美金</span><span class="en-only">Building a Niche Product with AI and Earning in USD</span></a><span class="d">2025.07.05</span><span class="c">出海</span></li>
+          <li><a href="2025-ai-side-hustle-12.html"><span class="zh-only">AI 副业变现 12 条路：普通人可复制的收入路径</span><span class="en-only">12 AI Side Hustle Paths Anyone Can Replicate</span></a><span class="d">2025.06.10</span><span class="c">副业</span></li>
+          <li><a href="2024-ai-side-hustle.html"><span class="zh-only">AI 做副业的 N 种可能：2024 年普通人实操路径</span><span class="en-only">AI Side Hustles: Practical Paths for Ordinary People in 2024</span></a><span class="d">2024.08.12</span><span class="c">副业</span></li>
+          <li><a href="2024-indie-dev-toolkit.html"><span class="zh-only">独立开发者 AI 工具栈搭建指南（2024 版）</span><span class="en-only">The Indie Developer AI Toolkit Guide (2024 Edition)</span></a><span class="d">2024.02.18</span><span class="c">工具栈</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-12">
+      <summary><span class="tb-name">需求描述</span><span class="tb-n"><span class="zh-only">5 篇</span><span class="en-only">5 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-debug-handbook.html"><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won&#x27;t Run: A Debugging Handbook for Non-Developers</span></a><span class="d">2026.10.22</span><span class="c">AI 编程</span></li>
+          <li><a href="2026-acceptance-criteria.html"><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></a><span class="d">2026.10.08</span><span class="c">AI 技巧</span></li>
+          <li><a href="prompt-engineering.html"><span class="zh-only">Prompt 工程没有你想的那么复杂</span><span class="en-only">Prompt Engineering Is Simpler Than You Think</span></a><span class="d">2026.04.18</span><span class="c">AI 技巧</span></li>
+          <li><a href="2025-vibe-coding.html"><span class="zh-only">一个人 + AI = 产品：Vibe Coding 实战手册</span><span class="en-only">One Person + AI = Product: The Vibe Coding Playbook</span></a><span class="d">2025.04.12</span><span class="c">AI 编程</span></li>
+          <li><a href="2024-cursor-guide.html"><span class="zh-only">Cursor 入门到精通：2024 最强 AI 编程工具实战</span><span class="en-only">The Complete Cursor Guide: Mastering AI Coding in 2024</span></a><span class="d">2024.10.20</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-13">
+      <summary><span class="tb-name">个人开发者</span><span class="tb-n"><span class="zh-only">4 篇</span><span class="en-only">4 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-indie-dev-survival.html"><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&amp;L)</span></a><span class="d">2025.08.15</span><span class="c">独立开发</span></li>
+          <li><a href="2025-ai-side-hustle-12.html"><span class="zh-only">AI 副业变现 12 条路：普通人可复制的收入路径</span><span class="en-only">12 AI Side Hustle Paths Anyone Can Replicate</span></a><span class="d">2025.06.10</span><span class="c">副业</span></li>
+          <li><a href="2024-ai-side-hustle.html"><span class="zh-only">AI 做副业的 N 种可能：2024 年普通人实操路径</span><span class="en-only">AI Side Hustles: Practical Paths for Ordinary People in 2024</span></a><span class="d">2024.08.12</span><span class="c">副业</span></li>
+          <li><a href="2024-indie-dev-toolkit.html"><span class="zh-only">独立开发者 AI 工具栈搭建指南（2024 版）</span><span class="en-only">The Indie Developer AI Toolkit Guide (2024 Edition)</span></a><span class="d">2024.02.18</span><span class="c">工具栈</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-14">
+      <summary><span class="tb-name">产品复盘</span><span class="tb-n"><span class="zh-only">4 篇</span><span class="en-only">4 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-small-products.html"><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></a><span class="d">2026.10.12</span><span class="c">产品</span></li>
+          <li><a href="2026-ai-product-pricing.html"><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></a><span class="d">2026.10.06</span><span class="c">产品</span></li>
+          <li><a href="ship-without-code.html"><span class="zh-only">我用 AI 做了一款产品，全程没写一行代码</span><span class="en-only">I Shipped a Product Without Writing a Single Line of Code</span></a><span class="d">2026.06.02</span><span class="c">实战</span></li>
+          <li><a href="2025-ai-product-lessons.html"><span class="zh-only">AI 产品从 0 到 1：8 个产品的血泪教训</span><span class="en-only">Building AI Products from Scratch: Lessons from 8 Products</span></a><span class="d">2025.10.30</span><span class="c">产品</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-15">
+      <summary><span class="tb-name">从零到一</span><span class="tb-n"><span class="zh-only">4 篇</span><span class="en-only">4 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-zero-to-first-product.html"><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></a><span class="d">2026.10.18</span><span class="c">入门</span></li>
+          <li><a href="build-with-cursor.html"><span class="zh-only">不会写代码的人，如何用 Cursor 做出人生第一个产品</span><span class="en-only">How to Build Your First Product with Cursor (No Coding Experience Needed)</span></a><span class="d">2026.07.14</span><span class="c">AI 编程</span></li>
+          <li><a href="ship-without-code.html"><span class="zh-only">我用 AI 做了一款产品，全程没写一行代码</span><span class="en-only">I Shipped a Product Without Writing a Single Line of Code</span></a><span class="d">2026.06.02</span><span class="c">实战</span></li>
+          <li><a href="2025-vibe-coding.html"><span class="zh-only">一个人 + AI = 产品：Vibe Coding 实战手册</span><span class="en-only">One Person + AI = Product: The Vibe Coding Playbook</span></a><span class="d">2025.04.12</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-16">
+      <summary><span class="tb-name">安全合规</span><span class="tb-n"><span class="zh-only">4 篇</span><span class="en-only">4 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-privacy-red-lines.html"><span class="zh-only">把用户数据交给模型之前：AI 应用的隐私红线</span><span class="en-only">Before You Hand User Data to a Model: Privacy Rules for AI Apps</span></a><span class="d">2026.10.20</span><span class="c">实战</span></li>
+          <li><a href="2026-ai-daily-automation.html"><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></a><span class="d">2026.10.17</span><span class="c">实战</span></li>
+          <li><a href="2026-indie-ops-keep-alive.html"><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></a><span class="d">2026.10.16</span><span class="c">独立开发</span></li>
+          <li><a href="2026-from-demo-to-production.html"><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></a><span class="d">2026.09.15</span><span class="c">实战</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-17">
+      <summary><span class="tb-name">AI 入门</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="getting-started-with-ai.html"><span class="zh-only">写给想用 AI 做东西但不知道从何开始的人</span><span class="en-only">For Those Who Want to Build with AI But Don&#x27;t Know Where to Start</span></a><span class="d">2026.02.09</span><span class="c">入门</span></li>
+          <li><a href="2025-reasoning-models.html"><span class="zh-only">推理模型时代来了：从生成到思考的范式转变</span><span class="en-only">The Era of Reasoning Models: From Generation to Thinking</span></a><span class="d">2025.05.20</span><span class="c">趋势</span></li>
+          <li><a href="2025-ai-agent-guide.html"><span class="zh-only">AI Agent 入门：从概念到工程化落地</span><span class="en-only">AI Agent 101: From Concept to Production</span></a><span class="d">2025.03.08</span><span class="c">Agent</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-18">
+      <summary><span class="tb-name">v0</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-coding-landscape.html"><span class="zh-only">2026 AI 编程工具全景：Cursor、Claude Code 与其他选手，选型指南</span><span class="en-only">The 2026 AI Coding Landscape: Choosing Between Cursor, Claude Code, and the Rest</span></a><span class="d">2026.08.12</span><span class="c">工具评测</span></li>
+          <li><a href="ship-without-code.html"><span class="zh-only">我用 AI 做了一款产品，全程没写一行代码</span><span class="en-only">I Shipped a Product Without Writing a Single Line of Code</span></a><span class="d">2026.06.02</span><span class="c">实战</span></li>
+          <li><a href="2024-no-code-ai-build.html"><span class="zh-only">不会写代码也能做产品：v0 + Bolt.new + Cursor 全流程</span><span class="en-only">Build Products Without Code: v0 + Bolt.new + Cursor Full Workflow</span></a><span class="d">2024.05.10</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-19">
+      <summary><span class="tb-name">定价策略</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-services.html"><span class="zh-only">不卖软件卖服务：用 AI 接单赚钱的 4 种活法</span><span class="en-only">Don&#x27;t Sell Software, Sell Services: 4 Ways to Earn with AI</span></a><span class="d">2026.10.21</span><span class="c">副业</span></li>
+          <li><a href="2026-small-products.html"><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></a><span class="d">2026.10.12</span><span class="c">产品</span></li>
+          <li><a href="2026-ai-product-pricing.html"><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></a><span class="d">2026.10.06</span><span class="c">产品</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-20">
+      <summary><span class="tb-name">提示词模板</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="prompt-engineering.html"><span class="zh-only">Prompt 工程没有你想的那么复杂</span><span class="en-only">Prompt Engineering Is Simpler Than You Think</span></a><span class="d">2026.04.18</span><span class="c">AI 技巧</span></li>
+          <li><a href="2024-chatgpt-tips.html"><span class="zh-only">ChatGPT 使用秘籍：10 个让输出质量翻倍的实战技巧</span><span class="en-only">10 ChatGPT Tips to Double Your Output Quality</span></a><span class="d">2024.09.08</span><span class="c">AI 技巧</span></li>
+          <li><a href="2024-claude-guide.html"><span class="zh-only">Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程</span><span class="en-only">The Deep Claude Guide: Why It Beats ChatGPT for Writing &amp; Coding</span></a><span class="d">2024.04.03</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-21">
+      <summary><span class="tb-name">模型趋势</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-reasoning-models.html"><span class="zh-only">推理模型时代来了：从生成到思考的范式转变</span><span class="en-only">The Era of Reasoning Models: From Generation to Thinking</span></a><span class="d">2025.05.20</span><span class="c">趋势</span></li>
+          <li><a href="2025-deepseek-r1.html"><span class="zh-only">DeepSeek-R1 深度解读：开源如何震动全球 AI 圈</span><span class="en-only">DeepSeek-R1: How Open Source Shocked the Global AI Community</span></a><span class="d">2025.01.28</span><span class="c">深度解析</span></li>
+          <li><a href="2024-ai-year-review.html"><span class="zh-only">2024 AI 年度总结：从百模大战到落地为王</span><span class="en-only">2024 AI Year in Review: From Model Wars to Real-World Impact</span></a><span class="d">2024.12.28</span><span class="c">年度总结</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-22">
+      <summary><span class="tb-name">盈亏复盘</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-product-pricing.html"><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></a><span class="d">2026.10.06</span><span class="c">产品</span></li>
+          <li><a href="2025-ai-product-lessons.html"><span class="zh-only">AI 产品从 0 到 1：8 个产品的血泪教训</span><span class="en-only">Building AI Products from Scratch: Lessons from 8 Products</span></a><span class="d">2025.10.30</span><span class="c">产品</span></li>
+          <li><a href="2025-indie-dev-survival.html"><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&amp;L)</span></a><span class="d">2025.08.15</span><span class="c">独立开发</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-23">
+      <summary><span class="tb-name">结果核验</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-debug-handbook.html"><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won&#x27;t Run: A Debugging Handbook for Non-Developers</span></a><span class="d">2026.10.22</span><span class="c">AI 编程</span></li>
+          <li><a href="2026-data-analysis.html"><span class="zh-only">不会写代码的人，怎么用 AI 做数据分析</span><span class="en-only">Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</span></a><span class="d">2026.10.19</span><span class="c">AI 编程</span></li>
+          <li><a href="2026-long-doc-ai.html"><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></a><span class="d">2026.10.15</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-24">
+      <summary><span class="tb-name">获客渠道</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-zero-to-first-product.html"><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></a><span class="d">2026.10.18</span><span class="c">入门</span></li>
+          <li><a href="2026-ai-product-pricing.html"><span class="zh-only">用 AI 做产品怎么赚钱：定价、获客与一次真实复盘</span><span class="en-only">How to Monetize an AI Product: Pricing, Growth, and an Honest Post-Mortem</span></a><span class="d">2026.10.06</span><span class="c">产品</span></li>
+          <li><a href="2025-ai-overseas.html"><span class="zh-only">AI 出海掘金：一个人做 Niche Product 赚美金</span><span class="en-only">Building a Niche Product with AI and Earning in USD</span></a><span class="d">2025.07.05</span><span class="c">出海</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-25">
+      <summary><span class="tb-name">行业观察</span><span class="tb-n"><span class="zh-only">3 篇</span><span class="en-only">3 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-reasoning-models.html"><span class="zh-only">推理模型时代来了：从生成到思考的范式转变</span><span class="en-only">The Era of Reasoning Models: From Generation to Thinking</span></a><span class="d">2025.05.20</span><span class="c">趋势</span></li>
+          <li><a href="2024-ai-year-review.html"><span class="zh-only">2024 AI 年度总结：从百模大战到落地为王</span><span class="en-only">2024 AI Year in Review: From Model Wars to Real-World Impact</span></a><span class="d">2024.12.28</span><span class="c">年度总结</span></li>
+          <li><a href="2024-ai-video-revolution.html"><span class="zh-only">AI 视频生成革命：从 Sora 到可灵的视觉新纪元</span><span class="en-only">The AI Video Revolution: From Sora to Kling</span></a><span class="d">2024.07.22</span><span class="c">视频生成</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-26">
+      <summary><span class="tb-name">Agent 框架</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-multi-agent.html"><span class="zh-only">多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</span><span class="en-only">Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</span></a><span class="d">2025.09.22</span><span class="c">Agent</span></li>
+          <li><a href="2025-ai-agent-guide.html"><span class="zh-only">AI Agent 入门：从概念到工程化落地</span><span class="en-only">AI Agent 101: From Concept to Production</span></a><span class="d">2025.03.08</span><span class="c">Agent</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-27">
+      <summary><span class="tb-name">国产大模型</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-ai-year-review.html"><span class="zh-only">2024 AI 年度总结：从百模大战到落地为王</span><span class="en-only">2024 AI Year in Review: From Model Wars to Real-World Impact</span></a><span class="d">2024.12.28</span><span class="c">年度总结</span></li>
+          <li><a href="2024-chinese-ai-tools.html"><span class="zh-only">2024 国产 AI 工具横评：通义/豆包/Kimi/文心谁最适合你</span><span class="en-only">2024 Chinese AI Tools: Which One is Right for You</span></a><span class="d">2024.11.15</span><span class="c">工具评测</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-28">
+      <summary><span class="tb-name">小产品</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-small-products.html"><span class="zh-only">可以直接抄的 10 个 AI 小产品：普通人怎么选</span><span class="en-only">10 AI Micro-Products You Can Copy: How a Beginner Should Choose One</span></a><span class="d">2026.10.12</span><span class="c">产品</span></li>
+          <li><a href="2025-indie-dev-survival.html"><span class="zh-only">2025 AI 独立开发者生存指南（含真实盈亏复盘）</span><span class="en-only">The 2025 AI Indie Developer Survival Guide (With Real P&amp;L)</span></a><span class="d">2025.08.15</span><span class="c">独立开发</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-29">
+      <summary><span class="tb-name">技术债</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-from-demo-to-production.html"><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></a><span class="d">2026.09.15</span><span class="c">实战</span></li>
+          <li><a href="2026-vibe-coding-advanced.html"><span class="zh-only">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</span><span class="en-only">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</span></a><span class="d">2026.08.28</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-30">
+      <summary><span class="tb-name">氛围编程</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-vibe-coding-advanced.html"><span class="zh-only">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</span><span class="en-only">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</span></a><span class="d">2026.08.28</span><span class="c">AI 编程</span></li>
+          <li><a href="2025-vibe-coding.html"><span class="zh-only">一个人 + AI = 产品：Vibe Coding 实战手册</span><span class="en-only">One Person + AI = Product: The Vibe Coding Playbook</span></a><span class="d">2025.04.12</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-31">
+      <summary><span class="tb-name">职场效率</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-data-analysis.html"><span class="zh-only">不会写代码的人，怎么用 AI 做数据分析</span><span class="en-only">Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</span></a><span class="d">2026.10.19</span><span class="c">AI 编程</span></li>
+          <li><a href="2026-ai-daily-automation.html"><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></a><span class="d">2026.10.17</span><span class="c">实战</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-32">
+      <summary><span class="tb-name">落地路线</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-zero-to-first-product.html"><span class="zh-only">2026 终极指南：从零到第一个 AI 产品的 90 天</span><span class="en-only">The 2026 Playbook: From Zero to Your First AI Product in 90 Days</span></a><span class="d">2026.10.18</span><span class="c">入门</span></li>
+          <li><a href="2025-ai-agent-guide.html"><span class="zh-only">AI Agent 入门：从概念到工程化落地</span><span class="en-only">AI Agent 101: From Concept to Production</span></a><span class="d">2025.03.08</span><span class="c">Agent</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-33">
+      <summary><span class="tb-name">运维监控</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-indie-ops-keep-alive.html"><span class="zh-only">一个人的 AI 小产品怎么活下去：运维、成本与备份</span><span class="en-only">Keeping a One-Person AI Product Alive: Operations, Costs, and Backups</span></a><span class="d">2026.10.16</span><span class="c">独立开发</span></li>
+          <li><a href="2026-from-demo-to-production.html"><span class="zh-only">从 Demo 到上线：AI 生成代码的生产化改造清单</span><span class="en-only">From Demo to Production: A Production-Readiness Checklist for AI-Generated Code</span></a><span class="d">2026.09.15</span><span class="c">实战</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-34">
+      <summary><span class="tb-name">长文档处理</span><span class="tb-n"><span class="zh-only">2 篇</span><span class="en-only">2 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-long-doc-ai.html"><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></a><span class="d">2026.10.15</span><span class="c">AI 技巧</span></li>
+          <li><a href="2024-claude-guide.html"><span class="zh-only">Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程</span><span class="en-only">The Deep Claude Guide: Why It Beats ChatGPT for Writing &amp; Coding</span></a><span class="d">2024.04.03</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-35">
+      <summary><span class="tb-name">AI 视频</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-ai-video-revolution.html"><span class="zh-only">AI 视频生成革命：从 Sora 到可灵的视觉新纪元</span><span class="en-only">The AI Video Revolution: From Sora to Kling</span></a><span class="d">2024.07.22</span><span class="c">视频生成</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-36">
+      <summary><span class="tb-name">ChatGPT</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-chatgpt-tips.html"><span class="zh-only">ChatGPT 使用秘籍：10 个让输出质量翻倍的实战技巧</span><span class="en-only">10 ChatGPT Tips to Double Your Output Quality</span></a><span class="d">2024.09.08</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-37">
+      <summary><span class="tb-name">Claude</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-claude-guide.html"><span class="zh-only">Claude 深度使用指南：为什么它比 ChatGPT 更适合写作和编程</span><span class="en-only">The Deep Claude Guide: Why It Beats ChatGPT for Writing &amp; Coding</span></a><span class="d">2024.04.03</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-38">
+      <summary><span class="tb-name">Copilot</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-ai-coding-tools-2025.html"><span class="zh-only">AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</span><span class="en-only">The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</span></a><span class="d">2025.02.15</span><span class="c">工具评测</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-39">
+      <summary><span class="tb-name">DeepSeek</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-deepseek-r1.html"><span class="zh-only">DeepSeek-R1 深度解读：开源如何震动全球 AI 圈</span><span class="en-only">DeepSeek-R1: How Open Source Shocked the Global AI Community</span></a><span class="d">2025.01.28</span><span class="c">深度解析</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-40">
+      <summary><span class="tb-name">Windsurf</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-ai-coding-tools-2025.html"><span class="zh-only">AI 编程工具四国大战：Cursor vs Copilot vs Windsurf vs Claude Code</span><span class="en-only">The Great AI Coding Tool War: Cursor vs Copilot vs Windsurf vs Claude Code</span></a><span class="d">2025.02.15</span><span class="c">工具评测</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-41">
+      <summary><span class="tb-name">上下文管理</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-vibe-coding-advanced.html"><span class="zh-only">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</span><span class="en-only">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</span></a><span class="d">2026.08.28</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-42">
+      <summary><span class="tb-name">多智能体协作</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-multi-agent.html"><span class="zh-only">多智能体协作实战：AutoGen / CrewAI / LangGraph 选型指南</span><span class="en-only">Multi-Agent Collaboration: AutoGen vs CrewAI vs LangGraph</span></a><span class="d">2025.09.22</span><span class="c">Agent</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-43">
+      <summary><span class="tb-name">工作流自动化</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-daily-automation.html"><span class="zh-only">把 AI 接进你的日常：邮件、表格和日程自动化实践</span><span class="en-only">Bringing AI Into Your Daily Work: Automating Email, Spreadsheets, and Your Calendar</span></a><span class="d">2026.10.17</span><span class="c">实战</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-44">
+      <summary><span class="tb-name">工具链搭建</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-indie-dev-toolkit.html"><span class="zh-only">独立开发者 AI 工具栈搭建指南（2024 版）</span><span class="en-only">The Indie Developer AI Toolkit Guide (2024 Edition)</span></a><span class="d">2024.02.18</span><span class="c">工具栈</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-45">
+      <summary><span class="tb-name">开源生态</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-deepseek-r1.html"><span class="zh-only">DeepSeek-R1 深度解读：开源如何震动全球 AI 圈</span><span class="en-only">DeepSeek-R1: How Open Source Shocked the Global AI Community</span></a><span class="d">2025.01.28</span><span class="c">深度解析</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-46">
+      <summary><span class="tb-name">报错排查</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-ai-debug-handbook.html"><span class="zh-only">AI 写的代码跑不起来怎么办：普通人的排查手册</span><span class="en-only">When AI-Generated Code Won&#x27;t Run: A Debugging Handbook for Non-Developers</span></a><span class="d">2026.10.22</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-47">
+      <summary><span class="tb-name">数据分析</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-data-analysis.html"><span class="zh-only">不会写代码的人，怎么用 AI 做数据分析</span><span class="en-only">Data Analysis Without Code: How Non-Programmers Use AI for Real Numbers</span></a><span class="d">2026.10.19</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-48">
+      <summary><span class="tb-name">文档拆解</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-long-doc-ai.html"><span class="zh-only">让 AI 读长文档：处理合同、论文和 PDF 的实用方法</span><span class="en-only">Making AI Read Long Documents: A Practical Guide to Contracts, Papers, and PDFs</span></a><span class="d">2026.10.15</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-49">
+      <summary><span class="tb-name">海外产品</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2025-ai-overseas.html"><span class="zh-only">AI 出海掘金：一个人做 Niche Product 赚美金</span><span class="en-only">Building a Niche Product with AI and Earning in USD</span></a><span class="d">2025.07.05</span><span class="c">出海</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-50">
+      <summary><span class="tb-name">版权商用</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-ai-art-guide.html"><span class="zh-only">AI 绘画工具全攻略：Midjourney / Stable Diffusion / Flux 怎么选</span><span class="en-only">The Complete AI Art Guide: Midjourney vs SD vs Flux</span></a><span class="d">2024.06.15</span><span class="c">AI 绘画</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-51">
+      <summary><span class="tb-name">绘画工具</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2024-ai-art-guide.html"><span class="zh-only">AI 绘画工具全攻略：Midjourney / Stable Diffusion / Flux 怎么选</span><span class="en-only">The Complete AI Art Guide: Midjourney vs SD vs Flux</span></a><span class="d">2024.06.15</span><span class="c">AI 绘画</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-52">
+      <summary><span class="tb-name">进阶实践</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-vibe-coding-advanced.html"><span class="zh-only">Vibe Coding 进阶：当 AI 写的代码超过 10 万行之后</span><span class="en-only">Advanced Vibe Coding: When AI-Written Code Passes 100,000 Lines</span></a><span class="d">2026.08.28</span><span class="c">AI 编程</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-53">
+      <summary><span class="tb-name">隐私合规</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-privacy-red-lines.html"><span class="zh-only">把用户数据交给模型之前：AI 应用的隐私红线</span><span class="en-only">Before You Hand User Data to a Model: Privacy Rules for AI Apps</span></a><span class="d">2026.10.20</span><span class="c">实战</span></li>
+      </ul>
+    </details>
+    <details class="tag-block reveal" id="tag-54">
+      <summary><span class="tb-name">验收标准</span><span class="tb-n"><span class="zh-only">1 篇</span><span class="en-only">1 articles</span></span></summary>
+      <ul class="tb-list">
+          <li><a href="2026-acceptance-criteria.html"><span class="zh-only">让 AI 一次做对：把需求写成验收清单</span><span class="en-only">Getting It Right the First Time: Writing Requirements as Acceptance Criteria</span></a><span class="d">2026.10.08</span><span class="c">AI 技巧</span></li>
+      </ul>
+    </details>
+  </div>
+<!-- /SYNC:TAGS -->
+
+</main>
+
+<div class="foot-link"><a href="../"><span class="zh-only">← 回到主页</span><span class="en-only">← Back to home</span></a></div>
+
+<footer class="blog-foot">
+  <div class="bf-in">
+    <nav class="bf-links" aria-label="Blog index / 文章索引">
+      <a href="index.html"><span class="zh-only">文章归档</span><span class="en-only">Archive</span></a>
+      <a href="categories.html"><span class="zh-only">分类</span><span class="en-only">Categories</span></a>
+      <a href="tags.html"><span class="zh-only">标签</span><span class="en-only">Tags</span></a>
+      <a href="popular.html"><span class="zh-only">精选</span><span class="en-only">Featured</span></a>
+      <a href="../lab.html"><span class="zh-only">实验室</span><span class="en-only">Lab</span></a>
+      <a href="../feed.xml">RSS</a>
+    </nav>
+    <p class="bf-copy">© 2026 Mu Chen · <span class="zh-only">木尘 · AI 编程实践者</span><span class="en-only">AI Coding Practitioner</span></p>
+  </div>
+</footer>
+
+<script>const langBtn=document.getElementById('langBtn'),body=document.body;function setLang(l){body.setAttribute('data-lang',l);langBtn.textContent=l==='zh'?'EN / 中':'中 / EN';try{localStorage.setItem('blog-lang',l)}catch(e){}document.documentElement.lang=l==='zh'?'zh-CN':'en'}try{const s=localStorage.getItem('blog-lang');if(s)setLang(s)}catch(e){}langBtn?.addEventListener('click',()=>{const c=body.getAttribute('data-lang')||'zh';setLang(c==='zh'?'en':'zh')});const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el)});</script>
+<script src="articles.js"></script><script src="blog.js"></script>
+<script>
+/* 点击标签云 → 展开对应的标签分组并滚动过去 */
+(function () {
+  function openTarget() {
+    var id = (location.hash || '').replace(/^#/, '');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') {
+      el.open = true;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  window.addEventListener('hashchange', openTarget);
+  if (location.hash) setTimeout(openTarget, 60);
+})();
+</script>
+<script src="../assets/theme.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
+</body></html>

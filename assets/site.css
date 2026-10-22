@@ -778,3 +778,61 @@
   .page-header h1{font-size:clamp(23px,8vw,32px)}
   .page-header p{font-size:13.5px}
 }
+
+/* ==========================================================================
+   内容索引条（首页「文章」板块）
+   归档 / 分类 / 标签 / 精选 四个入口
+   ========================================================================== */
+.index-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin:34px 0 8px;
+}
+.index-strip .ix-card{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:7px;
+  padding:20px 20px 18px;
+  border:1px solid var(--border);border-radius:16px;
+  background:var(--surface);backdrop-filter:blur(10px);
+  transition:transform .25s,border-color .25s,background .25s,box-shadow .25s;
+}
+.index-strip .ix-card::after{
+  content:"";position:absolute;right:-30px;top:-30px;
+  width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,.16),transparent 68%);
+  opacity:0;transition:opacity .3s;
+}
+.index-strip .ix-card:nth-child(2)::after{background:radial-gradient(circle,rgba(168,85,247,.16),transparent 68%)}
+.index-strip .ix-card:nth-child(3)::after{background:radial-gradient(circle,rgba(245,158,11,.14),transparent 68%)}
+.index-strip .ix-card:nth-child(4)::after{background:radial-gradient(circle,rgba(52,211,153,.14),transparent 68%)}
+.index-strip .ix-card:hover{
+  transform:translateY(-3px);border-color:var(--border-2);background:var(--surface-2);
+  box-shadow:0 16px 38px -24px rgba(0,229,255,.45);
+}
+.index-strip .ix-card:hover::after{opacity:1}
+.index-strip .ix-k{
+  font-family:var(--font-m);font-size:10px;letter-spacing:.12em;
+  color:var(--cyan);opacity:.85;
+}
+.index-strip .ix-card:nth-child(2) .ix-k{color:var(--violet)}
+.index-strip .ix-card:nth-child(3) .ix-k{color:var(--amber)}
+.index-strip .ix-card:nth-child(4) .ix-k{color:var(--green)}
+.index-strip .ix-t{
+  font-family:var(--font-h);font-weight:600;font-size:16px;line-height:1.4;
+  letter-spacing:-.01em;position:relative;z-index:1;
+}
+.index-strip .ix-n{
+  font-family:var(--font-m);font-size:26px;font-weight:500;line-height:1;
+  color:var(--text-3);margin-top:2px;position:relative;z-index:1;
+  transition:color .25s;
+}
+.index-strip .ix-card:hover .ix-n{color:var(--text)}
+
+@media(max-width:900px){
+  .index-strip{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+@media(max-width:520px){
+  .index-strip{grid-template-columns:1fr 1fr;gap:10px}
+  .index-strip .ix-card{padding:16px 15px 14px}
+  .index-strip .ix-t{font-size:14.5px}
+  .index-strip .ix-n{font-size:21px}
+}

@@ -107,8 +107,9 @@ print("4. 文章清单一致性 (blog/articles.js vs 实际文件)")
 print("=" * 74)
 man = open(os.path.join(ROOT, "blog/articles.js"), encoding="utf-8").read()
 listed = re.findall(r'\{file:"([^"]+)"', man)
+NON_ARTICLE = {"index.html", "categories.html", "tags.html", "popular.html"}
 actual = sorted(os.path.basename(f) for f in glob.glob(os.path.join(ROOT, "blog/*.html"))
-                 if not f.endswith("/index.html"))
+                 if os.path.basename(f) not in NON_ARTICLE)
 only_list = [f for f in listed if f not in actual]
 only_disk = [f for f in actual if f not in listed]
 print(f"  清单条目: {len(listed)}   磁盘文章: {len(actual)}")
